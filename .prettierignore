@@ -1,0 +1,11 @@
+.next
+next-env.d.ts
+yarn.lock
+public
+README.md
+Dockerfile
+.nvmrc
+.vscode
+.idea
+.yarn
+.pnp.*
