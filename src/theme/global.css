@@ -2,7 +2,6 @@
 
 :root[data-mantine-color-scheme="light"] {
   --color-main: #fafafa;
-  --mantine-color-body: var(--color-primary);
   --mantine-color-dimmed-border: var(--mantine-color-gray-1);
 }
 
