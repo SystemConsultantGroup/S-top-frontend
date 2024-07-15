@@ -26,3 +26,10 @@ export const Usage: Story = {
     label: "Button",
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    label: "Button",
+    disabled: true,
+  },
+};
