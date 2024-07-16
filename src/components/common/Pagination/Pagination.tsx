@@ -32,7 +32,7 @@ export function Paginations({ show, ...props }: { show: number }) {
         onChange={setPage}
         {...props}
       >
-        <Group gap={5} justify="center">
+        <Group gap={8} justify="center">
           <Pagination.Previous />
           <Pagination.Items />
           <Pagination.Next />
