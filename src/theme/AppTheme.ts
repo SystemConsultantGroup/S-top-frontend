@@ -19,6 +19,7 @@ export const AppTheme = createTheme({
   other: {
     fontWeights: {
       regular: 400,
+      semibold: 600,
       bold: 700,
     },
     // 피그마 기준 색상 설정
@@ -130,6 +131,7 @@ export const AppTheme = createTheme({
 export const resolver: CSSVariablesResolver = (theme) => ({
   variables: {
     "--mantine-other-font-weights-regular": theme.other.fontWeights.regular,
+    "--mantine-other-font-weights-semibold": theme.other.fontWeights.semibold,
     "--mantine-other-font-weights-bold": theme.other.fontWeights.bold,
   },
   dark: {
