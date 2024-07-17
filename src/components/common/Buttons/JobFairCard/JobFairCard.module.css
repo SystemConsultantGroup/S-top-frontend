@@ -1,0 +1,71 @@
+@import url('src/theme/fonts/pretendard.css');
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 400px; /* 가로 길이를 더 길게 조정 */
+  font-family: "Pretendard Variable", __Pretendard_Fallback_e223ab, sans-serif;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.logo img {
+    max-width: 250px; /* 원하는 최대 너비 설정 */
+    max-height: 300px; /* 원하는 최대 높이 설정 */
+    width: auto; /* 너비 자동 조절 */
+    height: auto; /* 높이 자동 조절 */
+  }
+  
+
+.company {
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.position {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.divider {
+  border-top: 1px solid #ddd;
+  margin: 10px 0;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.label {
+  color: #666;
+  font-size: 0.9em;
+  margin-right: 10px;
+}
+
+.tagContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.tag {
+  background-color: #e7efff;
+  color: #1c4975;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+.location {
+  font-size: 0.9em;
+}
