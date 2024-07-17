@@ -1,0 +1,126 @@
+.header {
+  padding: 0 30px;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  background-color: white;
+}
+
+.symbol {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #000;
+}
+
+.logo {
+  & > img {
+    width: 100px;
+    height: auto;
+  }
+}
+
+.dividerlnt {
+  margin: 0 15px;
+  width: 1px;
+  height: 70px;
+  background-color: #c3c6cf;
+}
+
+.title {
+  & > h1 {
+    margin: 0;
+    font-size: 28px;
+  }
+
+  & > span {
+    font-size: 14px;
+  }
+}
+
+.topnav {
+  flex: 1;
+  color: #000;
+
+  & ul,
+  & li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 16px;
+  }
+
+  & > ul {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  & > ul > li {
+    position: relative;
+  }
+
+  & > ul > li > div {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  & > ul > li > ul {
+    position: absolute;
+    display: none;
+    min-width: 100%;
+    background-color: #fff;
+  }
+
+  & > ul > li:hover > ul {
+    display: block;
+  }
+
+  & > ul > li > ul > li {
+    padding: 10px 20px;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  & > ul > li > ul > li:hover {
+    background-color: #ebf6fe;
+  }
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #000;
+}
+
+.authorization {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.lockico {
+  margin-right: 5px;
+}
+
+.dividerlnr {
+  /* divider for login and register */
+  margin: 0 10px;
+  width: 1px;
+  height: 16px;
+  background-color: #c3c6cf;
+}
+
+.swuniv {
+  & > img {
+    width: 160px;
+    height: auto;
+  }
+}
+
+.hamburger {
+}
