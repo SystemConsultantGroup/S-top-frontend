@@ -1,35 +1,35 @@
 .dropdown {
-    position: relative;
-    display: inline-block;
-    width: 300px;
-    font-family: pretendard;
-    background-color: white;
-    border: 1px solid black;
-    color: black;
+  position: relative;
+  display: inline-block;
+  width: 300px;
+  font-family: pretendard;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
 }
 
 .dropdown:hover {
-    background-color: #DFE2EB;
+  background-color: #dfe2eb;
 }
 
 .dropdownToggle {
-    background-color: white;
-    border: 1px solid black;
-    padding: 8px;
-    width: 300px;
-    text-align: left;
-    color: black;
+  background-color: white;
+  border: 1px solid black;
+  padding: 8px;
+  width: 300px;
+  text-align: left;
+  color: black;
 }
 
 .dropdownItem {
-    padding: 8px;
-    cursor: pointer;
-    background-color: white;
-    font-family: pretendard;
-    color: black;
-    width: 300px;
+  padding: 8px;
+  cursor: pointer;
+  background-color: white;
+  font-family: pretendard;
+  color: black;
+  width: 300px;
 }
 
 .dropdownItem:hover {
-    background-color: #DFE2EB;
+  background-color: #dfe2eb;
 }
