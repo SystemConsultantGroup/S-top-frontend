@@ -72,6 +72,7 @@ export const AppTheme = createTheme({
       surfaceContainer: "#ECEEF4",
       surfaceContainerHigh: "#E7E8EE",
       surfaceContainerHighest: "#E1E2E8",
+      tableRow: "#EFEFEF",
     },
     dark: {
       primary: "#002342",
@@ -123,6 +124,7 @@ export const AppTheme = createTheme({
       surfaceContainer: "#ECEEF4",
       surfaceContainerHigh: "#E7E8EE",
       surfaceContainerHighest: "#E1E2E8",
+      tableRow: "#3E3E3E",
     },
   },
 });
@@ -184,6 +186,7 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     "--color-surfaceContainer": theme.other.dark.surfaceContainer,
     "--color-surfaceContainerHigh": theme.other.dark.surfaceContainerHigh,
     "--color-surfaceContainerHighest": theme.other.dark.surfaceContainerHighest,
+    "--color-tableRow": theme.other.dark.tableRow,
   },
   light: {
     "--mantine-color-main-background": "#FAFAFA",
@@ -237,5 +240,6 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     "--color-surfaceContainer": theme.other.light.surfaceContainer,
     "--color-surfaceContainerHigh": theme.other.light.surfaceContainerHigh,
     "--color-surfaceContainerHighest": theme.other.light.surfaceContainerHighest,
+    "--color-tableRow": theme.other.light.tableRow,
   },
 });
