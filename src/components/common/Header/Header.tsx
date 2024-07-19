@@ -5,6 +5,7 @@ import styles from "./Header.module.css";
 import { IconLock } from "@tabler/icons-react";
 import { useState } from "react";
 import Link from "next/link";
+import { NavList } from "./NavList";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,57 +35,16 @@ export function Header() {
         </div>
         <div className={styles.topnav} role="navigation">
           <ul>
-            <li>
-              <div>Projects</div>
-              <ul>
-                <li>전체보기</li>
-                <li>AI/머신러닝</li>
-                <li>인터랙션/증강현실</li>
-                <li>컴퓨터 비전</li>
-                <li>보안/SW공학</li>
-                <li>시스템/네트워크</li>
-                <li>자연어 처리</li>
-                <li>빅데이터 분석</li>
-                <li>웹/어플리케이션</li>
-              </ul>
-            </li>
-            <li>
-              <div>Interviews</div>
-              <ul>
-                <li>대담 영상</li>
-                <li>퀴즈 챌린지</li>
-              </ul>
-            </li>
-            <li>
-              <div>Job Fair</div>
-              <ul>
-                <li>잡페어 인터뷰</li>
-                <li>채용 공고</li>
-              </ul>
-            </li>
-            <li>
-              <div>AI Hub</div>
-              <ul>
-                <li>AI Model</li>
-                <li>AI Dataset</li>
-              </ul>
-            </li>
-            <li>
-              <div>Events</div>
-              <ul>
-                <li>갤러리</li>
-                <li>이벤트 공지사항</li>
-              </ul>
-            </li>
-            <li>
-              <div>Info Desk</div>
-              <ul>
-                <li>S-TOP 소개</li>
-                <li>산학협력프로젝트 소개</li>
-                <li>산학협력 과제 제안</li>
-                <li>프로젝트 QnA</li>
-              </ul>
-            </li>
+            {NavList.map((topic) => (
+              <li key={topic.name}>
+                <div>{topic.name}</div>
+                <ul>
+                  {topic.items.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              </li>
+            ))}
           </ul>
         </div>
         <div className={styles.toolbar}>
@@ -107,66 +67,24 @@ export function Header() {
             className={`${styles.hamburger} ${isOpen ? styles.open : ""}`}
             onClick={toggleHamburger}
           >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+            {[1, 2, 3, 4].map((idx) => (
+              <span key={idx}></span>
+            ))}
           </div>
         </div>
       </div>
       <div className={`${styles.handout} ${isOpen ? styles.show : ""}`}>
         <div className={styles.overview}>
-          <div>
-            <b>Projects</b>
-            <ul>
-              <li>전체보기</li>
-              <li>AI/머신러닝</li>
-              <li>인터랙션/증강현실</li>
-              <li>컴퓨터 비전</li>
-              <li>보안/SW공학</li>
-              <li>시스템/네트워크</li>
-              <li>자연어 처리</li>
-              <li>빅데이터 분석</li>
-              <li>웹/어플리케이션</li>
-            </ul>
-          </div>
-          <div>
-            <b>Interviews</b>
-            <ul>
-              <li>대담 영상</li>
-              <li>퀴즈 챌린지</li>
-            </ul>
-          </div>
-          <div>
-            <b>Job Fair</b>
-            <ul>
-              <li>잡페어 인터뷰</li>
-              <li>채용 공고</li>
-            </ul>
-          </div>
-          <div>
-            <b>AI Hub</b>
-            <ul>
-              <li>AI Model</li>
-              <li>AI Dataset</li>
-            </ul>
-          </div>
-          <div>
-            <b>Events</b>
-            <ul>
-              <li>갤러리</li>
-              <li>이벤트 공지사항</li>
-            </ul>
-          </div>
-          <div>
-            <b>Info Desk</b>
-            <ul>
-              <li>S-TOP 소개</li>
-              <li>산학협력프로젝트 소개</li>
-              <li>산학협력 과제 제안</li>
-              <li>프로젝트 QnA</li>
-            </ul>
-          </div>
+          {NavList.map((topic) => (
+            <div key={topic.name}>
+              <b>{topic.name}</b>
+              <ul>
+                {topic.items.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
         <div className={styles.shortcuts}>
           <div>
