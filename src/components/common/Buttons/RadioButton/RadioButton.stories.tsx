@@ -8,29 +8,24 @@ const meta: Meta<typeof RadioButton> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  argTypes: {},
-  args: {},
+  argTypes: {
+    checked: {
+      control: 'boolean',
+    },
+  },
+  args: {
+    checked: false,
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const OptionOne: Story = {
+export const Usage: Story = {
   args: {
-    label: 'Option One',
-    name: 'example',
-    value: 'optionOne',
     checked: false,
-    onChange: () => {},
   },
-};
-
-export const OptionTwo: Story = {
-  args: {
-    label: 'Option Two',
-    name: 'example',
-    value: 'optionTwo',
-    checked: false,
-    onChange: () => {},
+  render: (args) => {
+    return <RadioButton {...args} />;
   },
 };

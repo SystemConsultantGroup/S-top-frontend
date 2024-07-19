@@ -1,25 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './RadioButton.module.css';
 
 interface RadioButtonProps {
-  label: string;
-  name: string;
-  value: string;
-  checked: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  checked?: boolean;
+  onChange?: (checked: boolean) => void;
 }
 
-export const RadioButton: React.FC<RadioButtonProps> = ({ label, name, value, checked, onChange }) => {
+export const RadioButton: React.FC<RadioButtonProps> = ({ checked = false, onChange }) => {
+  const [isChecked, setIsChecked] = useState(checked);
+
+  useEffect(() => {
+    setIsChecked(checked);
+  }, [checked]);
+
+  const handleClick = () => {
+    const newChecked = !isChecked;
+    setIsChecked(newChecked);
+    if (onChange) {
+      onChange(newChecked);
+    }
+  };
+
   return (
-    <label className={classes.element}>
-      <input
-        type="radio"
-        name={name}
-        value={value}
-        checked={checked}
-        onChange={onChange}
-      />
-      {label}
-    </label>
+    <button
+      type="button"
+      className={`${classes.radioButton} ${isChecked ? classes.checked : ''}`}
+      onClick={handleClick}
+    ></button>
   );
 };

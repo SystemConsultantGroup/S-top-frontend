@@ -1,7 +1,31 @@
-.element {
-    background-color: var(--color-primary);
-    &:hover {
-      background-color: var(--color-onPrimaryFixedVariant);
-    }
-  }
-  
+@import url('src/theme/fonts/pretendard.css');
+
+.radioButton {
+  appearance: none;
+  width: 30px; /* 사이즈를 사진 크기에 맞게 조정 */
+  height: 30px; /* 사이즈를 사진 크기에 맞게 조정 */
+  border: 2px solid #3a5a8d;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  background-color: white;
+}
+
+.radioButton::before {
+  content: '';
+  width: 14px; /* 내부 원 크기 조정 */
+  height: 14px; /* 내부 원 크기 조정 */
+  border-radius: 50%;
+  background-color: #3a5a8d;
+}
+
+.radioButton.checked::before {
+  background-color: red;
+}
+
+.radioButton.checked {
+  border-color: red;
+}

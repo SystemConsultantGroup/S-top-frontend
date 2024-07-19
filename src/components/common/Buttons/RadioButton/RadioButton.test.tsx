@@ -3,16 +3,17 @@ import { RadioButton } from './RadioButton';
 import '@testing-library/jest-dom';
 
 describe('RadioButton component', () => {
-  it('renders correctly with the given props', () => {
-    render(<RadioButton label="Option One" name="example" value="optionOne" checked={false} onChange={() => {}} />);
-    expect(screen.getByLabelText('Option One')).toBeInTheDocument();
-  });
+  it('renders correctly and toggles state on click', () => {
+    render(<RadioButton defaultChecked={false} />);
 
-  it('calls onChange when clicked', () => {
-    const handleChange = jest.fn();
-    render(<RadioButton label="Option One" name="example" value="optionOne" checked={false} onChange={handleChange} />);
-    const radioButton = screen.getByLabelText('Option One');
+    const radioButton = screen.getByRole('button');
+    expect(radioButton).toBeInTheDocument();
+    expect(radioButton).not.toHaveClass('checked');
+
     fireEvent.click(radioButton);
-    expect(handleChange).toHaveBeenCalled();
+    expect(radioButton).toHaveClass('checked');
+
+    fireEvent.click(radioButton);
+    expect(radioButton).not.toHaveClass('checked');
   });
 });

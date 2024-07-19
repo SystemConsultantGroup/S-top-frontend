@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './JobFairCard.module.css';
 
 interface JobFairCardProps {
-  logo: string;
+  logo: string; // 이미지 URL
   company: string;
   position: string;
   employmentType: string[];
