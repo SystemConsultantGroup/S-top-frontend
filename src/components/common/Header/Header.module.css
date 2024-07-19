@@ -6,6 +6,10 @@
   align-items: center;
   gap: 20px;
   background-color: white;
+
+  @media screen and (max-width: 1023px) {
+    justify-content: space-between;
+  }
 }
 
 .symbol {
@@ -27,6 +31,10 @@
   width: 1px;
   height: 70px;
   background-color: #c3c6cf;
+
+  @media screen and (max-width: 437px) {
+    display: none;
+  }
 }
 
 .title {
@@ -38,6 +46,10 @@
   & > span {
     font-size: 14px;
     white-space: nowrap;
+  }
+
+  @media screen and (max-width: 437px) {
+    display: none;
   }
 }
 
@@ -91,6 +103,10 @@
   & > ul > li > ul > li:hover {
     background-color: #ebf6fe;
   }
+
+  @media screen and (max-width: 1023px) {
+    display: none;
+  }
 }
 
 .toolbar {
@@ -98,12 +114,20 @@
   flex-direction: row;
   align-items: center;
   color: #000;
+
+  @media screen and (max-width: 1277px) {
+    gap: 20px;
+  }
 }
 
 .authorization {
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  @media screen and (max-width: 1023px) {
+    display: none;
+  }
 }
 
 .lockico {
@@ -122,6 +146,10 @@
   & > img {
     width: 160px;
     height: auto;
+  }
+
+  @media screen and (max-width: 1277px) {
+    display: none;
   }
 }
 
@@ -217,6 +245,10 @@
 
   @media screen and (max-width: 1053px) {
     padding: 100px 60px;
+  }
+
+  @media screen and (max-width: 1023px) {
+    display: none;
   }
 }
 
