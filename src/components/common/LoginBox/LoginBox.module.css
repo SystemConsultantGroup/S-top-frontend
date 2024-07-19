@@ -1,0 +1,29 @@
+.loginBox {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 8px 12px;
+    gap: 8px;
+    position: relative;
+    width: 727px;
+    height: 570px;
+    background: #FFFFFF;
+    border: 1px solid #EFEFF0;
+    border-radius: 12px;
+}
+
+.logo {
+    margin-bottom: 0px;
+    width: 256px;
+    height: 256px;
+}
+
+.button {
+    margin: 10px 0;
+    cursor: pointer;
+    width: 600px;
+    height: 90px;
+    border-radius: 12px;
+}
