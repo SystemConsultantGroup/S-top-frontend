@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import classes from "./layout.module.css";
-import { Sidebar } from "@/components/common/Sidebar";
-import { AdminSidebarMenu } from "@/components/pages/AdminSidebarMenu";
+import { AdminSidebar } from "@/components/pages/AdminSidebar";
 
 export const metadata: Metadata = {
   title: "S-TOP 기술교류회 관리자",
@@ -11,9 +10,7 @@ export const metadata: Metadata = {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <section className={classes.container}>
-      <Sidebar>
-        <AdminSidebarMenu />
-      </Sidebar>
+      <AdminSidebar />
       <section className={classes.main}>{children}</section>
     </section>
   );

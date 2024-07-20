@@ -15,7 +15,7 @@ export function AdminSidebarMenu() {
 
   function isNavbarActive(href: string | undefined): boolean {
     if (href === "/") return false;
-    return href ? pathname.startsWith(href) : false;
+    return href ? pathname?.startsWith(href) : false;
   }
 
   const isActive: { [key: string]: boolean } = {};
