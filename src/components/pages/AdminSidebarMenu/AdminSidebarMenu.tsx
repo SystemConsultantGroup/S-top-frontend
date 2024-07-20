@@ -3,16 +3,18 @@
 import {
   IconAlignBoxLeftTop,
   IconChartDotsFilled,
+  IconChevronsLeft,
   IconFiles,
   IconUserFilled,
 } from "@tabler/icons-react";
-import { SidebarItem, SidebarItemProps } from "./SidebarItem";
+import { SidebarItem, SidebarItemProps } from "../../common/Sidebar";
 import { usePathname } from "next/navigation";
 
 export function AdminSidebarMenu() {
   const pathname = usePathname();
 
   function isNavbarActive(href: string | undefined): boolean {
+    if (href === "/") return false;
     return href ? pathname.startsWith(href) : false;
   }
 
@@ -61,6 +63,11 @@ interface ListProps extends Omit<SidebarItemProps, "active" | "children"> {
 }
 
 const AdminSidebarMenuList: ListProps[] = [
+  {
+    label: "메인으로",
+    icon: <IconChevronsLeft size="24" />,
+    href: "/",
+  },
   {
     label: "가입 신청 관리",
     icon: <IconUserFilled size="24" />,

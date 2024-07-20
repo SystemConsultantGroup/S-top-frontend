@@ -1,7 +1,7 @@
-import { AdminSidebarMenu } from "@/components/common/Sidebar";
-import { Sidebar } from "@/components/common/Sidebar";
 import { Metadata } from "next";
 import classes from "./layout.module.css";
+import { Sidebar } from "@/components/common/Sidebar";
+import { AdminSidebarMenu } from "@/components/pages/AdminSidebarMenu";
 
 export const metadata: Metadata = {
   title: "S-TOP 기술교류회 관리자",
