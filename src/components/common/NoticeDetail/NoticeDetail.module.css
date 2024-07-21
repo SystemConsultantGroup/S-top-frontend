@@ -1,0 +1,83 @@
+.heading {
+  margin: 30px 0;
+
+  & > h2 {
+    margin: 0;
+  }
+}
+
+.container {
+  border-top: 1px solid #000;
+}
+
+.head {
+  padding: 20px 15px;
+  border-bottom: 1px solid #888;
+
+  & h3 {
+    margin: 0;
+  }
+}
+
+.primaryFilledPin {
+  color: var(--color-primary);
+}
+
+.info {
+  margin-top: 5px;
+}
+
+.ml35 {
+  margin-left: 35px;
+}
+
+.stage {
+  padding: 10px 15px;
+  border-bottom: 1px solid #000;
+}
+
+.stageBtn {
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.stageResizePanel {
+  width: 45px;
+  height: unset;
+
+  & input {
+    border: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 18px;
+  }
+}
+
+.stageFileBtn {
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active {
+    transform: none;
+  }
+}
+
+.fileDropdown {
+  padding: 0;
+  border: 0;
+}
+
+.fileDownloadAll {
+  border-radius: 0 0 0.25rem 0.25rem;
+}
+
+.moveBox {
+  padding: 20px 15px;
+  border-bottom: 1px solid #888;
+}
+
+.toolbar {
+  margin: 20px 0;
+}
