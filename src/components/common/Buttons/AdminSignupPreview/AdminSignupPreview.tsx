@@ -1,5 +1,5 @@
-import React from 'react';
-import classes from './AdminSignupPreview.module.css';
+import React from "react";
+import classes from "./AdminSignupPreview.module.css";
 
 interface Signup {
   id: number;

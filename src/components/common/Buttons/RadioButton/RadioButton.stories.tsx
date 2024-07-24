@@ -1,20 +1,25 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { RadioButton } from './RadioButton';
+import type { Meta, StoryObj } from "@storybook/react";
+import { RadioButton } from "./RadioButton";
 
 const meta: Meta<typeof RadioButton> = {
-  title: 'RadioButton',
+  title: "RadioButton",
   component: RadioButton,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
-  argTypes: {
-    checked: {
-      control: 'boolean',
-    },
-  },
+  tags: ["autodocs"],
+  argTypes: {},
   args: {
-    checked: false,
+    name: "favoriteFramework",
+    label: "Select your favorite framework/library",
+    description: "This is anonymous",
+    withAsterisk: true,
+    options: [
+      { value: "react", label: "React" },
+      { value: "svelte", label: "Svelte" },
+      { value: "ng", label: "Angular" },
+      { value: "vue", label: "Vue" },
+    ],
   },
 };
 
@@ -22,10 +27,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Usage: Story = {
-  args: {
-    checked: false,
-  },
-  render: (args) => {
-    return <RadioButton {...args} />;
-  },
+  args: {},
 };

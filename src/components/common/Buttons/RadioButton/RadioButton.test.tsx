@@ -1,19 +1,27 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { RadioButton } from './RadioButton';
-import '@testing-library/jest-dom';
+import { render, screen, fireEvent } from "@testing-library/react";
+import { RadioButton } from "./RadioButton";
+import "@testing-library/jest-dom";
 
-describe('RadioButton component', () => {
-  it('renders correctly and toggles state on click', () => {
-    render(<RadioButton defaultChecked={false} />);
+describe("RadioButton component", () => {
+  it("renders correctly and toggles state on click", () => {
+    const options = [
+      { value: 'react', label: 'React' },
+      { value: 'svelte', label: 'Svelte' },
+      { value: 'ng', label: 'Angular' },
+      { value: 'vue', label: 'Vue' },
+    ];
 
-    const radioButton = screen.getByRole('button');
+    render(<RadioButton options={options} name="framework" label="Choose a framework" />);
+
+    const radioButton = screen.getByLabelText("React");
     expect(radioButton).toBeInTheDocument();
-    expect(radioButton).not.toHaveClass('checked');
+    expect(radioButton).not.toBeChecked();
 
     fireEvent.click(radioButton);
-    expect(radioButton).toHaveClass('checked');
+    expect(radioButton).toBeChecked();
 
+    // Clicking again should not uncheck a radio button (standard behavior)
     fireEvent.click(radioButton);
-    expect(radioButton).not.toHaveClass('checked');
+    expect(radioButton).toBeChecked();
   });
 });

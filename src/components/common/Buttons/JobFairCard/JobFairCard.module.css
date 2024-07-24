@@ -1,7 +1,7 @@
-@import url('src/theme/fonts/pretendard.css');
+@import url("src/theme/fonts/pretendard.css");
 
 :root {
-  --primary-container: #D2E4FF; /* material-theme/sys/light/primary-container 값 */
+  --primary-container: #d2e4ff; /* material-theme/sys/light/primary-container 값 */
 }
 
 .card {

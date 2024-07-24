@@ -1,5 +1,5 @@
-import React from 'react';
-import classes from './JobFairCard.module.css';
+import React from "react";
+import classes from "./JobFairCard.module.css";
 
 interface JobFairCardProps {
   logo: string; // 이미지 URL
@@ -9,7 +9,13 @@ interface JobFairCardProps {
   location: string;
 }
 
-export const JobFairCard: React.FC<JobFairCardProps> = ({ logo, company, position, employmentType, location }) => {
+export const JobFairCard: React.FC<JobFairCardProps> = ({
+  logo,
+  company,
+  position,
+  employmentType,
+  location,
+}) => {
   return (
     <div className={classes.card}>
       <div className={classes.logo}>
@@ -22,7 +28,9 @@ export const JobFairCard: React.FC<JobFairCardProps> = ({ logo, company, positio
         <span className={classes.label}>고용 형태</span>
         <div className={classes.tagContainer}>
           {employmentType.map((type, index) => (
-            <div key={index} className={classes.tag}>{type}</div>
+            <div key={index} className={classes.tag}>
+              {type}
+            </div>
           ))}
         </div>
       </div>

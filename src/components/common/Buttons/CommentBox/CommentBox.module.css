@@ -1,17 +1,18 @@
-@import url('src/theme/fonts/pretendard.css');
+@import url("src/theme/fonts/pretendard.css");
 
-.commentBox {
+.commentBoxContainer {
   display: flex;
-  flex-direction: column;
-  margin: 20px 0;
-  width: 100%; /* 가로 길이 최대화 */
-  font-family: "Pretendard Variable", __Pretendard_Fallback_e223ab, sans-serif; /* 폰트 적용 */
+  align-items: center;
+  width: 100%; /* 가로 길이를 100%로 설정 */
+  max-width: 600px; /* 최대 가로 길이를 설정하여 너무 길어지지 않도록 제한 */
+  padding: 10px;
 }
 
 .textareaContainer {
   display: flex;
   border: 1px solid #ccc;
   overflow: hidden;
+  width: 100%; /* 부모 요소의 너비에 맞게 설정 */
 }
 
 .textarea {
@@ -21,6 +22,10 @@
   resize: none;
   outline: none;
   font-family: inherit; /* 상속된 폰트 사용 */
+  width: 550px;
+  height: 70px;
+  font-size: 14px;
+  /* vw...? */
 }
 
 .button {
@@ -58,9 +63,17 @@
 }
 
 .commentAuthor {
-  color: #666666; /* 글씨 색상을 변경 */
+  color: #9f9f9f; /* 글씨 색상을 변경 */
   margin-bottom: 5px;
   font-weight: normal; /* 기본값으로 변경 */
+  font-size: 15px;
+}
+
+.commentContent {
+  font-size: 15px; /* 글씨 크기를 줄임 */
+  margin-top: 8px; /* 댓글 내용과 작성자 간의 간격을 추가 */
+  color: #5b5b5b;
+  white-space: pre-wrap; /* 줄바꿈을 유지 */
 }
 
 .commentTitle {

@@ -1,31 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import classes from './RadioButton.module.css';
+import React from "react";
+import { Radio, Group } from "@mantine/core";
 
 interface RadioButtonProps {
-  checked?: boolean;
-  onChange?: (checked: boolean) => void;
+  options: { value: string; label: string }[];
+  name: string;
+  label: string;
+  description?: string; // description 속성 추가
+  withAsterisk?: boolean; // withAsterisk 속성 추가
 }
 
-export const RadioButton: React.FC<RadioButtonProps> = ({ checked = false, onChange }) => {
-  const [isChecked, setIsChecked] = useState(checked);
-
-  useEffect(() => {
-    setIsChecked(checked);
-  }, [checked]);
-
-  const handleClick = () => {
-    const newChecked = !isChecked;
-    setIsChecked(newChecked);
-    if (onChange) {
-      onChange(newChecked);
-    }
-  };
-
+export const RadioButton: React.FC<RadioButtonProps> = ({ options, name, label, description, withAsterisk }) => {
   return (
-    <button
-      type="button"
-      className={`${classes.radioButton} ${isChecked ? classes.checked : ''}`}
-      onClick={handleClick}
-    ></button>
+    <Radio.Group name={name} label={label} description={description} withAsterisk={withAsterisk}>
+      <Group mt="xs">
+        {options.map((option) => (
+          <Radio key={option.value} value={option.value} label={option.label} />
+        ))}
+      </Group>
+    </Radio.Group>
   );
 };

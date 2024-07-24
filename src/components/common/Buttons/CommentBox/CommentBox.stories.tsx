@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { CommentBox } from './CommentBox';
+import type { Meta, StoryObj } from "@storybook/react";
+import { CommentBox } from "./CommentBox";
 
 const meta: Meta<typeof CommentBox> = {
-  title: 'CommentBox',
+  title: "CommentBox",
   component: CommentBox,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {},
   args: {},
 };

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import classes from './CommentBox.module.css';
+import React, { useState } from "react";
+import classes from "./CommentBox.module.css";
 
 interface CommentBoxProps {
   onSubmit?: (comment: string) => void;
@@ -11,7 +11,7 @@ interface Comment {
 }
 
 export const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit }) => {
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [comments, setComments] = useState<Comment[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -19,9 +19,9 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit }) => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      handleSubmit(e as any);
+      handleSubmit(e);
     }
   };
 
@@ -29,8 +29,8 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit }) => {
     e.preventDefault();
     if (comment.trim()) {
       if (onSubmit) onSubmit(comment);
-      setComments([...comments, { author: '사람', content: comment }]);
-      setComment('');
+      setComments([...comments, { author: "사람", content: comment }]);
+      setComment("");
     }
   };
 
@@ -56,7 +56,7 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit }) => {
         {comments.map((comment, index) => (
           <div key={index} className={classes.commentItem}>
             <div className={classes.commentAuthor}>사람{index + 1}</div>
-            <div>{comment.content}</div>
+            <div className={classes.commentContent}>{comment.content}</div>
           </div>
         ))}
       </div>
