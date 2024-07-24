@@ -1,0 +1,43 @@
+/* Checkbox.module.css */
+
+.checkboxContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  gap: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.unchecked {
+  background: none;
+}
+
+.checked {
+  background: none;
+}
+
+.label {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  color: #19191b;
+}
