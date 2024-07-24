@@ -24,7 +24,6 @@
   color: var(--normal, #19191b);
   /* material-theme/title/medium */
 
-  font-family: "Pretendard";
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -44,7 +43,6 @@
   top: 41px;
   color: var(--Schemes-Outline, #73777f);
 
-  font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -64,7 +62,6 @@
   bottom: 50px;
   color: #000;
 
-  font-family: "Pretendard";
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -86,19 +83,36 @@
 }
 
 .modeltext {
+  display: flex;
+  width: auto;
+  height: 24px;
+  flex-direction: column;
+  justify-content: left;
+  position: absolute;
+  left: 28px;
   text-align: center;
-  font-family: "Gmarket Sans TTF";
-  font-size: 10px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 700;
   line-height: 24px;
   /* 240% */
 }
 
+.side {
+  width: 33px;
+  height: 137px;
+  flex-shrink: 0;
+  border-radius: 0px 12px 12px 0px;
+  background: var(--color-surfaceVariant, #dfe2eb);
+  position: absolute;
+  top: -1px;
+  right: 0;
+}
+
 .Bookmark {
   width: 16px;
   height: 17.367px;
-  right: 17px;
-  bottom: 18px;
+  right: 8px;
+  bottom: 9px;
   position: absolute;
 }

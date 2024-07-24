@@ -33,23 +33,14 @@ export function AihubCard({
   company: string;
   model: string;
 }) {
-  const models = model.replaceAll(" ", "").split(",");
-
   return (
     <>
       <div className={classes.root}>
         <div className={classes.title}>{title}</div>
         <div className={classes.people}>{people}</div>
         <div className={classes.company}>{company}</div>
-        {models.map((e) => {
-          return (
-            <>
-              <div className={classes.model}>
-                <div className={classes.modeltext}>{e}</div>
-              </div>
-            </>
-          );
-        })}
+        <div className={classes.modeltext}>{model}</div>
+        <div className={classes.side}></div>
         <Bookmark className={classes.Bookmark} />
       </div>
     </>
