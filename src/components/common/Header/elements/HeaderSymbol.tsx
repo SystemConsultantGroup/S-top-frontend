@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "../Header.module.css";
 
 export function HeaderSymbol() {
   return (
-    <div className={styles.symbol}>
+    <Link href="/" className={styles.symbol}>
       <div className={styles.logo}>
         <Image
           src="/images/logo.png"
@@ -18,6 +19,6 @@ export function HeaderSymbol() {
         <h1>S-TOP</h1>
         <span>성균관대학교 소프트웨어융합대학</span>
       </div>
-    </div>
+    </Link>
   );
 }
