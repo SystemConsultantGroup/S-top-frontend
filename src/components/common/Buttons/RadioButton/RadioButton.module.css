@@ -1,1 +1,8 @@
 @import url("src/theme/fonts/pretendard.css");
+
+.element {
+    background-color: var(--color-onPrimary);
+    &:hover {
+      background-color: var(--color-onPrimary);
+    }   
+  }

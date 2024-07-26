@@ -2,15 +2,17 @@
 
 .tableContainer {
   padding: 20px;
-  background-color: #fff; /* 배경색을 하얀색으로 설정 */
+  background-color: var(--color-background); /* 배경색을 하얀색으로 설정 */
   border-radius: 0; /* 모서리를 90도로 설정 */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   font-family: "Pretendard Variable", __Pretendard_Fallback_e223ab, sans-serif;
+  /* color: #000; */
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
+  
 }
 
 .table th,
@@ -22,5 +24,5 @@
 }
 
 .table th {
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid var(--color-primary);
 }

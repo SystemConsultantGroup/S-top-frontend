@@ -5,13 +5,12 @@
 }
 
 .card {
-  border: 1px solid #ddd;
+  border: 1.3px solid var(--color-outlineVariant);
   border-radius: 15px;
   padding: 20px;
   max-width: 300px; /* 가로 길이를 더 길게 조정 */
   font-family: "Pretendard Variable", __Pretendard_Fallback_e223ab, sans-serif;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-onPrimary);
 }
 
 .logo {
@@ -33,7 +32,7 @@
 }
 
 .position {
-  color: #666;
+  color: var(--primary-outline);
   margin-bottom: 10px;
 }
 
@@ -49,9 +48,10 @@
 }
 
 .label {
-  color: #000;
+  color: material-theme/black;
   font-size: 0.9em;
   margin-right: 10px;
+  font-weight: 500;
 }
 
 .tagContainer {
@@ -61,7 +61,7 @@
 
 .tag {
   background-color: var(--primary-container); /* primary-container 색상으로 변경 */
-  color: #1c4975;
+  color: var(--primary-onPrimaryFixedVariant);
   padding: 5px 10px;
   border-radius: 5px;
   font-size: 0.9em;

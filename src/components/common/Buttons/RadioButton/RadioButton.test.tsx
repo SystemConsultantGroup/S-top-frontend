@@ -5,10 +5,10 @@ import "@testing-library/jest-dom";
 describe("RadioButton component", () => {
   it("renders correctly and toggles state on click", () => {
     const options = [
-      { value: 'react', label: 'React' },
-      { value: 'svelte', label: 'Svelte' },
-      { value: 'ng', label: 'Angular' },
-      { value: 'vue', label: 'Vue' },
+      { value: "react", label: "React" },
+      { value: "svelte", label: "Svelte" },
+      { value: "ng", label: "Angular" },
+      { value: "vue", label: "Vue" },
     ];
 
     render(<RadioButton options={options} name="framework" label="Choose a framework" />);
