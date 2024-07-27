@@ -1,3 +1,23 @@
+/* [color-theme="light"] { */
+:root {
+  --color-text: #000;
+  --color-darkText: #fff;
+  --color-description: #888;
+  --color-darkBackground: #353535;
+  --color-cover: #fff;
+  --color-coverHover: #f5f5f5;
+}
+
+[color-theme="dark"] {
+  /* :root { */
+  --color-text: #c9c9c9;
+  --color-darkText: #c9c9c9;
+  --color-description: #888;
+  --color-darkBackground: #353535;
+  --color-cover: #2c2c2c;
+  --color-coverHover: #303030;
+}
+
 .header {
   padding: 0 30px;
   width: 100%;
@@ -6,7 +26,7 @@
   flex-direction: row;
   align-items: center;
   gap: 20px;
-  background-color: white;
+  background-color: var(--color-cover);
 
   @media screen and (max-width: 1023px) {
     justify-content: space-between;
@@ -17,7 +37,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: #000;
+  color: var(--color-text);
   text-decoration: none;
 }
 
@@ -32,7 +52,7 @@
   margin: 0 15px;
   width: 1px;
   height: 70px;
-  background-color: #c3c6cf;
+  background-color: var(--color-description);
 
   @media screen and (max-width: 437px) {
     display: none;
@@ -57,7 +77,6 @@
 
 .topnav {
   flex: 1;
-  color: #000;
 
   & ul,
   & li {
@@ -90,7 +109,7 @@
     z-index: 100;
     display: none;
     min-width: 100%;
-    background-color: #fff;
+    background-color: var(--color-cover);
   }
 
   & > ul > li:hover > ul {
@@ -103,7 +122,7 @@
     cursor: pointer;
   }
   & > ul > li > ul > li:hover {
-    background-color: #ebf6fe;
+    background-color: var(--color-coverHover);
   }
 
   @media screen and (max-width: 1023px) {
@@ -115,7 +134,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: #000;
+  color: var(--color-text);
 
   @media screen and (max-width: 1277px) {
     gap: 20px;
@@ -141,7 +160,7 @@
   margin: 0 10px;
   width: 1px;
   height: 16px;
-  background-color: #c3c6cf;
+  background-color: var(--color-description);
 }
 
 .swuniv {
@@ -174,7 +193,7 @@
     position: absolute;
     height: 3px;
     width: 100%;
-    background: #000;
+    background: var(--color-text);
     border-radius: 9px;
     opacity: 1;
     left: 0;
@@ -234,7 +253,8 @@
   flex-direction: row;
   justify-content: space-between;
   gap: 20px;
-  background-color: #313131;
+  color: var(--color-darkText);
+  background-color: #353535;
   transition: 0.5s opacity;
 
   @media screen and (min-width: 1198px) {
@@ -299,7 +319,7 @@
   & a {
     margin-bottom: 20px;
     display: block;
-    color: #fff;
+    color: var(--color-darkText);
     text-decoration: none;
     white-space: nowrap;
   }
