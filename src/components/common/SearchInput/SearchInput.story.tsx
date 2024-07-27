@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { SearchInput } from "./SearchInput";
-import { IconSearch } from "@tabler/icons-react";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -25,6 +24,6 @@ type Story = StoryObj<typeof meta>;
 export const Usage: Story = {
   args: {
     placeholder: "Input here to search...",
-    leftSection: <IconSearch size={16} />,
+    iconSize: 16,
   },
 };

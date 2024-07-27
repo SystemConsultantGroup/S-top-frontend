@@ -1,13 +1,12 @@
 import { render, screen } from "@/utils/test-utils";
 import { SearchInput } from "./SearchInput";
 import "@testing-library/jest-dom";
-import { IconSearch } from "@tabler/icons-react";
 
 describe("SearchInput component", () => {
   it("renders correctly with the given placeholder", () => {
     const props = {
       placeholder: "Input here to search...",
-      leftSection: <IconSearch size={16} />,
+      iconSize: 16,
     };
 
     render(<SearchInput {...props} />);
