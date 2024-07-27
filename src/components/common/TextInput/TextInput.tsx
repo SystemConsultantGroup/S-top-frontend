@@ -1,4 +1,4 @@
-import { Input, InputProps } from "@mantine/core";
+import { Input, InputProps, InputWrapper } from "@mantine/core";
 import { ReactNode } from "react";
 
 type TextInputPropsType = {
@@ -16,8 +16,8 @@ export function TextInput({
   ...props
 }: InputProps & TextInputPropsType) {
   return (
-    <Input.Wrapper label={label} description={description} error={error}>
+    <InputWrapper label={label} description={description} error={error}>
       <Input placeholder={placeholder} {...props} />
-    </Input.Wrapper>
+    </InputWrapper>
   );
 }
