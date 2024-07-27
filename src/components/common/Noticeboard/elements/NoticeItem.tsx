@@ -5,9 +5,11 @@ import { IconPinFilled } from "@tabler/icons-react";
 import { IBoardItem } from "../Noticeboard";
 
 export function NoticeItem({ title, number, author, date, view, pinned, href }: IBoardItem) {
-  const Year = date.getFullYear();
-  const Month = 1 + date.getMonth();
-  const Date = date.getDate();
+  const formattedDate = new Intl.DateTimeFormat("ko-KR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(date);
 
   return (
     <li className={styles.item}>
@@ -20,9 +22,7 @@ export function NoticeItem({ title, number, author, date, view, pinned, href }: 
       <Group className={styles.bottom} gap={10}>
         <span>#{number}</span>
         <span>{author}</span>
-        <span>
-          {Year}. {Month}. {Date}
-        </span>
+        <span>{formattedDate}</span>
         <span>조회수 {view}</span>
       </Group>
     </li>

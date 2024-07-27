@@ -28,7 +28,7 @@ export const Usage: Story = {
     title: "Title",
     author: "admin",
     created_date: new Date(),
-    edited_date: undefined,
+    edited_date: new Date(),
     attachment: [
       {
         name: "File 1",

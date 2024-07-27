@@ -12,28 +12,31 @@ export function NoticeHeading({
   value,
   setValue,
   heading,
-  classifier,
+  classifier: { labels, defaultLabel, searchPlaceholder },
 }: IBoardSelectState & IBoardHeadingProps) {
-  const Labels = classifier.labels;
-  const DefaultLabel = classifier.defaultLabel;
-  const SearchPlaceholder = classifier.searchPlaceholder;
-
   return (
     <div className={styles.heading}>
       <h2>{heading}</h2>
-      <Group>
+      <Group gap={10}>
         <Select
           className={styles.filterInput}
-          data={Labels}
-          defaultValue={DefaultLabel ? Labels[DefaultLabel] : null}
-          comboboxProps={{ shadow: "md" }}
+          radius={0}
+          data={labels}
+          defaultValue={labels[defaultLabel]}
+          comboboxProps={{
+            shadow: "md",
+            dropdownPadding: 0,
+            radius: 0,
+            offset: 0,
+            styles: { option: { borderRadius: 0, padding: "12px 14px" } },
+          }}
           allowDeselect={false}
           withCheckIcon={false}
         />
         <Group gap={0}>
           <Input
             className={styles.searchInput}
-            placeholder={SearchPlaceholder ?? "검색어를 입력하세요."}
+            placeholder={searchPlaceholder ?? "검색어를 입력하세요."}
             onChange={(event) => setValue(event.currentTarget.value)}
             rightSectionPointerEvents="all"
             mt="md"

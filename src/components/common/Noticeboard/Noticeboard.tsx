@@ -7,7 +7,7 @@ import { NoticeContainer } from "./elements/NoticeContainer";
 
 interface IBoardClassifier {
   labels: string[];
-  defaultLabel?: number;
+  defaultLabel: number;
   searchPlaceholder?: string;
 }
 

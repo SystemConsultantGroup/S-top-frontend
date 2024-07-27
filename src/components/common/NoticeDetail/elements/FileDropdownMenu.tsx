@@ -5,7 +5,7 @@ import { IFileInfo } from "./NoticeDetailStage";
 
 export function FileDropdownMenu({ attachment }: { attachment?: IFileInfo[] }) {
   return (
-    <Menu position="bottom-end" shadow="sm">
+    <Menu position="bottom-end" shadow="sm" offset={0} radius={0}>
       <Menu.Target>
         <Button className={`${styles.stageBtn} ${styles.stageFileBtn}`} variant="transparent">
           <Group gap={5}>
@@ -18,6 +18,7 @@ export function FileDropdownMenu({ attachment }: { attachment?: IFileInfo[] }) {
         <Menu.Dropdown className={styles.fileDropdown}>
           {attachment.map((item, idx) => (
             <Menu.Item
+              className={styles.dropdownItem}
               key={idx}
               leftSection={<IconPaperclip size={16} />}
               component="a"

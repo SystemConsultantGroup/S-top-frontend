@@ -6,7 +6,7 @@ export interface IDetailHeadProps {
   title: string;
   author: string;
   created_date: Date;
-  edited_date?: Date;
+  edited_date: Date;
   pinned: boolean;
 }
 
@@ -18,7 +18,7 @@ export function NoticeDetailHead({
   pinned,
 }: IDetailHeadProps) {
   const CreatedDate = formatDate(created_date);
-  const EditedDate = edited_date ? formatDate(edited_date) : null;
+  const EditedDate = formatDate(edited_date);
 
   return (
     <div className={styles.head}>
@@ -30,7 +30,7 @@ export function NoticeDetailHead({
         <span>{author}</span>
         <Group gap={5}>
           <span>작성일시 {CreatedDate}</span>
-          {EditedDate ? <span>수정일시 {EditedDate}</span> : ""}
+          {CreatedDate === EditedDate ? "" : <span>수정일시 {EditedDate}</span>}
         </Group>
       </Group>
     </div>

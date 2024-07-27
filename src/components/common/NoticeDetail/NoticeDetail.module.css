@@ -1,21 +1,55 @@
+/* [color-theme="light"] { */
+:root {
+  --color-primary: #37618e;
+  --color-primaryHover: #285582;
+  --color-secondary1: #4a672d;
+  --color-secondaryHover: #425e27;
+  --color-text: #000;
+  --color-description: #888;
+  --color-background1: #eee;
+  --color-backgroundHover: #ececec;
+  --color-backgroundTint: #ececec;
+  --color-backgroundTintHover: #e7e7e7;
+  --color-cover: #fff;
+  --color-coverHover: #f5f5f5;
+}
+
+[color-theme="dark"] {
+  /* :root { */
+  --color-primary: #37618e;
+  --color-primaryHover: #285582;
+  --color-secondary1: #4a672d;
+  --color-secondaryHover: #4e6d30;
+  --color-text: #c9c9c9;
+  --color-description: #888;
+  --color-background1: #2e2e2e;
+  --color-backgroundHover: #313131;
+  --color-backgroundTint: #353535;
+  --color-backgroundTintHover: #3c3c3c;
+  --color-cover: #2c2c2c;
+  --color-coverHover: #303030;
+}
+
 .heading {
   margin: 30px 0;
 
   & > h2 {
     margin: 0;
+    color: var(--color-text);
   }
 }
 
 .container {
-  border-top: 1px solid #000;
+  border-top: 1px solid var(--color-text);
 }
 
 .head {
   padding: 20px 15px;
-  border-bottom: 1px solid #888;
+  border-bottom: 1px solid var(--color-description);
 
   & h3 {
     margin: 0;
+    color: var(--color-text);
   }
 }
 
@@ -25,6 +59,7 @@
 
 .info {
   margin-top: 5px;
+  color: var(--color-text);
 }
 
 .ml35 {
@@ -33,13 +68,18 @@
 
 .stage {
   padding: 10px 15px;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid var(--color-text);
 }
 
 .stageBtn {
   padding: 5px;
   font-size: 16px;
   font-weight: 500;
+  color: var(--color-text);
+
+  &:hover {
+    color: var(--color-text);
+  }
 }
 
 .stageResizePanel {
@@ -50,8 +90,23 @@
     border: 0;
     padding: 0;
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
+    background-color: var(--color-background1);
+    color: var(--color-text);
   }
+}
+
+.filledBtn {
+  background-color: var(--color-background1);
+
+  &:hover {
+    background-color: var(--color-backgroundHover);
+  }
+}
+
+.divider {
+  margin: 5px 0;
+  border-inline-start: 1px solid var(--color-description);
 }
 
 .stageFileBtn {
@@ -67,17 +122,66 @@
 .fileDropdown {
   padding: 0;
   border: 0;
+  background-color: var(--color-cover);
+}
+
+.dropdownItem {
+  padding: 8px 12px;
+  color: var(--color-text);
+  background-color: var(--color-cover);
+
+  &:hover {
+    background-color: var(--color-coverHover);
+  }
 }
 
 .fileDownloadAll {
-  border-radius: 0 0 0.25rem 0.25rem;
+  background-color: var(--color-backgroundTint);
+  color: var(--color-text);
+
+  &:hover {
+    background-color: var(--color-backgroundTintHover);
+  }
 }
 
-.moveBox {
+.content {
+  color: var(--color-text);
+}
+
+.movebox {
   padding: 20px 15px;
-  border-bottom: 1px solid #888;
+  border-bottom: 1px solid var(--color-description);
+  color: var(--color-description);
+}
+
+.moveboxLink {
+  color: var(--color-text);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-text);
+    text-decoration: underline;
+  }
 }
 
 .toolbar {
   margin: 20px 0;
+}
+
+.outlineTool {
+  border: 2px solid var(--color-text);
+  color: var(--color-text);
+
+  &:hover {
+    color: var(--color-text);
+    background-color: var(--color-coverHover);
+  }
+}
+
+.filledTool {
+  background-color: var(--color-secondary1);
+
+  &:hover {
+    background-color: var(--color-secondaryHover);
+  }
 }
