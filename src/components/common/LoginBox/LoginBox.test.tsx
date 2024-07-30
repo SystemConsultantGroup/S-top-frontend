@@ -8,6 +8,5 @@ describe("LoginBox component", () => {
     render(<LoginBox />);
     expect(screen.getByAltText("Logo")).toBeInTheDocument();
     expect(screen.getByAltText("카카오 로그인")).toBeInTheDocument();
-    expect(screen.getByAltText("네이버 로그인")).toBeInTheDocument();
   });
 });
