@@ -1,0 +1,55 @@
+.filterChip {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2px 6px 2px 10px;
+  border-radius: 100px;
+  margin: 5px;
+}
+
+.label {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-shadow);
+  margin-right: 6px;
+}
+
+.close {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-outline);
+  border-radius: 50%;
+}
+
+.resetChip {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-surfaceVariant);
+  background-color: var(--color-surfaceBright);
+}
+
+.resetLabel {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ba1a1a;
+  margin-right: 6px;
+  margin-left: 3px;
+  cursor: pointer;
+}
+
+.resetIcon {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
