@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Menu } from "@mantine/core";
+import { Button, Menu, MenuTarget, MenuDropdown, MenuItem } from "@mantine/core";
 import classes from "./Dropdown.module.css";
 
 interface DropdownProps {
@@ -18,7 +18,7 @@ export function Dropdown({ options, placeholder }: DropdownProps) {
 
   return (
     <Menu offset={0} opened={opened} onChange={setOpened}>
-      <Menu.Target>
+      <MenuTarget>
         <Button
           justify="space-between"
           className={`${classes.dropdownToggle} ${opened ? classes.opened : ""}`}
@@ -27,6 +27,7 @@ export function Dropdown({ options, placeholder }: DropdownProps) {
           rightSection={
             <span className={classes.toggleIcon}>
               {opened ? (
+                /* opened dropdown = Lets Icons v1.0 Single Arrow Arrow_drop_up */
                 <svg
                   width="24"
                   height="24"
@@ -40,6 +41,7 @@ export function Dropdown({ options, placeholder }: DropdownProps) {
                   />
                 </svg>
               ) : (
+                /* closed dropdown = Lets Icons v1.0 Single Arrow Arrow_drop_down */
                 <svg
                   width="24"
                   height="24"
@@ -56,18 +58,18 @@ export function Dropdown({ options, placeholder }: DropdownProps) {
             </span>
           }
         ></Button>
-      </Menu.Target>
-      <Menu.Dropdown className={classes.dropdownList}>
+      </MenuTarget>
+      <MenuDropdown className={classes.dropdownList}>
         {options.map((option) => (
-          <Menu.Item
+          <MenuItem
             key={option}
             className={classes.dropdownItem}
             onClick={() => handleOptionClick(option)}
           >
             {option}
-          </Menu.Item>
+          </MenuItem>
         ))}
-      </Menu.Dropdown>
+      </MenuDropdown>
     </Menu>
   );
 }
