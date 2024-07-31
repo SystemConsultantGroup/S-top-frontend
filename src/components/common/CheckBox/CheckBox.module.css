@@ -1,0 +1,21 @@
+/* Checkbox.module.css */
+
+.checkboxContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.label {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  color: var(--color-onSurface);
+}
