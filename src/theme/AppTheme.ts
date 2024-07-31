@@ -78,21 +78,21 @@ export const AppTheme = createTheme({
       surfaceTint: "#A1CAFD",
       onPrimary: "#003259",
       primaryContainer: "#1A4975",
-      onPrimaryContainer: "#D1E4FF",
-      secondary: "#AFD18C",
-      onSecondary: "#1D3702",
-      secondaryContainer: "#334E17",
-      onSecondaryContainer: "#CBEEA5",
-      tertiary: "#D7BEE4",
+      onPrimaryContainer: "#D1E4FF", //밝은 하늘색
+      secondary: "#AFD18C", //밝은 녹색
+      onSecondary: "#1D3702", //진녹색
+      secondaryContainer: "#334E17", //조금 덜진한 녹색
+      onSecondaryContainer: "#CBEEA5", //밝은 연두색
+      tertiary: "#D7BEE4", //밝은 보라색
       onTertiary: "#3B2948",
       tertiaryContainer: "#523F5F",
-      onTertiaryContainer: "#F3DAFF",
+      onTertiaryContainer: "#F3DAFF", //밝은 라벤더색...?
       error: "#FFB4AB",
       onError: "#690005",
       errorContainer: "#93000A",
       onErrorContainer: "#FFDAD6",
-      background: "#111418",
-      onBackground: "#E1E2E8",
+      background: "#111418", // 오 이것도 배경색으로 좋을듯 (하양 검정) .. 근데 하양이 살짝 파란끼 도는 하양
+      onBackground: "#E1E2E8", //오! 이건 반대!!! (검정 하양)
       surface: "#111418",
       onSurface: "#E1E2E8",
       surfaceVariant: "#43474E",
@@ -118,7 +118,7 @@ export const AppTheme = createTheme({
       onTertiaryFixedVariant: "#523F5F",
       surfaceDim: "#111418",
       surfaceBright: "#36393E",
-      surfaceContainerLowest: "#0B0E13",
+      surfaceContainerLowest: "#0B0E13", //이게 완전 하양 검정인듯
       surfaceContainerLow: "#191C20",
       surfaceContainer: "#1D2024",
       surfaceContainerHigh: "#272A2F",

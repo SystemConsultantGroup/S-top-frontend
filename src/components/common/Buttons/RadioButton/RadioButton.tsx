@@ -18,7 +18,13 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
   withAsterisk,
 }) => {
   return (
-    <Radio.Group className={classes.element} name={name} label={label} description={description} withAsterisk={withAsterisk}>
+    <Radio.Group
+      className={classes.element}
+      name={name}
+      label={label}
+      description={description}
+      withAsterisk={withAsterisk}
+    >
       <Group mt="xs">
         {options.map((option) => (
           <Radio key={option.value} value={option.value} label={option.label} />

@@ -6,7 +6,7 @@
   width: 100%; /* 가로 길이를 100%로 설정 */
   max-width: 600px; /* 최대 가로 길이를 설정하여 너무 길어지지 않도록 제한 */
   padding: 10px;
-  background-color: var(--color-onPrimary);
+  background-color: var(--color-surfaceContainerLowest);
 }
 
 .textareaContainer {
@@ -17,7 +17,7 @@
 }
 
 .textarea {
-  background-color: #fff;
+  background-color: var(--color-surfaceContainerLowest);
   flex: 1;
   padding: 10px;
   border: none;
@@ -33,7 +33,7 @@
 .button {
   width: 70px;
   background-color: var(--color-primary);
-  color: var(--color-onPrimary);;
+  color: var(--color-onPrimary);
   border: none;
   cursor: pointer;
   display: flex;
