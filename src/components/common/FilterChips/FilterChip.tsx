@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ResetIcon from "./ResetIcon";
 import classes from "./FilterChip.module.css";
+import { IconRotateClockwise } from "@tabler/icons-react";
 
 type FilterChipProps = {
   label: string;
@@ -22,20 +22,23 @@ export function FilterChip({ label, onRemove, isReset = false }: FilterChipProps
     }
   }, [isReset]);
 
-  return (
-    <div className={classes.filterChip} style={{ backgroundColor: isReset ? "#DFE2EB" : bgColor }}>
-      {!isReset && <span className={classes.label}>{label}</span>}
-      {!isReset && (
-        <span className={classes.close} onClick={onRemove}>
-          X
-        </span>
-      )}
-      {isReset && (
+  if (isReset) {
+    return (
+      <div className={`${classes.filterChip} ${classes.resetChip}`}>
         <>
-          <ResetIcon />
+          <IconRotateClockwise stroke={1.8} color={"#BA1A1A"} size={16} />
           <span className={classes.resetLabel}>{label}</span>
         </>
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div className={classes.filterChip} style={{ backgroundColor: bgColor }}>
+      <span className={classes.label}>{label}</span>
+      <span className={classes.close} onClick={onRemove}>
+        X
+      </span>
     </div>
   );
 }
