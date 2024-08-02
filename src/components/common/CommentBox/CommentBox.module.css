@@ -16,6 +16,10 @@
   width: 100%; /* 부모 요소의 너비에 맞게 설정 */
 }
 
+.verticalDivider {
+  border-left: 2px solid var(--color-surfaceVariant); /* 구분선 스타일 */
+}
+
 .textarea {
   background-color: var(--color-surfaceContainerLowest);
   flex: 1;
@@ -61,7 +65,8 @@
 }
 
 .commentItem:first-child {
-  border-top: none;
+  border-top: 1px;
+  padding-top: 1px;
 }
 
 .commentAuthor {

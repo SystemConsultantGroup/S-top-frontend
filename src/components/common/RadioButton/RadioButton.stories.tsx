@@ -11,14 +11,14 @@ const meta: Meta<typeof RadioButton> = {
   argTypes: {},
   args: {
     name: "favoriteFramework",
-    label: "Select your favorite framework/library",
-    description: "This is anonymous",
+    label: "라디오 버튼입니당",
+    description: "골라보세용",
     withAsterisk: true,
     options: [
-      { value: "react", label: "React" },
-      { value: "svelte", label: "Svelte" },
-      { value: "ng", label: "Angular" },
-      { value: "vue", label: "Vue" },
+      { value: "react", label: "1번" },
+      { value: "svelte", label: "2번" },
+      { value: "ng", label: "3번" },
+      { value: "vue", label: "4번" },
     ],
   },
 };

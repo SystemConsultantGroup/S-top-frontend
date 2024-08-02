@@ -46,6 +46,7 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit }) => {
             onKeyDown={handleKeyDown}
             placeholder="정책 위반 댓글은 삭제될 수 있습니다."
           />
+          <div className={classes.verticalDivider}></div>
           <button type="submit" className={classes.button}>
             작성
           </button>

@@ -34,6 +34,8 @@
 .position {
   color: var(--primary-outline);
   margin-bottom: 10px;
+  font-size: 1em;
+  line-height: 21px;
 }
 
 .divider {
@@ -52,11 +54,13 @@
   font-size: 0.9em;
   margin-right: 10px;
   font-weight: 500;
+  white-space: nowrap
 }
 
 .tagContainer {
   display: flex;
-  gap: 10px;
+  gap: 6px;  
+  flex-wrap: wrap;
 }
 
 .tag {
@@ -65,6 +69,7 @@
   padding: 5px 10px;
   border-radius: 5px;
   font-size: 0.9em;
+  white-space: nowrap;
 }
 
 .location {
