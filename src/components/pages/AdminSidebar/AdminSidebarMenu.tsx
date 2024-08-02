@@ -80,7 +80,7 @@ const AdminSidebarMenuList: ListProps[] = [
       { label: "과제 제안", href: "/admin/proposals" },
       { label: "프로젝트 문의", href: "/admin/inquiries" },
       { label: "공지사항", href: "/admin/notices" },
-      { label: "이벤트 공지사항", href: "/admin/notices" },
+      { label: "이벤트 공지사항", href: "/admin/event-notices" },
     ],
   },
   {
