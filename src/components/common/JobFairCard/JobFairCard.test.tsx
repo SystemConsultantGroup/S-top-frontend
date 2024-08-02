@@ -6,7 +6,7 @@ describe("JobFairCard component", () => {
   it("renders correctly with given props", () => {
     render(
       <JobFairCard
-        logo="https://example.com/logo.png"
+        logo="/images/lululabLogo.png"
         company="룰루랩"
         position="Web SDK 개발자, AI 개발자"
         employmentType={["인턴", "신입 정규직"]}

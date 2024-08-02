@@ -54,12 +54,12 @@
   font-size: 0.9em;
   margin-right: 10px;
   font-weight: 500;
-  white-space: nowrap
+  white-space: nowrap;
 }
 
 .tagContainer {
   display: flex;
-  gap: 6px;  
+  gap: 6px;
   flex-wrap: wrap;
 }
 

@@ -14,7 +14,7 @@
 }
 
 .radio label {
-  color: var(--color-onBackground); 
+  color: var(--color-onBackground);
 }
 
 .radio input[type="radio"] {
