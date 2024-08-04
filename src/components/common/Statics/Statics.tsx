@@ -1,10 +1,8 @@
-const data = Array(0);
-for (let i = 0; i < 127; i++) {
-  data.push(i);
-}
-
+type align = "start" | "end" | "left" | "right" | "center" | "justify" | "match-parent";
 export function Statics({
   values,
+  labels,
+  labelAlign,
   maxWidth,
   maxHeight,
   viewSize,
@@ -20,6 +18,8 @@ export function Statics({
   pathWidth,
 }: {
   values: number[];
+  labels: string[];
+  labelAlign: align;
   maxWidth: number;
   maxHeight: number;
   viewSize: number;
@@ -38,70 +38,99 @@ export function Statics({
   const count = values.length;
   return (
     <>
-      <svg
-        id="canv"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox={`0 0 ${maxHeight} ${maxWidth}`}
-        fill="none"
-        height={maxWidth * viewSize}
-        width={maxHeight * viewSize}
+      <div
+        style={{
+          height: `${maxHeight * viewSize}`,
+          width: `${maxWidth * viewSize}`,
+          position: "relative",
+        }}
       >
-        {values.map((e, i) => {
+        <svg
+          id="canv"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox={`0 0 ${maxWidth} ${maxHeight}`}
+          fill="none"
+          width={maxWidth * viewSize}
+          height={maxHeight * viewSize}
+        >
+          {values.map((e, i) => {
+            return (
+              <>
+                <rect
+                  x={
+                    ((i * maxWidth) / (count * 2 + count - 1)) * 3 +
+                    ((maxWidth / (count * 2 + count - 1)) * rectStrokeWidth) / 2
+                  }
+                  y={
+                    maxHeight -
+                    (e / Max) * maxHeight * maxMaxHeight +
+                    ((maxWidth / (count * 2 + count - 1)) * rectStrokeWidth) / 2
+                  }
+                  height={
+                    (e / Max) * maxHeight * maxMaxHeight -
+                    ((maxWidth / (count * 2 + count - 1)) * 2 * rectStrokeWidth) / 2
+                  }
+                  width={
+                    (maxWidth / (count * 2 + count - 1)) * 2 -
+                    ((maxWidth / (count * 2 + count - 1)) * 2 * rectStrokeWidth) / 2
+                  }
+                  fill={rectFill}
+                  stroke={rectStrokeFill}
+                  strokeWidth={((maxWidth / (count * 2 + count - 1)) * 2 * rectStrokeWidth) / 2}
+                ></rect>
+              </>
+            );
+          })}
+          <path
+            stroke={pathStroke}
+            strokeWidth={pathWidth}
+            d={values
+              .map((e, i) => {
+                return `${i == 0 ? "M" : "L"} ${(((i + 1 / 3) * maxWidth) / (count * 2 + count - 1)) * 3} ${maxHeight - (e / Max) * maxHeight * maxMaxHeight} `;
+              })
+              .join("")}
+          ></path>
+          {values.map((e, i) => {
+            return (
+              <>
+                <circle
+                  cx={(((i + 1 / 3) * maxWidth) / (count * 2 + count - 1)) * 3}
+                  cy={maxHeight - (e / Max) * maxHeight * maxMaxHeight}
+                  r={
+                    (maxWidth / (count * 2 + count - 1)) *
+                    circleRadius *
+                    (1 - circleStrokeWidth / 2)
+                  }
+                  fill={circleFill}
+                  stroke={circleStrokeFill}
+                  strokeWidth={
+                    ((maxWidth / (count * 2 + count - 1)) * circleRadius * 2 * circleStrokeWidth) /
+                    2
+                  }
+                ></circle>
+              </>
+            );
+          })}
+        </svg>
+        {labels.map((e, i) => {
+          const a = ((i * maxWidth) / (count * 2 + count - 1)) * 3 * viewSize;
+          const b = (maxWidth / (count * 2 + count - 1)) * 2 * viewSize;
           return (
             <>
-              <rect
-                x={
-                  ((i * maxHeight) / (count * 2 + count - 1)) * 3 +
-                  ((maxHeight / (count * 2 + count - 1)) * rectStrokeWidth) / 2
-                }
-                y={
-                  maxWidth -
-                  (e / Max) * maxWidth * maxMaxHeight +
-                  ((maxHeight / (count * 2 + count - 1)) * rectStrokeWidth) / 2
-                }
-                height={
-                  (e / Max) * maxWidth * maxMaxHeight -
-                  ((maxHeight / (count * 2 + count - 1)) * 2 * rectStrokeWidth) / 2
-                }
-                width={
-                  (maxHeight / (count * 2 + count - 1)) * 2 -
-                  ((maxHeight / (count * 2 + count - 1)) * 2 * rectStrokeWidth) / 2
-                }
-                fill={rectFill}
-                stroke={rectStrokeFill}
-                strokeWidth={((maxHeight / (count * 2 + count - 1)) * 2 * rectStrokeWidth) / 2}
-              ></rect>
+              <p
+                style={{
+                  left: `${a}px`,
+                  width: `${b}px`,
+                  textAlign: labelAlign,
+                  position: "absolute",
+                }}
+              >
+                {e}
+              </p>
             </>
           );
         })}
-        <path
-          stroke={pathStroke}
-          strokeWidth={pathWidth}
-          d={values
-            .map((e, i) => {
-              return `${i == 0 ? "M" : "L"} ${(((i + 1 / 3) * maxHeight) / (count * 2 + count - 1)) * 3} ${maxWidth - (e / Max) * maxWidth * maxMaxHeight} `;
-            })
-            .join("")}
-        ></path>
-        {values.map((e, i) => {
-          return (
-            <>
-              <circle
-                cx={(((i + 1 / 3) * maxHeight) / (count * 2 + count - 1)) * 3}
-                cy={maxWidth - (e / Max) * maxWidth * maxMaxHeight}
-                r={
-                  (maxHeight / (count * 2 + count - 1)) * circleRadius * (1 - circleStrokeWidth / 2)
-                }
-                fill={circleFill}
-                stroke={circleStrokeFill}
-                strokeWidth={
-                  ((maxHeight / (count * 2 + count - 1)) * circleRadius * 2 * circleStrokeWidth) / 2
-                }
-              ></circle>
-            </>
-          );
-        })}
-      </svg>
+      </div>
     </>
   );
 }

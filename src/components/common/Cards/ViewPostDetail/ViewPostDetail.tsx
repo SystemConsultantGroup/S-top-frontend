@@ -1,12 +1,7 @@
 import { Button } from "@mantine/core";
 import classes from "./ViewPostDetail.module.css";
 
-const data = Array(0);
-for (let i = 0; i < 127; i++) {
-  data.push(i);
-}
-
-export function Paginations({
+export function ViewPostDetail({
   title,
   subtitle,
   articles,

@@ -23,6 +23,8 @@ describe("Pagenation component", () => {
         circleStrokeWidth={0.3}
         pathStroke={"#BCBCBC"}
         pathWidth={10}
+        labels={[]}
+        labelAlign={"center"}
       />
     );
     // More on screen queries: https://testing-library.com/docs/queries/about

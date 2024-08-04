@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Paginations } from "./ViewPostDetail";
+import { ViewPostDetail } from "./ViewPostDetail";
 
 const meta = {
-  component: Paginations,
+  component: ViewPostDetail,
   parameters: {
     layout: "centered",
   },
-} satisfies Meta<typeof Paginations>;
+} satisfies Meta<typeof ViewPostDetail>;
 
 export default meta;
 

@@ -110,9 +110,9 @@
 }
 
 .Bookmark {
-  width: 16px;
-  height: 17.367px;
-  right: 8px;
-  bottom: 9px;
+  width: 40px;
+  height: 40px;
+  right: -12px;
+  bottom: 0px;
   position: absolute;
 }
