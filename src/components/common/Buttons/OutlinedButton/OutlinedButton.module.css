@@ -5,6 +5,6 @@
   &:hover {
     background-color: var(--color-background);
     color: var(--color-onBackground);
-    border: 1px solid var(--color-outineVariant);
+    border: 1px solid var(--color-outlineVariant);
   }
 }
