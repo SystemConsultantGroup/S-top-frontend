@@ -1,5 +1,5 @@
-/* [color-theme="light"] { */
-:root {
+[color-theme="light"] {
+  /* :root { */
   --color-primary: #37618e;
   --color-text: #000;
   --color-description: #888;
