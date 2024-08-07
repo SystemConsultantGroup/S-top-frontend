@@ -134,6 +134,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 10px;
   color: var(--color-text);
 
   @media screen and (max-width: 1277px) {
@@ -249,13 +250,18 @@
   z-index: 10;
   width: 100%;
   display: flex;
-  opacity: 0;
   flex-direction: row;
   justify-content: space-between;
   gap: 20px;
+
   color: var(--color-darkText);
   background-color: #353535;
-  transition: 0.5s opacity;
+
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    visibility 0.2s,
+    opacity 0.2s ease-in-out;
 
   @media screen and (min-width: 1198px) {
     padding: 100px 180px;
@@ -275,6 +281,7 @@
 }
 
 .show {
+  visibility: visible;
   opacity: 1;
 }
 
