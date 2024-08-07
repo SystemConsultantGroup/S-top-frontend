@@ -1,5 +1,5 @@
-/* [color-theme="light"] { */
-:root {
+[color-theme="light"] {
+  /* :root { */
   --color-primary: #37618e;
   --color-primaryHover: #285582;
   --color-secondary1: #4a672d;
