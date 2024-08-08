@@ -1,0 +1,12 @@
+.element {
+  background-color: var(--color-secondary);
+  color: var(--color-onSecondary);
+  &:hover {
+    background-color: var(--color-secondaryFixed);
+    color: var(--color-onSecondaryFixed);
+  }
+  &:disabled {
+    background-color: var(--color-secondaryFixedDim);
+    color: var(--color-onSecondaryFixedDim);
+  }
+}
