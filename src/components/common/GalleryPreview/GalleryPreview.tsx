@@ -1,5 +1,13 @@
-import { Card, Text, Flex } from "@mantine/core";
+import {
+  Card,
+  Text,
+  Flex,
+  CardSection,
+  useMantineTheme,
+  useMantineColorScheme,
+} from "@mantine/core";
 import Image from "next/image";
+import { IconEye } from "@tabler/icons-react";
 import classes from "./GalleryPreview.module.css";
 
 export interface Props {
@@ -10,6 +18,12 @@ export interface Props {
 }
 
 export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
+  const theme = useMantineTheme();
+  const { colorScheme } = useMantineColorScheme();
+
+  // text color와 맞추기
+  const dimmedColor = colorScheme === "dark" ? theme.colors.dark[2] : theme.colors.gray[6];
+
   function formatDate(date: Date) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0"); // getMonth()는 0부터 시작하므로 +1
@@ -21,7 +35,7 @@ export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
   return (
     <>
       <Card padding="sm" radius="md" style={{ paddingBottom: 0 }}>
-        <Card.Section className={classes.image_section}>
+        <CardSection className={classes.image_section}>
           <Image
             src={imgUrl}
             alt="gallery preview image"
@@ -29,7 +43,7 @@ export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
             width={296}
             className={classes.image_view}
           />
-        </Card.Section>
+        </CardSection>
 
         <Text fw={700} size="lg" mt="md" className={classes.title}>
           {title}
@@ -41,13 +55,7 @@ export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
           </Text>
           {viewCount && (
             <Flex align="center">
-              <Image
-                src="/icons/View_light.png"
-                alt="view icon"
-                width={18}
-                height={18}
-                className={classes.viewcount_icon}
-              />
+              <IconEye size={18} className={classes.viewcount_icon} color={dimmedColor} />
               <Text c="dimmed" size="sm">
                 {viewCount}
               </Text>
