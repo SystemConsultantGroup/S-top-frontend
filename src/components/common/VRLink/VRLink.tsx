@@ -1,4 +1,4 @@
-import { Container, Group } from "@mantine/core";
+import { Group } from "@mantine/core";
 import classes from "./VRLink.module.css";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,7 +11,7 @@ export interface VRLinkProps {
 
 export function VRLink({ width, height }: VRLinkProps) {
   return (
-    <Container className={classes.container} w={width} h={height}>
+    <div className={classes.container} style={{ width: width, height: height }}>
       {/* TODO: 경로 수정하기 */}
       <Link href={"/vr"}>
         <Image
@@ -19,10 +19,12 @@ export function VRLink({ width, height }: VRLinkProps) {
           alt={"VR Link"}
           className={classes.img}
           objectFit="contain"
-          fill
-          priority
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: "100%", height: "auto" }}
         />
-        <Group className={classes.group} p={120} justify="space-between">
+        <Group className={classes.group} pl={120} pr={120} justify="space-between">
           <div className={classes.title}>킹고버스 KINGOVERSE</div>
           <Group gap={4} align="center" justify="center">
             <div className={classes.text}>바로가기</div>
@@ -30,6 +32,6 @@ export function VRLink({ width, height }: VRLinkProps) {
           </Group>
         </Group>
       </Link>
-    </Container>
+    </div>
   );
 }
