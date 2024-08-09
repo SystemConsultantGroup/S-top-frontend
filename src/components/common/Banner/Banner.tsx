@@ -1,6 +1,6 @@
 import Image from "next/image";
 import classes from "./Banner.module.css";
-import { Container, Group, Stack } from "@mantine/core";
+import { Group, Stack } from "@mantine/core";
 
 export type ImageType = "AI_HUB" | "IND_UNIV_PROJECT" | "INTERVIEW" | "PROJECT" | "S_TOP";
 export type ImageLocationLookupTable = Record<ImageType, string>;
@@ -22,22 +22,25 @@ export interface BannerProps {
 }
 export function Banner({ type, title, subtitle, text, width, height }: BannerProps) {
   return (
-    <Container className={classes.container} w={width} h={height}>
+    <div className={classes.container} style={{ width: width, height: height }}>
       <Image
+        className={classes.img}
         src={IMAGE_LOCATION_LOOKUP_TABLE[type]}
         alt={"Banner Image"}
-        className={classes.img}
-        layout="fill"
         objectFit="contain"
+        width={0}
+        height={0}
+        sizes="100vw"
+        style={{ width: "100%", height: "auto" }}
         priority
-      />
+      ></Image>
       <Group className={classes.group} gap={0}>
-        <Stack className={classes.stack} align="flex-start" p={40} gap={0}>
+        <Stack className={classes.stack} align="flex-start" p={50} gap={0}>
           <div className={classes.title}>{title}</div>
           <div className={classes.subtitle}>{subtitle}</div>
         </Stack>
         <div className={classes.text}>{text}</div>
       </Group>
-    </Container>
+    </div>
   );
 }
