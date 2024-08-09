@@ -24,11 +24,9 @@ export function FilterChip({ label, onRemove, isReset = false }: FilterChipProps
 
   if (isReset) {
     return (
-      <div className={`${classes.filterChip} ${classes.resetChip}`}>
-        <>
-          <IconRotateClockwise stroke={1.8} color={"#BA1A1A"} size={16} />
-          <span className={classes.resetLabel}>{label}</span>
-        </>
+      <div className={`${classes.filterChip} ${classes.resetChip}`} onClick={onRemove}>
+        <IconRotateClockwise stroke={1.8} color={"#BA1A1A"} size={16} />
+        <span className={classes.resetLabel}>{label}</span>
       </div>
     );
   }
