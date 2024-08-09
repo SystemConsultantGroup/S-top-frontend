@@ -1,0 +1,15 @@
+.container {
+  margin: 0 auto;
+  width: 1440px;
+}
+
+/* MainArticle */
+.articleHead {
+  & > h2 {
+    margin: 0;
+  }
+}
+
+.articleDetail {
+  color: var(--color-outline);
+}
