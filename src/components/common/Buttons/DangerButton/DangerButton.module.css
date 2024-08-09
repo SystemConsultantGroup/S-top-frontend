@@ -1,0 +1,8 @@
+.element {
+  background-color: var(--color-error);
+  color: var(--color-onError);
+  &:hover {
+    background-color: var(--color-error);
+    color: var(--color-onError);
+  }
+}
