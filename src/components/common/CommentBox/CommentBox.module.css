@@ -32,6 +32,11 @@
   height: 70px;
   font-size: 14px;
   /* vw...? */
+  overflow-wrap: break-word; /* 단어가 길어지면 줄바꿈 */
+  white-space: pre-wrap; /* 연속된 공백과 줄바꿈을 유지 */
+  height: 70px;
+  max-height: 70px; /* 최대 높이 지정 */
+  overflow-y: auto; /* 세로 스크롤바 추가 */
 }
 
 .button {
@@ -81,6 +86,9 @@
   margin-top: 8px; /* 댓글 내용과 작성자 간의 간격을 추가 */
   color: #5b5b5b;
   white-space: pre-wrap; /* 줄바꿈을 유지 */
+  width: 100%;
+  overflow-wrap: break-word; /* 긴 단어가 있을 경우 줄바꿈 */
+  max-width: 620px;
 }
 
 .commentTitle {
