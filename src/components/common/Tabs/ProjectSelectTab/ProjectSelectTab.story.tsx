@@ -1,13 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { PrimaryButton } from "./PrimaryButton";
+import { ProjectSelectTab } from "./ProjectSelectTab";
+import { Container } from "@mantine/core";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: "PrimaryButton",
-  component: PrimaryButton,
+  title: "Project Select Tab",
+  component: ProjectSelectTab,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    layout: "centered",
+    layout: "center",
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
@@ -15,7 +16,7 @@ const meta = {
   argTypes: {},
   // More on Action Args : https://storybook.js.org/docs/essentials/actions#action-args
   args: {},
-} satisfies Meta<typeof PrimaryButton>;
+} satisfies Meta<typeof ProjectSelectTab>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -23,13 +24,23 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Usage: Story = {
   args: {
-    label: "Button",
+    tabs: [
+      {
+        id: "1",
+        label: "S-TOP 이벤트 프로젝트",
+        children: <Container>S-TOP 이벤트 프로젝트 내용입니다.</Container>,
+      },
+      {
+        id: "2",
+        label: "전체 프로젝트",
+        children: <Container>전체 프로젝트 내용입니다.</Container>,
+      },
+    ],
+    defaultTabId: "1",
   },
-};
-
-export const Disabled: Story = {
-  args: {
-    label: "Button",
-    disabled: true,
-  },
+  render: (args) => (
+    <Container style={{ width: "1440px" }}>
+      <ProjectSelectTab {...args} />
+    </Container>
+  ),
 };
