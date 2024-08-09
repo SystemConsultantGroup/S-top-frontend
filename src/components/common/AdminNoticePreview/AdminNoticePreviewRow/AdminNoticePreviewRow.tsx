@@ -1,7 +1,7 @@
 import { Flex, Text } from "@mantine/core";
 import classes from "./AdminNoticePreviewRow.module.css";
-import Image from "next/image";
 import { IAdminNoticePreviewRow } from "../AdminNoticePreview";
+import { IconPinFilled } from "@tabler/icons-react";
 
 export function AdminNoticePreviewRow({
   pinned,
@@ -28,7 +28,7 @@ export function AdminNoticePreviewRow({
       onClick={onClickRow}
     >
       <div className={classes.column_pinned}>
-        {pinned && <Image src="/icons/Pin_fill.svg" alt="pinned" width={24} height={24} />}
+        {pinned && <IconPinFilled size={24} className={classes.pin_icon} />}
       </div>
       <div className={classes.column_title}>
         <Text className={classes.text_ellipsis}>{title}</Text>
