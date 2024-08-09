@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Menu, MenuTarget, MenuDropdown, MenuItem } from "@mantine/core";
 import classes from "./Dropdown.module.css";
 
 interface DropdownProps {
   options: string[];
   placeholder: string;
+  selectedOption?: string | null;
+  onOptionClick: (option: string) => void;
 }
 
-export function Dropdown({ options, placeholder }: DropdownProps) {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [opened, setOpened] = useState<boolean>(false);
+export function Dropdown({ options, placeholder, selectedOption, onOptionClick }: DropdownProps) {
+  const [opened, setOpened] = React.useState<boolean>(false);
 
   const handleOptionClick = (option: string) => {
-    setSelectedOption(option);
+    onOptionClick(option);
     setOpened(false);
   };
 
