@@ -3,13 +3,16 @@ import { ReactNode } from "react";
 import classes from "./DataTableData.module.css";
 
 interface DataTableDataProps {
+  maxWidth?: string;
   children: ReactNode;
 }
 
-export function DataTableData({ children }: DataTableDataProps) {
+export function DataTableData({ maxWidth, children }: DataTableDataProps) {
   return (
     <DataTableDataElement fz={16} fw={500} className={classes.element}>
-      {children}
+      <p style={{ maxWidth: maxWidth }} className={classes.block}>
+        {children}
+      </p>
     </DataTableDataElement>
   );
 }

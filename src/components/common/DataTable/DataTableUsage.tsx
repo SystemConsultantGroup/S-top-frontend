@@ -60,7 +60,7 @@ export function DataTableUsage() {
         <DataTable.Row key={index} onClick={() => {}}>
           <DataTable.Data>{user.name}</DataTable.Data>
           <DataTable.Data>{user.email}</DataTable.Data>
-          <DataTable.Data>{user.belonging}</DataTable.Data>
+          <DataTable.Data maxWidth="160px">{user.belonging}</DataTable.Data>
           <DataTable.Data>{user.position}</DataTable.Data>
           <DataTable.Data>{user.role}</DataTable.Data>
           <DataTable.Data>{user.createdAt}</DataTable.Data>

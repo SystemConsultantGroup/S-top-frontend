@@ -4,9 +4,7 @@ import { DataTableUsage } from "./DataTableUsage";
 const meta = {
   title: "DataTable",
   component: DataTableUsage,
-  parameters: {
-    layout: "centered",
-  },
+
   tags: ["autodocs"],
   argTypes: {},
   args: {},

@@ -13,7 +13,7 @@ export const MockUsersData: MockUserType[] = [
     id: 1,
     name: "이종민",
     email: "jmlee@skku.edu",
-    belonging: "시스템컨설턴트그룹SCG",
+    belonging: "시스템컨설턴템컨설턴템컨설턴템컨설턴트그룹SCG",
     position: "개발자",
     role: "관리자",
     createdAt: "2024-07-08T11:59:02",

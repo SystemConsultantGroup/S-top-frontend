@@ -4,3 +4,9 @@
   background-color: transparent;
   border-bottom: 8px solid var(--color-surfaceContainerLowest);
 }
+
+.block {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
