@@ -7,7 +7,6 @@ import { VideoCard } from "@/components/common/VideoCard/VideoCard";
 import { VRLink } from "@/components/common/VRLink";
 import { BannerList } from "./BannerList";
 import { MainArticle } from "./elements/MainAriticle";
-import { MarginBottom } from "./elements/MarginBottom";
 import styles from "./Main.module.css";
 
 export function Main() {
@@ -46,30 +45,30 @@ export function Main() {
   return (
     <>
       <Header />
-      <MarginBottom mb={30}>
+      <div className={styles.banner}>
         <Banner {...S_TOP_BANNER_INFO} />
-      </MarginBottom>
-      <MarginBottom mb={60}>
+      </div>
+      <div className={styles.vrlink}>
         <VRLink />
-      </MarginBottom>
+      </div>
       <div className={styles.container}>
         <MainArticle
+          className={styles.project}
           title={{ text: "프로젝트", align: "left" }}
           detailUri={{ uri: "", align: "left" }}
           itemHead={ProjectHead}
-          mb={30}
         />
         <MainArticle
+          className={styles.interview}
           title={{ text: "스타트업 대담 영상", align: "left" }}
           detailUri={{ uri: "", align: "left" }}
           itemHead={InterviewHead}
-          mb={30}
         />
         <MainArticle
-          title={{ text: "갤러리", align: "left" }}
-          detailUri={{ uri: "", align: "left" }}
+          className={styles.gallery}
+          title={{ text: "갤러리", align: "center" }}
+          detailUri={{ uri: "", align: "right" }}
           itemHead={GalleryHead}
-          mb={60}
         />
       </div>
       <Footer />
