@@ -1,17 +1,9 @@
 import { FilterChip } from "@/components/common/FilterChips/FilterChip";
 import { SearchInput } from "@/components/common/SearchInput";
 import { Stack, Group } from "@mantine/core";
-import { Dispatch } from "react";
-import { IFilterState, IAction, ADD, RESET, DELETE } from "../filterReducer";
-import { DropdownList } from "./DropdownList";
 import styles from "../Project.module.css";
-
-export interface IFilterReducer {
-  filters: IFilterState[];
-  dispatch: Dispatch<IAction>;
-}
-
-type filterContainerProps = IFilterReducer;
+import { filterContainerProps, ADD, RESET, DELETE } from "../types/types";
+import { DropdownList } from "./DropdownList";
 
 export function FilterContainer({ filters, dispatch }: filterContainerProps) {
   const handleYear = (value: string) => {

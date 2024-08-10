@@ -1,18 +1,6 @@
-// src/components/Project/DropdownList.tsx
 import React from "react";
 import { Dropdown } from "@/components/common/Dropdown/Dropdown";
-
-interface IDropdownItem {
-  placeholder: string;
-  options: string[];
-  onOptionClick: (option: string) => void;
-}
-
-interface DropdownListProps {
-  onYearSelect: (value: string) => void;
-  onKindSelect: (value: string) => void;
-  onFieldSelect: (value: string) => void;
-}
+import { DropdownListProps, IDropdownItem } from "../types/types";
 
 export function DropdownList({ onYearSelect, onKindSelect, onFieldSelect }: DropdownListProps) {
   const dropdownItems: IDropdownItem[] = [

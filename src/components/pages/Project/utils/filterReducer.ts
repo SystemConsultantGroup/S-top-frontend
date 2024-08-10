@@ -1,18 +1,4 @@
-export const ADD = "ADD";
-export const DELETE = "DELETE";
-export const RESET = "RESET";
-
-export type filterCategoryType = "YEAR" | "KIND" | "FIELD";
-
-export interface IFilterState {
-  category: filterCategoryType;
-  label: string;
-}
-
-export interface IAction {
-  type: typeof ADD | typeof DELETE | typeof RESET;
-  payload?: IFilterState;
-}
+import { IFilterState, IAction, ADD, DELETE, RESET } from "../types/types";
 
 export const filterReducer = (state: IFilterState[], action: IAction): IFilterState[] => {
   switch (action.type) {
@@ -28,3 +14,4 @@ export const filterReducer = (state: IFilterState[], action: IAction): IFilterSt
       return state;
   }
 };
+export { DELETE };
