@@ -3,7 +3,12 @@
   width: 1440px;
 }
 
+.banner {
+  margin-bottom: 30px;
+}
+
 .filterBox {
   margin: 0 auto;
-  width: 1000px;
+  margin-bottom: 30px;
+  width: 968px;
 }

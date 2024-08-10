@@ -1,59 +1,44 @@
-import { FilterChip } from "@/components/common/FilterChips/FilterChip";
 import { Header } from "@/components/common/Header";
-import { SearchInput } from "@/components/common/SearchInput";
-import { Stack, Group } from "@mantine/core";
+import { ProjectSelectTab } from "@/components/common/Tabs";
+import { TabType } from "@/components/common/Tabs/ProjectSelectTab/ProjectSelectTab";
 import { useReducer } from "react";
-import { DropdownList } from "./elements/DropdownList";
-import { filterReducer, ADD, DELETE, RESET } from "./filterReducer";
+import { ProjectTabAll } from "./elements/ProjectTabAll";
+import { ProjectTabEvent } from "./elements/ProjectTabEvent";
+import { filterReducer } from "./filterReducer";
 import styles from "./Project.module.css";
+import { Banner } from "@/components/common/Banner/Banner";
+import { BannerList } from "./BannerList";
 
 export function Project() {
-  const [filter, dispatch] = useReducer(filterReducer, []);
+  const PROJECT_BANNER_INFO = BannerList.find((item) => item.type === "PROJECT")!;
 
-  const handleYear = (value: string) => {
-    dispatch({ type: ADD, payload: { category: "YEAR", label: value } });
+  const [filters, dispatch] = useReducer(filterReducer, []);
+  const reducerProps = {
+    filters,
+    dispatch,
   };
 
-  const handleKind = (value: string) => {
-    dispatch({ type: ADD, payload: { category: "KIND", label: value } });
-  };
-
-  const handleField = (value: string) => {
-    dispatch({ type: ADD, payload: { category: "FIELD", label: value } });
-  };
-
-  const handleClipReset = () => {
-    dispatch({ type: RESET });
-  };
+  const projectTabs: TabType[] = [
+    {
+      id: "1",
+      label: "S-TOP 이벤트 프로젝트",
+      children: <ProjectTabEvent {...reducerProps} />,
+    },
+    {
+      id: "2",
+      label: "전체 프로젝트",
+      children: <ProjectTabAll {...reducerProps} />,
+    },
+  ];
 
   return (
     <>
       <Header />
-      {/* Banner */}
+      <div className={styles.banner}>
+        <Banner {...PROJECT_BANNER_INFO} />
+      </div>
       <div className={styles.container}>
-        {/* Project Selection Tab */}
-        <Stack className={styles.filterBox}>
-          <SearchInput />
-          <Group justify="space-between">
-            <DropdownList
-              onYearSelect={handleYear}
-              onKindSelect={handleKind}
-              onFieldSelect={handleField}
-            />
-          </Group>
-          <Group>
-            {filter.map((item, idx) => {
-              const onRemove = () => {
-                dispatch({
-                  type: DELETE,
-                  payload: { category: item.category, label: item.label },
-                });
-              };
-              return <FilterChip key={idx} label={item.label} onRemove={onRemove} />;
-            })}
-            {filter.length && <FilterChip label="전체해제" onRemove={handleClipReset} isReset />}
-          </Group>
-        </Stack>
+        <ProjectSelectTab tabs={projectTabs} defaultTabId="1" />
       </div>
     </>
   );
