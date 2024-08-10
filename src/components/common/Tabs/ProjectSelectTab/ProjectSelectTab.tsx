@@ -5,7 +5,7 @@ import { Tabs, TabsList, TabsPanel, TabsProps, TabsTab } from "@mantine/core";
 export interface TabType {
   id: string;
   label: string;
-  content: ReactNode;
+  children: ReactNode;
 }
 
 interface Props {
@@ -38,7 +38,7 @@ export function ProjectSelectTab({
         </TabsList>
         {tabs.map((tab, index) => (
           <TabsPanel key={index} value={tab.id} className={classes.panel}>
-            {tab.content}
+            {tab.children}
           </TabsPanel>
         ))}
       </Tabs>

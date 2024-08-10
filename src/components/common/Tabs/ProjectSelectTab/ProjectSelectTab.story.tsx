@@ -28,12 +28,12 @@ export const Usage: Story = {
       {
         id: "1",
         label: "S-TOP 이벤트 프로젝트",
-        content: <Container>S-TOP 이벤트 프로젝트 내용입니다.</Container>,
+        children: <Container>S-TOP 이벤트 프로젝트 내용입니다.</Container>,
       },
       {
         id: "2",
         label: "전체 프로젝트",
-        content: <Container>전체 프로젝트 내용입니다.</Container>,
+        children: <Container>전체 프로젝트 내용입니다.</Container>,
       },
     ],
     defaultTabId: "1",
