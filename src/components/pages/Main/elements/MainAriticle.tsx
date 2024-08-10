@@ -1,7 +1,8 @@
-import { ActionIcon, Group, Stack } from "@mantine/core";
 import { ReactNode } from "react";
-import styles from "../Main.module.css";
+import { Stack, Group, ActionIcon } from "@mantine/core";
 import { IconSquarePlus } from "@tabler/icons-react";
+import { MarginBottom } from "./MarginBottom";
+import styles from "../Main.module.css";
 
 type Alignment = "left" | "center" | "right";
 
@@ -19,9 +20,10 @@ interface IMainArticle {
   title: IArticleTitle;
   detailUri?: IArticleDetail;
   itemHead: ReactNode[];
+  mb?: number | string;
 }
 
-export function MainArticle({ title, detailUri, itemHead }: IMainArticle) {
+export function MainArticle({ title, detailUri, itemHead, mb }: IMainArticle) {
   const titleAlign = title.align ?? "left";
   const uriAlign = detailUri?.align ?? "left";
 
@@ -29,16 +31,18 @@ export function MainArticle({ title, detailUri, itemHead }: IMainArticle) {
 
   return (
     <>
-      <Stack gap={10}>
-        <Group className={styles.articleHead} justify={headingJustify.justify} gap={5}>
-          <div style={{ display: headingJustify.display }}></div>
-          <h2>{title.text}</h2>
-          <ActionIcon variant="transparent" size="xl">
-            <IconSquarePlus className={styles.articleDetail} size={48} stroke={1.5} />
-          </ActionIcon>
-        </Group>
-        <Group>{itemHead}</Group>
-      </Stack>
+      <MarginBottom mb={mb || ""}>
+        <Stack gap={10}>
+          <Group className={styles.articleHead} justify={headingJustify.justify} gap={5}>
+            <div style={{ display: headingJustify.display }}></div>
+            <h2>{title.text}</h2>
+            <ActionIcon variant="transparent" size="xl">
+              <IconSquarePlus className={styles.articleDetail} size={48} stroke={1.5} />
+            </ActionIcon>
+          </Group>
+          <Group>{itemHead}</Group>
+        </Stack>
+      </MarginBottom>
     </>
   );
 }
