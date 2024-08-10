@@ -43,6 +43,7 @@ export function KakaoAuth() {
       // 카카오 통신 오류
       router.push("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code]);
 
   return (
