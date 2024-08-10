@@ -1,16 +1,17 @@
 import { Banner } from "@/components/common/Banner/Banner";
+import { Footer } from "@/components/common/Footer";
 import { Header } from "@/components/common/Header";
 import { ProjectSelectTab } from "@/components/common/Tabs";
 import { TabType } from "@/components/common/Tabs/ProjectSelectTab/ProjectSelectTab";
 import { useReducer } from "react";
 import { ProjectTab } from "./elements/ProjectTab";
 import styles from "./Project.module.css";
-import { BannerList } from "./utils/BannerList";
+import { bannerList } from "./utils/bannerList";
 import { filterReducer } from "./utils/filterReducer";
 import { projectEventProps, projectAllProps } from "./utils/getProjectList";
 
 export function Project() {
-  const PROJECT_BANNER_INFO = BannerList.find((item) => item.type === "PROJECT")!;
+  const PROJECT_BANNER_INFO = bannerList.find((item) => item.type === "PROJECT")!;
 
   const [filters, dispatch] = useReducer(filterReducer, []);
   const reducerProps = {
@@ -40,6 +41,7 @@ export function Project() {
       <div className={styles.container}>
         <ProjectSelectTab tabs={projectTabs} defaultTabId="1" />
       </div>
+      <Footer />
     </>
   );
 }

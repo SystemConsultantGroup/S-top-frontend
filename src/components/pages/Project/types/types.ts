@@ -8,10 +8,8 @@ export const ADD = "ADD";
 export const DELETE = "DELETE";
 export const RESET = "RESET";
 
-export type filterCategoryType = "YEAR" | "KIND" | "FIELD";
-
 export interface IFilterState {
-  category: filterCategoryType;
+  category: "YEAR" | "KIND" | "FIELD";
   label: string;
 }
 
@@ -39,7 +37,7 @@ export interface IDropdownItem {
   onOptionClick: (option: string) => void;
 }
 
-export interface DropdownListProps {
+export interface IDropdownList {
   onYearSelect: (value: string) => void;
   onKindSelect: (value: string) => void;
   onFieldSelect: (value: string) => void;
@@ -49,10 +47,10 @@ export interface DropdownListProps {
  * project tab
  */
 export type projectTabProps = IFilterReducer & {
-  data: FilterableProjectCardType[];
+  data: filterableProjectCardType[];
 };
 
-export type FilterableProjectCardType = ProjectCardDataType & {
+export type filterableProjectCardType = ProjectCardDataType & {
   year: string;
   type: string;
 };

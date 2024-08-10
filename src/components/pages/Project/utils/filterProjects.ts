@@ -1,8 +1,8 @@
 import { ProjectCardDataType } from "@/components/common/ProjectCard/ProjectCard";
-import { FilterableProjectCardType, IFilterState } from "../types/types";
+import { filterableProjectCardType, IFilterState } from "../types/types";
 
 export function filterProjects(
-  data: FilterableProjectCardType[],
+  data: filterableProjectCardType[],
   filters: IFilterState[]
 ): ProjectCardDataType[] {
   const filterMap = filters.reduce(

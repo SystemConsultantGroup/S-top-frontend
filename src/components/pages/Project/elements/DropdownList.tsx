@@ -1,8 +1,7 @@
-import React from "react";
 import { Dropdown } from "@/components/common/Dropdown/Dropdown";
-import { DropdownListProps, IDropdownItem } from "../types/types";
+import { IDropdownList, IDropdownItem } from "../types/types";
 
-export function DropdownList({ onYearSelect, onKindSelect, onFieldSelect }: DropdownListProps) {
+export function DropdownList({ onYearSelect, onKindSelect, onFieldSelect }: IDropdownList) {
   const dropdownItems: IDropdownItem[] = [
     {
       placeholder: "연도",

@@ -1,6 +1,6 @@
 import { BannerProps } from "@/components/common/Banner/Banner";
 
-export const BannerList: BannerProps[] = [
+export const bannerList: BannerProps[] = [
   {
     type: "AI_HUB",
     title: "AI HUB",
