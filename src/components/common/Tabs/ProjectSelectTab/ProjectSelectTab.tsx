@@ -1,6 +1,6 @@
 import classes from "./ProjectSelectTab.module.css";
 import { ReactNode, useState } from "react";
-import { Tabs, TabsProps } from "@mantine/core";
+import { Tabs, TabsList, TabsPanel, TabsProps, TabsTab } from "@mantine/core";
 
 export interface TabType {
   id: string;
@@ -25,21 +25,21 @@ export function ProjectSelectTab({
   return (
     <>
       <Tabs value={activeTab} onChange={setActiveTab} className={classes.element} {...props}>
-        <Tabs.List grow={grow} className={classes.tablist}>
+        <TabsList grow={grow} className={classes.tablist}>
           {tabs.map((tab, index) => (
-            <Tabs.Tab
+            <TabsTab
               key={index}
               value={tab.id}
               className={`${classes.tab} ${activeTab === tab.id ? classes.activeTab : ""}`}
             >
               {tab.label}
-            </Tabs.Tab>
+            </TabsTab>
           ))}
-        </Tabs.List>
+        </TabsList>
         {tabs.map((tab, index) => (
-          <Tabs.Panel key={index} value={tab.id} className={classes.panel}>
+          <TabsPanel key={index} value={tab.id} className={classes.panel}>
             {tab.content}
-          </Tabs.Panel>
+          </TabsPanel>
         ))}
       </Tabs>
     </>
