@@ -1,3 +1,3 @@
-export default function RecruitmentsPage() {
+export default function InternsPage() {
   return <main>Hello, world!</main>;
 }
