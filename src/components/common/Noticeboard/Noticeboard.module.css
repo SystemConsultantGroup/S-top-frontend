@@ -1,5 +1,4 @@
-[color-theme="light"] {
-  /* :root { */
+/** Light mode {
   --color-primary: #37618e;
   --color-primaryHover: #285582;
   --color-secondary1: #4a672d;
@@ -14,8 +13,7 @@
   --color-coverHover: #f5f5f5;
 }
 
-[color-theme="dark"] {
-  /* :root { */
+/** Dark mode {
   --color-primary: #37618e;
   --color-primaryHover: #285582;
   --color-secondary1: #4a672d;
@@ -28,7 +26,7 @@
   --color-backgroundTintHover: #3c3c3c;
   --color-cover: #2c2c2c;
   --color-coverHover: #303030;
-}
+}*/
 
 .heading {
   margin-bottom: 30px;
@@ -41,7 +39,8 @@
     margin: 0;
     font-size: 28px;
     font-weight: 500;
-    color: var(--color-text);
+    /* color: var(--color-text); */
+    color: var(--mantine-color-text);
   }
 }
 
@@ -49,7 +48,8 @@
   width: 120px;
 
   & input {
-    color: var(--color-text);
+    /* color: var(--color-text); */
+    color: var(--mantine-color-text);
   }
 }
 
@@ -70,7 +70,8 @@
 }
 
 .container {
-  border-top: 1px solid var(--color-text);
+  /* border-top: 1px solid var(--color-text); */
+  border-top: 1px solid var(--mantine-color-text);
 }
 
 .content {
@@ -83,7 +84,8 @@
 
 .item {
   padding: 20px 15px;
-  border-bottom: 1px solid var(--color-description);
+  /* border-bottom: 1px solid var(--color-description); */
+  border-bottom: 1px solid var(--color-outline);
 }
 
 .top {
@@ -98,12 +100,14 @@
   width: calc(100% - 34px);
   font-size: 20px;
   text-decoration: none;
-  color: var(--color-text);
+  /* color: var(--color-text); */
+  color: var(--mantine-color-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .bottom {
-  color: var(--color-description);
+  /* color: var(--color-description); */
+  color: var(--color-outline);
 }

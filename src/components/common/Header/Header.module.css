@@ -1,22 +1,20 @@
-[color-theme="light"] {
-  /* :root { */
+/** Light mode {
   --color-text: #000;
   --color-darkText: #fff;
   --color-description: #888;
   --color-darkBackground: #353535;
   --color-cover: #fff;
   --color-coverHover: #f5f5f5;
-}
+}*/
 
-[color-theme="dark"] {
-  /* :root { */
+/** Dark mode {
   --color-text: #c9c9c9;
   --color-darkText: #c9c9c9;
   --color-description: #888;
   --color-darkBackground: #353535;
   --color-cover: #2c2c2c;
   --color-coverHover: #303030;
-}
+} */
 
 .header {
   padding: 0 30px;
@@ -26,7 +24,8 @@
   flex-direction: row;
   align-items: center;
   gap: 20px;
-  background-color: var(--color-cover);
+  /* background-color: var(--color-cover); */
+  background-color: var(--color-background);
 
   @media screen and (max-width: 1023px) {
     justify-content: space-between;
@@ -37,7 +36,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: var(--color-text);
+  /* color: var(--color-text); */
+  color: var(--mantine-color-text);
   text-decoration: none;
 }
 
@@ -52,7 +52,8 @@
   margin: 0 15px;
   width: 1px;
   height: 70px;
-  background-color: var(--color-description);
+  /* background-color: var(--color-description); */
+  background-color: var(--color-outline);
 
   @media screen and (max-width: 437px) {
     display: none;
@@ -109,7 +110,8 @@
     z-index: 100;
     display: none;
     min-width: 100%;
-    background-color: var(--color-cover);
+    /* background-color: var(--color-cover); */
+    background-color: var(--color-background);
   }
 
   & > ul > li:hover > ul {
@@ -122,7 +124,8 @@
     cursor: pointer;
   }
   & > ul > li > ul > li:hover {
-    background-color: var(--color-coverHover);
+    /* background-color: var(--color-coverHover); */
+    background-color: var(--color-surfaceVariant);
   }
 
   @media screen and (max-width: 1023px) {
@@ -135,7 +138,8 @@
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  color: var(--color-text);
+  /* color: var(--color-text); */
+  color: var(--mantine-color-text);
 
   @media screen and (max-width: 1277px) {
     gap: 20px;
@@ -161,7 +165,8 @@
   margin: 0 10px;
   width: 1px;
   height: 16px;
-  background-color: var(--color-description);
+  /* background-color: var(--color-description); */
+  background-color: var(--color-outline);
 }
 
 .swuniv {
@@ -194,7 +199,8 @@
     position: absolute;
     height: 3px;
     width: 100%;
-    background: var(--color-text);
+    /* background: var(--color-text); */
+    background-color: var(--mantine-color-text);
     border-radius: 9px;
     opacity: 1;
     left: 0;
@@ -254,8 +260,10 @@
   justify-content: space-between;
   gap: 20px;
 
-  color: var(--color-darkText);
-  background-color: #353535;
+  /* color: var(--color-darkText); */
+  color: #c9c9c9;
+  /* background-color: #353535; */
+  background-color: #2e3135;
 
   visibility: hidden;
   opacity: 0;
@@ -326,7 +334,8 @@
   & a {
     margin-bottom: 20px;
     display: block;
-    color: var(--color-darkText);
+    /* color: var(--color-darkText); */
+    color: #c9c9c9;
     text-decoration: none;
     white-space: nowrap;
   }
