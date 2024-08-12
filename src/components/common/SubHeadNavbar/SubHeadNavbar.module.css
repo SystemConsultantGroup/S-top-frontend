@@ -1,0 +1,42 @@
+.navbar {
+  background-color: var(--color-primary);
+  color: var(--color-onPrimary);
+}
+
+.navtit {
+  margin: 0 30px;
+
+  & > h3 {
+    margin: 0;
+  }
+}
+
+.divider {
+  margin: 18px 0;
+}
+
+.navlist {
+  & ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+  }
+}
+
+.navitem {
+  cursor: pointer;
+
+  a {
+    text-decoration: none;
+    color: var(--color-onPrimary);
+  }
+
+  & > div {
+    padding: 0 40px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+  }
+}
