@@ -4,7 +4,11 @@ import { Group } from "@mantine/core";
 import { IconPinFilled } from "@tabler/icons-react";
 import { IBoardItem } from "../Noticeboard";
 
-export function NoticeItem({ title, number, author, date, view, pinned, href }: IBoardItem) {
+type INoticeItem = IBoardItem & {
+  key: number;
+};
+
+export function NoticeItem({ key, title, number, author, date, view, pinned, href }: INoticeItem) {
   const formattedDate = new Intl.DateTimeFormat("ko-KR", {
     year: "numeric",
     month: "2-digit",
@@ -12,7 +16,7 @@ export function NoticeItem({ title, number, author, date, view, pinned, href }: 
   }).format(date);
 
   return (
-    <li className={styles.item}>
+    <li className={styles.item} key={key}>
       <Group className={styles.top} gap={10}>
         {pinned ? <IconPinFilled className={styles.primaryFilledPin} /> : null}
         <Link className={styles.title} href={href}>
