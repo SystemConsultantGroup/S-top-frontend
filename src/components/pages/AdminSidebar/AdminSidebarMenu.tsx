@@ -2,9 +2,11 @@
 
 import {
   IconAlignBoxLeftTop,
+  IconCalendarEvent,
   IconChartDotsFilled,
   IconChevronsLeft,
   IconFiles,
+  IconHome,
   IconUserFilled,
 } from "@tabler/icons-react";
 import { SidebarItem, SidebarItemProps } from "../../common/Sidebar";
@@ -15,7 +17,7 @@ export function AdminSidebarMenu() {
 
   function isNavbarActive(href: string | undefined): boolean {
     if (href === "/") return false;
-    return href ? pathname?.startsWith(href) : false;
+    return href ? pathname === href : false;
   }
 
   const isActive: { [key: string]: boolean } = {};
@@ -69,34 +71,46 @@ const AdminSidebarMenuList: ListProps[] = [
     href: "/",
   },
   {
+    label: "관리자 메인",
+    icon: <IconHome size="24" />,
+    href: "/admin",
+  },
+  {
     label: "가입 신청 관리",
     icon: <IconUserFilled size="24" />,
     href: "/admin/applications",
   },
   {
-    label: "게시판 관리",
-    icon: <IconAlignBoxLeftTop size="24" />,
-    children: [
-      { label: "과제 제안", href: "/admin/proposals" },
-      { label: "프로젝트 문의", href: "/admin/inquiries" },
-      { label: "공지사항", href: "/admin/notices" },
-      { label: "이벤트 공지사항", href: "/admin/event-notices" },
-    ],
+    label: "이벤트 기간 설정",
+    icon: <IconCalendarEvent size="24" />,
+    href: "/admin/event-period",
   },
   {
     label: "프로젝트 관리",
     icon: <IconFiles size="24" />,
     children: [
       { label: "프로젝트 조회 및 수정", href: "/admin/projects" },
-      { label: "프로젝트 등록", href: "/admin/project-create" },
+      { label: "프로젝트 등록", href: "/admin/projects/create" },
+      { label: "과제 제안 관리", href: "/admin/projects/proposals" },
+      { label: "프로젝트 문의 관리", href: "/admin/projects/inquiries" },
+    ],
+  },
+  {
+    label: "게시판 관리",
+    icon: <IconAlignBoxLeftTop size="24" />,
+    children: [
+      { label: "공지사항", href: "/admin/notices" },
+      { label: "이벤트 공지사항", href: "/admin/event-notices" },
     ],
   },
   {
     label: "컨텐츠 관리",
     icon: <IconFiles size="24" />,
     children: [
-      { label: "대담 영상 관리", href: "/admin/talks" },
+      { label: "대담 영상 관리", href: "/admin/interviews" },
       { label: "잡페어 영상 관리", href: "/admin/jobfair" },
+      { label: "갤러리 관리", href: "/admin/gallery" },
+      { label: "퀴즈 제출 목록", href: "/admin/quiz-list" },
     ],
   },
   {
