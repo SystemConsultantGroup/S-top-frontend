@@ -1,14 +1,10 @@
-import Link from "next/link";
-import styles from "../Noticeboard.module.css";
+import { INoticeAllItem } from "@/types/PageBoardTypes";
 import { Group } from "@mantine/core";
 import { IconPinFilled } from "@tabler/icons-react";
-import { IBoardItem } from "../Noticeboard";
+import Link from "next/link";
+import styles from "../Noticeboard.module.css";
 
-type INoticeItem = IBoardItem & {
-  key: number;
-};
-
-export function NoticeItem({ key, title, number, author, date, view, pinned, href }: INoticeItem) {
+export function NoticeItem({ title, number, author, date, view, pinned, href }: INoticeAllItem) {
   const formattedDate = new Intl.DateTimeFormat("ko-KR", {
     year: "numeric",
     month: "2-digit",
@@ -16,7 +12,7 @@ export function NoticeItem({ key, title, number, author, date, view, pinned, hre
   }).format(date);
 
   return (
-    <li className={styles.item} key={key}>
+    <li className={styles.item}>
       <Group className={styles.top} gap={10}>
         {pinned ? <IconPinFilled className={styles.primaryFilledPin} /> : null}
         <Link className={styles.title} href={href}>

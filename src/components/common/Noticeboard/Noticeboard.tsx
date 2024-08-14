@@ -1,51 +1,46 @@
-"use client";
-
-import { useState } from "react";
-import styles from "./Noticeboard.module.css";
-import { NoticeHeading } from "./elements/NoticeHeading";
+import {
+  INoticeHeading,
+  INoticeContent,
+  INoticeHandler,
+  IBoardPagin,
+} from "@/types/PageBoardTypes";
 import { NoticeContainer } from "./elements/NoticeContainer";
+import { NoticeHeading } from "./elements/NoticeHeading";
+import styles from "./Noticeboard.module.css";
 
-interface IBoardClassifier {
-  labels: string[];
-  defaultLabel: number;
-  searchPlaceholder?: string;
-}
-
-export interface IBoardItem {
-  title: string;
-  number: number;
-  author: string;
-  date: Date;
-  view: number;
-  pinned: boolean;
-  href: string;
-}
-
-export interface IBoardHeadingProps {
-  heading: string;
-  classifier: IBoardClassifier;
-}
-
-export interface IBoardContentProps {
-  items: IBoardItem[];
-}
+type NoticeboardProps = INoticeHeading & INoticeContent & INoticeHandler & IBoardPagin;
 
 export function Noticeboard({
+  inputValue,
+  handleInput,
+  handleKeyDown,
+  handleSelect,
+  handleSubmit,
   heading,
   classifier,
   items,
-}: IBoardHeadingProps & IBoardContentProps) {
-  const [value, setValue] = useState("");
+  paginShow,
+  paginJustify,
+  paginMarginTop,
+}: NoticeboardProps) {
   return (
     <>
       <div className={styles.noticeboard}>
         <NoticeHeading
-          value={value}
-          setValue={setValue}
+          inputValue={inputValue}
+          handleInput={handleInput}
+          handleKeyDown={handleKeyDown}
+          handleSelect={handleSelect}
+          handleSubmit={handleSubmit}
           heading={heading}
           classifier={classifier}
         />
-        <NoticeContainer items={items} />
+        <NoticeContainer
+          items={items}
+          paginShow={paginShow}
+          paginJustify={paginJustify}
+          paginMarginTop={paginMarginTop}
+        />
       </div>
     </>
   );
