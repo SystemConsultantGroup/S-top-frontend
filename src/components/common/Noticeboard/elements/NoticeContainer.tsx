@@ -1,14 +1,30 @@
-import { IBoardContentProps } from "../Noticeboard";
+import { IBoardPagin, INoticeContent } from "@/types/PageBoardTypes";
+import { Paginations } from "../../Pagination";
 import styles from "../Noticeboard.module.css";
 import { NoticeItem } from "./NoticeItem";
 
-export function NoticeContainer({ items }: IBoardContentProps) {
+type NoticeContainerProps = INoticeContent & IBoardPagin;
+
+export function NoticeContainer({
+  items,
+  paginShow,
+  paginJustify,
+  paginMarginTop,
+}: NoticeContainerProps) {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <ul>{items.map((item, key) => NoticeItem({ ...item, key }))}</ul>
+        <ul>
+          <Paginations
+            data={items.map((item, key) => (
+              <NoticeItem key={key} {...item} />
+            ))}
+            paginShow={paginShow}
+            paginJustify={paginJustify}
+            paginMarginTop={paginMarginTop}
+          />
+        </ul>
       </div>
-      {/* Pagination */}
     </div>
   );
 }
