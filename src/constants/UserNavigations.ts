@@ -1,14 +1,15 @@
-type NavItemType = {
+interface INavItem {
   name: string;
   link: string;
-};
+}
 
-type NavListType = {
+interface INavList {
   title: string;
-  items: NavItemType[];
-}[];
+  items: INavItem[];
+}
 
-export const NavList: NavListType = [
+export type USER_NAV_NAMES = (typeof USER_NAVS)[number]["title"];
+export const USER_NAVS: INavList[] = [
   {
     title: "Projects",
     items: [
@@ -124,5 +125,3 @@ export const NavList: NavListType = [
     ],
   },
 ];
-
-export type NavNames = (typeof NavList)[number]["title"];
