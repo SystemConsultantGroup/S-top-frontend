@@ -1,48 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./jobfair.module.css"; // CSS 파일 import
 import { Header } from "../../common/Header"; // Header 컴포넌트 import
-import {SearchInput} from "../../common/SearchInput"; // 검색창 컴포넌트 import
-
+import { SearchInput } from "../../common/SearchInput";
 
 
 const JobFairPage = () => {
+  const [activeTab, setActiveTab] = useState('advice');  // 기본 탭은 'advice'로 설정
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'advice':
+        return (
+          <div>
+            <div className={styles.search}>
+              <h2 className={styles.title}>선배님들의 조언</h2>
+              <div className={styles.searchArea}>
+                <SearchInput placeholder="영상 검색"/>
+              </div>
+            </div>
+          </div>
+        );
+      case 'interns':
+        return (
+          <div>
+            <div className={styles.search}>
+              <h2 className={styles.title}>인턴들의 이야기</h2>
+              <div className={styles.searchArea}>
+                <SearchInput placeholder="영상 검색"/>
+              </div>
+            </div>
+          </div>
+        );
+      case 'positions':
+        return (
+          <div>
+            <div className={styles.search}>
+              <h2 className={styles.title}>채용 포지션</h2>
+              <div className={styles.searchArea}>
+                <SearchInput placeholder="영상 검색"/>
+              </div>
+            </div>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className={styles.container}>
       {/* Header 컴포넌트 사용 */}
       <Header />
 
       {/* 파란색 바 추가 */}
-      <nav className={styles.navbar}>
-        <ul className={styles.navList}>
-          <li className={styles.navItem1}>JobFair  | </li>
-          <li className={styles.navItem}><a href="#advice">선배님들의 조언</a></li>
-          <li className={styles.navItem}><a href="#story">인턴들의 이야기</a></li>
-          <li className={styles.navItem}><a href="#position">채용 포지션</a></li>
-        </ul>
-      </nav>
+      <div className={styles.navbar}>
+        <li className={styles.navItem1}>JobFair  | </li>
+        <button className={styles.navItem} onClick={() => setActiveTab('advice')}>선배님들의 조언</button>
+        <button className={styles.navItem} onClick={() => setActiveTab('interns')}>인턴들의 이야기</button>
+        <button className={styles.navItem} onClick={() => setActiveTab('positions')}>채용 포지션</button>
+      </div>
 
-
-
-      <section id="all">
-          <main className={styles.content}>
-            <h1 className={styles.title}>선배님들의 조언</h1>
-            <div className={styles.searchArea}>
-              <SearchInput placeholder="영상 검색" /> 
-            </div>
-            <div className={styles.videoGrid}>
-              {/* VideoCard 컴포넌트를 반복하여 사용할 수 있습니다 */}
-            </div>
-          </main>
-      </section>
-      <section id="tech">
-          
-      </section>
-      <section id="lifestyle">
-          
-      </section>
+      <div className={styles.content}>
+        {renderContent()}  {/* 선택된 탭에 맞는 콘텐츠를 렌더링합니다 */}
+      </div>
     </div>
-    
-
   );
 };
 
