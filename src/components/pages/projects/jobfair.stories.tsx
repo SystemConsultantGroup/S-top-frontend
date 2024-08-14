@@ -1,9 +1,9 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import JobFairPage from './jobfair';
+import React from "react";
+import { Meta, StoryFn } from "@storybook/react";
+import JobFairPage from "./jobfair";
 
 export default {
-  title: 'JobFairPage',
+  title: "JobFairPage",
   component: JobFairPage,
 } as Meta<typeof JobFairPage>;
 

@@ -1,45 +1,52 @@
 .container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .navbar {
-    background-color: var(--color-primary); /* 파란색 바의 배경색 */
-    padding: 25px 35px;
-  }
-  
-  .navList {
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navItem {
-    color: white;
-    margin-right: 95px;
-    
-  }
-  
-  .content {
-    padding: 20px;
-  }
-  
-  .title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .searchArea {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .videoGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  background-color: var(--color-primary); /* 파란색 바의 배경색 */
+  padding: 30px 35px;
+  height: 80px;
+}
+
+.navList {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navItem1 {
+  color: white;
+  margin-right: 70px;
+  font-size: large;
+  font-weight: 600;
+}
+
+.navItem {
+  color: white;
+  margin-right: 70px;
+  font-size: medium;
+}
+
+.content {
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.searchArea {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.videoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
