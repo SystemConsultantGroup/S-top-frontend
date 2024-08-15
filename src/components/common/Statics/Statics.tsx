@@ -1,4 +1,3 @@
-type align = "start" | "end" | "left" | "right" | "center" | "justify" | "match-parent";
 export function Statics({
   values,
   labels,
@@ -19,7 +18,7 @@ export function Statics({
 }: {
   values: number[];
   labels: string[];
-  labelAlign: align;
+  labelAlign: any;
   maxWidth: number;
   maxHeight: number;
   viewSize: number;
