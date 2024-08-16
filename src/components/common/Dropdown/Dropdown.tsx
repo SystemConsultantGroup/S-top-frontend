@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { Button, Menu, MenuTarget, MenuDropdown, MenuItem } from "@mantine/core";
 import classes from "./Dropdown.module.css";
