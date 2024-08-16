@@ -31,22 +31,22 @@ const JobFairPage = () => {
           <VideoCard
             title="국내 ICT 인턴십"
             subtitle="알리멍"
-            videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
+            videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
           />
           <VideoCard
             title="국내 ICT 인턴십"
             subtitle="알리멍"
-            videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
+            videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
           />
           <VideoCard
             title="국내 ICT 인턴십"
             subtitle="알리멍"
-            videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
+            videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
           />
           <VideoCard
             title="국내 ICT 인턴십"
             subtitle="알리멍"
-            videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
+            videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
           />
           <VideoCard
             title="국내 ICT 인턴십"
