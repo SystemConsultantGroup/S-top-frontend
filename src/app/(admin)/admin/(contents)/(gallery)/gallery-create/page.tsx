@@ -1,4 +1,4 @@
-export default function AdminGalleryPage() {
+export default function AdminGalleryCreate() {
   return (
     <>
       <div>
