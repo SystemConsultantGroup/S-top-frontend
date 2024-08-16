@@ -1,3 +1,10 @@
 export default function AdminProjectsPage() {
-  return <main>Hello, world!</main>;
+  return (
+    <>
+      <div>
+        <h1>이벤트 기간 설정</h1>
+      </div>
+      <div></div>
+    </>
+  );
 }

@@ -82,6 +82,9 @@ export default function AdminMainPage() {
   return (
     <>
       <div>
+        <h1>관리자 메인</h1>
+      </div>
+      <div>
         <AdminNoticePreview title={""} pagingData={testdata}></AdminNoticePreview>
       </div>
       <div>
