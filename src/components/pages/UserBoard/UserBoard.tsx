@@ -1,17 +1,16 @@
-"use client";
-
 import { Noticeboard } from "@/components/common/Noticeboard";
-import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
 import { MantineSelectData } from "@/types/MantineTypes";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ChangeEvent, FormEvent, KeyboardEvent, MouseEvent, useState } from "react";
-import { getUserNoticeItems } from "./getUserNoticeItems";
-import styles from "./styles.module.css";
-import { INoticeClassifier } from "@/types/PageBoardTypes";
+import { IBoardPagin, INoticeAllItem, INoticeClassifier } from "@/types/PageBoardTypes";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, ChangeEvent, FormEvent, MouseEvent, KeyboardEvent } from "react";
 
-export default function NoticesPage() {
+type UserBoardProps = {
+  heading: string;
+  items: INoticeAllItem[];
+} & IBoardPagin;
+
+export function UserBoard({ heading, items }: UserBoardProps) {
   const pathname = usePathname();
-  const params = useSearchParams();
 
   const [inputValue, setInputValue] = useState("");
   const [selectValue, setSelectValue] = useState("0");
@@ -59,7 +58,7 @@ export default function NoticesPage() {
     }
   };
 
-  const userNoticeData: MantineSelectData = [
+  const data: MantineSelectData = [
     {
       value: "0",
       label: "전체",
@@ -72,32 +71,31 @@ export default function NoticesPage() {
       value: "2",
       label: "내용",
     },
+    {
+      value: "3",
+      label: "작성자",
+    },
   ];
 
-  const userNoticeClassifier: INoticeClassifier = {
-    data: userNoticeData,
+  const classifier: INoticeClassifier = {
+    data,
     defaultLabel: 0,
     searchPlaceholder: "검색어를 입력하세요.",
   };
 
   return (
-    <>
-      <SubHeadNavbar title="Info Desk" />
-      <div className={styles.container}>
-        <Noticeboard
-          inputValue={inputValue}
-          handleInput={handleInput}
-          handleKeyDown={handleKeyDown}
-          handleSelect={handleSelect}
-          handleSubmit={handleSubmit}
-          heading="공지사항"
-          classifier={userNoticeClassifier}
-          items={getUserNoticeItems(params)}
-          paginShow={20}
-          paginJustify="end"
-          paginMarginTop="40px"
-        />
-      </div>
-    </>
+    <Noticeboard
+      inputValue={inputValue}
+      handleInput={handleInput}
+      handleKeyDown={handleKeyDown}
+      handleSelect={handleSelect}
+      handleSubmit={handleSubmit}
+      heading={heading}
+      classifier={classifier}
+      items={items}
+      paginShow={20}
+      paginJustify="end"
+      paginMarginTop="40px"
+    />
   );
 }

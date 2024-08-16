@@ -1,52 +1,12 @@
 import { INoticeAllItem } from "@/types/PageBoardTypes";
 import { ReadonlyURLSearchParams } from "next/navigation";
 
-export function getUserNoticeItems(params: ReadonlyURLSearchParams) {
+export function getUserBoardItems(api: string | INoticeAllItem[], params: ReadonlyURLSearchParams) {
   const queryParams = params.get("query");
   const categoryIdParams = params.get("categoryId");
 
-  const items = [
-    {
-      title: "Important Notice",
-      number: 1,
-      author: "admin",
-      date: new Date(),
-      view: 123,
-      pinned: true,
-      href: "#",
-      contentTxt: "안녕하세요 이건 아주 중요한 공지입니다. 꼭 확인해주세요.",
-    },
-    {
-      title: "Content Update",
-      number: 2,
-      author: "admin",
-      date: new Date(),
-      view: 456,
-      pinned: false,
-      href: "#",
-      contentTxt: "우리 동아리는 SCG. 중요한 업데이트가 있습니다.",
-    },
-    {
-      title: "Reminder",
-      number: 3,
-      author: "admin",
-      date: new Date(),
-      view: 789,
-      pinned: false,
-      href: "#",
-      contentTxt: "이 공지사항을 꼭 확인해 주세요.",
-    },
-    {
-      title: "Important Announcement",
-      number: 4,
-      author: "admin",
-      date: new Date(),
-      view: 321,
-      pinned: true,
-      href: "#",
-      contentTxt: "중요한 발표가 있습니다. 확인해 주세요.",
-    },
-  ];
+  // api 연결 후 수정 필요
+  const items = api as INoticeAllItem[];
 
   const filteredItems = filterItems({ items, queryParams, categoryIdParams });
   const sortedItems = arrangeItems(filteredItems);
@@ -68,14 +28,22 @@ function filterItems({ items, queryParams, categoryIdParams }: IFilterItems) {
   return items.filter((item) => {
     const titleLower = item.title.toLowerCase();
     const contentLower = item.contentTxt.toLowerCase();
+    const authorLower = item.author.toLowerCase();
     const queryLower = queryParams.toLowerCase();
+
     switch (categoryId) {
       case 0:
-        return titleLower.includes(queryLower) || contentLower.includes(queryLower);
+        return (
+          titleLower.includes(queryLower) ||
+          contentLower.includes(queryLower) ||
+          authorLower.includes(queryLower)
+        );
       case 1:
         return titleLower.includes(queryLower);
       case 2:
         return contentLower.includes(queryLower);
+      case 3:
+        return authorLower.includes(queryLower);
       default:
         return false;
     }

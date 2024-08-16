@@ -23,7 +23,7 @@ export function getUserNoticeDetail(id: DynamicSegmentType) {
       title: "Next",
       url: "/2",
     },
-    children: <p>Content</p>,
+    children: "Content",
   };
   return item;
 }
