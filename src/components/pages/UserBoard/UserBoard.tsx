@@ -1,15 +1,24 @@
-import { Noticeboard } from "@/components/common/Noticeboard";
+import { NoticeItem } from "@/components/common/Noticeboard/elements/NoticeItem";
+import { NoticeHeading } from "@/components/common/Noticeboard/elements/NoticeHeading";
+import { Paginations } from "@/components/common/Pagination";
 import { MantineSelectData } from "@/types/MantineTypes";
 import { IBoardPagin, INoticeAllItem, INoticeClassifier } from "@/types/PageBoardTypes";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, ChangeEvent, FormEvent, MouseEvent, KeyboardEvent } from "react";
+import styles from "./UserBoard.module.css";
 
 type UserBoardProps = {
   heading: string;
   items: INoticeAllItem[];
 } & IBoardPagin;
 
-export function UserBoard({ heading, items }: UserBoardProps) {
+export function UserBoard({
+  heading,
+  items,
+  paginShow,
+  paginJustify,
+  paginMarginTop,
+}: UserBoardProps) {
   const pathname = usePathname();
 
   const [inputValue, setInputValue] = useState("");
@@ -84,18 +93,28 @@ export function UserBoard({ heading, items }: UserBoardProps) {
   };
 
   return (
-    <Noticeboard
-      inputValue={inputValue}
-      handleInput={handleInput}
-      handleKeyDown={handleKeyDown}
-      handleSelect={handleSelect}
-      handleSubmit={handleSubmit}
-      heading={heading}
-      classifier={classifier}
-      items={items}
-      paginShow={20}
-      paginJustify="end"
-      paginMarginTop="40px"
-    />
+    <>
+      <NoticeHeading
+        inputValue={inputValue}
+        handleInput={handleInput}
+        handleKeyDown={handleKeyDown}
+        handleSelect={handleSelect}
+        handleSubmit={handleSubmit}
+        heading={heading}
+        classifier={classifier}
+      />
+      <div className={styles.container}>
+        <ul>
+          <Paginations
+            data={items.map((item, key) => (
+              <NoticeItem key={key} {...item} />
+            ))}
+            paginShow={paginShow}
+            paginJustify={paginJustify}
+            paginMarginTop={paginMarginTop}
+          />
+        </ul>
+      </div>
+    </>
   );
 }
