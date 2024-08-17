@@ -1,0 +1,14 @@
+.input {
+  border-color: var(--color-onSurface);
+  transition: border-color 0.3s linear;
+  background-color: var(--color-surfaceContainerLowest);
+  color: var(--color-onSurface);
+
+  &:focus-within {
+    border-color: var(--color-inputFocusWithin, #1971c2);
+  }
+}
+
+.section {
+  color: var(--color-onSurface);
+}
