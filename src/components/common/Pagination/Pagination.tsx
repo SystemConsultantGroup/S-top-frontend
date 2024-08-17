@@ -6,12 +6,12 @@ import {
   PaginationPrevious,
   PaginationRoot,
 } from "@mantine/core";
-import classes from "./Pagination.module.css";
-import { ReactNode, useState } from "react";
 import { IBoardPagin } from "@/types/PageBoardTypes";
+import { ReactElement, useState } from "react";
+import classes from "./Pagination.module.css";
 
 type PaginationProps = IBoardPagin & {
-  data: Array<ReactNode>;
+  data: ReactElement[];
 };
 
 export function Paginations({

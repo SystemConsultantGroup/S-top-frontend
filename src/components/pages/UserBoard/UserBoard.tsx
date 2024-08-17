@@ -4,17 +4,19 @@ import { Paginations } from "@/components/common/Pagination";
 import { MantineSelectData } from "@/types/MantineTypes";
 import { IBoardPagin, INoticeAllItem, INoticeClassifier } from "@/types/PageBoardTypes";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, ChangeEvent, FormEvent, MouseEvent, KeyboardEvent } from "react";
+import { useState, ChangeEvent, FormEvent, MouseEvent, KeyboardEvent, ReactElement } from "react";
 import styles from "./UserBoard.module.css";
 
 type UserBoardProps = {
   heading: string;
   items: INoticeAllItem[];
+  bottomSection?: ReactElement;
 } & IBoardPagin;
 
 export function UserBoard({
   heading,
   items,
+  bottomSection,
   paginShow,
   paginJustify,
   paginMarginTop,
@@ -67,7 +69,7 @@ export function UserBoard({
     }
   };
 
-  const data: MantineSelectData = [
+  const classifierData: MantineSelectData = [
     {
       value: "0",
       label: "전체",
@@ -87,10 +89,15 @@ export function UserBoard({
   ];
 
   const classifier: INoticeClassifier = {
-    data,
+    data: classifierData,
     defaultLabel: 0,
     searchPlaceholder: "검색어를 입력하세요.",
   };
+
+  const data = items.map((item, key) => <NoticeItem key={key} {...item} />);
+  if (bottomSection !== undefined) {
+    data.push(bottomSection);
+  }
 
   return (
     <>
@@ -106,9 +113,7 @@ export function UserBoard({
       <div className={styles.container}>
         <ul>
           <Paginations
-            data={items.map((item, key) => (
-              <NoticeItem key={key} {...item} />
-            ))}
+            data={data}
             paginShow={paginShow}
             paginJustify={paginJustify}
             paginMarginTop={paginMarginTop}

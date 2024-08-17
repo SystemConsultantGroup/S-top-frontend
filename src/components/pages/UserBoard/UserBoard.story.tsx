@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { UserBoard } from "./UserBoard";
+import { Button, Group } from "@mantine/core";
 
 const meta = {
-  title: "User Board",
+  title: "page/UserBoard",
   component: UserBoard,
   parameters: { layout: "centered" },
   tags: ["autodocs"],
@@ -57,10 +58,37 @@ const items = [
   },
 ];
 
+const bottomSection = (
+  <Group style={{ marginTop: "20px" }} justify="end">
+    <Button>작성하기</Button>
+  </Group>
+);
+
 export const Usage: Story = {
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+    },
+  },
   args: {
     heading: "Info Desk",
     items,
+    paginShow: 20,
+    paginJustify: "end",
+    paginMarginTop: "20px",
+  },
+};
+
+export const BottomButton: Story = {
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+    },
+  },
+  args: {
+    heading: "Info Desk",
+    items,
+    bottomSection,
     paginShow: 20,
     paginJustify: "end",
     paginMarginTop: "20px",
