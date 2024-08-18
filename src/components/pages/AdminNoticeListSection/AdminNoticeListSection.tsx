@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @eslint-ignore
-// @prettier-ignore
-
 "use client";
 
 import { DangerButton, PrimaryButton } from "@/components/common/Buttons";
@@ -98,15 +94,14 @@ export function AdminNoticeListSection() {
           <SearchInput placeholder="제목 입력" w={300} onChange={onSearchChange} />
         </Group>
         <Group justify="space-between">
-          {/* @ts-ignore */}
-          <DangerButton label="선택 삭제" onClick={handleDelete} />
+          <DangerButton onClick={handleDelete}>선택 삭제</DangerButton>
           <PrimaryButton
-            label="게시글 등록"
-            /* @ts-ignore */
             onClick={() => {
               push("notices/create");
             }}
-          />
+          >
+            게시글 등록
+          </PrimaryButton>
         </Group>
         <DataTable
           headers={NOTICE_TABLE_HEADERS}
