@@ -13,12 +13,14 @@ import {
   IconBookmark,
   IconBookmarkFilled,
 } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   projectId: string;
 }
 
 export function ProjectDetailInfo({ projectId }: Props) {
+  const router = useRouter();
   const [project, setProject] = useState<ProjectDetailDto>(mockup);
   const [isThumbup, setIsThumbup] = useState<boolean>(false);
   const [isInterest, setIsInterest] = useState<boolean>(false);
@@ -32,6 +34,28 @@ export function ProjectDetailInfo({ projectId }: Props) {
     setIsThumbup(mockup.isThumbup);
     setIsInterest(mockup.isInterest);
   }, [projectId]);
+
+  const handleThumbupClick = () => {
+    /**
+     * TODO: 좋아요 상태 변경하기
+     */
+    setIsThumbup((isThumbup) => !isThumbup);
+  };
+
+  const handleInterestClick = () => {
+    /**
+     * TODO: 관심 여부 상태 변경하기
+     */
+    setIsInterest((isInterest) => !isInterest);
+  };
+
+  const handleProposalClick = () => {
+    router.push("/infodesk/proposals");
+  };
+
+  const handleInquiryClick = () => {
+    router.push("/infodesk/inquries");
+  };
 
   return (
     <>
@@ -78,11 +102,11 @@ export function ProjectDetailInfo({ projectId }: Props) {
             ))}
           </Flex>
           <Group justify="center">
-            <PrimaryButton className={classes.addBtn}>
+            <PrimaryButton className={classes.addBtn} onClick={handleThumbupClick}>
               {isThumbup ? <IconThumbUpFilled size={24} /> : <IconThumbUp size={24} />}
               <Text className={classes.btnLabel}>좋아요</Text>
             </PrimaryButton>
-            <PrimaryButton className={classes.addBtn}>
+            <PrimaryButton className={classes.addBtn} onClick={handleInterestClick}>
               {isInterest ? <IconBookmarkFilled size={24} /> : <IconBookmark size={24} />}
               <Text className={classes.btnLabel}>관심프로젝트 등록</Text>
             </PrimaryButton>
@@ -90,8 +114,12 @@ export function ProjectDetailInfo({ projectId }: Props) {
         </Stack>
       </Flex>
       <Group justify="center">
-        <Button className={classes.externalBtn}>산학 과제 제안하기</Button>
-        <Button className={classes.externalBtn}>프로젝트 문의하기</Button>
+        <Button className={classes.externalBtn} onClick={handleProposalClick}>
+          산학 과제 제안하기
+        </Button>
+        <Button className={classes.externalBtn} onClick={handleInquiryClick}>
+          프로젝트 문의하기
+        </Button>
       </Group>
       <div className={classes.sectionBottom}>
         <Text className={classes.title}>작품 영상</Text>
@@ -105,6 +133,16 @@ export function ProjectDetailInfo({ projectId }: Props) {
           />
         </AspectRatio>
         <Text className={classes.title}>포스터</Text>
+        <div className={classes.posterWrapper}>
+          <Image
+            src="/images/_mock/project-poster.png"
+            alt="project poster"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "100%", height: "auto" }}
+          />
+        </div>
       </div>
     </>
   );

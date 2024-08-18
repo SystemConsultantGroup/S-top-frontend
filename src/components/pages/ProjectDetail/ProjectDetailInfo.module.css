@@ -76,6 +76,16 @@
 
 .externalBtn {
   width: 40%;
+  height: 60px;
+  background-color: var(--color-primaryFixedDim);
+  color: #000000;
+
+  font-size: 20px;
+
+  &:hover {
+    background-color: #d1e4ff;
+    color: #000000;
+  }
 
   @media (max-width: 768px) {
     width: 80%;
@@ -84,4 +94,22 @@
 
 .sectionBottom {
   margin-top: 40px;
+}
+
+.posterWrapper {
+  width: 100%;
+  max-width: 794px;
+}
+
+/* ProjectDetailInquiry 컴포넌트에서 사용 */
+
+.SectionInquiry {
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.SectionInquiry > button {
+  font-size: 20px;
+  height: 56px;
+  margin-top: 20px;
 }

@@ -1,3 +1,5 @@
+import { Comment } from "@/components/common/CommentBox/CommentBox";
+
 export interface ProjectDetailDto {
   // TODO: API 문서 참조하여 변경
   thumbnailId: number; // 프로젝트 대표 이미지
@@ -30,4 +32,7 @@ export const project: ProjectDetailDto = {
   year: 2023,
 };
 
-export const comments: string[] = ["아이디어가 좋은 것 같아요!", "응원합니다!"];
+export const comments: Comment[] = [
+  { author: "사람", content: "아이디어가 좋은 것 같아요!" },
+  { author: "사람", content: "응원합니다!" },
+];
