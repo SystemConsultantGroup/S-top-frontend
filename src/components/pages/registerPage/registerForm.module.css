@@ -1,0 +1,95 @@
+.registerBox {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 30px;
+  position: relative;
+  background: var(--color-surfaceContainerLowest);
+  border: 1px solid var(--color-surfaceVariant);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  width: 542px;
+  word-wrap: break-word;
+}
+
+.text {
+  width: 300px;
+  height: 12%;
+}
+
+.logo {
+  margin-bottom: 0px;
+  width: 150px;
+  height: auto;
+}
+
+.button {
+  width: 300px;
+}
+
+/* Tablet Landscape */
+@media screen and (max-width: 1280px) {
+  .registerBox {
+    width: 470px;
+  }
+
+  .logo {
+    width: 130px;
+  }
+
+  .text {
+    width: 350px;
+    font-size: 17px;
+  }
+}
+
+/* Tablet Portrait */
+@media screen and (max-width: 1024px) {
+  .registerBox {
+    width: 400px;
+  }
+
+  .logo {
+    width: 110px;
+  }
+
+  .text {
+    width: 360px;
+    font-size: 16px;
+  }
+}
+
+/* Mobile Landscape and Small Tablets */
+@media screen and (max-width: 768px) {
+  .registerBox {
+    width: 320px;
+  }
+
+  .logo {
+    width: 90px;
+  }
+
+  .text {
+    width: 290px;
+    font-size: 15px;
+  }
+}
+
+/* Mobile Portrait */
+@media screen and (max-width: 480px) {
+  .registerBox {
+    width: 260px;
+  }
+
+  .logo {
+    width: 75px;
+  }
+
+  .text {
+    width: 240px;
+    font-size: 14px;
+  }
+}
