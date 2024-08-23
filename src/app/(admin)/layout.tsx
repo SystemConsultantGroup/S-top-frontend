@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import classes from "./layout.module.css";
+import "./layout.css";
 import { AdminSidebar } from "@/components/pages/AdminSidebar";
 
 export const metadata: Metadata = {

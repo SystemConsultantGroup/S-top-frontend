@@ -1,3 +1,4 @@
+"use client";
 import {
   Card,
   Text,
@@ -53,7 +54,7 @@ export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
           <Text c="dimmed" size="sm">
             {formatDate(date)}
           </Text>
-          {viewCount && (
+          {(viewCount || viewCount == 0) && (
             <Flex align="center">
               <IconEye size={18} className={classes.viewcount_icon} color={dimmedColor} />
               <Text c="dimmed" size="sm">

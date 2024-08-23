@@ -9,4 +9,5 @@
   grid-area: main;
   height: 100vh;
   background-color: var(--color-background);
+  padding: 20px;
 }
