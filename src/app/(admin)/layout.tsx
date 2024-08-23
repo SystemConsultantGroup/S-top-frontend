@@ -12,7 +12,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <section className={classes.container}>
       <AdminSidebar />
-      <section className={classes.main}>{children}</section>
+      <section className={classes.content}>
+        <section className={classes.main}>{children}</section>
+      </section>
     </section>
   );
 }

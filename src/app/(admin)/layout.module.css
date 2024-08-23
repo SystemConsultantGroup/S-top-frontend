@@ -3,11 +3,16 @@
   display: grid;
   grid-template-areas: "sidebar main";
   grid-template-columns: 300px auto;
+  background-color: var(--color-background);
 }
 
 .main {
-  grid-area: main;
-  height: 100vh;
   background-color: var(--color-background);
   padding: 20px;
+}
+
+.content {
+  grid-area: main;
+  position: static;
+  height: 100vh;
 }
