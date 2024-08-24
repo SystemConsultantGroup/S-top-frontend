@@ -6,7 +6,7 @@ import { TabType } from "@/components/common/Tabs/ProjectSelectTab/ProjectSelect
 import { useReducer } from "react";
 import { ProjectTab } from "./elements/ProjectTab";
 import styles from "./Project.module.css";
-import { bannerList } from "./utils/bannerList";
+import { bannerList } from "./utils/BannerList";
 import { filterReducer } from "./utils/filterReducer";
 import { projectEventProps, projectAllProps } from "./utils/getProjectList";
 
