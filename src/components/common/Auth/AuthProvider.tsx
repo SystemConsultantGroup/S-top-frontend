@@ -41,7 +41,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setToken(token);
     CommonAxios.defaults.headers.Authorization = `Bearer ${token}`;
     CommonAxios.defaults.withCredentials = true;
-    Cookies.set(JWT_COOKIE_NAME, token, { "max-age": String(JWT_MAX_AGE) });
+    Cookies.set(JWT_COOKIE_NAME, token, { "max-age": String(JWT_MAX_AGE), secure: true });
 
     setIsLoadingCookie(false);
   }

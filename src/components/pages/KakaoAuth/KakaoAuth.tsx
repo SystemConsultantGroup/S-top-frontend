@@ -1,54 +1,35 @@
 "use client";
 
 import { useAuth } from "@/components/common/Auth";
-import { fetcher } from "@/utils/fetcher/fetcher";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useCallback, useEffect } from "react";
-
-interface ResponseType {
-  accessToken: string;
-}
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { JWT_COOKIE_NAME } from "@/constants/Auth";
+import { jwtDecode } from "jwt-decode";
+import { CustomJwtPayload } from "@/types/jwtPayload";
 
 export function KakaoAuth() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { login } = useAuth();
 
-  const code = searchParams.get("code");
-  const error = searchParams.get("error");
-
-  const loginHandler = useCallback(
-    async (code: string | string[]) => {
-      // 백엔드 auth api
-      const response: ResponseType = await fetcher({
-        url: "http://localhost:8000/auth/login/kakao",
-        query: { code: code },
-      });
-      if (response) {
-        // Context에 토큰 저장
-        login(response.accessToken);
-        router.push("/");
+  useEffect(() => {
+    // 백엔드에서 브라우저에 설정한 쿠키를 가져옴
+    const accessToken = Cookies.get(JWT_COOKIE_NAME);
+    if (accessToken) {
+      login(accessToken);
+      const claims: CustomJwtPayload = jwtDecode(accessToken);
+      if (claims.type === "TEMP") {
+        // 가입되지 않은 사용자
+        router.push("/register");
       } else {
-        // 백엔드 통신 오류
+        // 이미 가입된 사용자
         router.push("/");
       }
-    },
-    [router, login]
-  );
-
-  useEffect(() => {
-    if (code) {
-      loginHandler(code);
-    } else if (error) {
-      // 카카오 통신 오류
-      router.push("/");
+    } else {
+      // 백엔드 오류
+      router.push("/login");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [code]);
+  }, [login, router]);
 
-  return (
-    <Suspense>
-      <></>
-    </Suspense>
-  );
+  return <></>;
 }
