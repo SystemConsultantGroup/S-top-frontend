@@ -43,6 +43,7 @@ export function DataTableUsage() {
     });
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const sortedData = useMemo(() => makeSortData(), [toggle, order]);
 
   return (
