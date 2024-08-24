@@ -3,6 +3,7 @@ import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "@/theme/global.css";
 import type { Metadata } from "next";
+import { AuthProvider } from "@/components/common/Auth";
 
 export const metadata: Metadata = {
   title: "S-TOP 기술교류회",
@@ -21,7 +22,7 @@ export default function RootLayout({
       </head>
       <body>
         <MantineProvider theme={AppTheme} cssVariablesResolver={resolver} defaultColorScheme="auto">
-          {children}
+          <AuthProvider>{children}</AuthProvider>
         </MantineProvider>
       </body>
     </html>
