@@ -1,0 +1,58 @@
+/* Full-width navbar */
+.subHeadNavbar {
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Banner section */
+.banner {
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+/* Main content section */
+.mainContent {
+  width: 90%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  padding-bottom: 100px;
+}
+
+.searchSection {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.chips {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* Adjust for the number of columns you want */
+  gap: 100px;
+}
+
+.container {
+  width: 100%;
+  margin-bottom: 100px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
