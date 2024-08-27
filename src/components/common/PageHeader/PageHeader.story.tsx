@@ -15,5 +15,4 @@ const meta: Meta<typeof PageHeader> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// 기본 Dropdown
 export const Default: Story = {};
