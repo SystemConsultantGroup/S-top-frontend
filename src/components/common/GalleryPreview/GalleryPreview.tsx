@@ -1,11 +1,4 @@
-import {
-  Card,
-  Text,
-  Flex,
-  CardSection,
-  useMantineTheme,
-  useMantineColorScheme,
-} from "@mantine/core";
+import { Card, Text, Flex, CardSection } from "@mantine/core";
 import Image from "next/image";
 import { IconEye } from "@tabler/icons-react";
 import classes from "./GalleryPreview.module.css";
@@ -18,11 +11,8 @@ export interface Props {
 }
 
 export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
-  const theme = useMantineTheme();
-  const { colorScheme } = useMantineColorScheme();
-
   // text color와 맞추기
-  const dimmedColor = colorScheme === "dark" ? theme.colors.dark[2] : theme.colors.gray[6];
+  //const dimmedColor = colorScheme === "dark" ? theme.colors.dark[2] : theme.colors.gray[6];
 
   function formatDate(date: Date) {
     const year = date.getFullYear();
@@ -34,7 +24,7 @@ export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
 
   return (
     <>
-      <Card padding="sm" radius="md" style={{ paddingBottom: 0 }}>
+      <Card padding="sm" radius="md" style={{ paddingBottom: 0, display: "inline-block" }}>
         <CardSection className={classes.image_section}>
           <Image
             src={imgUrl}
@@ -55,8 +45,8 @@ export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
           </Text>
           {viewCount && (
             <Flex align="center">
-              <IconEye size={18} className={classes.viewcount_icon} color={dimmedColor} />
-              <Text c="dimmed" size="sm">
+              <IconEye size={18} className={classes.viewcount_icon} />
+              <Text c="dimmed" size="sm" className={classes.viewcount}>
                 {viewCount}
               </Text>
             </Flex>
