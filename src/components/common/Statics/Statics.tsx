@@ -1,39 +1,42 @@
+import { Property } from "csstype";
 export function Statics({
   values,
+  plotvalues = [],
   labels,
-  labelAlign,
-  maxWidth,
-  maxHeight,
-  viewSize,
-  maxMaxHeight,
-  rectFill,
-  rectStrokeFill,
-  rectStrokeWidth,
-  circleRadius,
-  circleFill,
-  circleStrokeFill,
-  circleStrokeWidth,
-  pathStroke,
-  pathWidth,
+  labelAlign = "center",
+  maxWidth = 1200,
+  maxHeight = 800,
+  viewSize = 0.4,
+  maxMaxHeight = 0.8,
+  rectFill = "#ADADAD",
+  rectStrokeFill = "#858585",
+  rectStrokeWidth = 0.2,
+  circleRadius = 0.4,
+  circleFill = "#9A9A9A",
+  circleStrokeFill = "#454545",
+  circleStrokeWidth = 0.3,
+  pathStroke = "#BCBCBC",
+  pathWidth = 10,
 }: {
   values: number[];
+  plotvalues?: number[];
   labels: string[];
-  labelAlign: any;
-  maxWidth: number;
-  maxHeight: number;
-  viewSize: number;
-  maxMaxHeight: number;
-  rectFill: string;
-  rectStrokeFill: string;
-  rectStrokeWidth: number;
-  circleRadius: number;
-  circleFill: string;
-  circleStrokeFill: string;
-  circleStrokeWidth: number;
-  pathStroke: string;
-  pathWidth: number;
+  labelAlign?: Property.TextAlign;
+  maxWidth?: number;
+  maxHeight?: number;
+  viewSize?: number;
+  maxMaxHeight?: number;
+  rectFill?: string;
+  rectStrokeFill?: string;
+  rectStrokeWidth?: number;
+  circleRadius?: number;
+  circleFill?: string;
+  circleStrokeFill?: string;
+  circleStrokeWidth?: number;
+  pathStroke?: string;
+  pathWidth?: number;
 }) {
-  const Max = Math.max(...values);
+  const Max = Math.max(...values.concat(plotvalues));
   const count = values.length;
   return (
     <>
@@ -41,7 +44,7 @@ export function Statics({
         style={{
           height: `${maxHeight * viewSize}`,
           width: `${maxWidth * viewSize}`,
-          position: "relative",
+          position: "sticky",
         }}
       >
         <svg
@@ -83,13 +86,13 @@ export function Statics({
           <path
             stroke={pathStroke}
             strokeWidth={pathWidth}
-            d={values
+            d={plotvalues
               .map((e, i) => {
                 return `${i == 0 ? "M" : "L"} ${(((i + 1 / 3) * maxWidth) / (count * 2 + count - 1)) * 3} ${maxHeight - (e / Max) * maxHeight * maxMaxHeight} `;
               })
               .join("")}
           ></path>
-          {values.map((e, i) => {
+          {plotvalues.map((e, i) => {
             return (
               <>
                 <circle
@@ -111,24 +114,27 @@ export function Statics({
             );
           })}
         </svg>
-        {labels.map((e, i) => {
-          const a = ((i * maxWidth) / (count * 2 + count - 1)) * 3 * viewSize;
-          const b = (maxWidth / (count * 2 + count - 1)) * 2 * viewSize;
-          return (
-            <>
-              <p
-                style={{
-                  left: `${a}px`,
-                  width: `${b}px`,
-                  textAlign: labelAlign,
-                  position: "absolute",
-                }}
-              >
-                {e}
-              </p>
-            </>
-          );
-        })}
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          {labels.map((e) => {
+            const a = ((maxWidth / (count * 2 + count - 1)) * 3 * viewSize) / 3;
+            const b = (maxWidth / (count * 2 + count - 1)) * 2 * viewSize;
+            return (
+              <>
+                <p
+                  style={{
+                    marginLeft: a / 2,
+                    marginRight: a / 2,
+                    width: b,
+                    display: "inline",
+                    textAlign: labelAlign,
+                  }}
+                >
+                  {e}
+                </p>
+              </>
+            );
+          })}
+        </div>
       </div>
     </>
   );

@@ -62,20 +62,6 @@ for (let i = 0; i < 9; i++) {
 const testdata2 = {
   values: array,
   labels: array2,
-  labelAlign: "center",
-  maxWidth: 1200,
-  maxHeight: 800,
-  viewSize: 0.4,
-  maxMaxHeight: 0.8,
-  rectFill: "#ADADAD",
-  rectStrokeFill: "#858585",
-  rectStrokeWidth: 0.2,
-  circleRadius: 0.4,
-  circleFill: "#9A9A9A",
-  circleStrokeFill: "#454545",
-  circleStrokeWidth: 0.3,
-  pathStroke: "#BCBCBC",
-  pathWidth: 10,
 };
 
 export default function AdminMainPage() {

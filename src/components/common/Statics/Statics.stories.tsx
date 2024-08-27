@@ -21,6 +21,7 @@ for (let i = 0; i < 9; i++) {
 export const Default: Story = {
   args: {
     values: array,
+    plotvalues: array,
     labels: array2,
     labelAlign: "center",
     maxWidth: 1200,

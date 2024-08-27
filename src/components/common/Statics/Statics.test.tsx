@@ -10,6 +10,7 @@ describe("Pagenation component", () => {
     render(
       <Statics
         values={array}
+        plotvalues={array}
         maxWidth={800}
         maxHeight={1200}
         viewSize={0.4}
