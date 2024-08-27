@@ -4,6 +4,7 @@ import "@mantine/core/styles.css";
 import "@/theme/global.css";
 import type { Metadata } from "next";
 import { AuthProvider } from "@/components/common/Auth";
+import { SWRProvider } from "@/components/common/SWRProvider";
 
 export const metadata: Metadata = {
   title: "S-TOP 기술교류회",
@@ -21,9 +22,15 @@ export default function RootLayout({
         <ColorSchemeScript defaultColorScheme="auto" />
       </head>
       <body>
-        <MantineProvider theme={AppTheme} cssVariablesResolver={resolver} defaultColorScheme="auto">
-          <AuthProvider>{children}</AuthProvider>
-        </MantineProvider>
+        <SWRProvider>
+          <MantineProvider
+            theme={AppTheme}
+            cssVariablesResolver={resolver}
+            defaultColorScheme="auto"
+          >
+            <AuthProvider>{children}</AuthProvider>
+          </MantineProvider>
+        </SWRProvider>
       </body>
     </html>
   );
