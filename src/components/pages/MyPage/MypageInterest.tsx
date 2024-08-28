@@ -13,14 +13,16 @@ import { IVideoCard, MockInterestProjects, MockInterestVideos } from "./_mock/mo
 import { PrimaryButton } from "@/components/common/Buttons";
 
 export function MypageInterest() {
-  const [projects, setProjects] = useState<ProjectCardDataType[]>();
-  const [videos, setVideos] = useState<IVideoCard[]>();
+  const [projects, setProjects] = useState<ProjectCardDataType[] | null>(null);
+  const [videos, setVideos] = useState<IVideoCard[] | null>(null);
+  const [jobfairVideos, setJobfairVideos] = useState<IVideoCard[] | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     /* 관심 등록 프로젝트, 비디오 가져오기 */
     setProjects(MockInterestProjects);
     setVideos(MockInterestVideos);
+    setJobfairVideos(null);
   }, []);
 
   const handleProjectButtonClick = () => {
@@ -29,6 +31,10 @@ export function MypageInterest() {
 
   const handleVideoButtonClick = () => {
     router.push("/interviews");
+  };
+
+  const handleJobfairButtonClick = () => {
+    router.push("/jobfair/advices");
   };
 
   return (
@@ -70,9 +76,29 @@ export function MypageInterest() {
           <div className={classes.noContentDiv}>
             <IconReportSearch stroke={0.5} size={60} />
             <div className={classes.noContentText}>
-              <Text className={classes.first}>현재 관심 등록한 영상이 없습니다.</Text>
+              <Text className={classes.first}>현재 관심 등록한 대담 영상이 없습니다.</Text>
             </div>
             <PrimaryButton onClick={handleVideoButtonClick}>대담영상 보러가기</PrimaryButton>
+          </div>
+        )}
+      </div>
+      <div className={classes.interestContainer}>
+        <Text className={classes.title}>관심 등록 잡페어 영상</Text>
+        {jobfairVideos ? (
+          <Carousel dragFree slideGap="md" slideSize="20%" align="start" containScroll="trimSnaps">
+            {jobfairVideos.map((data, idx) => (
+              <CarouselSlide key={idx}>
+                <VideoCard {...data} />
+              </CarouselSlide>
+            ))}
+          </Carousel>
+        ) : (
+          <div className={classes.noContentDiv}>
+            <IconReportSearch stroke={0.5} size={60} />
+            <div className={classes.noContentText}>
+              <Text className={classes.first}>현재 관심 등록한 잡페어 영상이 없습니다.</Text>
+            </div>
+            <PrimaryButton onClick={handleJobfairButtonClick}>잡페어 바로가기</PrimaryButton>
           </div>
         )}
       </div>
