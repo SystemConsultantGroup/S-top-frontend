@@ -9,10 +9,14 @@
 }
 
 .viewcount_icon {
-  margin-right: 1.5px;
-  margin-bottom: 3px;
+  margin-right: 3px;
+  margin-bottom: 8px;
 }
 
 .title {
   margin-top: 8px;
+}
+
+.viewcount {
+  margin-bottom: 6px;
 }
