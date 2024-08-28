@@ -10,8 +10,8 @@ export const MOCK_TABLE_HEADERS: DataTableHeaderProps[] = [
 ];
 
 export const NOTICE_TABLE_HEADERS: DataTableHeaderProps[] = [
-  { label: "순번", widthPercentage: 7, sort: true, selector: "num" },
+  { label: "순번", widthPercentage: 7, sort: true, selector: "id" },
   { label: "제목", widthPercentage: 20, sort: true, selector: "title" },
-  { label: "작성일", widthPercentage: 10, sort: false, selector: "createdAt" },
-  { label: "관리", widthPercentage: 7, sort: false, selector: "updatedAt" },
+  { label: "작성일", widthPercentage: 10, sort: true, selector: "createdAt" },
+  { label: "관리", widthPercentage: 7, sort: false },
 ];
