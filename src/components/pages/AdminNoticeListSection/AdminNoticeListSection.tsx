@@ -28,7 +28,7 @@ export function AdminNoticeListSection() {
   const [pageNumber, setPageNumber] = useState(1);
   /* 데이터 정렬 훅 */
   const { sortBy, order, handleSortButton } = useTableSort();
-  /* 쿼리 debounced state */
+  /* 쿼리 debounced state, 검색창에 이용 */
   const [query, setQuery] = useDebouncedState<PagedNoticesRequestParams>(
     {
       page: pageNumber - 1,
@@ -38,6 +38,7 @@ export function AdminNoticeListSection() {
   );
 
   /* SWR 훅을 사용하여 공지사항 목록 패칭 */
+  // TODO: 백엔드 수정 이후 sort 파라미터 추가
   const { data, pageData, mutate } = useNotices({
     params: { ...query, page: pageNumber - 1, size: Number(pageSize) },
   });
@@ -58,8 +59,6 @@ export function AdminNoticeListSection() {
   };
   // 개별선택 함수
   const handleSelect = (id: number) => {
-    console.log(data);
-    console.log(pageData);
     setSelectedNotices((prev) =>
       prev.includes(id) ? prev.filter((noticeId) => noticeId !== id) : [...prev, id]
     );
