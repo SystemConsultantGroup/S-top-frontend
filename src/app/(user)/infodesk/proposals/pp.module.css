@@ -1,0 +1,27 @@
+/* Noticeboard를 감싸는 영역에 대한 전체 레이아웃 조정 */
+.propose {
+  margin: 40px auto;
+  padding: 60px;
+  width: 80%; /* 원하는 디자인에 맞게 너비를 조정 */
+  background-color: var(--color-surfaceContainerLowest);
+  box-sizing: border-box;
+}
+
+/* 페이지 전체의 배경색을 조정 */
+.backColor {
+  background-color: var(--color-background);
+}
+
+.propose:last-child {
+  margin-bottom: 0;
+  padding-bottom: 50px;
+}
+
+.container {
+  margin-bottom: 60px;
+}
+
+.button {
+  margin-top: 50px;
+  text-align: right;
+}
