@@ -42,3 +42,9 @@ export const MockDepartments = [
   "지능형소프트웨어학과",
   "전자전기공학부",
 ];
+
+export interface IVideoCard {
+  title: string;
+  subtitle: string;
+  videoUrl: string;
+}
