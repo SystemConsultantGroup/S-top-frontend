@@ -1,4 +1,4 @@
-import { render, screen } from "@/utils/test-utils";
+import { render, screen, fireEvent } from "@/utils/test-utils";
 import { PrimaryButton } from "./PrimaryButton";
 import "@testing-library/jest-dom";
 
@@ -16,4 +16,12 @@ describe("PrimaryButton component", () => {
 
     expect(screen.getByRole("button", { name: "Button" })).toHaveClass(testClassName);
   });
+
+  it("calls the onClick handler when clicked", () => {
+    const handleClick = jest.fn();
+    render(<PrimaryButton onClick={handleClick}>Button</PrimaryButton>);
+    fireEvent.click(screen.getByRole("button", { name: "Button" }));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
 });

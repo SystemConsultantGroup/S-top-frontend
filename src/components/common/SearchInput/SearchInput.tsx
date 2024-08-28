@@ -1,5 +1,6 @@
 import { Input, InputProps } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
+import styles from "./SearchInput.module.css";
 
 export function SearchInput({
   placeholder,
@@ -14,6 +15,10 @@ export function SearchInput({
   return (
     <>
       <Input
+        classNames={{
+          input: styles.input,
+          section: styles.section,
+        }}
         placeholder={placeholder}
         leftSection={<IconSearch size={iconSize} />}
         onChange={onChange}
