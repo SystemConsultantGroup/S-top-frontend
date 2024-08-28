@@ -22,7 +22,7 @@ for (let i = 0; i < 127; i++) {
 }
 export const Default: Story = {
   args: {
-    show: 3,
+    count: 3,
     data: data,
   },
 };
