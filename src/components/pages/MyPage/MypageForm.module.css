@@ -1,0 +1,23 @@
+.text {
+  width: 300px;
+  height: 12%;
+}
+
+.rowGroup {
+  width: 100%;
+}
+
+.rowGroup > .row {
+  display: flex;
+  width: 100%;
+  line-height: 22px;
+  font-size: 16px;
+  margin-top: 5px;
+  align-items: center;
+}
+
+.rowGroup > .row > .firstCol {
+  font-weight: 700;
+  width: 20%;
+  flex-shrink: 0;
+}

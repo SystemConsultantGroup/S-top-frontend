@@ -15,6 +15,7 @@ export const MockUserTypes = {
   student: "학생",
   faculty: "교수/교직원",
   corporate: "기업 관계자",
+  external: "외부인",
 };
 
 export const MockUserData: IUser = {
@@ -34,3 +35,10 @@ export const MockInterestVideos = new Array(3).fill({
   subtitle: "현지웅 엔지니어님",
   videoUrl: "https://www.youtube.com/embed/OBsR6UumFdc",
 });
+
+export const MockDepartments = [
+  "소프트웨어학과",
+  "컴퓨터공학과",
+  "지능형소프트웨어학과",
+  "전자전기공학부",
+];

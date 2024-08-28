@@ -12,13 +12,17 @@
 
 .userInfoContainer > .title {
   font-size: 32px;
+  margin-bottom: 30px;
 }
 
-.userInfoContainer > .rowGroup {
+.userInfoContainer > .rowGroup,
+.UserInfoEditModal > .rowGroup {
   width: 100%;
+  margin-bottom: 30px;
 }
 
-.userInfoContainer > .rowGroup > .row {
+.userInfoContainer > .rowGroup > .row,
+.UserInfoEditModal > .rowGroup > .row {
   display: flex;
   gap: 10px;
   width: 100%;
@@ -27,7 +31,8 @@
   margin-top: 25px;
 }
 
-.userInfoContainer > .rowGroup > .row > .firstCol {
+.userInfoContainer > .rowGroup > .row > .firstCol,
+.UserInfoEditModal > .rowGroup > .row > .firstCol {
   font-weight: 700;
   width: 25%;
   flex-shrink: 0;
