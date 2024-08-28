@@ -1,11 +1,16 @@
 .input {
-  border-color: var(--color-onSurface);
-  transition: border-color 0.3s linear;
-  background-color: var(--color-surfaceContainerLowest);
-  color: var(--color-onSurface);
+  border: 1px solid var(--color-inputBorder);
+  border-radius: 8px;
+  background-color: var(--color-inputSurface);
 
-  &:focus-within {
-    border-color: var(--color-inputFocusWithin, #1971c2);
+  &:hover {
+    border: 1px solid var(--color-inputBorder);
+    background-color: var(--color-inputSurfaceHover);
+  }
+
+  &:focus {
+    border: 1px solid var(--color-inputBorderFocus);
+    background-color: var(--color-inputSurface);
   }
 }
 
