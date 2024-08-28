@@ -1,3 +1,5 @@
+import { MypageView } from "@/components/pages/MypageView/MypageView";
+
 export default function MyPage() {
-  return <main>Hello, world!</main>;
+  return <MypageView />;
 }
