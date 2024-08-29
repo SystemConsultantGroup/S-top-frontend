@@ -15,6 +15,7 @@ import { handleChangeSearch } from "@/utils/handleChangeSearch";
 // import { getSortString } from "@/utils/getSortString";
 import { Button, Checkbox, Group, Stack } from "@mantine/core";
 import { useDebouncedState } from "@mantine/hooks";
+import { IconPinFilled } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 
@@ -125,10 +126,21 @@ export function AdminNoticeListSection() {
                 />
               </DataTableData>
               <DataTableData>{index + 1 + (pageNumber - 1) * Number(pageSize)}</DataTableData>
-              <DataTableData>{notice.title}</DataTableData>
+              <DataTableData text={false}>
+                <Group>
+                  {notice.fixed && <IconPinFilled />}
+                  {notice.title}
+                </Group>
+              </DataTableData>
               <DataTableData>{notice.createdAt}</DataTableData>
               <DataTableData text={false}>
-                <Button>수정</Button>
+                <Button
+                  onClick={() => {
+                    push(`notices/${notice.id}`);
+                  }}
+                >
+                  수정
+                </Button>
               </DataTableData>
             </DataTableRow>
           ))}
