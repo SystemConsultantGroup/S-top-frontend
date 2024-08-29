@@ -1,9 +1,9 @@
+import { PageHeader } from "@/components/common/PageHeader";
 export default function AdminJobFairEdit() {
   return (
     <>
-      <div>
-        <h1>잡페어 영상 수정</h1>
-      </div>
+      <PageHeader title="잡페어 영상 수정" />
+
       <div></div>
     </>
   );

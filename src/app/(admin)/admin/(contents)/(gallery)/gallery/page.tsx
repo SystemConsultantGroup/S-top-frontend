@@ -3,6 +3,7 @@ import classes from "../galley.module.css";
 import { SearchInput } from "@/components/common/SearchInput";
 import { GalleryPreview } from "@/components/common/GalleryPreview/GalleryPreview";
 import { useEffect, useState } from "react";
+import { PageHeader } from "@/components/common/PageHeader";
 
 const testimgurl = "https://i.ytimg.com/vi/h7SkjDKF11g/maxresdefault.jpg";
 export interface Props {
@@ -49,35 +50,32 @@ export default function AdminGalleryPage() {
   while (datas.length) reshape.push(datas.splice(0, col));
   return (
     <>
-      <div>
-        <h1>갤러리 관리</h1>
+      <PageHeader title="갤러리 관리" />
+
+      <div className={classes.search}>
+        <SearchInput></SearchInput>
       </div>
-      <>
-        <div className={classes.search}>
-          <SearchInput></SearchInput>
-        </div>
-        <table className={classes.cards}>
-          <tbody>
-            {reshape.map((e) => {
-              return (
-                <>
-                  <tr>
-                    {e.map((f) => {
-                      return (
-                        <>
-                          <td>
-                            <GalleryPreview {...f} width={width} height={(width / 300) * 180} />
-                          </td>
-                        </>
-                      );
-                    })}
-                  </tr>
-                </>
-              );
-            })}
-          </tbody>
-        </table>
-      </>
+      <table className={classes.cards}>
+        <tbody>
+          {reshape.map((e) => {
+            return (
+              <>
+                <tr>
+                  {e.map((f) => {
+                    return (
+                      <>
+                        <td>
+                          <GalleryPreview {...f} width={width} height={(width / 300) * 180} />
+                        </td>
+                      </>
+                    );
+                  })}
+                </tr>
+              </>
+            );
+          })}
+        </tbody>
+      </table>
     </>
   );
 }

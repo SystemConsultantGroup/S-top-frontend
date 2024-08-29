@@ -1,15 +1,12 @@
 "use client";
 import { DataTableUsage } from "@/components/common/DataTable/DataTableUsage";
+import { PageHeader } from "@/components/common/PageHeader";
 
 export default function AdminQuizPage() {
   return (
     <>
-      <div>
-        <h1>퀴즈 제출 목록</h1>
-      </div>
-      <div>
-        <DataTableUsage></DataTableUsage>
-      </div>
+      <PageHeader title="퀴즈 제출 목록" />
+      <DataTableUsage></DataTableUsage>
     </>
   );
 }

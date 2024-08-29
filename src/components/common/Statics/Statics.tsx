@@ -1,8 +1,13 @@
 import { Property } from "csstype";
+
+export interface values {
+  value: number;
+  plotvalue?: number;
+  label?: string;
+}
 export function Statics({
   values,
-  plotvalues = [],
-  labels,
+  title,
   labelAlign = "center",
   maxWidth = 1200,
   maxHeight = 800,
@@ -18,9 +23,8 @@ export function Statics({
   pathStroke = "#BCBCBC",
   pathWidth = 10,
 }: {
-  values: number[];
-  plotvalues?: number[];
-  labels: string[];
+  values: values[];
+  title?: string;
   labelAlign?: Property.TextAlign;
   maxWidth?: number;
   maxHeight?: number;
@@ -36,7 +40,13 @@ export function Statics({
   pathStroke?: string;
   pathWidth?: number;
 }) {
-  const Max = Math.max(...values.concat(plotvalues));
+  const Max = Math.max(
+    ...values
+      .map((e) => {
+        return [e.value, e.plotvalue ?? e.value];
+      })
+      .flat()
+  );
   const count = values.length;
   return (
     <>
@@ -45,6 +55,7 @@ export function Statics({
           height: `${maxHeight * viewSize}`,
           width: `${maxWidth * viewSize}`,
           position: "sticky",
+          textAlign: "center",
         }}
       >
         <svg
@@ -65,11 +76,11 @@ export function Statics({
                   }
                   y={
                     maxHeight -
-                    (e / Max) * maxHeight * maxMaxHeight +
+                    (e.value / Max) * maxHeight * maxMaxHeight +
                     ((maxWidth / (count * 2 + count - 1)) * rectStrokeWidth) / 2
                   }
                   height={
-                    (e / Max) * maxHeight * maxMaxHeight -
+                    (e.value / Max) * maxHeight * maxMaxHeight -
                     ((maxWidth / (count * 2 + count - 1)) * 2 * rectStrokeWidth) / 2
                   }
                   width={
@@ -79,6 +90,7 @@ export function Statics({
                   fill={rectFill}
                   stroke={rectStrokeFill}
                   strokeWidth={((maxWidth / (count * 2 + count - 1)) * 2 * rectStrokeWidth) / 2}
+                  key={e + ""}
                 ></rect>
               </>
             );
@@ -86,36 +98,45 @@ export function Statics({
           <path
             stroke={pathStroke}
             strokeWidth={pathWidth}
-            d={plotvalues
+            d={values
               .map((e, i) => {
-                return `${i == 0 ? "M" : "L"} ${(((i + 1 / 3) * maxWidth) / (count * 2 + count - 1)) * 3} ${maxHeight - (e / Max) * maxHeight * maxMaxHeight} `;
+                if (e.plotvalue) {
+                  return `${i == 0 ? "M" : "L"} ${(((i + 1 / 3) * maxWidth) / (count * 2 + count - 1)) * 3} ${maxHeight - (e.plotvalue / Max) * maxHeight * maxMaxHeight} `;
+                }
               })
               .join("")}
+            key={"path"}
           ></path>
-          {plotvalues.map((e, i) => {
-            return (
-              <>
-                <circle
-                  cx={(((i + 1 / 3) * maxWidth) / (count * 2 + count - 1)) * 3}
-                  cy={maxHeight - (e / Max) * maxHeight * maxMaxHeight}
-                  r={
-                    (maxWidth / (count * 2 + count - 1)) *
-                    circleRadius *
-                    (1 - circleStrokeWidth / 2)
-                  }
-                  fill={circleFill}
-                  stroke={circleStrokeFill}
-                  strokeWidth={
-                    ((maxWidth / (count * 2 + count - 1)) * circleRadius * 2 * circleStrokeWidth) /
-                    2
-                  }
-                ></circle>
-              </>
-            );
+          {values.map((e, i) => {
+            if (e.plotvalue) {
+              return (
+                <>
+                  <circle
+                    cx={(((i + 1 / 3) * maxWidth) / (count * 2 + count - 1)) * 3}
+                    cy={maxHeight - (e.plotvalue / Max) * maxHeight * maxMaxHeight}
+                    r={
+                      (maxWidth / (count * 2 + count - 1)) *
+                      circleRadius *
+                      (1 - circleStrokeWidth / 2)
+                    }
+                    fill={circleFill}
+                    stroke={circleStrokeFill}
+                    strokeWidth={
+                      ((maxWidth / (count * 2 + count - 1)) *
+                        circleRadius *
+                        2 *
+                        circleStrokeWidth) /
+                      2
+                    }
+                    key={e + ""}
+                  ></circle>
+                </>
+              );
+            }
           })}
         </svg>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          {labels.map((e) => {
+        <div style={{ display: "flex", justifyContent: "center" }} key={"label"}>
+          {values.map((e) => {
             const a = ((maxWidth / (count * 2 + count - 1)) * 3 * viewSize) / 3;
             const b = (maxWidth / (count * 2 + count - 1)) * 2 * viewSize;
             return (
@@ -128,13 +149,15 @@ export function Statics({
                     display: "inline",
                     textAlign: labelAlign,
                   }}
+                  key={e + ""}
                 >
-                  {e}
+                  {e.label}
                 </p>
               </>
             );
           })}
         </div>
+        <div key={"title"}>{title}</div>
       </div>
     </>
   );

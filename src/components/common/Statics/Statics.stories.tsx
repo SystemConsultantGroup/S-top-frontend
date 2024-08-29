@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Statics } from "./Statics";
+import { Statics, values } from "./Statics";
 
 const meta = {
   component: Statics,
@@ -12,17 +12,18 @@ const meta = {
 export default meta;
 
 type Story = StoryObj<typeof meta>;
-const array: number[] = Array(0);
-const array2: string[] = Array(0);
-for (let i = 0; i < 9; i++) {
-  array.push(Math.random() * 100 + 100);
-  array2.push(Math.round(Math.random() * 100 + 100).toString());
+const array: values[] = Array(0);
+
+for (let i = 0; i < 20; i++) {
+  array.push({
+    value: Math.random() * 100 + 100,
+    plotvalue: i < 7 ? Math.random() * 100 + 100 : undefined,
+    label: Math.round(Math.random() * 100 + 100).toString(),
+  });
 }
 export const Default: Story = {
   args: {
     values: array,
-    plotvalues: array,
-    labels: array2,
     labelAlign: "center",
     maxWidth: 1200,
     maxHeight: 800,

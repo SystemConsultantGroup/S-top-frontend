@@ -1,5 +1,7 @@
 import { AdminNoticePreview } from "@/components/common/AdminNoticePreview/AdminNoticePreview";
-import { Statics } from "@/components/common/Statics/Statics";
+import { Statics, values } from "@/components/common/Statics/Statics";
+import { PageHeader } from "@/components/common/PageHeader";
+import classes from "./layout.module.css";
 
 const testdata = [
   {
@@ -53,29 +55,81 @@ const testdata = [
     ],
   },
 ];
-const array: number[] = Array(0);
-const array2: string[] = Array(0);
+const array: values[] = Array(0);
 for (let i = 0; i < 9; i++) {
-  array.push(Math.random() * 100 + 100);
-  array2.push(Math.round(Math.random() * 100 + 100).toString());
+  array.push({
+    value: Math.random() * 100 + 100,
+    plotvalue: undefined,
+    label: Math.round(Math.random() * 100 + 100).toString(),
+  });
 }
-const testdata2 = {
-  values: array,
-  labels: array2,
-};
+
+function Sinchung() {
+  return (
+    <>
+      <section style={{ width: "auto" }}>
+        <table style={{ width: "100%" }}>
+          <thead>
+            <tr>
+              <td>ID</td>
+              <td>신청자</td>
+              <td>신청일</td>
+              <td>분류</td>
+              <td>비고</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderTop: "1px solid white" }}></tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style={{ width: "auto" }}>
+          <div> </div>
+          <div> </div>
+        </div>
+      </section>
+    </>
+  );
+}
+function TodaysVisitor() {
+  return (
+    <>
+      <table style={{ textAlign: "center", alignContent: "center", alignItems: "center" }}>
+        <tbody>
+          <tr>
+            <td>총 접속자</td>
+            <td>1명</td>
+          </tr>
+          <tr>
+            <td>오늘 접속자</td>
+            <td>2명</td>
+          </tr>
+          <tr>
+            <td>일평균 접속자</td>
+            <td>3명</td>
+          </tr>
+        </tbody>
+      </table>
+    </>
+  );
+}
 
 export default function AdminMainPage() {
   return (
     <>
-      <div>
-        <h1>관리자 메인</h1>
-      </div>
-      <div>
+      <PageHeader title="관리자 메인" />
+      <section className={classes.container}>
+        <Sinchung></Sinchung>
         <AdminNoticePreview title={""} pagingData={testdata}></AdminNoticePreview>
-      </div>
-      <div>
-        <Statics {...testdata2}></Statics>
-      </div>
+        <TodaysVisitor></TodaysVisitor>
+        <Statics values={array} title="접속 통계"></Statics>
+      </section>
     </>
   );
 }

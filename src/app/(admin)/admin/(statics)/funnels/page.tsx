@@ -1,15 +1,12 @@
 "use client";
 import { DataTableUsage } from "@/components/common/DataTable/DataTableUsage";
+import { PageHeader } from "@/components/common/PageHeader";
 
 export default function AdminFunnelsStatics() {
   return (
     <>
-      <div>
-        <h1>유입 경로 분석</h1>
-      </div>
-      <div>
-        <DataTableUsage></DataTableUsage>
-      </div>
+      <PageHeader title="유입 경로 분석" />
+      <DataTableUsage></DataTableUsage>
     </>
   );
 }

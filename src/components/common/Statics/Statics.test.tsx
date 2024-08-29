@@ -1,16 +1,20 @@
 import { render, screen } from "@/utils/test-utils";
-import { Statics } from "./Statics";
+import { Statics, values } from "./Statics";
 import "@testing-library/jest-dom";
-const array: number[] = Array(0);
-for (let i = 0; i < 9; i++) {
-  array.push(Math.random() * 100 + 100);
+const array: values[] = Array(0);
+
+for (let i = 0; i < 20; i++) {
+  array.push({
+    value: Math.random() * 100 + 100,
+    plotvalue: i < 7 ? Math.random() * 100 + 100 : undefined,
+    label: Math.round(Math.random() * 100 + 100).toString(),
+  });
 }
 describe("Pagenation component", () => {
   it("renders correctly with the given label", () => {
     render(
       <Statics
         values={array}
-        plotvalues={array}
         maxWidth={800}
         maxHeight={1200}
         viewSize={0.4}
@@ -24,7 +28,6 @@ describe("Pagenation component", () => {
         circleStrokeWidth={0.3}
         pathStroke={"#BCBCBC"}
         pathWidth={10}
-        labels={[]}
         labelAlign={"center"}
       />
     );
