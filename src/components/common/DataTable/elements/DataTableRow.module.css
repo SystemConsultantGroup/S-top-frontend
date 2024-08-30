@@ -1,0 +1,14 @@
+.container {
+  height: 50px;
+  background-color: var(--color-tableRow);
+}
+
+.container:hover {
+  background-color: var(--color-surface);
+  cursor: pointer;
+}
+
+.containerNoPointer {
+  background-color: var(--color-tableRow);
+  height: 56px;
+}

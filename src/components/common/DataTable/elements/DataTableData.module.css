@@ -1,0 +1,12 @@
+.element {
+  height: 58px;
+  word-break: break-all;
+  background-color: transparent;
+  border-bottom: 8px solid var(--color-surface);
+}
+
+.block {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

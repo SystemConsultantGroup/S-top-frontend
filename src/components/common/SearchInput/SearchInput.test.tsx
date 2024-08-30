@@ -7,6 +7,7 @@ describe("SearchInput component", () => {
     const props = {
       placeholder: "Input here to search...",
       iconSize: 16,
+      onChange: () => {},
     };
 
     render(<SearchInput {...props} />);
