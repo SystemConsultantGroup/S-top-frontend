@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ProjectCardLikeSection } from "./ProjectCardLikeSection";
 import { CardBadge } from "../CardBadge";
 import { IProjectContent } from "@/types/project";
+import { PROJECT_CATEGORY_LOOKUP_TABLE } from "@/constants/LookupTables";
 
 export interface ProjectCardProps {
   data: IProjectContent;
@@ -40,7 +41,7 @@ export function ProjectCard({ data, thumbnailUrl, width, height }: ProjectCardPr
       </CardSection>
       <CardSection pl={24} pt={8}>
         <Group className={classes["badge-group"]} gap={16}>
-          <CardBadge label={data.projectCategory} />
+          <CardBadge label={PROJECT_CATEGORY_LOOKUP_TABLE[data.projectCategory]} />
         </Group>
       </CardSection>
       <CardSection pl={24} pr={24} pb={16} pt={8}>
