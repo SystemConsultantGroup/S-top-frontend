@@ -1,19 +1,29 @@
 import { CardSection, Group, UnstyledButton } from "@mantine/core";
-import { IconBookmark, IconBookmarkFilled, IconThumbUp } from "@tabler/icons-react";
+import {
+  IconBookmark,
+  IconBookmarkFilled,
+  IconThumbUp,
+  IconThumbUpFilled,
+} from "@tabler/icons-react";
 import classes from "./ProjectCard.module.css";
 
 export interface ProjectCardLikeSectionProps {
   likes: number;
+  isLiked: boolean;
   isMarked: boolean;
 }
 
-export function ProjectCardLikeSection({ likes, isMarked }: ProjectCardLikeSectionProps) {
+export function ProjectCardLikeSection({ likes, isLiked, isMarked }: ProjectCardLikeSectionProps) {
   return (
     <CardSection className={classes["like-section"]}>
       <Group align="center" justify="space-between" w={500} p={16}>
         <UnstyledButton>
           <Group gap={0}>
-            <IconThumbUp color="var(--color-primary)" />
+            {isLiked ? (
+              <IconThumbUpFilled color="var(--color-primary)" />
+            ) : (
+              <IconThumbUp color="var(--color-primary)" />
+            )}
             <div className={classes["likes-wrapper"]}>{likes}</div>
           </Group>
         </UnstyledButton>

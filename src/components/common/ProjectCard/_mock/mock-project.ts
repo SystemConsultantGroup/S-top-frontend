@@ -1,4 +1,14 @@
-import { ProjectCardDataType } from "../ProjectCard";
+export type ProjectCardDataType = {
+  id: number;
+  title: string;
+  thumbnailUrl: string;
+  categories: string[];
+  participants: string[];
+  team: string;
+  advisor: string;
+  likes: number;
+  isMarked: boolean;
+};
 
 export const MockProjectData: ProjectCardDataType = {
   id: 1,

@@ -20,6 +20,15 @@ const data = MockProjectData;
 
 export const Usage: Story = {
   args: {
-    data: data,
+    id: data.id,
+    projectName: data.title,
+    thumbnailUrl: data.thumbnailUrl,
+    teamName: data.team,
+    studentNames: data.participants,
+    professorNames: [data.advisor],
+    projectCategory: data.categories[0],
+    likeCount: data.likes,
+    like: true,
+    bookMark: data.isMarked,
   },
 };
