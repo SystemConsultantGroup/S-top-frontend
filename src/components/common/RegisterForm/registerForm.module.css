@@ -15,6 +15,10 @@
   word-wrap: break-word;
 }
 
+.registerBox label {
+  margin-bottom: 10px;
+}
+
 .text {
   width: 300px;
   height: 12%;

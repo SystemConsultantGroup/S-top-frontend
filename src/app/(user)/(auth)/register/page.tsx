@@ -1,6 +1,15 @@
-import React from "react";
-import RegisterPage from "@/components/pages/registerPage/registerPage";
+"use client";
 
-export default function Page() {
-  return <RegisterPage />;
+import React from "react";
+import styles from "./registerPage.module.css";
+import { RegisterForm } from "@/components/common/RegisterForm/registerForm";
+
+export default function RegisterPage() {
+  return (
+    <div className={styles.pageContainer}>
+      <div className={styles.registerContainer}>
+        <RegisterForm />
+      </div>
+    </div>
+  );
 }
