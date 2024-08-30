@@ -1,7 +1,13 @@
-// src/app/(user)/(auth)/login/page.tsx
 import React from "react";
-import LoginPage from "@/components/pages/loginPage/loginPage";
+import { LoginBox } from "@/components/common/LoginBox/LoginBox";
+import styles from "./loginPage.module.css";
 
-export default function Page() {
-  return <LoginPage />;
+export default function LoginPage() {
+  return (
+    <div className={styles.pageContainer}>
+      <div className={styles.loginContainer}>
+        <LoginBox />
+      </div>
+    </div>
+  );
 }
