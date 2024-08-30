@@ -1,4 +1,5 @@
 "use client";
+
 import classes from "../jobfair.module.css";
 import { SearchInput } from "@/components/common/SearchInput";
 import { useEffect, useState } from "react";

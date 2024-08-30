@@ -1,4 +1,5 @@
 "use client";
+
 import classes from "../galley.module.css";
 import { SearchInput } from "@/components/common/SearchInput";
 import { GalleryPreview } from "@/components/common/GalleryPreview/GalleryPreview";

@@ -1,4 +1,5 @@
 "use client";
+
 import { Stack, Pagination, Flex } from "@mantine/core";
 import { useState } from "react";
 import { AdminNoticePreviewRow } from "./AdminNoticePreviewRow/AdminNoticePreviewRow";

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Group, Button } from "@mantine/core";
 import styles from "./VideoCard.module.css";
