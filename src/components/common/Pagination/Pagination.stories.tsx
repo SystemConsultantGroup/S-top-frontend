@@ -22,7 +22,9 @@ for (let i = 0; i < 127; i++) {
 }
 export const Default: Story = {
   args: {
-    show: 3,
     data: data,
+    paginShow: 3,
+    paginJustify: "center",
+    paginMarginTop: "40px",
   },
 };
