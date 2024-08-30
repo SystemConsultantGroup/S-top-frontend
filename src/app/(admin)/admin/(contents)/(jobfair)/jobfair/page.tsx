@@ -79,13 +79,13 @@ export default function AdminJobFairPage() {
               <SearchInput w={300}></SearchInput>
             </td>
             <td>
-              <PrimaryButton label="검색"></PrimaryButton>
+              <PrimaryButton>검색</PrimaryButton>
             </td>
           </tr>
         </tbody>
       </table>
       <div style={{ display: "flex", padding: 10 }}>
-        <PrimaryButton label="잡페어 영상 등록" style={{ marginLeft: "auto" }}></PrimaryButton>
+        <PrimaryButton style={{ marginLeft: "auto" }}>잡페어 영상 등록</PrimaryButton>
       </div>
       <table className={classes.cards}>
         <tbody>

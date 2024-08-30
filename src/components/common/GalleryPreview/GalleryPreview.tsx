@@ -1,12 +1,4 @@
-"use client";
-import {
-  Card,
-  Text,
-  Flex,
-  CardSection,
-  useMantineTheme,
-  useMantineColorScheme,
-} from "@mantine/core";
+import { Card, Text, Flex, CardSection } from "@mantine/core";
 import Image from "next/image";
 import { IconEye } from "@tabler/icons-react";
 import classes from "./GalleryPreview.module.css";
@@ -19,14 +11,6 @@ export interface Props {
   height?: number;
   width?: number;
 }
-function formatDate(date: Date) {
-  date = new Date(date);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // getMonth()는 0부터 시작하므로 +1
-  const day = String(date.getDate()).padStart(2, "0");
-
-  return `${year}.${month}.${day}`;
-}
 
 export function GalleryPreview({
   imgUrl,
@@ -36,15 +20,20 @@ export function GalleryPreview({
   height = 180,
   width = 300,
 }: Props) {
-  const theme = useMantineTheme();
-  const { colorScheme } = useMantineColorScheme();
-
   // text color와 맞추기
-  const dimmedColor = colorScheme === "dark" ? theme.colors.dark[2] : theme.colors.gray[6];
+  //const dimmedColor = colorScheme === "dark" ? theme.colors.dark[2] : theme.colors.gray[6];
+
+  function formatDate(date: Date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // getMonth()는 0부터 시작하므로 +1
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}.${month}.${day}`;
+  }
 
   return (
     <>
-      <Card padding="2px" radius="md" style={{ paddingBottom: 10 }}>
+      <Card padding="sm" radius="md" style={{ paddingBottom: 0, display: "inline-block" }}>
         <CardSection className={classes.image_section}>
           <Image
             src={imgUrl}
@@ -63,10 +52,10 @@ export function GalleryPreview({
           <Text c="dimmed" size="sm">
             {formatDate(date)}
           </Text>
-          {(viewCount || viewCount == 0) && (
+          {viewCount && (
             <Flex align="center">
-              <IconEye size={18} className={classes.viewcount_icon} color={dimmedColor} />
-              <Text c="dimmed" size="sm">
+              <IconEye size={18} className={classes.viewcount_icon} />
+              <Text c="dimmed" size="sm" className={classes.viewcount}>
                 {viewCount}
               </Text>
             </Flex>

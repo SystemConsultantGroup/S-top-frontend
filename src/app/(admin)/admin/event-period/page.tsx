@@ -55,7 +55,7 @@ export default function AdminEventPeriodPage() {
             ></Dropdown>
           </div>
           <div style={{ paddingTop: 20, paddingBottom: 30 }}>
-            <PrimaryButton label="변경하기"></PrimaryButton>
+            <PrimaryButton>변경하기</PrimaryButton>
           </div>
         </div>
       </div>

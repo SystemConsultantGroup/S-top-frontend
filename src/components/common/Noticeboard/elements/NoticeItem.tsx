@@ -1,10 +1,10 @@
-import Link from "next/link";
-import styles from "../Noticeboard.module.css";
+import { INoticeAllItem } from "@/types/PageBoardTypes";
 import { Group } from "@mantine/core";
 import { IconPinFilled } from "@tabler/icons-react";
-import { IBoardItem } from "../Noticeboard";
+import Link from "next/link";
+import styles from "../Noticeboard.module.css";
 
-export function NoticeItem({ title, number, author, date, view, pinned, href }: IBoardItem) {
+export function NoticeItem({ title, number, author, date, view, pinned, href }: INoticeAllItem) {
   const formattedDate = new Intl.DateTimeFormat("ko-KR", {
     year: "numeric",
     month: "2-digit",

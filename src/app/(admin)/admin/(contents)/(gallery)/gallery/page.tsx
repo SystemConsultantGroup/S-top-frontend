@@ -70,13 +70,13 @@ export default function AdminGalleryPage() {
               <SearchInput w={300}></SearchInput>
             </td>
             <td>
-              <PrimaryButton label="검색"></PrimaryButton>
+              <PrimaryButton>검색</PrimaryButton>
             </td>
           </tr>
         </tbody>
       </table>
       <div style={{ display: "flex", padding: 10 }}>
-        <PrimaryButton label="사진 등록" style={{ marginLeft: "auto" }}></PrimaryButton>
+        <PrimaryButton style={{ marginLeft: "auto" }}>사진 등록</PrimaryButton>
       </div>
       <table className={classes.cards}>
         <tbody>

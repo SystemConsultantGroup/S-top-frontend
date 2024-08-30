@@ -60,7 +60,7 @@ export default function AdminGalleryEdit() {
                   <input type="file"></input>
                 </td>
                 <td>
-                  <DangerButton label="삭제"></DangerButton>
+                  <DangerButton>삭제</DangerButton>
                 </td>
               </tr>
               <tr>
@@ -71,7 +71,7 @@ export default function AdminGalleryEdit() {
                   <input type="file"></input>
                 </td>
                 <td>
-                  <DangerButton label="삭제"></DangerButton>
+                  <DangerButton>삭제</DangerButton>
                 </td>
               </tr>
               <tr>
@@ -82,7 +82,7 @@ export default function AdminGalleryEdit() {
                   <h4>1번 사진이 썸네일로 지정됩니다.</h4>
                 </td>
                 <td>
-                  <PrimaryButton label="갤러리 수정하기"></PrimaryButton>
+                  <PrimaryButton>갤러리 수정하기</PrimaryButton>
                 </td>
               </tr>
             </tbody>

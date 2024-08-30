@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Group, Button } from "@mantine/core";
 import styles from "./VideoCard.module.css";
 
@@ -7,24 +7,17 @@ export interface VideoCardProps {
   subtitle: string;
   videoUrl: string;
   bookmarked?: boolean;
+  onBookmarkToggle?: () => void;
 }
-
 export const VideoCard: React.FC<VideoCardProps> = ({
   title,
   subtitle,
   videoUrl,
-  bookmarked: initialBookmarked = false,
+  bookmarked = false,
+  onBookmarkToggle = function (): void {
+    throw new Error("Function not implemented.");
+  },
 }) => {
-  const [bookmarked, setBookmarked] = useState(initialBookmarked);
-
-  useEffect(() => {
-    setBookmarked(initialBookmarked);
-  }, [initialBookmarked]);
-
-  const handleBookmarkClick = () => {
-    setBookmarked(!bookmarked);
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.videoFrame}>
@@ -43,7 +36,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
         <div className={styles.subtitle}>{subtitle}</div>
 
         <Group justify="space-between">
-          <div className={styles.bookmarkIcon} onClick={handleBookmarkClick}>
+          <div className={styles.bookmarkIcon} onClick={onBookmarkToggle}>
             {bookmarked ? (
               /* bookmarked icon */
               <svg

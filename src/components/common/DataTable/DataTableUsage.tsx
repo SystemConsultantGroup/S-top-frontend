@@ -53,7 +53,7 @@ export function DataTableUsage() {
       order={order}
       handleSortButton={handleSortButton}
       w={900}
-      totalSize={total}
+      totalElements={total}
       pageSize={pageSize}
       setPageSize={setPageSize}
     >

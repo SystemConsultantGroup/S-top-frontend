@@ -64,7 +64,7 @@ export default function AdminGalleryCreate() {
                   <h4>1번 사진이 썸네일로 지정됩니다.</h4>
                 </td>
                 <td>
-                  <PrimaryButton label="갤러리 등록하기"></PrimaryButton>
+                  <PrimaryButton>갤러리 등록하기</PrimaryButton>
                 </td>
               </tr>
             </tbody>

@@ -66,7 +66,7 @@ export default function AdminJobFairCreate() {
               <tr>
                 <td style={{ paddingRight: 10 }} colSpan={3}></td>
                 <td>
-                  <PrimaryButton label="영상 등록하기"></PrimaryButton>
+                  <PrimaryButton>영상 등록하기</PrimaryButton>
                 </td>
               </tr>
             </tbody>
