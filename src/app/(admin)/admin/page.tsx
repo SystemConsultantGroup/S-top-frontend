@@ -1,6 +1,7 @@
 import { AdminNoticePreview } from "@/components/common/AdminNoticePreview/AdminNoticePreview";
 import { Statics, values } from "@/components/common/Statics/Statics";
 import { PageHeader } from "@/components/common/PageHeader";
+import "./layout.css";
 import classes from "./layout.module.css";
 
 const testdata = [
@@ -64,7 +65,13 @@ for (let i = 0; i < 9; i++) {
   });
 }
 
-function Sinchung() {
+interface sinchung {
+  name: string;
+  date: string;
+  type: string;
+  etc?: string;
+}
+function Sinchung({ data }: { data?: sinchung[] }) {
   return (
     <>
       <section style={{ width: "auto" }}>
@@ -79,14 +86,22 @@ function Sinchung() {
             </tr>
           </thead>
           <tbody>
-            <tr style={{ borderTop: "1px solid white" }}></tr>
             <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
+              <td style={{ borderTop: "2px solid white" }} colSpan={5}></td>
             </tr>
+            {data?.map((e, i) => {
+              return (
+                <>
+                  <tr>
+                    <td>{i}</td>
+                    <td>{e.name}</td>
+                    <td>{e.date}</td>
+                    <td>{e.type}</td>
+                    <td>{e.etc}</td>
+                  </tr>
+                </>
+              );
+            })}
           </tbody>
         </table>
         <div style={{ width: "auto" }}>
@@ -97,25 +112,45 @@ function Sinchung() {
     </>
   );
 }
-function TodaysVisitor() {
+function TodaysVisitor({
+  total,
+  today,
+  dailyAvg,
+}: {
+  total?: number;
+  today?: number;
+  dailyAvg?: number;
+}) {
   return (
     <>
-      <table style={{ textAlign: "center", alignContent: "center", alignItems: "center" }}>
-        <tbody>
-          <tr>
-            <td>총 접속자</td>
-            <td>1명</td>
-          </tr>
-          <tr>
-            <td>오늘 접속자</td>
-            <td>2명</td>
-          </tr>
-          <tr>
-            <td>일평균 접속자</td>
-            <td>3명</td>
-          </tr>
-        </tbody>
-      </table>
+      <section>
+        <table
+          style={{
+            textAlign: "center",
+            alignContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "100%",
+            borderTop: "3px solid white",
+            borderBottom: "3px solid white",
+          }}
+        >
+          <tbody>
+            <tr>
+              <td style={{ width: "50%", padding: 20 }}>총 접속자</td>
+              <td style={{ width: "50%", padding: 20 }}>{total}명</td>
+            </tr>
+            <tr>
+              <td style={{ borderBlock: "1px dashed white", padding: 20 }}>오늘 접속자</td>
+              <td style={{ borderBlock: "1px dashed white", padding: 20 }}>{today}명</td>
+            </tr>
+            <tr>
+              <td style={{ padding: 20 }}>일평균 접속자</td>
+              <td style={{ padding: 20 }}>{dailyAvg}명</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </>
   );
 }
@@ -124,12 +159,43 @@ export default function AdminMainPage() {
   return (
     <>
       <PageHeader title="관리자 메인" />
-      <section className={classes.container}>
-        <Sinchung></Sinchung>
-        <AdminNoticePreview title={""} pagingData={testdata}></AdminNoticePreview>
-        <TodaysVisitor></TodaysVisitor>
-        <Statics values={array} title="접속 통계"></Statics>
-      </section>
+      <table className={classes.container}>
+        <tbody>
+          <tr>
+            <td style={{ width: "40%" }} valign="top">
+              <Sinchung></Sinchung>
+            </td>
+            <td style={{ width: "60%" }} align="center">
+              <AdminNoticePreview title={""} pagingData={testdata}></AdminNoticePreview>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h2>가입 신청 목록</h2>
+            </td>
+            <td>
+              <h2>공지사항 게시판</h2>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <TodaysVisitor today={123} total={456} dailyAvg={79}></TodaysVisitor>
+            </td>
+            <td>
+              <Statics values={array} title=""></Statics>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h2>방문자수</h2>
+            </td>
+            <td>
+              <h2>접속 통계</h2>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <section></section>
     </>
   );
 }
