@@ -23,5 +23,4 @@ describe("PrimaryButton component", () => {
     fireEvent.click(screen.getByRole("button", { name: "Button" }));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
-
 });
