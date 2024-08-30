@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ProjectCard } from "./ProjectCard";
 import { MockProjectData } from "./_mock/mock-project";
+import { IProjectContent } from "@/types/project";
 
 const meta = {
   title: "ProjectCard",
@@ -16,19 +17,10 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const data = MockProjectData;
+const data = MockProjectData as unknown as IProjectContent;
 
 export const Usage: Story = {
   args: {
-    id: data.id,
-    projectName: data.title,
-    thumbnailUrl: data.thumbnailUrl,
-    teamName: data.team,
-    studentNames: data.participants,
-    professorNames: [data.advisor],
-    projectCategory: data.categories[0],
-    likeCount: data.likes,
-    like: true,
-    bookMark: data.isMarked,
+    data: data,
   },
 };

@@ -5,45 +5,25 @@ import { IconSearch } from "@tabler/icons-react";
 import Link from "next/link";
 import { ProjectCardLikeSection } from "./ProjectCardLikeSection";
 import { CardBadge } from "../CardBadge";
+import { IProjectContent } from "@/types/project";
 
 export interface ProjectCardProps {
-  id: number;
-  projectName: string;
+  data: IProjectContent;
   thumbnailUrl: string;
-  teamName: string;
-  studentNames: string[];
-  professorNames: string[];
-  projectCategory: string;
-  likeCount: number;
-  like: boolean;
-  bookMark: boolean;
   width?: string;
   height?: string;
 }
 
-export function ProjectCard({
-  id,
-  projectName,
-  thumbnailUrl,
-  teamName,
-  studentNames,
-  professorNames,
-  projectCategory,
-  likeCount,
-  like,
-  bookMark,
-  width,
-  height,
-}: ProjectCardProps) {
-  const studentsString = studentNames.join(", ");
-  const professorString = professorNames.join(", ");
+export function ProjectCard({ data, thumbnailUrl, width, height }: ProjectCardProps) {
+  const studentsString = data.studentNames.join(", ");
+  const professorString = data.professorNames.join(", ");
 
   return (
     <Card className={classes.card} w={width} h={height}>
       <CardSection className={classes["img-section"]}>
         <Link
           href={{
-            pathname: `/${id}`,
+            pathname: `/${data.id}`,
           }}
           style={{ textDecorationLine: "none" }}
         >
@@ -60,19 +40,19 @@ export function ProjectCard({
       </CardSection>
       <CardSection pl={24} pt={8}>
         <Group className={classes["badge-group"]} gap={16}>
-          <CardBadge label={projectCategory} />
+          <CardBadge label={data.projectCategory} />
         </Group>
       </CardSection>
       <CardSection pl={24} pr={24} pb={16} pt={8}>
         <Stack gap={8}>
-          <div className={classes.title}>{projectName}</div>
+          <div className={classes.title}>{data.projectName}</div>
           <div className={classes["participants-container"]}>{studentsString}</div>
           <Divider c={"var(--color-outline)"} />
         </Stack>
         <Stack gap={0} mt={8}>
           <Group gap={24}>
             <div className={classes["attr-wrapper"]}>참가팀명</div>
-            <div className={classes["value-wrapper"]}>{teamName}</div>
+            <div className={classes["value-wrapper"]}>{data.teamName}</div>
           </Group>
           <Group gap={24}>
             <div className={classes["attr-wrapper"]}>지도교수</div>
@@ -80,7 +60,7 @@ export function ProjectCard({
           </Group>
         </Stack>
       </CardSection>
-      <ProjectCardLikeSection likes={likeCount} isMarked={bookMark} isLiked={like} />
+      <ProjectCardLikeSection likes={data.likeCount} isMarked={data.bookMark} isLiked={data.like} />
     </Card>
   );
 }
