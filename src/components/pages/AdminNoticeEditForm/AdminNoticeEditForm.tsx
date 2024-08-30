@@ -92,14 +92,14 @@ export function AdminNoticeEditForm({ noticeId }: { noticeId?: number }) {
       }
     };
     if (noticeId) fetchPrevNotice();
-  }, [getTempFile, noticeId, setFiles, setValues]);
+  }, [noticeId]);
 
   return (
     <Section>
       <form onSubmit={onSubmit(handleSubmit)}>
         <Stack gap="lg">
           <Row field="제목" fieldSize={150}>
-            <TextInput id="input-title" {...getInputProps("title")} />
+            <TextInput id="input-title" {...getInputProps("title")} w={"50%"} />
           </Row>
           <Row field="내용" fieldSize={150}>
             <Textarea
