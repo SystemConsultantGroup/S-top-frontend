@@ -4,6 +4,8 @@ import { SearchInput } from "@/components/common/SearchInput";
 import { GalleryPreview } from "@/components/common/GalleryPreview/GalleryPreview";
 import { useEffect, useState } from "react";
 import { PageHeader } from "@/components/common/PageHeader";
+import { Dropdown } from "@/components/common/Dropdown/Dropdown";
+import { PrimaryButton } from "@/components/common/Buttons";
 
 const testimgurl = "https://i.ytimg.com/vi/h7SkjDKF11g/maxresdefault.jpg";
 export interface Props {
@@ -52,8 +54,29 @@ export default function AdminGalleryPage() {
     <>
       <PageHeader title="갤러리 관리" />
 
-      <div className={classes.search}>
-        <SearchInput></SearchInput>
+      <table className={classes.search}>
+        <tbody>
+          <tr>
+            <td>
+              <Dropdown
+                options={["1", "2"]}
+                placeholder={"연도 선택"}
+                onOptionClick={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+              ></Dropdown>
+            </td>
+            <td>
+              <SearchInput w={300}></SearchInput>
+            </td>
+            <td>
+              <PrimaryButton label="검색"></PrimaryButton>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style={{ display: "flex", padding: 10 }}>
+        <PrimaryButton label="사진 등록" style={{ marginLeft: "auto" }}></PrimaryButton>
       </div>
       <table className={classes.cards}>
         <tbody>
