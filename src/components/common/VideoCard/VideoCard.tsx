@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Group, Button } from "@mantine/core";
 import styles from "./VideoCard.module.css";
@@ -6,16 +8,17 @@ export interface VideoCardProps {
   title: string;
   subtitle: string;
   videoUrl: string;
-  bookmarked: boolean;
-  onBookmarkToggle: () => void;
+  bookmarked?: boolean;
+  onBookmarkToggle?: () => void;
 }
-
 export const VideoCard: React.FC<VideoCardProps> = ({
   title,
   subtitle,
   videoUrl,
-  bookmarked,
-  onBookmarkToggle,
+  bookmarked = false,
+  onBookmarkToggle = function (): void {
+    throw new Error("Function not implemented.");
+  },
 }) => {
   return (
     <div className={styles.container}>
