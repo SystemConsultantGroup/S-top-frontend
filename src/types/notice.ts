@@ -1,9 +1,7 @@
-import { PagedApiResponse } from "./common";
+import { PagedApiRequestParams, PagedApiResponse } from "./common";
 
-export interface PagedNoticesRequestParams {
+export interface PagedNoticesRequestParams extends PagedApiRequestParams {
   title?: string;
-  page?: number;
-  size?: number;
   sort?: string;
 }
 
