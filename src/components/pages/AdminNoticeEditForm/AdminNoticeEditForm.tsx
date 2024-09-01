@@ -10,7 +10,7 @@ import { CommonAxios } from "@/utils/CommonAxios";
 import { Checkbox, FileInput, Group, Stack, Textarea } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { EventImageSection } from "./EventImageSection";
 
 interface NoticeEditFormInputs {
@@ -36,6 +36,9 @@ export function AdminNoticeEditForm({ noticeId, event }: { noticeId?: number; ev
     getTempFile,
     uploadFiles,
   } = useFiles();
+
+  // 이벤트 공지사항의 첨부파일 이미지 미리보기를 위한 fileId state
+  const [fileIds, setFileIds] = useState<number[]>([]);
 
   // 공지사항 게시글 등록 및 수정을 위한  mantine form hook
   const { onSubmit, getInputProps, values, setValues } = useForm<NoticeEditFormInputs>({
@@ -91,7 +94,10 @@ export function AdminNoticeEditForm({ noticeId, event }: { noticeId?: number; ev
           id: apiFile.id.toString(),
           file: getTempFile(apiFile),
         }));
+        const fileIds = prevNotice.files.map((apiFile: ApiFile) => apiFile.id);
+
         setFiles(convertedFiles);
+        setFileIds(fileIds);
       }
     };
     if (noticeId) fetchPrevNotice();
@@ -99,7 +105,7 @@ export function AdminNoticeEditForm({ noticeId, event }: { noticeId?: number; ev
 
   return (
     <Section>
-      {event && <EventImageSection fileIds={files.map((file) => file.id)} />}
+      {event && noticeId && <EventImageSection fileIds={fileIds} />}
       <form onSubmit={onSubmit(handleSubmit)}>
         <Stack gap="lg">
           <Row field="제목" fieldSize={150}>
@@ -117,10 +123,16 @@ export function AdminNoticeEditForm({ noticeId, event }: { noticeId?: number; ev
             <Checkbox id="input-fixed" checked={values.fixed} {...getInputProps("fixed")} />
           </Row>
           <Group pl={20}>
-            <PrimaryButton onClick={handleAddFile}>첨부파일 추가</PrimaryButton>
+            <PrimaryButton onClick={handleAddFile}>
+              {event ? "이미지 추가" : "첨부파일 추가"}
+            </PrimaryButton>
           </Group>
           {files.map((file, index) => (
-            <Row key={file.id} field={`첨부파일 ${index + 1}`} fieldSize={150}>
+            <Row
+              key={file.id}
+              field={event ? `이미지 ${index + 1}` : `첨부파일 ${index + 1}`}
+              fieldSize={150}
+            >
               <Group w={"50%"}>
                 <FileInput
                   id={file.id}
@@ -128,6 +140,8 @@ export function AdminNoticeEditForm({ noticeId, event }: { noticeId?: number; ev
                   value={file.file}
                   placeholder={file.file ? file.file.name : "파일을 선택해주세요."}
                   w={"50%"}
+                  // 이벤트 공지사항의 경우 이미지만 업로드
+                  {...(event ? { accept: "image/*" } : {})}
                 />
                 <DangerButton onClick={() => handleRemoveFile(file.id)}>삭제</DangerButton>
               </Group>
