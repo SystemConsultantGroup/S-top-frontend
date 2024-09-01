@@ -11,6 +11,7 @@ import { Checkbox, FileInput, Group, Stack, Textarea } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { EventImageSection } from "./EventImageSection";
 
 interface NoticeEditFormInputs {
   title: string;
@@ -19,7 +20,9 @@ interface NoticeEditFormInputs {
   fileIds?: number[];
 }
 
-export function AdminNoticeEditForm({ noticeId }: { noticeId?: number }) {
+export function AdminNoticeEditForm({ noticeId, event }: { noticeId?: number; event?: boolean }) {
+  const url = event ? "/eventNotices" : "/notices";
+
   /* next 라우터, 페이지 이동에 이용 */
   const { push } = useRouter();
 
@@ -58,9 +61,9 @@ export function AdminNoticeEditForm({ noticeId }: { noticeId?: number }) {
         fileIds: fileIds,
       };
       if (noticeId) {
-        await CommonAxios.put(`/notices/${noticeId}`, notice);
+        await CommonAxios.put(`${url}/${noticeId}`, notice);
       } else {
-        await CommonAxios.post("/notices", notice);
+        await CommonAxios.post(`${url}`, notice);
       }
 
       // TODO: 등록/수정 성공 시 알림
@@ -74,7 +77,7 @@ export function AdminNoticeEditForm({ noticeId }: { noticeId?: number }) {
   useEffect(() => {
     // 공지사항 관리 페이지 접근 시 이전 공지사항 정보를 불러옴
     const fetchPrevNotice = async () => {
-      const response = await CommonAxios.get(`/notices/${noticeId}`);
+      const response = await CommonAxios.get(`${url}/${noticeId}`);
       const prevNotice = response.data;
       setValues({
         title: prevNotice.title,
@@ -96,6 +99,7 @@ export function AdminNoticeEditForm({ noticeId }: { noticeId?: number }) {
 
   return (
     <Section>
+      {event && <EventImageSection fileIds={files.map((file) => file.id)} />}
       <form onSubmit={onSubmit(handleSubmit)}>
         <Stack gap="lg">
           <Row field="제목" fieldSize={150}>
