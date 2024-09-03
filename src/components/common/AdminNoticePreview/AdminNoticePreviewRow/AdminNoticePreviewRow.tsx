@@ -1,3 +1,5 @@
+"use client";
+
 import { Flex, Text } from "@mantine/core";
 import classes from "./AdminNoticePreviewRow.module.css";
 import { IAdminNoticePreviewRow } from "../AdminNoticePreview";

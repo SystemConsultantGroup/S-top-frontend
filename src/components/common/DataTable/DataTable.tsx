@@ -7,6 +7,9 @@ import {
   TableCaption as DataTableFooterContainer,
   Group,
   Select,
+  Pagination,
+  Checkbox,
+  TableTh,
 } from "@mantine/core";
 import { DataTableHeader, DataTableHeaderProps } from "./elements/DataTableHeader";
 import { Dispatch, ReactNode, SetStateAction } from "react";
@@ -18,23 +21,39 @@ import { PAGE_SIZES } from "@/constants/PageSize";
 export interface DataTableProps extends TableProps {
   headers: DataTableHeaderProps[];
   children: ReactNode;
+  withCheckbox?: boolean;
+  checkboxProps?: {
+    checked: boolean;
+    indeterminate: boolean;
+    onChange: () => void;
+  };
   sortBy?: string;
   order?: string;
   handleSortButton?: (selector?: string) => void;
-  totalSize?: string;
+
+  totalElements?: string;
   pageSize?: string | null;
   setPageSize?: Dispatch<SetStateAction<string | null>>;
+
+  totalPages?: number;
+  pageNumber?: number;
+  setPageNumber?: Dispatch<SetStateAction<number>>;
 }
 
 export function DataTable({
   headers,
   children,
+  withCheckbox,
+  checkboxProps,
   sortBy,
   order,
   handleSortButton,
-  totalSize,
+  totalElements,
   pageSize,
   setPageSize,
+  totalPages,
+  pageNumber,
+  setPageNumber,
   ...props
 }: DataTableProps) {
   return (
@@ -42,6 +61,15 @@ export function DataTable({
       <DataTableContainer horizontalSpacing="lg" className={classes.container} {...props}>
         <DataTableHeaderContainer className={classes.header}>
           <TableRow className={classes["header-row"]}>
+            {withCheckbox && (
+              <TableTh style={{ width: "1%", borderTopLeftRadius: "10px" }}>
+                <Checkbox
+                  checked={checkboxProps?.checked}
+                  indeterminate={checkboxProps?.indeterminate}
+                  onChange={checkboxProps?.onChange}
+                />
+              </TableTh>
+            )}
             {headers.map((header, index) => (
               <DataTableHeader
                 key={index}
@@ -58,9 +86,9 @@ export function DataTable({
         </DataTableHeaderContainer>
         <DataTableBody>{children}</DataTableBody>
         <DataTableFooterContainer>
-          <Group>
-            <div>전체 {totalSize}개</div>
+          <Group justify="space-between">
             <Group gap={4}>
+              <div>전체 {totalElements}개</div>
               <Select
                 h={40}
                 w={80}
@@ -76,7 +104,14 @@ export function DataTable({
               />
               <div>개씩 보기</div>
             </Group>
-            {/* TODO: Pagenation 추가 */}
+            {pageNumber && setPageNumber && totalPages && (
+              <Pagination
+                value={pageNumber}
+                onChange={setPageNumber}
+                total={totalPages}
+                classNames={{ control: classes["pagination-control"] }}
+              />
+            )}
           </Group>
         </DataTableFooterContainer>
       </DataTableContainer>
