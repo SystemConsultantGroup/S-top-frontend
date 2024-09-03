@@ -81,6 +81,18 @@ export default function ModelsPage() {
             company="회사 B"
             model="텍스트 분석 모델"
           />
+          <AihubCard
+            title="AI 모델 데이터셋 3"
+            people="개발자 C"
+            company="회사 C"
+            model="그래프 분석 모델"
+          />
+          <AihubCard
+            title="AI 모델 데이터셋 4"
+            people="개발자 D"
+            company="회사 D"
+            model="영상 분석 모델"
+          />
           {/* Add more AihubCard components as needed */}
         </div>
       </div>

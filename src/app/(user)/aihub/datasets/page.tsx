@@ -81,6 +81,18 @@ export default function DatasetsPage() {
             company="회사 B"
             model="텍스트 분석 모델"
           />
+          <AihubCard
+            title="AI 모델 데이터셋 2"
+            people="개발자 B"
+            company="회사 B"
+            model="텍스트 분석 모델"
+          />
+          <AihubCard
+            title="AI 모델 데이터셋 2"
+            people="개발자 B"
+            company="회사 B"
+            model="텍스트 분석 모델"
+          />
           {/* Add more AihubCard components as needed */}
         </div>
       </div>
