@@ -8,7 +8,7 @@ export default function AdminEventNoticeEditPage({
 }) {
   return (
     <main>
-      <PageHeader title={"공지사항 게시글 등록"} />
+      <PageHeader title={"이벤트 공지사항 게시글 등록"} />
       <AdminNoticeEditForm noticeId={noticeId} event />
     </main>
   );
