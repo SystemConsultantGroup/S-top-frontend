@@ -1,3 +1,4 @@
+"use client";
 import { DangerButton, PrimaryButton } from "@/components/common/Buttons";
 import { PageHeader } from "@/components/common/PageHeader";
 import { TextInput } from "@/components/common/TextInput";
