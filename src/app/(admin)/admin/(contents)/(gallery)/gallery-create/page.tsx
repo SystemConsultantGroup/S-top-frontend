@@ -1,7 +1,19 @@
 import { PrimaryButton } from "@/components/common/Buttons";
 import { PageHeader } from "@/components/common/PageHeader";
 import { TextInput } from "@/components/common/TextInput";
+import { CommonAxios } from "@/utils/CommonAxios";
+import { useEffect, useState } from "react";
 export default function AdminGalleryCreate() {
+  const [Data, setData] = useState<any | null>(null);
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await CommonAxios.get("/galleries?year=2024&month=4");
+      setData(data);
+    };
+    getData();
+  }, []);
+  console.log(Data);
+
   return (
     <>
       <PageHeader title="갤러리 사진 등록" />

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { PageHeader } from "@/components/common/PageHeader";
 import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { PrimaryButton } from "@/components/common/Buttons";
+import { CommonAxios } from "@/utils/CommonAxios";
 
 const testimgurl = "https://i.ytimg.com/vi/h7SkjDKF11g/maxresdefault.jpg";
 export interface Props {
@@ -15,35 +16,50 @@ export interface Props {
   date: Date;
   viewCount?: number;
 }
-function useWindowSize() {
-  const [windowSize, setWindowSize] = useState({
-    width: 0,
-    height: 0,
-  });
+// function useWindowSize() {
+//   const [windowSize, setWindowSize] = useState({
+//     width: 0,
+//     height: 0,
+//   });
+//   useEffect(() => {
+//     if (window) {
+//       const handleResize = () => {
+//         setWindowSize({
+//           width: window.innerWidth,
+//           height: window.innerHeight,
+//         });
+//       };
 
-  useEffect(() => {
-    if (window) {
-      const handleResize = () => {
-        setWindowSize({
-          width: window.innerWidth,
-          height: window.innerHeight,
-        });
-      };
+//       window.addEventListener("resize", handleResize);
 
-      window.addEventListener("resize", handleResize);
-
-      handleResize();
-      return () => window.removeEventListener("resize", handleResize);
-    }
-  }, []);
-  return windowSize;
+//       handleResize();
+//       return () => window.removeEventListener("resize", handleResize);
+//     }
+//   }, []);
+//   return windowSize;
+// }
+interface asdf {
+  totalElements: any;
+  totalPages: any;
+  size: any;
+  content: any;
 }
 const minWidth = 280;
 export default function AdminGalleryPage() {
   const reshape: Props[][] = [];
-  const windowWidth = useWindowSize().width;
+  const windowWidth = 1500;
+  // const windowWidth = useWindowSize().width;
   const col = Math.max(Math.floor((windowWidth - 400) / minWidth), 1);
   const width = Math.max((windowWidth - 400 - 20 * (col - 1)) / col, minWidth);
+  const [Data, setData] = useState<asdf | null>(null);
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await CommonAxios.get("/galleries?year=2024&month=4");
+      setData(data);
+    };
+    getData();
+  }, []);
+
   const datas: Props[] = Array(10).fill({
     imgUrl: testimgurl,
     title: "짱짱 멋진 제목",
@@ -51,6 +67,7 @@ export default function AdminGalleryPage() {
     viewCount: col,
   });
   while (datas.length) reshape.push(datas.splice(0, col));
+  console.log(Data);
   return (
     <>
       <PageHeader title="갤러리 관리" />

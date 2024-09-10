@@ -1,11 +1,24 @@
 import { DangerButton, PrimaryButton } from "@/components/common/Buttons";
 import { PageHeader } from "@/components/common/PageHeader";
 import { TextInput } from "@/components/common/TextInput";
+import { CommonAxios } from "@/utils/CommonAxios";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const testimgurl = "https://i.ytimg.com/vi/h7SkjDKF11g/maxresdefault.jpg";
 
 export default function AdminGalleryEdit() {
+  const router = useRouter();
+  const [Data, setData] = useState<any | null>(null);
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await CommonAxios.get("/galleries/" + router.query.id);
+      setData(data);
+    };
+    getData();
+  }, []);
+  console.log(Data);
   return (
     <>
       <PageHeader title="갤러리 사진 수정" />
