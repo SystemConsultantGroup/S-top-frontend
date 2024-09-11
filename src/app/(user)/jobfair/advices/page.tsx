@@ -1,3 +1,5 @@
+"use client";
+import React, { useState } from "react";
 import { Banner } from "@/components/common/Banner/Banner";
 import styles from "./jobfair.module.css"; // CSS 파일 import
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
@@ -6,6 +8,10 @@ import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { VideoCard } from "@/components/common/VideoCard/VideoCard";
 
 const JobFairPage = () => {
+  const [selectedType, setSelected] = useState<string | null>(null);
+  const handleChange = (type: string) => {
+    setSelected(type);
+  };
   return (
     <div>
       <div className={styles.container}>
@@ -24,7 +30,12 @@ const JobFairPage = () => {
             <SearchInput placeholder="영상 검색" />
           </div>
           <div className={styles.dropdown}>
-            <Dropdown options={["연도", "작성자", "제목"]} placeholder="연도" />
+            <Dropdown
+              options={["연도", "작성자", "제목"]}
+              placeholder="연도"
+              selectedOption={selectedType}
+              onOptionClick={handleChange}
+            />
           </div>
         </div>
         <div className={styles.videoGrid}>
@@ -32,41 +43,57 @@ const JobFairPage = () => {
             title="삼성리서치"
             subtitle="김성보 연구원님"
             videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
           <VideoCard
             title="삼성리서치"
             subtitle="김성보 연구원님"
             videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
           <VideoCard
             title="삼성리서치"
             subtitle="김성보 연구원님"
             videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
           <VideoCard
             title="삼성리서치"
             subtitle="김성보 연구원님"
             videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
           <VideoCard
             title="삼성리서치"
             subtitle="김성보 연구원님"
             videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
           <VideoCard
             title="삼성리서치"
             subtitle="김성보 연구원님"
             videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
           <VideoCard
             title="삼성리서치"
             subtitle="김성보 연구원님"
             videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
           <VideoCard
             title="삼성리서치"
             subtitle="김성보 연구원님"
             videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
         </div>
       </div>

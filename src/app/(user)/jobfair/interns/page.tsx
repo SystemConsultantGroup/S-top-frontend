@@ -1,3 +1,5 @@
+"use client";
+import React, { useState } from "react";
 import styles from "./jonfairInterns.module.css";
 import { Banner } from "@/components/common/Banner/Banner";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
@@ -6,6 +8,10 @@ import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { VideoCard } from "@/components/common/VideoCard/VideoCard";
 
 const InternsPage = () => {
+  const [selectedType, setSelected] = useState<string | null>(null);
+  const handleChange = (type: string) => {
+    setSelected(type);
+  };
   return (
     <div>
       <div className={styles.container}>
@@ -24,7 +30,12 @@ const InternsPage = () => {
             <SearchInput placeholder="영상 검색" />
           </div>
           <div className={styles.dropdown}>
-            <Dropdown options={["연도", "작성자", "제목"]} placeholder="연도" />
+            <Dropdown
+              options={["연도", "작성자", "제목"]}
+              placeholder="연도"
+              selectedOption={selectedType}
+              onOptionClick={handleChange}
+            />
           </div>
         </div>
         <div className={styles.videoGrid}>
@@ -32,41 +43,57 @@ const InternsPage = () => {
             title="국내 ICT 인턴십"
             subtitle="알리멍"
             videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
           <VideoCard
             title="국내 ICT 인턴십"
             subtitle="알리멍"
             videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
           <VideoCard
             title="국내 ICT 인턴십"
             subtitle="알리멍"
             videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
           <VideoCard
             title="국내 ICT 인턴십"
             subtitle="알리멍"
             videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
           <VideoCard
             title="국내 ICT 인턴십"
             subtitle="알리멍"
             videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
           <VideoCard
             title="국내 ICT 인턴십"
             subtitle="알리멍"
             videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
           <VideoCard
             title="국내 ICT 인턴십"
             subtitle="알리멍"
             videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
           <VideoCard
             title="국내 ICT 인턴십"
             subtitle="알리멍"
             videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
+            bookmarked={false}
+            onBookmarkToggle={() => {}}
           />
         </div>
       </div>
