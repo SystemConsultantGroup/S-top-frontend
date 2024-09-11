@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { PrimaryButton } from "./PrimaryButton";
+import { IconThumbUp } from "@tabler/icons-react";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -31,5 +32,16 @@ export const Disabled: Story = {
   args: {
     children: "Button",
     disabled: true,
+  },
+};
+
+export const WithIcon: Story = {
+  args: {
+    children: (
+      <>
+        <IconThumbUp size={18} />
+        Button
+      </>
+    ),
   },
 };

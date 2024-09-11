@@ -1,4 +1,5 @@
 /* example usage */
+"use client";
 
 import { useMemo, useState } from "react";
 import { MockUsersData } from "./_mock/mock-table-data";
@@ -43,6 +44,7 @@ export function DataTableUsage() {
     });
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const sortedData = useMemo(() => makeSortData(), [toggle, order]);
 
   return (
@@ -52,7 +54,7 @@ export function DataTableUsage() {
       order={order}
       handleSortButton={handleSortButton}
       w={900}
-      totalSize={total}
+      totalElements={total}
       pageSize={pageSize}
       setPageSize={setPageSize}
     >
