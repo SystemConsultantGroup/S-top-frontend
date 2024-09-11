@@ -6,6 +6,7 @@ import "@mantine/carousel/styles.css";
 import type { Metadata } from "next";
 import { AuthProvider } from "@/components/common/Auth";
 import { SWRProvider } from "@/components/common/SWRProvider";
+import "@mantine/carousel/styles.css";
 
 export const metadata: Metadata = {
   title: "S-TOP 기술교류회",
