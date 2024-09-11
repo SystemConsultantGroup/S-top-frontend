@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ReactNode } from "react";
 import { TableTr as DataTableRowElement } from "@mantine/core";
 import classes from "./DataTableRow.module.css";

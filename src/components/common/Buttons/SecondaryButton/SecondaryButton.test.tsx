@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 
 describe("SecondaryButton component", () => {
   it("renders correctly with the given label", () => {
-    render(<SecondaryButton label="Button" />);
+    render(<SecondaryButton>Button</SecondaryButton>);
     // More on screen queries: https://testing-library.com/docs/queries/about
     // More on jest expect Api: https://jestjs.io/docs/expect
     expect(screen.getByRole("button", { name: "Button" })).toBeInTheDocument();

@@ -1,0 +1,37 @@
+.container {
+  margin: 0 auto;
+  width: 1440px;
+}
+
+.banner {
+  margin-bottom: 30px;
+}
+
+.vrlink {
+  margin-bottom: 60px;
+}
+
+.project {
+  margin-bottom: 30px;
+}
+
+.interview {
+  margin-bottom: 30px;
+}
+
+.gallery {
+  margin-bottom: 60px;
+  padding: 30px 40px;
+  background-color: var(--color-surfaceContainer);
+}
+
+/* MainArticle */
+.articleHead {
+  & > h2 {
+    margin: 0;
+  }
+}
+
+.articleDetail {
+  color: var(--color-outline);
+}

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Button, Menu, MenuTarget, MenuDropdown, MenuItem } from "@mantine/core";
 import classes from "./Dropdown.module.css";
@@ -6,10 +8,17 @@ interface DropdownProps {
   options: string[];
   placeholder: string;
   selectedOption?: string | null;
-  onOptionClick: (option: string) => void;
+  onOptionClick?: (option: string) => void;
 }
 
-export function Dropdown({ options, placeholder, selectedOption, onOptionClick }: DropdownProps) {
+export function Dropdown({
+  options,
+  placeholder,
+  selectedOption,
+  onOptionClick = function (): void {
+    throw new Error("Function not implemented.");
+  },
+}: DropdownProps) {
   const [opened, setOpened] = React.useState<boolean>(false);
 
   const handleOptionClick = (option: string) => {

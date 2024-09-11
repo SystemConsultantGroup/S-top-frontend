@@ -68,11 +68,15 @@ export const USER_NAVS: INavList[] = [
     title: "Job Fair",
     items: [
       {
-        name: "잡페어 인터뷰",
+        name: "선배님들의 조언",
         link: "#",
       },
       {
-        name: "채용 공고",
+        name: "인턴들의 이야기",
+        link: "#",
+      },
+      {
+        name: "채용 포지션",
         link: "#",
       },
     ],
