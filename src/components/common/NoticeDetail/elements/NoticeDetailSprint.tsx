@@ -1,19 +1,10 @@
-import styles from "../NoticeDetail.module.css";
+import { INoticeDetailNav } from "@/types/PageBoardTypes";
 import { Group } from "@mantine/core";
 import { IconChevronUp, IconChevronDown } from "@tabler/icons-react";
 import Link from "next/link";
+import styles from "../NoticeDetail.module.css";
 
-export interface IPageInfo {
-  title: string;
-  url: string;
-}
-
-export interface IDetailSprintProps {
-  prev_page?: IPageInfo;
-  next_page?: IPageInfo;
-}
-
-export function NoticeDetailSprint({ prev_page, next_page }: IDetailSprintProps) {
+export function NoticeDetailSprint({ prev_page, next_page }: INoticeDetailNav) {
   return (
     <div className={styles.sprint}>
       <Group className={styles.movebox} gap={30}>

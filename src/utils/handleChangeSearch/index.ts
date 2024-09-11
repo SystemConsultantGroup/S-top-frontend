@@ -1,0 +1,1 @@
+export { handleChangeSearch } from "./handleChangeSearch";

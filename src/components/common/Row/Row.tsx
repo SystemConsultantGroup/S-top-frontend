@@ -1,10 +1,11 @@
-import { Box, BoxProps, Group, Text } from "@mantine/core";
+import { Box, BoxProps, Group, StyleProp, Text } from "@mantine/core";
 import classes from "./Row.module.css";
 
 export interface RowProps extends BoxProps {
   field?: string; // 필드 이름
   children: React.ReactNode;
   fieldSize?: "sm" | "md" | "lg" | "xl" | number; // 필드 부분이 차지하는 길이
+  fieldWeight?: StyleProp<React.CSSProperties["fontWeight"]>;
   flexStart?: boolean;
 }
 
@@ -12,6 +13,7 @@ export function Row({
   field = "",
   fieldSize = "md",
   children,
+  fieldWeight,
   flexStart = false,
   ...props
 }: RowProps) {
@@ -32,6 +34,7 @@ export function Row({
                       : fieldSize,
           }}
           fz={16}
+          fw={fieldWeight}
         >
           {field}
         </Text>

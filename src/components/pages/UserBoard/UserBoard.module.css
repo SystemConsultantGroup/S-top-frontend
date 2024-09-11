@@ -1,0 +1,9 @@
+.container {
+  border-top: 1px solid var(--mantine-color-text);
+
+  & ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
