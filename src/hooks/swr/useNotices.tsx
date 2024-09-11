@@ -3,8 +3,17 @@
 import { PagedNoticesRequestParams, PagedNoticesResponse } from "@/types/notice";
 import useSWR from "swr";
 
-export function useNotices({ params }: { params: PagedNoticesRequestParams }) {
-  const result = useSWR<PagedNoticesResponse>({ url: "/notices", query: params });
+export function useNotices({
+  params,
+  event,
+}: {
+  params: PagedNoticesRequestParams;
+  event?: boolean;
+}) {
+  const result = useSWR<PagedNoticesResponse>({
+    url: event ? "/eventNotices" : "/notices",
+    query: params,
+  });
 
   return {
     data: result.data?.content,
