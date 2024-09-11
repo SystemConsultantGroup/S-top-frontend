@@ -16,6 +16,8 @@ export function Main() {
     title: "뤼튼 테크놀리지스",
     subtitle: "현지웅 엔지니어",
     videoUrl: "https://www.youtube.com/embed/OBsR6UumFdc",
+    bookmarked: false,
+    onBookmarkToggle: () => {},
   }));
   const InterviewHead = InterviewHeadProps.map((props, idx) => <VideoCard key={idx} {...props} />);
 
