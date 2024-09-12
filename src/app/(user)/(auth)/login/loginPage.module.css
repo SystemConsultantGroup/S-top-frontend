@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 200px;
+  margin-bottom: 200px;
 }
 
 /* Desktop Default */
@@ -19,21 +20,21 @@
 /* Tablet Landscape */
 @media screen and (max-width: 1280px) {
   .loginContainer {
-    margin-top: 180px;
+    margin-top: 100px;
   }
 }
 
 /* Tablet Portrait */
 @media screen and (max-width: 1024px) {
   .loginContainer {
-    margin-top: 160px;
+    margin-top: 140px;
   }
 }
 
 /* Mobile Landscape and Small Tablets */
 @media screen and (max-width: 768px) {
   .loginContainer {
-    margin-top: 140px;
+    margin-top: 120px;
   }
 
   .pageContainer {
@@ -44,7 +45,7 @@
 /* Mobile Portrait */
 @media screen and (max-width: 480px) {
   .loginContainer {
-    margin-top: 120px;
+    margin-top: 80px;
   }
 
   .pageContainer {

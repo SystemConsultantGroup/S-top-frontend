@@ -8,7 +8,7 @@ export function LoginBox() {
   const handleKakaoLogin = () => {
     const kakaoClientId = "REST API KEY";
     const redirectUri = "http://localhost:3000/auth";
-    const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoClientId}&redirect_uri=${redirectUri}/login/kakao`;
+    const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoClientId}&redirect_uri=${redirectUri}`;
     window.location.href = kakaoUrl;
   };
 
