@@ -1,3 +1,9 @@
+import { AdminProjectsEditSection } from "@/components/pages/AdminProjectsEditSection";
+
 export default function AdminProjectCreatePage() {
-  return <main>Hello, world!</main>;
+  return (
+    <main>
+      <AdminProjectsEditSection />
+    </main>
+  );
 }

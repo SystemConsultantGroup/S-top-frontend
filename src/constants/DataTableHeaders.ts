@@ -15,3 +15,12 @@ export const NOTICE_TABLE_HEADERS: DataTableHeaderProps[] = [
   { label: "작성일", widthPercentage: 10, sort: true, selector: "createdAt" },
   { label: "관리", widthPercentage: 7, sort: false },
 ];
+
+export const PROJECT_TABLE_HEADERS: DataTableHeaderProps[] = [
+  { label: "순번", widthPercentage: 7, sort: true, selector: "id" },
+  { label: "썸네일", widthPercentage: 10, sort: false },
+  { label: "년도", widthPercentage: 10, sort: true, selector: "createdAt" },
+  { label: "카테고리", widthPercentage: 10, sort: true, selector: "teamName" },
+  { label: "프로젝트명", widthPercentage: 20, sort: true, selector: "projectName" },
+  { label: "관리", widthPercentage: 7, sort: false },
+];
