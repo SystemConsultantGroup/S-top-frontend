@@ -1,0 +1,115 @@
+.title {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 700;
+  padding: 10px 0px;
+}
+
+.description {
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.sectionMiddle {
+  margin-top: 40px;
+  margin-bottom: 15px;
+  gap: 80px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 40px;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 635px;
+  aspect-ratio: 635 / 350; /* 이미지 비율 설정 */
+}
+
+.infoContainer {
+  width: 100%;
+  padding-right: 40px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding-right: 0px;
+  }
+}
+
+.infoContainer > .infoRowGroup {
+  width: 100%;
+}
+
+.infoContainer > .infoRowGroup > .infoRow {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  line-height: 22px;
+  font-size: 16px;
+}
+
+.infoRow > .firstCol {
+  font-weight: 700;
+  width: 72px;
+  flex-shrink: 0; /* 다른 item이 영역 침범하지 않도록 함 */
+}
+
+.divider {
+  width: 100%;
+}
+
+.btnLabel {
+  padding-left: 5px;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.addBtn {
+  width: 45%;
+  height: 56px;
+}
+
+.externalBtn {
+  width: 40%;
+  height: 60px;
+  background-color: var(--color-primaryFixedDim);
+  color: #000000;
+
+  font-size: 20px;
+
+  &:hover {
+    background-color: #d1e4ff;
+    color: #000000;
+  }
+
+  @media (max-width: 768px) {
+    width: 80%;
+  }
+}
+
+.sectionBottom {
+  margin-top: 40px;
+}
+
+.posterWrapper {
+  width: 100%;
+  max-width: 794px;
+}
+
+/* ProjectDetailInquiry 컴포넌트에서 사용 */
+
+.SectionInquiry {
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.SectionInquiry > button {
+  font-size: 20px;
+  height: 56px;
+  margin-top: 20px;
+}

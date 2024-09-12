@@ -19,3 +19,14 @@
     border-color: var(--color-outlineVariant);
   }
 }
+
+.pagination-control {
+  border: none;
+  background-color: transparent;
+
+  font-weight: 500;
+  --pagination-active-color: var(--color-primary);
+  &:hover {
+    background-color: var(--color-outlineVariant);
+  }
+}

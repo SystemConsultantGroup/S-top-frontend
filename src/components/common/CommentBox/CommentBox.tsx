@@ -3,16 +3,17 @@ import classes from "./CommentBox.module.css";
 
 interface CommentBoxProps {
   onSubmit?: (comment: string) => void;
+  commentList?: Comment[];
 }
 
-interface Comment {
+export interface Comment {
   author: string;
   content: string;
 }
 
-export const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit }) => {
+export const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit, commentList = [] }) => {
   const [comment, setComment] = useState("");
-  const [comments, setComments] = useState<Comment[]>([]);
+  const [comments, setComments] = useState<Comment[]>(commentList);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
