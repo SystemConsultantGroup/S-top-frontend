@@ -4,27 +4,21 @@ import classes from "./ProjectCard.module.css";
 import { IconSearch } from "@tabler/icons-react";
 import Link from "next/link";
 import { ProjectCardLikeSection } from "./ProjectCardLikeSection";
-
-export type ProjectCardDataType = {
-  id: number;
-  title: string;
-  thumbnailUrl: string; // uuid 예정
-  categories: string[];
-  participants: string[];
-  team: string;
-  advisor: string;
-  likes: number;
-  isMarked: boolean;
-};
+import { CardBadge } from "../CardBadge";
+import { IProjectContent } from "@/types/project";
+import { PROJECT_CATEGORY_MAPPED_LIST } from "@/constants/TextMapping";
 
 export interface ProjectCardProps {
-  data: ProjectCardDataType;
+  data: IProjectContent;
+  thumbnailUrl: string;
   width?: string;
   height?: string;
 }
 
-export function ProjectCard({ data, width, height }: ProjectCardProps) {
-  const ParticipantsString = data.participants.join(", ");
+export function ProjectCard({ data, thumbnailUrl, width, height }: ProjectCardProps) {
+  const studentsString = data.studentNames.join(", ");
+  const professorString = data.professorNames.join(", ");
+
   return (
     <Card className={classes.card} w={width} h={height}>
       <CardSection className={classes["img-section"]}>
@@ -35,7 +29,7 @@ export function ProjectCard({ data, width, height }: ProjectCardProps) {
           style={{ textDecorationLine: "none" }}
         >
           <Image
-            src={data.thumbnailUrl}
+            src={thumbnailUrl}
             alt={"thumbnail"}
             className={classes.img}
             width={500}
@@ -47,30 +41,27 @@ export function ProjectCard({ data, width, height }: ProjectCardProps) {
       </CardSection>
       <CardSection pl={24} pt={8}>
         <Group className={classes["badge-group"]} gap={16}>
-          {/* TODO: div를 카드뱃지 컴포넌트로 수정 */}
-          {data.categories.map((category, index) => (
-            <div key={index}>{category}</div>
-          ))}
+          <CardBadge label={PROJECT_CATEGORY_MAPPED_LIST[data.projectCategory]} />
         </Group>
       </CardSection>
       <CardSection pl={24} pr={24} pb={16} pt={8}>
         <Stack gap={8}>
-          <div className={classes.title}>{data.title}</div>
-          <div className={classes["participants-container"]}>{ParticipantsString}</div>
+          <div className={classes.title}>{data.projectName}</div>
+          <div className={classes["participants-container"]}>{studentsString}</div>
           <Divider c={"var(--color-outline)"} />
         </Stack>
         <Stack gap={0} mt={8}>
           <Group gap={24}>
             <div className={classes["attr-wrapper"]}>참가팀명</div>
-            <div className={classes["value-wrapper"]}>{data.team}</div>
+            <div className={classes["value-wrapper"]}>{data.teamName}</div>
           </Group>
           <Group gap={24}>
             <div className={classes["attr-wrapper"]}>지도교수</div>
-            <div className={classes["value-wrapper"]}>{data.advisor}</div>
+            <div className={classes["value-wrapper"]}>{professorString}</div>
           </Group>
         </Stack>
       </CardSection>
-      <ProjectCardLikeSection likes={data.likes} isMarked={data.isMarked} />
+      <ProjectCardLikeSection likes={data.likeCount} isMarked={data.bookMark} isLiked={data.like} />
     </Card>
   );
 }

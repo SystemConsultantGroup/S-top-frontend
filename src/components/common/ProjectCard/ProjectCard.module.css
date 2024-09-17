@@ -1,6 +1,5 @@
 .card {
   width: 300px;
-  height: 410px;
   background-color: var(--color-surfaceContainerLowest);
   border: 1px solid var(--color-outlineVariant);
   border-radius: 12px;
@@ -39,8 +38,6 @@
 }
 
 .title {
-  height: 48px;
-  max-height: 48px;
   font-size: 24px;
   line-height: 25px;
   font-weight: 700;
@@ -86,11 +83,12 @@
   color: var(--color-onSurface);
 }
 
+.section-container {
+  padding: 7px 20px;
+}
+
 .like-section {
-  display: flex;
   background-color: var(--color-surfaceVariant);
-  height: 40px;
-  align-items: center;
 }
 
 .likes-wrapper {
