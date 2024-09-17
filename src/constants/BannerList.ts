@@ -31,4 +31,10 @@ export const bannerList: BannerProps[] = [
     subtitle: "Sungkyun. Tech. Open Party",
     text: "S-TOP은 SW 중심 사회 구현에 선도적 역할을 수행하기 위한 성균관대학교 소프트웨어융합대학 기술교류회입니다. 소프트웨어융합대학 학생들이 기업들과 함께 연구개발한 산학과제, 연구실, SPARK, 창업 프로그램 등에서 만들어진 성과물을 전시합니다.",
   },
+  {
+    type: "JOB_FAIR",
+    title: "잡페어",
+    subtitle: "Job Fair",
+    text: "S-TOP Job Fair는 현업에 종사하고 있는 선배 개발자님들과 실무 경험을 얻고자 하는 학생들을 연결하여, IT 인재 양성 문화를 함께 만들기 위해 기획되었습니다.",
+  },
 ];
