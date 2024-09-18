@@ -1,5 +1,4 @@
 "use client";
-"use client";
 
 import { DangerButton, PrimaryButton } from "@/components/common/Buttons";
 import { Row } from "@/components/common/Row";

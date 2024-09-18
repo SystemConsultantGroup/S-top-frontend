@@ -11,8 +11,6 @@ export default function AdminGalleryCreate() {
   const [Data, setData] = useState<any | null>(null);
   const [Title, setTitle] = useState("");
   const [Year, setYear] = useState<Date | null>(null);
-  const [Photos, setPhotos] = useState([]);
-  setPhotos([]);
   const [Count, setCount] = useState(1);
   useEffect(() => {
     const getData = async () => {
@@ -24,7 +22,6 @@ export default function AdminGalleryCreate() {
   console.log(Data);
   console.log(Title);
   console.log(Year);
-  console.log(Photos);
 
   return (
     <>
