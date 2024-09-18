@@ -94,7 +94,9 @@ export default function AdminGalleryPage() {
         </tbody>
       </table>
       <div style={{ display: "flex", padding: 10 }}>
-        <PrimaryButton style={{ marginLeft: "auto" }}>사진 등록</PrimaryButton>
+        <a href="./gallery-create">
+          <PrimaryButton style={{ marginLeft: "auto" }}>사진 등록</PrimaryButton>
+        </a>
       </div>
       <table className={classes.cards}>
         <tbody>
@@ -102,11 +104,13 @@ export default function AdminGalleryPage() {
             return (
               <>
                 <tr>
-                  {e.map((f) => {
+                  {e.map((f, i) => {
                     return (
                       <>
                         <td>
-                          <GalleryPreview {...f} width={width} height={(width / 300) * 180} />
+                          <a href={"./gallery/" + i}>
+                            <GalleryPreview {...f} width={width} height={(width / 300) * 180} />
+                          </a>
                         </td>
                       </>
                     );
