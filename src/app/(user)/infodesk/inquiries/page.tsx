@@ -17,10 +17,10 @@ export default function InquiriesPage() {
   const classifier = {
     data: [
       { value: "0", label: "전체" },
-      { value: "0", label: "제목" },
-      { value: "0", label: "내용" },
-      { value: "0", label: "작성자" },
-      { value: "0", label: "제목+내용" },
+      { value: "1", label: "제목" },
+      { value: "2", label: "내용" },
+      { value: "3", label: "작성자" },
+      { value: "4", label: "제목+내용" },
     ],
     defaultLabel: 0,
     searchPlaceholder: "검색어를 입력하세요",
@@ -73,10 +73,10 @@ export default function InquiriesPage() {
       <div className={classes.mainContent}>
         <Noticeboard
           inputValue=""
-          handleInput={() => {}}
-          handleKeyDown={() => {}}
-          handleSelect={() => {}}
-          handleSubmit={() => {}}
+          handleInput={() => { }}
+          handleKeyDown={() => { }}
+          handleSelect={() => { }}
+          handleSubmit={() => { }}
           heading={heading}
           classifier={classifier}
           items={items}
