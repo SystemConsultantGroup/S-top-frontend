@@ -82,7 +82,7 @@ export function RegisterForm() {
 
       <CheckBox label="서비스이용약관 (필수)" />
       <CheckBox label="개인정보처리방침 (필수)" />
-      <PrimaryButton label="회원가입" />
+      <PrimaryButton>회원가입</PrimaryButton>
     </div>
   );
 }
