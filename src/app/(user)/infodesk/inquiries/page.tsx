@@ -73,10 +73,10 @@ export default function InquiriesPage() {
       <div className={classes.mainContent}>
         <Noticeboard
           inputValue=""
-          handleInput={() => { }}
-          handleKeyDown={() => { }}
-          handleSelect={() => { }}
-          handleSubmit={() => { }}
+          handleInput={() => {}}
+          handleKeyDown={() => {}}
+          handleSelect={() => {}}
+          handleSubmit={() => {}}
           heading={heading}
           classifier={classifier}
           items={items}
