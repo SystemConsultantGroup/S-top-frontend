@@ -6,9 +6,9 @@ import classes from "./LoginBox.module.css";
 
 export function LoginBox() {
   const handleKakaoLogin = () => {
-    const kakaoClientId = "REST API KEY";
-    const redirectUri = "http://localhost:3000/auth";
-    const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoClientId}&redirect_uri=${redirectUri}/login/kakao`;
+    const kakaoClientId = "71c7a5552be46df39f8781d45361e718";
+    const redirectUri = "http://localhost:8000/auth/login/kakao";
+    const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoClientId}&redirect_uri=${redirectUri}`;
     window.location.href = kakaoUrl;
   };
 
