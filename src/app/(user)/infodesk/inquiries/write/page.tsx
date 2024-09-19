@@ -63,7 +63,7 @@ export default function InquiryWritePage() {
         </div>
 
         <div className={classes.formRow}>
-          <PrimaryButton label="첨부파일 추가" />
+          <PrimaryButton>첨부파일 추가</PrimaryButton>
         </div>
 
         <div className={classes.formFile}>
@@ -71,7 +71,7 @@ export default function InquiryWritePage() {
             <TextInput label="첨부파일 1" placeholder="" />
           </div>
           <div className={classes.buttonWrapper}>
-            <PrimaryButton label="삭제" style={{ backgroundColor: "#FF6B6B" }} />
+            <PrimaryButton style={{ backgroundColor: "#FF6B6B" }}>삭제</PrimaryButton>
           </div>
         </div>
 
@@ -80,13 +80,13 @@ export default function InquiryWritePage() {
             <TextInput label="첨부파일 2" placeholder="" />
           </div>
           <div className={classes.buttonWrapper}>
-            <PrimaryButton label="삭제" style={{ backgroundColor: "#FF6B6B" }} />
+            <PrimaryButton style={{ backgroundColor: "#FF6B6B" }}>삭제</PrimaryButton>
           </div>
         </div>
 
         <div className={classes.formActions}>
-          <PrimaryButton label="작성하기" style={{ marginRight: "10px" }} />
-          <PrimaryButton label="목록으로" />
+          <PrimaryButton style={{ marginRight: "10px" }}>작성하기</PrimaryButton>
+          <PrimaryButton>목록으로</PrimaryButton>
         </div>
       </div>
     </>

@@ -1,20 +1,10 @@
-import styles from "../NoticeDetail.module.css";
+import { INoticeDetailStage } from "@/types/PageBoardTypes";
 import { Group, Input, Button, Divider } from "@mantine/core";
 import { IconPlus, IconMinus, IconShare, IconPrinter } from "@tabler/icons-react";
-import { ReactNode } from "react";
+import styles from "../NoticeDetail.module.css";
 import { FileDropdownMenu } from "./FileDropdownMenu";
 
-export interface IFileInfo {
-  name: string;
-  url: string;
-}
-
-export interface IDetailStageProps {
-  attachment?: IFileInfo[];
-  children?: ReactNode;
-}
-
-export function NoticeDetailStage({ attachment, children }: IDetailStageProps) {
+export function NoticeDetailStage({ attachment, children }: INoticeDetailStage) {
   return (
     <div className={styles.stage}>
       <Group justify="flex-end" gap={5}>

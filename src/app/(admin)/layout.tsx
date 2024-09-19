@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import classes from "./layout.module.css";
+import "./layout.css";
 import { AdminSidebar } from "@/components/pages/AdminSidebar";
 
 export const metadata: Metadata = {
@@ -11,7 +12,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <section className={classes.container}>
       <AdminSidebar />
-      <section className={classes.main}>{children}</section>
+      <section className={classes.content}>
+        <section className={classes.main}>{children}</section>
+      </section>
     </section>
   );
 }

@@ -1,14 +1,14 @@
-import { Divider, Group } from "@mantine/core";
-import styles from "./SubHeadNavbar.module.css";
-import { NavList, NavNames } from "./NavList";
+import { USER_NAV_NAMES, USER_NAVS } from "@/constants/UserNavigations";
+import { Group } from "@mantine/core";
 import Link from "next/link";
+import styles from "./SubHeadNavbar.module.css";
 
 interface ISubHeadNavbar {
-  title: NavNames;
+  title: USER_NAV_NAMES;
 }
 
 export function SubHeadNavbar({ title }: ISubHeadNavbar) {
-  const NavTitList = NavList.find((item) => item.title === title)!.items;
+  const NavTitList = USER_NAVS.find((item) => item.title === title)!.items;
 
   return (
     <>
@@ -17,7 +17,6 @@ export function SubHeadNavbar({ title }: ISubHeadNavbar) {
           <div className={styles.navtit}>
             <h3>{title}</h3>
           </div>
-          <Divider className={styles.divider} orientation="vertical" />
           <div className={styles.navlist}>
             <ul>
               {NavTitList.map((item, idx) => (

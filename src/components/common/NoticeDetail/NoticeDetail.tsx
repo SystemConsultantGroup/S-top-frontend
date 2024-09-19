@@ -1,17 +1,13 @@
-import styles from "./NoticeDetail.module.css";
-import { IDetailHeadProps, NoticeDetailHead } from "./elements/NoticeDetailHead";
-import { IDetailStageProps, NoticeDetailStage } from "./elements/NoticeDetailStage";
-import { IDetailSprintProps, NoticeDetailSprint } from "./elements/NoticeDetailSprint";
+import { INoticeDetailItem } from "@/types/PageBoardTypes";
+import { NoticeDetailHead } from "./elements/NoticeDetailHead";
+import { NoticeDetailSprint } from "./elements/NoticeDetailSprint";
+import { NoticeDetailStage } from "./elements/NoticeDetailStage";
 import { NoticeDetailToolbar } from "./elements/NoticeDetailToolbar";
+import styles from "./NoticeDetail.module.css";
 
-interface IDetailHeadingProps {
+type NoticeDetailProps = INoticeDetailItem & {
   heading: string;
-}
-
-type NoticeDetailPropsType = IDetailHeadingProps &
-  IDetailHeadProps &
-  IDetailStageProps &
-  IDetailSprintProps;
+};
 
 export function NoticeDetail({
   heading,
@@ -24,7 +20,7 @@ export function NoticeDetail({
   prev_page,
   next_page,
   children,
-}: NoticeDetailPropsType) {
+}: NoticeDetailProps) {
   return (
     <>
       <div className={styles.noticedetail}>

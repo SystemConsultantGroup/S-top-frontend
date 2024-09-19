@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Group,
   PaginationItems,
@@ -7,9 +8,20 @@ import {
   PaginationRoot,
 } from "@mantine/core";
 import classes from "./Pagination.module.css";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
+import { IBoardPagin } from "@/types/PageBoardTypes";
 
-export function Paginations({ show, data, ...props }: { show: number; data: Array<Element> }) {
+type PaginationProps = IBoardPagin & {
+  data: Array<ReactNode>;
+};
+
+export function Paginations({
+  data,
+  paginShow: show,
+  paginJustify: justify,
+  paginMarginTop: marginTop,
+  ...props
+}: PaginationProps) {
   const [page, setPage] = useState(1);
   const pages = data.slice((page - 1) * show, page * show);
   return (
@@ -18,8 +30,9 @@ export function Paginations({ show, data, ...props }: { show: number; data: Arra
 
       <PaginationRoot
         total={Math.ceil(data.length / show)}
+        style={{ marginTop: marginTop }}
         styles={{
-          root: { borderStyle: "none" },
+          root: { borderStyle: "none", marginTop: marginTop },
           control: { borderStyle: "none" },
           dots: { color: "black" },
         }}
@@ -28,7 +41,7 @@ export function Paginations({ show, data, ...props }: { show: number; data: Arra
         onChange={setPage}
         {...props}
       >
-        <Group gap={8} justify="center">
+        <Group gap={8} justify={justify}>
           <PaginationPrevious />
           <PaginationItems />
           <PaginationNext />

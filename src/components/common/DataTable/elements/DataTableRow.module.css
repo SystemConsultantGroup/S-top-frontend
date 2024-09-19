@@ -9,5 +9,6 @@
 }
 
 .containerNoPointer {
+  background-color: var(--color-tableRow);
   height: 56px;
 }

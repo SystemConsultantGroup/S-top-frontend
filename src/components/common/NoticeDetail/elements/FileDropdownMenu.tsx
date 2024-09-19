@@ -1,9 +1,9 @@
-import styles from "../NoticeDetail.module.css";
+import { IBoardAttachment } from "@/types/PageBoardTypes";
 import { Menu, Button, Group } from "@mantine/core";
 import { IconPaperclip, IconDownload } from "@tabler/icons-react";
-import { IFileInfo } from "./NoticeDetailStage";
+import styles from "../NoticeDetail.module.css";
 
-export function FileDropdownMenu({ attachment }: { attachment?: IFileInfo[] }) {
+export function FileDropdownMenu({ attachment }: { attachment?: IBoardAttachment[] }) {
   return (
     <Menu position="bottom-end" shadow="sm" offset={0} radius={0}>
       <Menu.Target>

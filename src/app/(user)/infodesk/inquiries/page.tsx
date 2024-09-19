@@ -5,7 +5,7 @@ import React from "react";
 
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar/SubHeadNavbar";
 import { Banner } from "@/components/common/Banner/Banner";
-import { Noticeboard, IBoardItem } from "@/components/common/Noticeboard/Noticeboard";
+import { Noticeboard } from "@/components/common/Noticeboard/Noticeboard";
 import { PrimaryButton } from "@/components/common/Buttons/PrimaryButton/PrimaryButton"; // Import PrimaryButton
 
 import classes from "./projectQA.module.css";
@@ -15,12 +15,18 @@ export default function InquiriesPage() {
 
   const heading = "프로젝트 문의";
   const classifier = {
-    labels: ["전체", "제목", "내용", "제목+내용", "작성자"],
+    data: [
+      { value: "0", label: "전체" },
+      { value: "0", label: "제목" },
+      { value: "0", label: "내용" },
+      { value: "0", label: "작성자" },
+      { value: "0", label: "제목+내용" },
+    ],
     defaultLabel: 0,
     searchPlaceholder: "검색어를 입력하세요",
   };
 
-  const items: IBoardItem[] = [
+  const items = [
     {
       title: "프로젝트 문의입니다",
       number: 1,
@@ -29,6 +35,7 @@ export default function InquiriesPage() {
       view: 150,
       pinned: true,
       href: "/inquiries/1",
+      contentTxt: "this is a content.",
     },
     {
       title: "프로젝트 문의입니다",
@@ -38,6 +45,7 @@ export default function InquiriesPage() {
       view: 100,
       pinned: false,
       href: "/inquiries/2",
+      contentTxt: "this is a content.",
     },
     // More items can be added here
   ];
@@ -63,12 +71,25 @@ export default function InquiriesPage() {
       </div>
 
       <div className={classes.mainContent}>
-        <Noticeboard heading={heading} classifier={classifier} items={items} />
+        <Noticeboard
+          inputValue=""
+          handleInput={() => {}}
+          handleKeyDown={() => {}}
+          handleSelect={() => {}}
+          handleSubmit={() => {}}
+          heading={heading}
+          classifier={classifier}
+          items={items}
+          paginShow={10}
+          paginJustify="end"
+          paginMarginTop="20px"
+        />
 
         <PrimaryButton
-          label="작성하기"
           style={{ position: "absolute", bottom: "120px", right: "20px" }} // Position the button
-        />
+        >
+          작성하기
+        </PrimaryButton>
       </div>
     </>
   );
