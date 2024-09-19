@@ -129,6 +129,7 @@ export const AppTheme = createTheme({
       surfaceContainer: "#1D2024",
       surfaceContainerHigh: "#272A2F",
       surfaceContainerHighest: "#32353A",
+      tableRow: "#3E3E3E",
       inputBorder: "#424242",
       inputBorderFocus: "#228BE6",
       inputSurface: "#2E2E2E",

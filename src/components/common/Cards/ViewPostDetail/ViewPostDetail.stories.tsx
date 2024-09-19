@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    img: "",
     title: "[S-TOP 2024 이벤트 참여 안내]",
     subtitle: "🎊 S-TOP 2024 기술교류회에서 이벤트를 진행합니다! (2/15 ~ 2/17)",
     articles: [

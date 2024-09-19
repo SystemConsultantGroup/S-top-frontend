@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { Checkbox as MantineCheckbox } from "@mantine/core";
 import styles from "./CheckBox.module.css";

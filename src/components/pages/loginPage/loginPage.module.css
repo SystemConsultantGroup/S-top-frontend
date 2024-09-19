@@ -1,0 +1,53 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.loginContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+/* Desktop Default */
+/* No media query needed here, since it's the default */
+
+/* Tablet Landscape */
+@media screen and (max-width: 1280px) {
+  .loginContainer {
+    margin-top: 80px;
+  }
+}
+
+/* Tablet Portrait */
+@media screen and (max-width: 1024px) {
+  .loginContainer {
+    margin-top: 60px;
+  }
+}
+
+/* Mobile Landscape and Small Tablets */
+@media screen and (max-width: 768px) {
+  .loginContainer {
+    margin-top: 40px;
+  }
+
+  .pageContainer {
+    padding: 0 20px;
+  }
+}
+
+/* Mobile Portrait */
+@media screen and (max-width: 480px) {
+  .loginContainer {
+    margin-top: 20px;
+  }
+
+  .pageContainer {
+    padding: 0 10px;
+  }
+}

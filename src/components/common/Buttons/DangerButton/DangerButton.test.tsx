@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 
 describe("DangerButton component", () => {
   it("renders correctly with the given label", () => {
-    render(<DangerButton label="Button" />);
+    render(<DangerButton>Button</DangerButton>);
     // More on screen queries: https://testing-library.com/docs/queries/about
     // More on jest expect Api: https://jestjs.io/docs/expect
     expect(screen.getByRole("button", { name: "Button" })).toBeInTheDocument();

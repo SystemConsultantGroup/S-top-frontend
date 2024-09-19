@@ -1,43 +1,30 @@
+"use client";
+
 import React from "react";
 import { Button } from "@mantine/core";
 import classes from "./LoginBox.module.css";
 
-interface LoginBoxProps {
-  width?: string | number;
-  height?: string | number;
-  logoSize?: string | number;
-  iconSize?: string | number;
-}
+export function LoginBox() {
+  const handleKakaoLogin = () => {
+    const kakaoClientId = "REST API KEY";
+    const redirectUri = "http://localhost:3000/auth";
+    const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoClientId}&redirect_uri=${redirectUri}/login/kakao`;
+    window.location.href = kakaoUrl;
+  };
 
-export function LoginBox({
-  width = "auto",
-  height = "auto",
-  logoSize = 256,
-  iconSize = 40,
-}: LoginBoxProps) {
   return (
-    <div className={classes.loginBox} style={{ width, height }}>
-      <img
-        src="/images/S-TopLogo.png"
-        alt="Logo"
-        className={classes.logo}
-        style={{ width: logoSize, height: "auto" }}
-      />
+    <div className={classes.loginBox}>
+      <img src="/images/S-TopLogo.png" alt="Logo" className={classes.logo} />
       <Button
         className={classes.button}
         justify="space-between"
-        leftSection={
-          <img
-            src="/images/kakaoLogo.png"
-            alt="카카오"
-            style={{ width: iconSize, height: "auto" }}
-          />
-        }
+        leftSection={<img src="/images/kakaoLogo.png" alt="카카오" />}
         rightSection={<span />}
         style={{
           backgroundColor: "#FEE500",
           color: "#000000",
         }}
+        onClick={handleKakaoLogin}
       >
         카카오 로그인
       </Button>

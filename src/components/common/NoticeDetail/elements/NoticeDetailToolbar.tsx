@@ -1,6 +1,6 @@
-import styles from "../NoticeDetail.module.css";
 import { Group, Button } from "@mantine/core";
 import { IconMenu2, IconPencil, IconTrash } from "@tabler/icons-react";
+import styles from "../NoticeDetail.module.css";
 
 export function NoticeDetailToolbar() {
   return (

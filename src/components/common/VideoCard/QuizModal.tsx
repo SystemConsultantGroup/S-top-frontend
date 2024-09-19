@@ -34,7 +34,7 @@ export const QuizModal: React.FC<QuizModalProps> = ({ opened, onClose, videoUrl,
       <div>
         {quizContent}
         <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <PrimaryButton label="제출하기" /> {/* onclick이 안되나여 */}
+          <PrimaryButton> 제출하기</PrimaryButton> {/* onclick 수정 필요*/}
         </div>
       </div>
     </Modal>
