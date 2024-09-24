@@ -21,9 +21,17 @@ export interface ProjectCardProps {
   data: ProjectCardDataType;
   width?: string;
   height?: string;
+  onClickLike?: () => void;
+  onClickBookmark?: () => void;
 }
 
-export function ProjectCard({ data, width, height }: ProjectCardProps) {
+export function ProjectCard({
+  data,
+  width,
+  height,
+  onClickLike,
+  onClickBookmark,
+}: ProjectCardProps) {
   const ParticipantsString = data.participants.join(", ");
   return (
     <Card className={classes.card} w={width} h={height}>
@@ -55,7 +63,14 @@ export function ProjectCard({ data, width, height }: ProjectCardProps) {
       </CardSection>
       <CardSection pl={24} pr={24} pb={16} pt={8}>
         <Stack gap={8}>
-          <div className={classes.title}>{data.title}</div>
+          <Link
+            href={{
+              pathname: `/${data.id}`,
+            }}
+            style={{ textDecorationLine: "none" }}
+          >
+            <div className={classes.title}>{data.title}</div>
+          </Link>
           <div className={classes["participants-container"]}>{ParticipantsString}</div>
           <Divider c={"var(--color-outline)"} />
         </Stack>
@@ -70,7 +85,12 @@ export function ProjectCard({ data, width, height }: ProjectCardProps) {
           </Group>
         </Stack>
       </CardSection>
-      <ProjectCardLikeSection likes={data.likes} isMarked={data.isMarked} />
+      <ProjectCardLikeSection
+        likes={data.likes}
+        isMarked={data.isMarked}
+        onClickLike={onClickLike}
+        onClickBookmark={onClickBookmark}
+      />
     </Card>
   );
 }
