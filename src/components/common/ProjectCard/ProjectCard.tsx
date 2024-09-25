@@ -13,9 +13,18 @@ export interface ProjectCardProps {
   thumbnailUrl: string;
   width?: string;
   height?: string;
+  onClickLike?: () => void;
+  onClickBookmark?: () => void;
 }
 
-export function ProjectCard({ data, thumbnailUrl, width, height }: ProjectCardProps) {
+export function ProjectCard({
+  data,
+  thumbnailUrl,
+  width,
+  height,
+  onClickLike,
+  onClickBookmark,
+}: ProjectCardProps) {
   const studentsString = data.studentNames.join(", ");
   const professorString = data.professorNames.join(", ");
 
@@ -28,14 +37,16 @@ export function ProjectCard({ data, thumbnailUrl, width, height }: ProjectCardPr
           }}
           style={{ textDecorationLine: "none" }}
         >
-          <Image
-            src={thumbnailUrl}
-            alt={"thumbnail"}
-            className={classes.img}
-            width={500}
-            height={500}
-            priority
-          />
+          {thumbnailUrl && (
+            <Image
+              src={thumbnailUrl}
+              alt={"thumbnail"}
+              className={classes.img}
+              width={500}
+              height={500}
+              priority
+            />
+          )}
           <IconSearch className={classes.icon} />
         </Link>
       </CardSection>
@@ -46,7 +57,14 @@ export function ProjectCard({ data, thumbnailUrl, width, height }: ProjectCardPr
       </CardSection>
       <CardSection pl={24} pr={24} pb={16} pt={8}>
         <Stack gap={8}>
-          <div className={classes.title}>{data.projectName}</div>
+          <Link
+            href={{
+              pathname: `/${data.id}`,
+            }}
+            style={{ textDecorationLine: "none" }}
+          >
+            <div className={classes.title}>{data.projectName}</div>
+          </Link>
           <div className={classes["participants-container"]}>{studentsString}</div>
           <Divider c={"var(--color-outline)"} />
         </Stack>
@@ -61,7 +79,13 @@ export function ProjectCard({ data, thumbnailUrl, width, height }: ProjectCardPr
           </Group>
         </Stack>
       </CardSection>
-      <ProjectCardLikeSection likes={data.likeCount} isMarked={data.bookMark} isLiked={data.like} />
+      <ProjectCardLikeSection
+        likes={data.likeCount}
+        isLiked={data.like}
+        isMarked={data.bookMark}
+        onClickLike={onClickLike}
+        onClickBookmark={onClickBookmark}
+      />
     </Card>
   );
 }

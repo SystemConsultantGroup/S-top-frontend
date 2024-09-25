@@ -1,3 +1,5 @@
+"use client";
+
 import { CardSection, Group, UnstyledButton } from "@mantine/core";
 import {
   IconBookmark,
@@ -11,13 +13,21 @@ export interface ProjectCardLikeSectionProps {
   likes: number;
   isLiked: boolean;
   isMarked: boolean;
+  onClickLike?: () => void;
+  onClickBookmark?: () => void;
 }
 
-export function ProjectCardLikeSection({ likes, isLiked, isMarked }: ProjectCardLikeSectionProps) {
+export function ProjectCardLikeSection({
+  likes,
+  isLiked,
+  isMarked,
+  onClickLike,
+  onClickBookmark,
+}: ProjectCardLikeSectionProps) {
   return (
     <CardSection className={classes["like-section"]}>
-      <Group className={classes["section-container"]} align="center" justify="space-between">
-        <UnstyledButton>
+      <Group align="center" justify="space-between" w={500} p={16}>
+        <UnstyledButton onClick={onClickLike}>
           <Group gap={0}>
             {isLiked ? (
               <IconThumbUpFilled color="var(--color-primary)" />
@@ -27,7 +37,7 @@ export function ProjectCardLikeSection({ likes, isLiked, isMarked }: ProjectCard
             <div className={classes["likes-wrapper"]}>{likes}</div>
           </Group>
         </UnstyledButton>
-        <UnstyledButton>
+        <UnstyledButton onClick={onClickBookmark}>
           {isMarked ? (
             <IconBookmarkFilled color="var(--color-primary)" />
           ) : (
