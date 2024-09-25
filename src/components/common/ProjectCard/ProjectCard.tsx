@@ -37,14 +37,16 @@ export function ProjectCard({
           }}
           style={{ textDecorationLine: "none" }}
         >
-          <Image
-            src={thumbnailUrl}
-            alt={"thumbnail"}
-            className={classes.img}
-            width={500}
-            height={500}
-            priority
-          />
+          {thumbnailUrl && (
+            <Image
+              src={thumbnailUrl}
+              alt={"thumbnail"}
+              className={classes.img}
+              width={500}
+              height={500}
+              priority
+            />
+          )}
           <IconSearch className={classes.icon} />
         </Link>
       </CardSection>
