@@ -35,10 +35,10 @@ export function GalleryEditFrom({ galleryID }: { galleryID?: number }) {
     uploadFiles,
   } = useFiles();
 
-  // 이벤트 공지사항의 첨부파일 이미지 미리보기를 위한 fileId state
+  // 갤러리의 첨부파일 이미지 미리보기를 위한 fileId state
   const [fileIds, setFileIds] = useState<number[]>([]);
   fileIds;
-  // 공지사항 게시글 등록 및 수정을 위한  mantine form hook
+  // 갤러리 게시글 등록 및 수정을 위한  mantine form hook
   const { onSubmit, getInputProps, values, setValues } = useForm<GalleryEditFormInputs>({
     initialValues: {
       title: "",
@@ -49,20 +49,20 @@ export function GalleryEditFrom({ galleryID }: { galleryID?: number }) {
       date: isNotEmpty("년도을 입력해주세요."),
     },
   });
-  // 공지사항 게시글 등록/수정 request 함수
+  // 갤러리 게시글 등록/수정 request 함수
   const handleSubmit = async (values: GalleryEditFormInputs) => {
     try {
       const fileIds = await uploadFiles(files);
-      const notice = {
+      const gallery = {
         title: values.title,
         year: values.date.getFullYear(),
         month: values.date.getMonth() + 1,
         fileIds: fileIds,
       };
       if (galleryID) {
-        await CommonAxios.put(`${url}/${galleryID}`, notice);
+        await CommonAxios.put(`${url}/${galleryID}`, gallery);
       } else {
-        await CommonAxios.post(`${url}`, notice);
+        await CommonAxios.post(`${url}`, gallery);
       }
 
       // TODO: 등록/수정 성공 시 알림
@@ -74,8 +74,8 @@ export function GalleryEditFrom({ galleryID }: { galleryID?: number }) {
   };
 
   useEffect(() => {
-    // 공지사항 관리 페이지 접근 시 이전 공지사항 정보를 불러옴
-    const fetchPrevNotice = async () => {
+    // 갤러리 관리 페이지 접근 시 이전 갤러리 정보를 불러옴
+    const fetchPrevGallery = async () => {
       try {
         const response = await CommonAxios.get(`${url}/${galleryID}`);
         const prevGallery = response.data;
@@ -86,7 +86,7 @@ export function GalleryEditFrom({ galleryID }: { galleryID?: number }) {
           date: newdate,
         });
 
-        // 이전 공지사항의 첨부파일 정보를 불러옴 (api에서 반환하는 파일을 File 객체로 변환)
+        // 이전 갤러리의 첨부파일 정보를 불러옴 (api에서 반환하는 파일을 File 객체로 변환)
         if (prevGallery.files && prevGallery.files.length > 0) {
           const convertedFiles = prevGallery.files.map((apiFile: ApiFile) => ({
             id: apiFile.id.toString(),
@@ -103,7 +103,7 @@ export function GalleryEditFrom({ galleryID }: { galleryID?: number }) {
         notFound();
       }
     };
-    if (galleryID) fetchPrevNotice();
+    if (galleryID) fetchPrevGallery();
   }, [galleryID]);
   if (files.length == 0) {
     files.push({ id: "", file: null });
