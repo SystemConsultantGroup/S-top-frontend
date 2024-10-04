@@ -35,32 +35,37 @@ export function useFiles() {
 
   /**
    * 파일 업로드 함수, 백엔드 [POST] /files API 호출
-   * 파일 업로드에 실패할 경우 재시도
    */
   const uploadFiles = async (files: { id: string; file: File | null }[]) => {
-    const fileIds = [];
-    for (const { file } of files) {
-      if (file) {
-        const formData = new FormData();
-        formData.append("file", file);
+    const fileIds: string[] = [];
+    const filesToUpload: FormData = new FormData();
 
-        // 작업의 원자성을 위해 while 루프를 사용
-        let success = false;
-        while (!success) {
-          try {
-            const response = await CommonAxios.post("/files", formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            });
-            fileIds.push(response.data.id); // 서버에서 반환된 파일 ID
-            success = true;
-          } catch (error) {
-            console.error(`파일 업로드에 실패했습니다: ${file.name}. 재시도합니다.`, error);
-          }
+    for (const { file, id } of files) {
+      if (file) {
+        // temp file의 경우에 id만 추가
+        if (file.size == 0) {
+          fileIds.push(id);
+          continue;
         }
+
+        filesToUpload.append("files", file);
       }
     }
+
+    try {
+      const response = await CommonAxios.post("/files", filesToUpload, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      response.data.forEach((file: ApiFile) => {
+        fileIds.push(String(file.id));
+      });
+    } catch (error) {
+      console.error(`파일 업로드에 실패했습니다.`, error);
+    }
+
     return fileIds;
   };
 
