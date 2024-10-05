@@ -104,7 +104,7 @@ export function GalleryEditFrom({ galleryID }: { galleryID?: number }) {
       }
     };
     if (galleryID) fetchPrevGallery();
-  }, [galleryID]);
+  }, [galleryID, getTempFile, setFiles, setValues]);
   if (files.length == 0) {
     files.push({ id: "", file: null });
   }
