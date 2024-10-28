@@ -2,8 +2,6 @@
 
 import { DangerButton, PrimaryButton } from "@/components/common/Buttons";
 import { DataTable } from "@/components/common/DataTable";
-import { DataTableData } from "@/components/common/DataTable/elements/DataTableData";
-import { DataTableRow } from "@/components/common/DataTable/elements/DataTableRow";
 import { SearchInput } from "@/components/common/SearchInput";
 import { PROJECT_TABLE_HEADERS } from "@/constants/DataTableHeaders";
 import { PAGE_SIZES } from "@/constants/PageSize";
@@ -12,12 +10,11 @@ import { useTableSort } from "@/hooks/useTableSort";
 import { IProjectParams } from "@/types/project";
 import { CommonAxios } from "@/utils/CommonAxios";
 import { handleChangeSearch } from "@/utils/handleChangeSearch";
-import { getFileUrlById } from "@/utils/handleDownloadFile";
-import { Checkbox, Group, Stack } from "@mantine/core";
+import { Group, Stack } from "@mantine/core";
 import { useDebouncedState } from "@mantine/hooks";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
+import { AdminProjectListRow } from "./AdminProjectsListRow";
 
 export function AdminProjectsListSection() {
   /* next 라우터, 페이지 이동에 이용 */
@@ -44,22 +41,22 @@ export function AdminProjectsListSection() {
   });
 
   /* 체크박스 전체선택, 일괄선택 다루는 파트 */
-  const [selectedNotices, setSelectedNotices] = useState<number[]>([]);
-  const allChecked = selectedNotices.length === data?.length;
-  const indeterminate = selectedNotices.length > 0 && !allChecked;
+  const [selectedProjects, setSelectedProjects] = useState<number[]>([]);
+  const allChecked = selectedProjects.length === data?.length;
+  const indeterminate = selectedProjects.length > 0 && !allChecked;
   // 전체선택 함수
   const handleSelectAll = () => {
     if (data) {
       if (allChecked) {
-        setSelectedNotices([]);
+        setSelectedProjects([]);
       } else {
-        setSelectedNotices(data.map((project) => project.id));
+        setSelectedProjects(data.map((project) => project.id));
       }
     }
   };
   // 개별선택 함수
   const handleSelect = (id: number) => {
-    setSelectedNotices((prev) =>
+    setSelectedProjects((prev) =>
       prev.includes(id) ? prev.filter((noticeId) => noticeId !== id) : [...prev, id]
     );
   };
@@ -76,8 +73,8 @@ export function AdminProjectsListSection() {
   /* 삭제 버튼 핸들러 */
   const handleDelete = () => {
     // TODO: 삭제 확인하는 모달 추가
-    Promise.all(selectedNotices.map((id) => CommonAxios.delete(`/notices/${id}`))).then(() => {
-      setSelectedNotices([]);
+    Promise.all(selectedProjects.map((id) => CommonAxios.delete(`/projects/${id}`))).then(() => {
+      setSelectedProjects([]);
       mutate();
     });
   };
@@ -92,10 +89,10 @@ export function AdminProjectsListSection() {
           <DangerButton onClick={handleDelete}>선택 삭제</DangerButton>
           <PrimaryButton
             onClick={() => {
-              push("projecs/create");
+              push("projects/create");
             }}
           >
-            게시글 등록
+            프로젝트 등록
           </PrimaryButton>
         </Group>
         <DataTable
@@ -112,35 +109,17 @@ export function AdminProjectsListSection() {
           withCheckbox
           checkboxProps={{ checked: allChecked, indeterminate, onChange: handleSelectAll }}
         >
-          {data?.map(async (project, index) => {
-            const thumbnailId = project.thumbnailInfo.id;
-            const thumbnailSrc = await getFileUrlById(thumbnailId);
-            return (
-              <DataTableRow key={index}>
-                <DataTableData text={false}>
-                  <Checkbox
-                    checked={selectedNotices.includes(project.id)}
-                    onChange={() => handleSelect(project.id)}
-                  />
-                </DataTableData>
-                <DataTableData>{index + 1 + (pageNumber - 1) * Number(pageSize)}</DataTableData>
-                <DataTableData>
-                  <Image src={thumbnailSrc} alt={"Thumbnail"} width={100} height={50} />
-                </DataTableData>
-                <DataTableData>{"2024"}</DataTableData>
-                <DataTableData>{project.projectName}</DataTableData>
-                <DataTableData text={false}>
-                  <PrimaryButton
-                    onClick={() => {
-                      push(`notices/${project.id}`);
-                    }}
-                  >
-                    수정
-                  </PrimaryButton>
-                </DataTableData>
-              </DataTableRow>
-            );
-          })}
+          {data?.map((project, index) => (
+            <AdminProjectListRow
+              key={index}
+              project={project}
+              index={index}
+              pageNumber={pageNumber}
+              pageSize={Number(pageSize)}
+              selectedProjects={selectedProjects}
+              handleSelect={handleSelect}
+            />
+          ))}
         </DataTable>
       </Stack>
     </section>
