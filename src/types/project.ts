@@ -28,6 +28,7 @@ export interface IProjectContent {
   likeCount: number;
   like: boolean;
   bookMark: boolean;
+  year: number;
 }
 
 export type ProjectType = "RESEARCH_AND_BUSINESS_FOUNDATION" | "LAB" | "STARTUP" | "CLUB";
