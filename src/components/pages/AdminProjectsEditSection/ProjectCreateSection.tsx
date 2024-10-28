@@ -6,7 +6,7 @@ import { TextInput } from "@/components/common/TextInput";
 import { FileInput, Group, Radio, RadioGroup, Stack, Title } from "@mantine/core";
 import classes from "./AdminProjectsEditSection.module.css";
 import { Dropdown } from "@/components/common/Dropdown/Dropdown";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PrimaryButton } from "@/components/common/Buttons";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { getYears } from "@/utils/getYears";
@@ -14,6 +14,7 @@ import { AwardStatus, ProjectCategory, ProjectType } from "@/types/project";
 import { ProjectsCategoryLookupTable, ProjectsTypeLookupTable } from "@/constants/LookupTables";
 import { useRouter } from "next/navigation";
 import { useFiles } from "@/hooks/useFiles/useFiles";
+import { CommonAxios } from "@/utils/CommonAxios";
 
 type Role = "PROFESSOR" | "STUDENT";
 
@@ -43,7 +44,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
 
   const { uploadFiles } = useFiles();
 
-  const { onSubmit, getInputProps } = useForm<ProjectEditFormInputs>({
+  const { onSubmit, getInputProps, values, setValues } = useForm<ProjectEditFormInputs>({
     initialValues: {
       thumbnailId: 0,
       posterId: 0,
@@ -59,14 +60,10 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
     validate: {
       projectCategory: isNotEmpty("프로젝트 분야를 선택해주세요."),
       projectType: isNotEmpty("프로젝트 종류를 선택해주세요."),
-      year: isNotEmpty("년도를 선택해주세요."),
       description: isNotEmpty("프로젝트 요약을 입력해주세요."),
       projectName: isNotEmpty("프로젝트명을 입력해주세요."),
       teamName: isNotEmpty("팀 이름을 입력해주세요."),
       youtubeId: isNotEmpty("유튜브 ID를 입력해주세요."),
-      thumbnailId: isNotEmpty("썸네일을 등록해주세요."),
-      posterId: isNotEmpty("포스터를 등록해주세요."),
-      members: isNotEmpty("담당교수와 참여 학생을 입력해주세요."),
     },
   });
 
@@ -102,24 +99,80 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
         projectCategory: values.projectCategory,
         teamName: values.teamName,
         youtubeId: values.youtubeId,
-        year: values.year,
+        year: Number(option),
         awardStatus: values.awardStatus,
         members: members,
         url: values.url,
         description: values.description,
       };
 
-      console.log(project);
+      if (projectId) {
+        await CommonAxios.put(`/projects/${projectId}`, project);
+      } else {
+        await CommonAxios.post("/projects", project);
+      }
+
+      push("../projects");
     } catch (error) {
       console.error(error);
     }
   };
 
+  useEffect(() => {
+    const fetchPrevProject = async () => {
+      const response = await CommonAxios.get(`/projects/${projectId}`);
+      const prevProject = response.data;
+      console.log(prevProject);
+      const prevMembers = prevProject.professorNames.map((professor: string) => ({
+        name: professor,
+        role: "PROFESSOR",
+      }));
+      prevMembers.push(
+        ...prevProject.studentNames.map((student: string) => ({
+          name: student,
+          role: "STUDENT",
+        }))
+      );
+
+      setValues({
+        thumbnailId: prevProject.thumbnailInfo.id,
+        posterId: prevProject.posterInfo.id,
+        projectName: prevProject.projectName,
+        projectType: prevProject.projectType,
+        projectCategory: prevProject.projectCategory,
+        teamName: prevProject.teamName,
+        youtubeId: prevProject.youtubeId,
+        year: prevProject.year,
+        awardStatus: prevProject.awardStatus,
+        members: prevMembers,
+        url: prevProject.url,
+        description: prevProject.description,
+      });
+
+      if (prevProject.thumbnailInfo.id) {
+        setThumbnail(
+          new File([], prevProject.thumbnailInfo.name, { type: prevProject.thumbnailInfo.mimeType })
+        );
+      }
+      if (prevProject.posterInfo.id) {
+        setPoster(
+          new File([], prevProject.posterInfo.name, { type: prevProject.posterInfo.mimeType })
+        );
+      }
+      const professors = prevMembers.filter((member: Member) => member.role === "PROFESSOR");
+      setProfessors(professors.map((professor: Member) => professor.name).join(", "));
+      const students = prevMembers.filter((member: Member) => member.role === "STUDENT");
+      setStudents(students.map((student: Member) => student.name).join(", "));
+      setOption(String(prevProject.year));
+    };
+    if (projectId) fetchPrevProject();
+  }, [projectId, setValues]);
+
   return (
     <Section>
       <form onSubmit={onSubmit(handleSubmit)}>
         <Title order={2} fz={24} pl={20} mb={24}>
-          개별등록
+          {projectId ? "프로젝트 수정" : "개별등록"}
         </Title>
         <Stack>
           <Row field="프로젝트 종류" fieldSize={130}>
@@ -177,6 +230,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
             <TextInput
               placeholder="프로젝트명"
               wrapperClasses={{ root: classes.input }}
+              initialValue={values.projectName}
               {...getInputProps("projectName")}
             />
           </Row>
@@ -184,6 +238,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
             <TextInput
               placeholder="프로젝트 요약"
               wrapperClasses={{ root: classes.input }}
+              initialValue={values.description}
               {...getInputProps("description")}
             />
           </Row>
@@ -191,6 +246,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
             <TextInput
               placeholder="팀 이름"
               wrapperClasses={{ root: classes.input }}
+              initialValue={values.teamName}
               {...getInputProps("teamName")}
             />
           </Row>
@@ -200,13 +256,13 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
               selectedOption={option}
               onOptionClick={setOption}
               placeholder={""}
-              {...getInputProps("year")}
             />
           </Row>
           <Row field="담당교수" fieldSize={130}>
             <TextInput
               placeholder=", 로 구분하여 입력해주세요."
               wrapperClasses={{ root: classes["input-md"] }}
+              initialValue={professors}
               onChange={(e) => setProfessors(e.currentTarget.value)}
             />
           </Row>
@@ -214,6 +270,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
             <TextInput
               placeholder=", 로 구분하여 입력해주세요."
               wrapperClasses={{ root: classes["input-md"] }}
+              initialValue={students}
               onChange={(e) => setStudents(e.currentTarget.value)}
             />
           </Row>
@@ -221,6 +278,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
             <TextInput
               placeholder="유튜브 ID"
               wrapperClasses={{ root: classes["input-md"] }}
+              initialValue={values.youtubeId}
               {...getInputProps("youtubeId")}
             />
           </Row>
@@ -228,6 +286,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
             <TextInput
               placeholder="프로젝트 링크"
               wrapperClasses={{ root: classes["input-md"] }}
+              initialValue={values.url}
               {...getInputProps("url")}
             />
           </Row>
