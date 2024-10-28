@@ -14,6 +14,7 @@ type TextInputPropsType = {
   error?: string | ReactNode;
   placeholder?: string;
   wrapperClasses?: IWrapperStyle;
+  initialValue?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -23,12 +24,13 @@ export function TextInput({
   error,
   placeholder,
   wrapperClasses,
+  initialValue,
   onChange,
   ...props
 }: InputProps & TextInputPropsType) {
   return (
     <InputWrapper classNames={wrapperClasses} label={label} description={description} error={error}>
-      <Input placeholder={placeholder} onChange={onChange} {...props} />
+      <Input placeholder={placeholder} onChange={onChange} {...props} value={initialValue} />
     </InputWrapper>
   );
 }
