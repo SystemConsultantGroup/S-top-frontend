@@ -22,11 +22,22 @@ export interface Interview {
   updatedAt: string;
 }
 
+export interface Answers {
+  id: string;
+  qid: string;
+  answer: string;
+}
+
 export interface Quiz {
-  id: number;
+  id: string;
+  question: string;
+  correct: number;
+}
+
+export interface ReqQuiz {
   question: string;
   answer: number;
-  options: string[];
+  optinos: string[];
 }
 
 export interface InterviewResponse extends PagedApiResponse<Interview> {}

@@ -128,9 +128,9 @@ export function GalleryEditFrom({ galleryID }: { galleryID?: number }) {
               {...getInputProps("date")}
             ></MonthPickerInput>
           </Row>
-          <Group pl={20}>
+          <Row>
             <PrimaryButton onClick={handleAddFile}>사진 추가</PrimaryButton>
-          </Group>
+          </Row>
           {files.map((file, index) => (
             <Row key={file.id} field={`이미지 ${index + 1}`} fieldSize={150}>
               <Group w={"50%"}>

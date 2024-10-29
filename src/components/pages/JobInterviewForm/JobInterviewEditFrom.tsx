@@ -6,9 +6,9 @@ import { Section } from "@/components/common/Section";
 import { TextInput } from "@/components/common/TextInput";
 import "@mantine/dates/styles.css";
 import { CommonAxios } from "@/utils/CommonAxios";
-import { Group, Radio, Stack } from "@mantine/core";
+import { Group, Radio, RadioGroup, Stack } from "@mantine/core";
 import { YearPickerInput } from "@mantine/dates";
-import { isNotEmpty, useForm } from "@mantine/form";
+import { isNotEmpty, matches, useForm } from "@mantine/form";
 import { notFound, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -41,8 +41,7 @@ export function JobInterviewEditFrom({ jobInterviewID }: { jobInterviewID?: numb
     validate: {
       title: isNotEmpty("제목을 입력해주세요."),
       date: isNotEmpty("년도을 입력해주세요."),
-      youtubeId:
-        isNotEmpty("년도을 입력해주세요.") /*matches(reg, "형식에 맞는 링크를 입력해주세요")*/,
+      youtubeId: matches(reg, "형식에 맞는 링크를 입력해주세요"),
       name: isNotEmpty("이름을 입력해주세요."),
       belonging: isNotEmpty("소속을 입력해주세요."),
       category: isNotEmpty("유형을 선택해주세요."),
@@ -128,12 +127,12 @@ export function JobInterviewEditFrom({ jobInterviewID }: { jobInterviewID?: numb
             <TextInput id="input-belonging" {...getInputProps("belonging")} w={"100%"} />
           </Row>
           <Row field="유형" fieldSize={150}>
-            <Radio.Group {...getInputProps("category")} withAsterisk>
+            <RadioGroup {...getInputProps("category")} withAsterisk>
               <Group mt="xs">
                 <Radio value="SENIOR" label="시니어" />
                 <Radio value="INTERN" label="인턴" />
               </Group>
-            </Radio.Group>
+            </RadioGroup>
           </Row>
           <Group justify="center">
             <PrimaryButton

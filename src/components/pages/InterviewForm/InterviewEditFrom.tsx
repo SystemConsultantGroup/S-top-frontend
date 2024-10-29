@@ -3,16 +3,16 @@
 import { DangerButton, PrimaryButton } from "@/components/common/Buttons";
 import { Row } from "@/components/common/Row";
 import { Section } from "@/components/common/Section";
-import { TextInput } from "@/components/common/TextInput";
 import "@mantine/dates/styles.css";
 import { CommonAxios } from "@/utils/CommonAxios";
-import { Group, Stack } from "@mantine/core";
+import { Group, Radio, RadioGroup, Stack, TextInput } from "@mantine/core";
 import { YearPickerInput } from "@mantine/dates";
-import { isNotEmpty, useForm } from "@mantine/form";
+import { isNotEmpty, matches, useForm } from "@mantine/form";
 import { notFound, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useQuizs } from "@/hooks/useQuizs/useQuizs";
-import { Quiz } from "@/types/Interview";
+import { Answers, Quiz, ReqQuiz } from "@/types/Interview";
+import { getUniqueId } from "@/utils/getUniqueId";
 
 interface InterviewEditFormInputs {
   title: string;
@@ -20,7 +20,8 @@ interface InterviewEditFormInputs {
   date: Date;
   belonging: string;
   name: string;
-  quiz: Quiz[];
+  quizs: Quiz[];
+  answers: Answers[];
 }
 
 export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
@@ -30,7 +31,18 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
   const reg = RegExp(
     /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|live\/|v\/)?)([\w\-]+)(\S+)?$/g
   );
-  const { quizs, setQuizs, handleAddQuiz, handleRemoveQuiz } = useQuizs();
+  const {
+    quizs,
+    answers,
+    setQuizs,
+    setAnswers,
+    handleAddQuiz,
+    handleRemoveQuiz,
+    handleAddAnswer,
+    handleRemoveAnswer,
+    handleChangeQuiz,
+    handleChangeAnswer,
+  } = useQuizs();
   // 잡페어 게시글 등록 및 수정을 위한  mantine form hook
   const { onSubmit, getInputProps, values, setValues } = useForm<InterviewEditFormInputs>({
     initialValues: {
@@ -39,16 +51,19 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
       youtubeId: "",
       belonging: "",
       name: "",
-      quiz: [],
+      quizs: quizs,
+      answers: answers,
     },
     validate: {
       title: isNotEmpty("제목을 입력해주세요."),
       date: isNotEmpty("년도을 입력해주세요."),
-      youtubeId:
-        isNotEmpty("년도을 입력해주세요.") /*matches(reg, "형식에 맞는 링크를 입력해주세요")*/,
+      youtubeId: matches(reg, "형식에 맞는 링크를 입력해주세요"),
       name: isNotEmpty("이름을 입력해주세요."),
       belonging: isNotEmpty("소속을 입력해주세요."),
-      quiz: () => {
+      quizs: () => {
+        return true;
+      },
+      answers: () => {
         return true;
       },
     },
@@ -64,7 +79,7 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
           (reg.exec(values.youtubeId) || [0, 0, 0, 0, 0, 0, " "])[6],
         talkerBelonging: values.belonging,
         talkerName: values.name,
-        quiz: values.quiz,
+        quiz: values.quizs,
       };
       if (interviewID) {
         await CommonAxios.put(`${url}/${interviewID}`, interview);
@@ -73,7 +88,7 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
       }
 
       // TODO: 등록/수정 성공 시 알림
-      push("/admin/jobfair");
+      push("/admin/interviews");
     } catch (error) {
       // TODO: 에러 처리
       console.error(error);
@@ -88,16 +103,33 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
         const prevInterview = response.data;
         const newdate = new Date();
         newdate.setFullYear(prevInterview.year);
+        const prevQuiz: Quiz[] = prevInterview.quiz.map((quiz: ReqQuiz) => {
+          return {
+            id: getUniqueId(),
+            question: quiz.question,
+            correct: quiz.answer,
+          };
+        });
+        // TODO 정답 플랫으로 풀어버리기
+        const prevAnswer: Answers[] = prevInterview.quiz
+          .map((quiz: ReqQuiz) => {
+            return { id: getUniqueId(), question: quiz.question, answer: quiz.answer };
+          })
+          .flat();
         setValues({
           title: prevInterview.title,
           date: newdate,
           youtubeId: prevInterview.youtubeId,
           belonging: prevInterview.talkerBelonging,
           name: prevInterview.talkerName,
-          quiz: prevInterview.quiz,
+          quizs: prevQuiz,
+          answers: prevAnswer,
         });
-        if (prevInterview.quiz && prevInterview.quiz.length > 0) {
-          setQuizs(prevInterview.quiz);
+        if (prevQuiz && prevQuiz.length > 0) {
+          setQuizs(prevQuiz);
+        }
+        if (prevAnswer && prevAnswer.length > 0) {
+          setAnswers(prevAnswer);
         }
       } catch (error) {
         // TODO: 에러 처리
@@ -106,8 +138,7 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
       }
     };
     if (interviewID) fetchPrevInterview();
-  }, [interviewID, setQuizs, setValues]);
-
+  }, [interviewID, setQuizs, setAnswers, setValues]);
   return (
     <Section>
       {interviewID ? true : false}
@@ -139,16 +170,72 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
             <PrimaryButton onClick={handleAddQuiz}>퀴즈 추가</PrimaryButton>
           </Group>
           {quizs.map((quiz, index) => (
-            <Row key={quiz.id} field={`퀴즈 ${index + 1}`} fieldSize={150}>
-              <Group w={"50%"}>
-                <DangerButton onClick={() => handleRemoveQuiz(quiz.id)}>삭제</DangerButton>
-              </Group>
-            </Row>
+            <>
+              {/* TODO: 다크모드 대응 필요 */}
+              <Section bg={"dark"}>
+                <Group w={"50%"} key={quiz.id}>
+                  <Row field={"Q" + (index + 1) + ": "} fieldSize={50}>
+                    <TextInput
+                      id="input-quiz-question"
+                      w={"300%"}
+                      value={quiz.question}
+                      onChange={(event) => handleChangeQuiz(quiz.id)(event.currentTarget.value)}
+                    ></TextInput>
+                  </Row>
+                  <RadioGroup
+                    id="input-quiz-currect"
+                    value={Math.min(
+                      answers.filter((answer) => answer.qid === quiz.id).length - 1,
+                      quiz.correct
+                    ).toString()}
+                    onChange={(e) =>
+                      (quiz.correct = Math.min(
+                        answers.filter((answer) => answer.qid === quiz.id).length - 1,
+                        parseInt(e)
+                      ))
+                    }
+                  >
+                    {answers
+                      .filter((answer) => answer.qid === quiz.id)
+                      .map((answer, aindex) => {
+                        return (
+                          <>
+                            <Group w={"50%"}>
+                              <Radio value={aindex.toString()} label={"A" + (aindex + 1) + ": "} />
+                              <DangerButton onClick={() => handleRemoveAnswer(answer.id)}>
+                                삭제
+                              </DangerButton>
+                              <TextInput
+                                id="input-quiz-answer"
+                                w={"200%"}
+                                value={answer.answer}
+                                onChange={(event) =>
+                                  handleChangeAnswer(answer.id)(event.currentTarget.value)
+                                }
+                              ></TextInput>
+                            </Group>
+                          </>
+                        );
+                      })}
+                  </RadioGroup>
+
+                  {/* <RadioGroup >{}</RadioGroup> */}
+                  <Row fieldSize={0}>
+                    <Group w={"50%"}>
+                      <PrimaryButton onClick={() => handleAddAnswer(quiz.id)}>
+                        답 추가
+                      </PrimaryButton>
+                      <DangerButton onClick={() => handleRemoveQuiz(quiz.id)}>삭제</DangerButton>
+                    </Group>
+                  </Row>
+                </Group>
+              </Section>
+            </>
           ))}
           <Group justify="center">
             <PrimaryButton
               onClick={() => {
-                push("/admin/jobfair");
+                push("/admin/interviews");
               }}
             >
               목록으로

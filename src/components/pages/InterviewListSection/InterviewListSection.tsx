@@ -5,7 +5,7 @@ import { DataTable } from "@/components/common/DataTable";
 import { DataTableData } from "@/components/common/DataTable/elements/DataTableData";
 import { DataTableRow } from "@/components/common/DataTable/elements/DataTableRow";
 import { SearchInput } from "@/components/common/SearchInput";
-import { JOBINTERVIEW_TABLE_HEADERS } from "@/constants/DataTableHeaders";
+import { INTERVIEW_TABLE_HEADERS } from "@/constants/DataTableHeaders";
 import { PAGE_SIZES, REFRESH_DEFAULT_PAGE_NUMBER } from "@/constants/PageSize";
 import { useInterviews } from "@/hooks/swr/useInterviews";
 import { useTableSort } from "@/hooks/useTableSort";
@@ -99,14 +99,14 @@ export function InterviewListSection() {
           <DangerButton onClick={handleDelete}>선택 삭제</DangerButton>
           <PrimaryButton
             onClick={() => {
-              push(`/admin/jobfair-create`);
+              push(`/admin/interviews-create`);
             }}
           >
             영상 등록
           </PrimaryButton>
         </Group>
         <DataTable
-          headers={JOBINTERVIEW_TABLE_HEADERS}
+          headers={INTERVIEW_TABLE_HEADERS}
           sortBy={sortBy}
           order={order}
           handleSortButton={handleSortButton}
@@ -138,7 +138,7 @@ export function InterviewListSection() {
               <DataTableData text={false}>
                 <Button
                   onClick={() => {
-                    push(`/admin/jobfair/${interview.id}`);
+                    push(`/admin/interviews/${interview.id}`);
                   }}
                 >
                   수정
