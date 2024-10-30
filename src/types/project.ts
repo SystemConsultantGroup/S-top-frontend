@@ -2,8 +2,9 @@ import { PagedApiResponse } from "./common";
 
 export interface IProjectRequestParams {
   title?: string;
-  year?: number | null;
-  category?: ProjectCategory;
+  year?: string | null;
+  category?: string | null;
+  type?: string | null;
   page?: number;
   size?: number;
   sort?: string;

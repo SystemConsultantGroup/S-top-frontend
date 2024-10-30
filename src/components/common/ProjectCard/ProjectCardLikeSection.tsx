@@ -26,7 +26,7 @@ export function ProjectCardLikeSection({
 }: ProjectCardLikeSectionProps) {
   return (
     <CardSection className={classes["like-section"]}>
-      <Group align="center" justify="space-between" w={500} p={16}>
+      <Group align="center" justify="space-between" p="8px 16px">
         <UnstyledButton onClick={onClickLike}>
           <Group gap={0}>
             {isLiked ? (

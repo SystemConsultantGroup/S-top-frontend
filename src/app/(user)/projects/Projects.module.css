@@ -102,10 +102,6 @@
   }
 }
 
-.dummyCard {
-  width: 420px;
-}
-
 @media (prefers-color-scheme: light) {
   .active:hover {
     background-color: #d0d3dc;
