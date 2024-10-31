@@ -25,3 +25,11 @@ export const APPLICATION_TABLE_HEADERS: DataTableHeaderProps[] = [
   { label: "가입일시", widthPercentage: 15, sort: true, selector: "createdAt" },
   { label: "관리", widthPercentage: 7, sort: false },
 ];
+
+export const INQUIRIES_TABLE_HEADERS: DataTableHeaderProps[] = [
+  { label: "순번", widthPercentage: 7, sort: true, selector: "id" },
+  { label: "제목", widthPercentage: 15, sort: true, selector: "title" },
+  { label: "작성자", widthPercentage: 7, sort: false, selector: "user.name" },
+  { label: "작성일", widthPercentage: 7, sort: false, selector: "CreatedAt" },
+  { label: "관리", widthPercentage: 7, sort: false },
+];
