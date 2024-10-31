@@ -5,7 +5,7 @@ import { DataTable } from "@/components/common/DataTable";
 import { DataTableData } from "@/components/common/DataTable/elements/DataTableData";
 import { DataTableRow } from "@/components/common/DataTable/elements/DataTableRow";
 import { INQUIRIES_TABLE_HEADERS } from "@/constants/DataTableHeaders";
-import { Checkbox, Group, Stack } from "@mantine/core";
+import { Button, Checkbox, Group, Stack } from "@mantine/core";
 import { useInquiries } from "@/hooks/swr/useInquiries";
 import { ChangeEvent, useState } from "react";
 import { useTableSort } from "@/hooks/useTableSort";
@@ -13,10 +13,13 @@ import { PAGE_SIZES } from "@/constants/PageSize";
 import { CommonAxios } from "@/utils/CommonAxios";
 import { SearchInput } from "@/components/common/SearchInput";
 import { handleChangeSearch } from "@/utils/handleChangeSearch";
-import { PagedNoticesRequestParams } from "@/types/notice";
 import { useDebouncedState } from "@mantine/hooks";
+import { PagedInquiriesRequestParams } from "@/types/inquiry";
+import { useRouter } from "next/navigation";
 
 export default function AdminInquiriesListSection() {
+  const { push } = useRouter();
+
   /* 페이지당 행 개수 */
   const [pageSize, setPageSize] = useState<string | null>(String(PAGE_SIZES[0]));
   /* 페이지네이션 페이지 넘버*/
@@ -25,7 +28,7 @@ export default function AdminInquiriesListSection() {
   const { sortBy, order, handleSortButton } = useTableSort();
 
   /* 쿼리 debounced state, 검색창에 이용 */
-  const [query, setQuery] = useDebouncedState<PagedNoticesRequestParams>(
+  const [query, setQuery] = useDebouncedState<PagedInquiriesRequestParams>(
     {
       page: pageNumber - 1,
       size: Number(pageSize),
@@ -71,7 +74,7 @@ export default function AdminInquiriesListSection() {
 
   /* 검색창 핸들러 */
   const onSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-    handleChangeSearch<string, PagedNoticesRequestParams>({
+    handleChangeSearch<string, PagedInquiriesRequestParams>({
       name: "title",
       value: event.target.value,
       setQuery,
@@ -110,10 +113,18 @@ export default function AdminInquiriesListSection() {
                 />
               </DataTableData>
               <DataTableData>{index + 1 + (pageNumber - 1) * Number(pageSize)}</DataTableData>
-              <DataTableData>{inquiry.name}</DataTableData>
-              <DataTableData>{inquiry.division}</DataTableData>
-              <DataTableData>{inquiry.position}</DataTableData>
+              <DataTableData>{inquiry.title}</DataTableData>
+              <DataTableData>{inquiry.authorName}</DataTableData>
               <DataTableData>{inquiry.createdAt}</DataTableData>
+              <DataTableData text={false}>
+                <Button
+                  onClick={() => {
+                    push(`inquiries/${inquiry.id}`);
+                  }}
+                >
+                  수정
+                </Button>
+              </DataTableData>
             </DataTableRow>
           ))}
         </DataTable>

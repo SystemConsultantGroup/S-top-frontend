@@ -1,12 +1,10 @@
 "use client";
 
-// 임시 타입
-import { PagedApplicationsResponse } from "@/types/application";
-import { PagedApiRequestParams } from "@/types/common";
+import { PagedInquiriesRequestParams, PagedInquiriesResponse } from "@/types/inquiry";
 import useSWR from "swr";
 
-export function useInquiries({ params }: { params: PagedApiRequestParams }) {
-  const result = useSWR<PagedApplicationsResponse>({
+export function useInquiries({ params }: { params: PagedInquiriesRequestParams }) {
+  const result = useSWR<PagedInquiriesResponse>({
     url: "/inquiries",
     query: params,
   });
