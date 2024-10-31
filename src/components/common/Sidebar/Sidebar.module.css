@@ -1,6 +1,8 @@
 .root {
   grid-area: sidebar;
+  position: fixed;
   height: 100vh;
+  width: 300px;
 }
 
 .nav {

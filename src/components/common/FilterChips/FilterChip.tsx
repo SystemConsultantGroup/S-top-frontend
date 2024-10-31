@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import classes from "./FilterChip.module.css";
 import { IconRotateClockwise } from "@tabler/icons-react";

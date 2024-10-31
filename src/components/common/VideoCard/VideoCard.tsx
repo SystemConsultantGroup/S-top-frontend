@@ -1,22 +1,42 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import { Group, Button } from "@mantine/core";
 import styles from "./VideoCard.module.css";
+import { QuizModal } from "./QuizModal";
 
 export interface VideoCardProps {
   title: string;
   subtitle: string;
   videoUrl: string;
-  bookmarked: boolean;
-  onBookmarkToggle: () => void;
+  bookmarked?: boolean;
+  onBookmarkToggle?: () => void;
 }
-
 export const VideoCard: React.FC<VideoCardProps> = ({
   title,
   subtitle,
   videoUrl,
-  bookmarked,
-  onBookmarkToggle,
+  bookmarked: initialBookmarked = false,
 }) => {
+  const [bookmarked, setBookmarked] = useState(initialBookmarked);
+  const [quizModalOpened, setQuizModalOpened] = useState(false);
+
+  useEffect(() => {
+    setBookmarked(initialBookmarked);
+  }, [initialBookmarked]);
+
+  const handleBookmarkClick = () => {
+    setBookmarked(!bookmarked);
+  };
+
+  const openQuizModal = () => {
+    setQuizModalOpened(true);
+  };
+
+  const closeQuizModal = () => {
+    setQuizModalOpened(false);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.videoFrame}>
@@ -35,9 +55,8 @@ export const VideoCard: React.FC<VideoCardProps> = ({
         <div className={styles.subtitle}>{subtitle}</div>
 
         <Group justify="space-between">
-          <div className={styles.bookmarkIcon} onClick={onBookmarkToggle}>
+          <div className={styles.bookmarkIcon} onClick={handleBookmarkClick}>
             {bookmarked ? (
-              /* bookmarked icon */
               <svg
                 width="18"
                 height="20"
@@ -53,7 +72,6 @@ export const VideoCard: React.FC<VideoCardProps> = ({
                 />
               </svg>
             ) : (
-              /* un-bookmarked icon */
               <svg
                 width="18"
                 height="20"
@@ -69,10 +87,18 @@ export const VideoCard: React.FC<VideoCardProps> = ({
               </svg>
             )}
           </div>
-          <Button size="xs" variant="light" radius="lg" color="#36618e">
+          <Button size="xs" variant="light" radius="lg" color="#36618e" onClick={openQuizModal}>
             퀴즈 풀기
           </Button>
         </Group>
+
+        {/* Quiz modal */}
+        <QuizModal
+          opened={quizModalOpened}
+          onClose={closeQuizModal}
+          videoUrl={videoUrl}
+          quizContent={<div>퀴즈 내용이 여기에 들어갑니다.</div>}
+        />
       </div>
     </div>
   );

@@ -1,0 +1,38 @@
+/* Banner section */
+.banner {
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+/* Main content section */
+.mainContent {
+  width: 90%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  padding-bottom: 100px;
+}
+
+.searchSection {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.filters {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* Grid container for video cards */
+.videoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  /* Adjusts the number of columns based on screen size */
+  gap: 20px;
+  margin-top: 40px;
+}

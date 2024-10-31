@@ -1,4 +1,5 @@
 /* example usage */
+"use client";
 
 import { useMemo, useState } from "react";
 import { MockUsersData } from "./_mock/mock-table-data";

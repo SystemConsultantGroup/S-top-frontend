@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode } from "react";
 import { TableTh as DataTableHeaderElement, Group, UnstyledButton } from "@mantine/core";
 import classes from "./DataTableHeader.module.css";

@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import styles from "./jobfair.module.css"; // CSS 파일 import
 import { Header } from "../../common/Header"; // Header 컴포넌트 import

@@ -15,10 +15,11 @@ import { handleChangeSearch } from "@/utils/handleChangeSearch";
 // import { getSortString } from "@/utils/getSortString";
 import { Button, Checkbox, Group, Stack } from "@mantine/core";
 import { useDebouncedState } from "@mantine/hooks";
+import { IconPinFilled } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 
-export function AdminNoticeListSection() {
+export function AdminNoticeListSection({ event }: { event?: boolean }) {
   /* next 라우터, 페이지 이동에 이용 */
   const { push } = useRouter();
 
@@ -41,6 +42,7 @@ export function AdminNoticeListSection() {
   // TODO: 백엔드 수정 이후 sort 파라미터 추가
   const { data, pageData, mutate } = useNotices({
     params: { ...query, page: pageNumber - 1, size: Number(pageSize) },
+    event,
   });
 
   /* 체크박스 전체선택, 일괄선택 다루는 파트 */
@@ -76,7 +78,8 @@ export function AdminNoticeListSection() {
   /* 삭제 버튼 핸들러 */
   const handleDelete = () => {
     // TODO: 삭제 확인하는 모달 추가
-    Promise.all(selectedNotices.map((id) => CommonAxios.delete(`/notices/${id}`))).then(() => {
+    const url = event ? "/eventNotices" : "/notices";
+    Promise.all(selectedNotices.map((id) => CommonAxios.delete(`${url}/${id}`))).then(() => {
       setSelectedNotices([]);
       mutate();
     });
@@ -125,10 +128,21 @@ export function AdminNoticeListSection() {
                 />
               </DataTableData>
               <DataTableData>{index + 1 + (pageNumber - 1) * Number(pageSize)}</DataTableData>
-              <DataTableData>{notice.title}</DataTableData>
+              <DataTableData text={false}>
+                <Group>
+                  {notice.fixed && <IconPinFilled />}
+                  {notice.title}
+                </Group>
+              </DataTableData>
               <DataTableData>{notice.createdAt}</DataTableData>
               <DataTableData text={false}>
-                <Button>수정</Button>
+                <Button
+                  onClick={() => {
+                    push(`notices/${notice.id}`);
+                  }}
+                >
+                  수정
+                </Button>
               </DataTableData>
             </DataTableRow>
           ))}
