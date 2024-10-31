@@ -6,6 +6,7 @@ import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
 import { SearchInput } from "@/components/common/SearchInput";
 import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { VideoCard } from "@/components/common/VideoCard/VideoCard";
+//import { JobFairCard } from "@/components/common/JobFairCard/JobFairCard";
 
 const RecruitmentsPage = () => {
   const [selectedYearType, setYearType] = useState<string | null>(null);
@@ -63,6 +64,13 @@ const RecruitmentsPage = () => {
           </div>
         </div>
         <div className={styles.videoGrid}>
+          {/* <JobFairCard
+            logo = "/images/lululabLogo.png"
+            company = "룰루랩"
+            position = "Web SDK 개발자, AI 개발자"
+            employmentType = {["인턴", "신입 정규직"]}
+            location = "서울 강남구"
+          /> */}
           <VideoCard
             title="국내 ICT 인턴십"
             subtitle="알리멍"

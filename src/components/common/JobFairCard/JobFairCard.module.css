@@ -1,8 +1,8 @@
 @import url("src/theme/fonts/pretendard.css");
 
-:root {
-  --primary-container: #d2e4ff; /* material-theme/sys/light/primary-container 값 */
-}
+/* :root {
+  --primary-container: #d2e4ff;  
+}  */
 
 .card {
   border: 1.3px solid var(--color-outlineVariant);
