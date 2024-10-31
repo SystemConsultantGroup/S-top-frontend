@@ -1,3 +1,4 @@
+import { PageHeader } from "@/components/common/PageHeader";
 import { ProjectCreateSection } from "@/components/pages/AdminProjectsEditSection/ProjectCreateSection";
 
 export default function AdminProjectDetailPage({
@@ -7,6 +8,7 @@ export default function AdminProjectDetailPage({
 }) {
   return (
     <main>
+      <PageHeader title={"프로젝트 관리"} />
       <ProjectCreateSection projectId={projectId} />
     </main>
   );

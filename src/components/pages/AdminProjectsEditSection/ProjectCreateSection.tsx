@@ -15,6 +15,7 @@ import { ProjectsCategoryLookupTable, ProjectsTypeLookupTable } from "@/constant
 import { useRouter } from "next/navigation";
 import { useFiles } from "@/hooks/useFiles/useFiles";
 import { CommonAxios } from "@/utils/CommonAxios";
+import { ProjectsAwardStatusLookupTable } from "@/constants/LookupTables/ProjectsAwardStatusLookupTable";
 
 type Role = "PROFESSOR" | "STUDENT";
 
@@ -77,23 +78,32 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
 
   const handleSubmit = async (values: ProjectEditFormInputs) => {
     try {
-      const fileIds = await uploadFiles([
-        { id: "0", file: thumbnail },
-        { id: "1", file: poster },
-      ]);
+      const fileIds = { thumbnailId: values.thumbnailId, posterId: values.posterId };
+
+      if (thumbnail?.arrayBuffer.length !== 0) {
+        const uploadedThumbnail = await uploadFiles([{ id: "0", file: thumbnail }]);
+        fileIds.thumbnailId = Number(uploadedThumbnail[0]);
+      }
+      if (poster?.arrayBuffer.length !== 0) {
+        const uploadedPoster = await uploadFiles([{ id: "0", file: poster }]);
+        fileIds.posterId = Number(uploadedPoster[0]);
+      }
+
       const professorsArr = professors?.split(",").map((professor) => ({
         name: professor,
         role: "PROFESSOR",
       }));
+
       const studentsArr = students?.split(",").map((student) => ({
         name: student,
         role: "STUDENT",
       }));
+
       const members = [...(professorsArr || []), ...(studentsArr || [])];
 
       const project = {
-        thumbnailId: fileIds[0],
-        posterId: fileIds[1],
+        thumbnailId: fileIds.thumbnailId,
+        posterId: fileIds.posterId,
         projectName: values.projectName,
         projectType: values.projectType,
         projectCategory: values.projectCategory,
@@ -294,7 +304,9 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
             <FileInput
               id="thumbnail"
               value={thumbnail}
-              onChange={(file) => setThumbnail(file)}
+              onChange={(file) => {
+                setThumbnail(file);
+              }}
               placeholder={thumbnail ? thumbnail.name : "썸네일을 선택해주세요."}
               w={"50%"}
             />
@@ -307,6 +319,19 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
               placeholder={poster ? poster.name : "포스터를 선택해주세요."}
               w={"50%"}
             />
+          </Row>
+          <Row field="수상 내역" fieldSize={130} mt={20}>
+            <RadioGroup {...getInputProps("awardStatus")}>
+              <Group gap={20}>
+                <Radio value={ProjectsAwardStatusLookupTable["대상"]} label={"대상"}></Radio>
+                <Radio
+                  value={ProjectsAwardStatusLookupTable["최우수상"]}
+                  label={"최우수상"}
+                ></Radio>
+                <Radio value={ProjectsAwardStatusLookupTable["우수상"]} label={"우수상"}></Radio>
+                <Radio value={ProjectsAwardStatusLookupTable["인기상"]} label={"인기상"}></Radio>
+              </Group>
+            </RadioGroup>
           </Row>
           <Group justify="center" mt={30}>
             {projectId && (
