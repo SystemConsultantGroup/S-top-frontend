@@ -1,6 +1,7 @@
 import { ComboboxItem } from "@mantine/core";
-import { ChangeEvent, KeyboardEvent, MouseEvent } from "react";
+import { ChangeEvent, KeyboardEvent, MouseEvent, ReactNode } from "react";
 
+/** Noticeboard Types */
 interface INoticeClassifierItem {
   value: string;
   label: string;
@@ -40,6 +41,38 @@ export interface INoticeHandler {
   handleSubmit: (event: MouseEvent, payload?: unknown) => void;
 }
 
+/** Noticeboard Detail Types */
+export interface IBoardAttachment {
+  name: string;
+  url: string;
+}
+
+interface INavigationPage {
+  title: string;
+  url: string;
+}
+
+export type INoticeDetailItem = INoticeDetailHead & INoticeDetailStage & INoticeDetailNav;
+
+export interface INoticeDetailHead {
+  title: string;
+  author: string;
+  created_date: Date;
+  edited_date: Date;
+  pinned: boolean;
+}
+
+export interface INoticeDetailStage {
+  attachment?: IBoardAttachment[];
+  children?: ReactNode;
+}
+
+export interface INoticeDetailNav {
+  prev_page?: INavigationPage;
+  next_page?: INavigationPage;
+}
+
+/** Board Pagination Types */
 type justifyAlign = "start" | "center" | "end";
 
 export interface IBoardPagin {

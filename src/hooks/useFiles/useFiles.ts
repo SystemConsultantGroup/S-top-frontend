@@ -13,7 +13,6 @@ export function useFiles() {
   // 파일 추가 함수, 첨부 파일 추가 버튼 등에서 호출
   const handleAddFile = () => {
     setFiles([...files, { id: getUniqueId(), file: null }]);
-    console.log(files);
   };
 
   // 파일 삭제 함수, 파일 삭제 버튼 등에서 호출

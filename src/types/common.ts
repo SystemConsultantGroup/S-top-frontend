@@ -30,3 +30,9 @@ export interface PagedApiResponse<T> {
     };
   };
 }
+
+export interface PagedApiRequestParams {
+  page?: number;
+  size?: number;
+  sort?: string;
+}

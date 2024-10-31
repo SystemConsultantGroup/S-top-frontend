@@ -1,5 +1,3 @@
-"use client";
-
 import { INoticeHeading, INoticeHandler } from "@/types/PageBoardTypes";
 import { Group, Select, Input, CloseButton, Button } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";

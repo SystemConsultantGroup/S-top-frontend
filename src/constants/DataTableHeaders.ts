@@ -24,3 +24,12 @@ export const PROJECT_TABLE_HEADERS: DataTableHeaderProps[] = [
   { label: "프로젝트명", widthPercentage: 20, sort: true, selector: "projectName" },
   { label: "관리", widthPercentage: 7, sort: false },
 ];
+
+export const APPLICATION_TABLE_HEADERS: DataTableHeaderProps[] = [
+  { label: "순번", widthPercentage: 7, sort: true, selector: "id" },
+  { label: "이름", widthPercentage: 15, sort: true, selector: "user.name" },
+  { label: "소속", widthPercentage: 15, sort: false, selector: "division" },
+  { label: "직책", widthPercentage: 7, sort: false, selector: "position" },
+  { label: "권한", widthPercentage: 7, sort: false, selector: "userType" },
+  { label: "가입일시", widthPercentage: 15, sort: true, selector: "createdAt" },
+];
