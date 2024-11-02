@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import classes from "./JobFairCard.module.css";
 
@@ -16,6 +18,7 @@ export const JobFairCard: React.FC<JobFairCardProps> = ({
   employmentType,
   location,
 }) => {
+  // console.log("JobFairCard 렌더링됨:", { logo, company, position, employmentType, location });
   return (
     <div className={classes.card}>
       <div className={classes.logo}>

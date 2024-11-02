@@ -1,17 +1,32 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./jobfairRe.module.css";
 import { Banner } from "@/components/common/Banner/Banner";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
 import { SearchInput } from "@/components/common/SearchInput";
 import { Dropdown } from "@/components/common/Dropdown/Dropdown";
-import { VideoCard } from "@/components/common/VideoCard/VideoCard";
-//import { JobFairCard } from "@/components/common/JobFairCard/JobFairCard";
+import { JobFairCard } from "@/components/common/JobFairCard/JobFairCard";
+
+interface JobInfo {
+  company: string;
+  jobTypes: string[];
+  region: string;
+  position: string;
+  logo: string;
+  salary: string;
+  website: string;
+  state: string[];
+  hiringTime: string;
+  object: string;
+  id: string;
+  url: string;
+}
 
 const RecruitmentsPage = () => {
   const [selectedYearType, setYearType] = useState<string | null>(null);
   const [selectedFieldType, setFieldType] = useState<string | null>(null);
   const [selectedHireType, setHireType] = useState<string | null>(null);
+  const [jobInfos, setJobInfos] = useState<JobInfo[]>([]);
 
   const handleYearType = (type: string) => {
     setYearType(type);
@@ -22,6 +37,36 @@ const RecruitmentsPage = () => {
   const handleHireType = (type: string) => {
     setHireType(type);
   };
+
+  useEffect(() => {
+    const fetchJobInfos = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/jobInfos", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            page: 0,
+            size: 10,
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const validContent = data.content.filter((item: any) => item.company !== null); // null인 항목 제거
+          setJobInfos(validContent); // 검증된 데이터로 상태 업데이트
+          console.log("Fetched data:", data); // 데이터를 콘솔에 출력
+        } else {
+          console.error("Failed to fetch jobInfos");
+        }
+      } catch (error) {
+        console.error("Error fetching jobInfos:", error);
+      }
+    };
+
+    fetchJobInfos();
+  }, []);
 
   return (
     <div>
@@ -64,69 +109,16 @@ const RecruitmentsPage = () => {
           </div>
         </div>
         <div className={styles.videoGrid}>
-          {/* <JobFairCard
-            logo = "/images/lululabLogo.png"
-            company = "룰루랩"
-            position = "Web SDK 개발자, AI 개발자"
-            employmentType = {["인턴", "신입 정규직"]}
-            location = "서울 강남구"
-          /> */}
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
+          {jobInfos.map((jobInfo) => (
+            <JobFairCard
+              key={jobInfo.id}
+              logo={jobInfo.url} // 로고 이미지 URL
+              company={jobInfo.company} // 회사명
+              position={jobInfo.position} // 포지션 제목
+              employmentType={jobInfo.jobTypes} // 고용 형태 배열
+              location={jobInfo.region} // 근무 지역
+            />
+          ))}
         </div>
       </div>
     </div>

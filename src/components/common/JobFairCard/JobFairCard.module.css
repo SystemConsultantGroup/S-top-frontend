@@ -1,4 +1,4 @@
-@import url("src/theme/fonts/pretendard.css");
+@import url("../../../theme/fonts/pretendard.css");
 
 /* :root {
   --primary-container: #d2e4ff;  
@@ -8,7 +8,7 @@
   border: 1.3px solid var(--color-outlineVariant);
   border-radius: 15px;
   padding: 20px;
-  max-width: 300px; /* 가로 길이를 더 길게 조정 */
+  max-width: 280px; /* 가로 길이를 더 길게 조정 */
   font-family: "Pretendard Variable", __Pretendard_Fallback_e223ab, sans-serif;
   background-color: var(--color-surfaceContainerLowest);
 }
@@ -64,8 +64,8 @@
 }
 
 .tag {
-  background-color: var(--primary-container); /* primary-container 색상으로 변경 */
-  color: var(--primary-onPrimaryFixedVariant);
+  background-color: var(--color-outlineVariant); /* 지금은 회색으로 보임 */
+  color: var(--color-surfaceContainerLowest); /* 지금은 흰색으로 보임 */
   padding: 5px 10px;
   border-radius: 5px;
   font-size: 0.9em;

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./jonfairInterns.module.css";
 import { Banner } from "@/components/common/Banner/Banner";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
@@ -7,11 +7,50 @@ import { SearchInput } from "@/components/common/SearchInput";
 import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { VideoCard } from "@/components/common/VideoCard/VideoCard";
 
+interface Interview {
+  id: number;
+  title: string;
+  youtubeId: string;
+  year: number;
+  talkerBelonging: string;
+  talkerName: string;
+  category: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 const InternsPage = () => {
   const [selectedType, setSelected] = useState<string | null>(null);
+  const [interviews, setInterviews] = useState<Interview[]>([]);
+
   const handleChange = (type: string) => {
     setSelected(type);
   };
+
+  useEffect(() => {
+    const fetchInterviews = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/jobInterviews", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            // Authorization: "admin_access_token",
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Fetched data:", data); // 데이터를 콘솔에 출력
+          setInterviews(data.content);
+        } else {
+          console.error("Failed to fetch interviews");
+        }
+      } catch (error) {
+        console.error("Error fetching interviews:", error);
+      }
+    };
+    fetchInterviews();
+  }, []);
+
   return (
     <div>
       <div className={styles.container}>
@@ -39,62 +78,16 @@ const InternsPage = () => {
           </div>
         </div>
         <div className={styles.videoGrid}>
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://www.youtube.com/embed/OBsR6UumFdc"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
-          <VideoCard
-            title="국내 ICT 인턴십"
-            subtitle="알리멍"
-            videoUrl="https://youtu.be/Wx1ndu5FX2s?si=xSiEDTmt8Ez7Zk8p"
-            bookmarked={false}
-            onBookmarkToggle={() => {}}
-          />
+          {interviews.map((interview) => (
+            <VideoCard
+              key={interview.id}
+              title={interview.title}
+              subtitle={interview.talkerName}
+              videoUrl={"https://www.youtube.com/embed/${interview.youtubeId}"}
+              bookmarked={false}
+              onBookmarkToggle={() => {}}
+            />
+          ))}
         </div>
       </div>
     </div>
