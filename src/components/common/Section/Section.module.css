@@ -1,6 +1,6 @@
 .wrapper {
   width: 100%;
   border-radius: 10px;
-  background: var(--mantine-color-white);
+  background: var(--color-surfaceContainerLowest);
   padding: 20px;
 }

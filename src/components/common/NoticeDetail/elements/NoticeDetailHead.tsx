@@ -1,14 +1,7 @@
+import { INoticeDetailHead } from "@/types/PageBoardTypes";
 import { Group } from "@mantine/core";
-import styles from "../NoticeDetail.module.css";
 import { IconPinFilled } from "@tabler/icons-react";
-
-export interface IDetailHeadProps {
-  title: string;
-  author: string;
-  created_date: Date;
-  edited_date: Date;
-  pinned: boolean;
-}
+import styles from "../NoticeDetail.module.css";
 
 export function NoticeDetailHead({
   title,
@@ -16,7 +9,7 @@ export function NoticeDetailHead({
   created_date,
   edited_date,
   pinned,
-}: IDetailHeadProps) {
+}: INoticeDetailHead) {
   const CreatedDate = formatDate(created_date);
   const EditedDate = formatDate(edited_date);
 

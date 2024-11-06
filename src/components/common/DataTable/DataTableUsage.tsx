@@ -1,4 +1,5 @@
 /* example usage */
+"use client";
 
 import { useMemo, useState } from "react";
 import { MockUsersData } from "./_mock/mock-table-data";
@@ -53,7 +54,7 @@ export function DataTableUsage() {
       order={order}
       handleSortButton={handleSortButton}
       w={900}
-      totalSize={total}
+      totalElements={total}
       pageSize={pageSize}
       setPageSize={setPageSize}
     >

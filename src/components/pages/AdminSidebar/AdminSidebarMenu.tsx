@@ -1,5 +1,4 @@
 "use client";
-
 import {
   IconAlignBoxLeftTop,
   IconCalendarEvent,
@@ -100,7 +99,7 @@ const AdminSidebarMenuList: ListProps[] = [
     icon: <IconAlignBoxLeftTop size="24" />,
     children: [
       { label: "공지사항", href: "/admin/notices" },
-      { label: "이벤트 공지사항", href: "/admin/event-notices" },
+      { label: "이벤트 공지사항", href: "/admin/event/notices" },
     ],
   },
   {

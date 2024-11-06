@@ -2,10 +2,17 @@ import Image from "next/image";
 import classes from "./Banner.module.css";
 import { Group, Stack } from "@mantine/core";
 
-export type ImageType = "AI_HUB" | "IND_UNIV_PROJECT" | "INTERVIEW" | "PROJECT" | "S_TOP";
+export type ImageType =
+  | "AI_HUB"
+  | "IND_UNIV_PROJECT"
+  | "INTERVIEW"
+  | "PROJECT"
+  | "S_TOP"
+  | "JOB_FAIR";
 export type ImageLocationLookupTable = Record<ImageType, string>;
 export const IMAGE_LOCATION_LOOKUP_TABLE: ImageLocationLookupTable = {
   AI_HUB: "/images/aihub.png",
+  JOB_FAIR: "/images/job-fair.png",
   IND_UNIV_PROJECT: "/images/ind-univ-project.png",
   INTERVIEW: "/images/interview.png",
   PROJECT: "/images/project.png",
