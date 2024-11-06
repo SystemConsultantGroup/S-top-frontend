@@ -41,43 +41,57 @@ export function MypageForm({ initialData }: Props) {
   });
 
   return (
-    <form>
+    <form className={classes.formContainer}>
       <Stack gap={"lg"} className={classes.rowGroup}>
         <div className={classes.row}>
           <div className={classes.firstCol}>이름</div>
-          <TextInput {...form.getInputProps("name")} className={classes.text} />
+          <div className={classes.inputWrapper}>
+            <TextInput {...form.getInputProps("name")} className={classes.text} />
+          </div>
         </div>
         <div className={classes.row}>
           <div className={classes.firstCol}>휴대전화</div>
-          <TextInput {...form.getInputProps("phone")} className={classes.text} />
+          <div className={classes.inputWrapper}>
+            <TextInput {...form.getInputProps("phone")} className={classes.text} />
+          </div>
         </div>
         <div className={classes.row}>
           <div className={classes.firstCol}>이메일</div>
-          <TextInput {...form.getInputProps("email")} className={classes.text} />
+          <div className={classes.inputWrapper}>
+            <TextInput {...form.getInputProps("email")} className={classes.text} />
+          </div>
         </div>
         <div className={classes.row}>
           <div className={classes.firstCol}>회원 유형</div>
-          <Dropdown
-            options={userTypesList}
-            placeholder={"선택"}
-            onOptionClick={setSelectedUserType}
-            selectedOption={selectedUserType}
-          />
+          <div className={classes.inputWrapper}>
+            <Dropdown
+              options={userTypesList}
+              placeholder={"선택"}
+              onOptionClick={setSelectedUserType}
+              selectedOption={selectedUserType}
+              fullWidth
+            />
+          </div>
         </div>
         {selectedUserType === "학생" && (
           <>
             <div className={classes.row}>
               <div className={classes.firstCol}>학과</div>
-              <Dropdown
-                options={MockDepartments}
-                placeholder="학과 선택"
-                onOptionClick={setSelectedDept}
-                selectedOption={selectedDept}
-              />
+              <div className={classes.inputWrapper}>
+                <Dropdown
+                  options={MockDepartments}
+                  placeholder="학과 선택"
+                  onOptionClick={setSelectedDept}
+                  selectedOption={selectedDept}
+                  fullWidth
+                />
+              </div>
             </div>
             <div className={classes.row}>
               <div className={classes.firstCol}>학번</div>
-              <TextInput {...form.getInputProps("studentId")} className={classes.text} />
+              <div className={classes.inputWrapper}>
+                <TextInput {...form.getInputProps("studentId")} className={classes.text} />
+              </div>
             </div>
           </>
         )}
@@ -85,11 +99,15 @@ export function MypageForm({ initialData }: Props) {
           <>
             <div className={classes.row}>
               <div className={classes.firstCol}>소속</div>
-              <TextInput {...form.getInputProps("affiliation")} className={classes.text} />
+              <div className={classes.inputWrapper}>
+                <TextInput {...form.getInputProps("affiliation")} className={classes.text} />
+              </div>
             </div>
             <div className={classes.row}>
               <div className={classes.firstCol}>직책</div>
-              <TextInput {...form.getInputProps("position")} className={classes.text} />
+              <div className={classes.inputWrapper}>
+                <TextInput {...form.getInputProps("position")} className={classes.text} />
+              </div>
             </div>
           </>
         )}
