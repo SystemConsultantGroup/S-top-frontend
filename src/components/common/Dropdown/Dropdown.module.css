@@ -68,3 +68,13 @@
 .dropdownList .dropdownItem:not(:last-child) {
   border-radius: 0;
 }
+
+/* fullWidth 관련 스타일 */
+
+.fullWidthToggle {
+  width: 100%;
+}
+
+.fullWidthItem {
+  width: 100%;
+}
