@@ -56,7 +56,7 @@ export function MypageTable() {
             </TableTr>
           </TableThead>
           <TableTbody>
-            {data.map((item, index) => (
+            {data2.map((item, index) => (
               <TableTr key={index}>
                 <TableTd>{item.date}</TableTd>
                 <TableTd className={classes.postTitle}>{item.title}</TableTd>
