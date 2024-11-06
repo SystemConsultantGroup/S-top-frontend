@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1100px; /* 최대 너비 설정 */
   margin: 0 auto; /* 중앙 정렬 */
-  padding: 80px 90px 0px 90px; /* 상단과 양측 패딩 설정 */ /*위  왼  아래  오*/
+  padding: 80px 90px 20px 90px; /* 상단과 양측 패딩 설정 */ /*위  왼  아래  오*/
 }
 
 .title {
@@ -19,12 +19,21 @@
   flex-direction: column; /* 자식 요소들을 수직으로 정렬 */
 }
 
-.dropdown {
+/* .dropdown {
   margin-top: 20px;
   margin-bottom: 60px;
   display: flex;
-  justify-content: flex-end; /* 드롭다운을 오른쪽으로 정렬 */
-  align-items: center; /* 드롭다운의 세로 정렬을 맞추기 위해 추가 */
+  justify-content: flex-end; 
+  align-items: center; 
+}
+*/
+.dropdown {
+  gap: 10px; /* 드롭다운 간의 간격 설정 */
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-color: var(--color-inputBorder);
+  border-top: 0;
+  line-height: 24px;
 }
 
 .videoGrid {
@@ -38,4 +47,33 @@
 
 .space {
   width: 20px;
+}
+
+.input {
+  border-color: var(--color-inputBorder);
+  background-color: var(--color-inputSurface);
+  transition: none;
+
+  &::placeholder {
+    color: var(--color-onSurface);
+    opacity: 1;
+  }
+  &::-ms-input-placeholder {
+    color: var(--color-onSurface);
+  }
+
+  &:hover {
+    background-color: var(--color-inputSurfaceHover);
+  }
+
+  &[data-expanded] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.section {
+  & * {
+    color: var(--color-onSurface);
+  }
 }

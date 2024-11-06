@@ -4,8 +4,28 @@ import styles from "./jobfairRe.module.css";
 import { Banner } from "@/components/common/Banner/Banner";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
 import { SearchInput } from "@/components/common/SearchInput";
-import { Dropdown } from "@/components/common/Dropdown/Dropdown";
+// import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { JobFairCard } from "@/components/common/JobFairCard/JobFairCard";
+import { Select } from "@mantine/core";
+import { FilterChip } from "@/components/common/FilterChips/FilterChip";
+import { SelectProps } from "@mantine/core";
+/** 프로젝트 필터링 옵션 분류 타입 */
+export type OptionKey = "YEAR" | "CATEGORY" | "TYPE";
+/**
+ * 프로젝트 조회 필터링에 사용되는 옵션의 형태를 지정한 인터페이스.
+ *
+ * key 값에 "YEAR", "TYPE", "CATEGORY" 세 가지 중 하나를 쓸 수 있고, 해당 딕셔너리에는 카테고리에 맞게 옵션이 저장됨.
+ *
+ * 예를 들어, key 값이  "YEAR"인 딕셔너리는 프로젝트 연도 드롭다운에서 선택한 옵션을 value에 저장함.
+ *
+ * @interface IOption
+ * @property {("YEAR" | "TYPE" | "CATEGORY")} key
+ * @property {string} value
+ */
+export interface IOption {
+  key: OptionKey;
+  value: string;
+}
 
 interface JobInfo {
   company: string;
@@ -23,20 +43,72 @@ interface JobInfo {
 }
 
 const RecruitmentsPage = () => {
-  const [selectedYearType, setYearType] = useState<string | null>(null);
-  const [selectedFieldType, setFieldType] = useState<string | null>(null);
-  const [selectedHireType, setHireType] = useState<string | null>(null);
   const [jobInfos, setJobInfos] = useState<JobInfo[]>([]);
+  const [options, setOptions] = useState<IOption[]>([]);
 
-  const handleYearType = (type: string) => {
-    setYearType(type);
+  const PROJECT_YEAR_LIST: string[] = ["2020", "2021", "2022", "2023", "2024"];
+  const PROJECT_CATEGORY_MAPPED_LIST: string[] = [
+    "AI 개발자",
+    "Web SDK 개발자",
+    "position1",
+    "position2",
+    "position3",
+  ];
+  const PROJECT_TYPE_MAPPED_LIST: string[] = ["인턴", "신입 정규직", "type1", "type2", "type3"];
+
+  const HandleOption = (key: OptionKey, value: string) => {
+    setOptions((prev) =>
+      prev.some((option) => option.value === value) ? prev : [...prev, { key, value }]
+    );
   };
-  const handleFieldType = (type: string) => {
-    setFieldType(type);
+  const UNMODIFIABLE_SELECT = "null";
+  /** 공통 필터링 드롭다운 props */
+  const dropdownCommonProps = {
+    classNames: {
+      dropdown: styles.dropdown,
+      input: styles.input,
+      section: styles.section,
+    },
+    value: UNMODIFIABLE_SELECT,
+    comboboxProps: {
+      dropdownPadding: 0,
+      shadow: "md",
+      offset: 0,
+      position: "bottom",
+      middlewares: { flip: false, shift: false },
+    },
+  } as SelectProps;
+
+  /** 프로젝트 연도(YEAR) 필터링을 위한 드롭다운 props */
+  const dropdownYearProps = {
+    data: PROJECT_YEAR_LIST, // string[]
+    placeholder: "연도",
+    onChange: (value: string | null) => HandleOption("YEAR", value!),
+    ...dropdownCommonProps,
   };
-  const handleHireType = (type: string) => {
-    setHireType(type);
+  /** 분야(CATEGORY) 필터링을 위한 드롭다운 props */
+  const dropdownCategoryProps = {
+    data: Object.values(PROJECT_CATEGORY_MAPPED_LIST), // string[]
+    placeholder: "분야",
+    onChange: (value: string | null) => HandleOption("CATEGORY", value!),
+    ...dropdownCommonProps,
   };
+  /** 고용 형태(TYPE) 필터링을 위한 드롭다운 props */
+  const dropdownTypeProps = {
+    data: Object.values(PROJECT_TYPE_MAPPED_LIST), // string[]
+    placeholder: "고용 형태",
+    onChange: (value: string | null) => HandleOption("TYPE", value!),
+    ...dropdownCommonProps,
+  };
+  /** 선택한 필터링 옵션들의 props 배열 */
+  const filterChipProps = options
+    .map((option) => ({
+      label: option.value,
+      onRemove: () => {
+        setOptions((prev) => prev.filter((item) => item.value !== option.value));
+      },
+    }))
+    .reverse();
 
   useEffect(() => {
     const fetchJobInfos = async () => {
@@ -85,28 +157,23 @@ const RecruitmentsPage = () => {
           <div className={styles.searchArea}>
             <SearchInput placeholder="채용 포지션 검색" />
           </div>
-          <div className={styles.dropdown}>
-            <Dropdown
-              options={["2024", "2023", "2022"]}
-              placeholder="연도"
-              selectedOption={selectedYearType}
-              onOptionClick={handleYearType}
-            />
-            <div className={styles.space}></div>
-            <Dropdown
-              options={["AI 개발자", "Web SDK 개발자", ""]}
-              placeholder="분야"
-              selectedOption={selectedFieldType}
-              onOptionClick={handleFieldType}
-            />
-            <div className={styles.space}></div>
-            <Dropdown
-              options={["인턴", "신입 정규직", "치킨"]}
-              placeholder="고용 형태"
-              selectedOption={selectedHireType}
-              onOptionClick={handleHireType}
-            />
-          </div>
+        </div>
+        <div className={styles.dropdown}>
+          <Select {...dropdownYearProps} />
+          <Select {...dropdownTypeProps} />
+          <Select {...dropdownCategoryProps} />
+        </div>
+        <div>
+          {filterChipProps.map((prop, idx) => (
+            <FilterChip key={idx} {...prop} />
+          ))}
+          <FilterChip
+            label="전체해제"
+            onRemove={() => {
+              setOptions(() => []);
+            }}
+            isReset
+          />
         </div>
         <div className={styles.videoGrid}>
           {jobInfos.map((jobInfo) => (
