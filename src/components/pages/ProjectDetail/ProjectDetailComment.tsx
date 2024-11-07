@@ -11,13 +11,6 @@ interface Props {
   onRefresh?: () => void;
 }
 
-/**
-export interface Comment {
-  author: string;
-  content: string;
-}
- */
-
 export function ProjectDetailComment({ projectId, comments = [], onRefresh }: Props) {
   const [commentList, setCommentList] = useState<Comment[]>([]);
 
@@ -31,7 +24,7 @@ export function ProjectDetailComment({ projectId, comments = [], onRefresh }: Pr
         isAnonymous: element.isAnonymous,
       });
     });
-    setCommentList(formattedComments);
+    if (formattedComments.length > 0) setCommentList(formattedComments);
   }, [comments]);
 
   const handleCommentSubmit = async (comment: string, isAnonymous: boolean) => {
