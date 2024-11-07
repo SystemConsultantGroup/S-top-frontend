@@ -127,7 +127,7 @@ export function ProjectDetailInfo({ projectId }: Props) {
   };
 
   const handleInquiryClick = () => {
-    router.push("/infodesk/inquries");
+    router.push(`/infodesk/inquries/write?id=${projectId}`);
   };
 
   return (
