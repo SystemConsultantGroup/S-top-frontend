@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import classes from "./CommentBox.module.css";
+import { CheckBox } from "@/components/common/CheckBox/CheckBox";
 
 interface CommentBoxProps {
-  onSubmit?: (comment: string) => void;
+  onSubmit?: (comment: string, isAnonymous: boolean) => void;
   commentList?: Comment[];
 }
 
 export interface Comment {
   author: string;
   content: string;
+  isAnonymous?: boolean;
 }
 
 export const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit, commentList = [] }) => {
   const [comment, setComment] = useState("");
-  const [comments, setComments] = useState<Comment[]>(commentList);
+  const [isAnonymous, setIsAnonymous] = useState<boolean>(true);
+  const [anonymousIndex, setAnonymousIndex] = useState<number>(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
@@ -27,10 +30,11 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit, commentList = 
   };
 
   const handleSubmit = (e: React.FormEvent) => {
+    console.log("isAnonymous: ", isAnonymous);
     e.preventDefault();
     if (comment.trim()) {
-      if (onSubmit) onSubmit(comment);
-      setComments([...comments, { author: "사람", content: comment }]);
+      if (onSubmit) onSubmit(comment, isAnonymous);
+      //setComments([...comments, { author: "사람", content: comment }]);
       setComment("");
     }
   };
@@ -52,15 +56,27 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit, commentList = 
             작성
           </button>
         </div>
+        <CheckBox
+          label="익명으로 작성"
+          defaultValue={true}
+          onClick={(status) => setIsAnonymous(status)}
+        />
       </form>
       <div className={classes.divider}></div>
       <div className={classes.commentsList}>
-        {comments.map((comment, index) => (
-          <div key={index} className={classes.commentItem}>
-            <div className={classes.commentAuthor}>사람{index + 1}</div>
-            <div className={classes.commentContent}>{comment.content}</div>
-          </div>
-        ))}
+        {commentList.map((commentItem, index) => {
+          // 익명인 경우에는 anonymousIndex를 증가시키고, 아니면 그대로 유지
+          if (commentItem.isAnonymous) setAnonymousIndex((val) => val + 1);
+
+          return (
+            <div key={index} className={classes.commentItem}>
+              <div className={classes.commentAuthor}>
+                {commentItem.isAnonymous ? `익명${anonymousIndex}` : commentItem.author}
+              </div>
+              <div className={classes.commentContent}>{commentItem.content}</div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

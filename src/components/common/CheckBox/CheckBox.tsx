@@ -5,13 +5,21 @@ import styles from "./CheckBox.module.css";
 
 interface CheckBoxProps {
   label: string;
+  defaultValue?: boolean;
+  onClick?: (value: boolean) => void;
 }
 
-export const CheckBox: React.FC<CheckBoxProps> = ({ label }) => {
-  const [checked, setChecked] = useState(false);
+export const CheckBox: React.FC<CheckBoxProps> = ({ label, defaultValue = false, onClick }) => {
+  const [checked, setChecked] = useState(defaultValue);
 
   const handleClick = () => {
-    setChecked(!checked);
+    const newChecked = !checked;
+    setChecked(newChecked); // 상태 변경
+
+    // onClick 콜백이 전달된 경우 호출
+    if (onClick) {
+      onClick(newChecked);
+    }
   };
 
   return (
