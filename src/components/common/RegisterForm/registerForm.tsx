@@ -4,7 +4,9 @@ import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { CheckBox } from "@/components/common/CheckBox/CheckBox";
 import { PrimaryButton } from "@/components/common/Buttons/PrimaryButton/PrimaryButton";
 import classes from "./registerForm.module.css";
-
+// refresh token 안됨 !! 왜지 ??
+//import { getServerSideToken } from "@/components/common/Auth/getServerSideToken";
+import { useAuth } from "@/components/common/Auth/AuthProvider";
 import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
 
 const MEMBER_TYPES = ["학생", "교수/교직원", "기업관계자", "외부인"];
@@ -27,6 +29,8 @@ export function RegisterForm() {
 
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
+
+  const { token } = useAuth();
 
   const handleTermsChange = () => {
     setAcceptedTerms(!acceptedTerms);
@@ -76,9 +80,18 @@ export function RegisterForm() {
     }
 
     try {
-      const response = await CommonAxios.post("http://localhost:8000/auth/register", formData, {
+      //const { accessToken, refreshToken } = await getServerSideToken()
+
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
-      });
+      };
+
+      const response = await CommonAxios.post(
+        "http://localhost:8000/auth/register",
+        formData,
+        config
+      );
 
       console.log("Registration Successful: ", response.data);
     } catch (error) {
