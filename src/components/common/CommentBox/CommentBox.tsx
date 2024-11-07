@@ -58,8 +58,8 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit, commentList = 
         </div>
         <CheckBox
           label="익명으로 작성"
-          defaultValue={true}
-          onClick={(status) => setIsAnonymous(status)}
+          checked={true}
+          onChange={(status) => setIsAnonymous(status)}
         />
       </form>
       <div className={classes.divider}></div>

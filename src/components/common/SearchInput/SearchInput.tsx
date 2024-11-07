@@ -6,11 +6,13 @@ export function SearchInput({
   placeholder,
   iconSize = 16,
   onChange,
+  value,
   ...props
 }: InputProps & {
   placeholder?: string;
   iconSize?: number;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
 }) {
   return (
     <>
@@ -22,6 +24,7 @@ export function SearchInput({
         placeholder={placeholder}
         leftSection={<IconSearch size={iconSize} />}
         onChange={onChange}
+        value={value}
         {...props}
       />
     </>

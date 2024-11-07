@@ -5,27 +5,22 @@ import styles from "./CheckBox.module.css";
 
 interface CheckBoxProps {
   label: string;
-  defaultValue?: boolean;
-  onClick?: (value: boolean) => void;
+  checked?: boolean;
+  onChange?: (checked: boolean) => void;
 }
 
-export const CheckBox: React.FC<CheckBoxProps> = ({ label, defaultValue = false, onClick }) => {
-  const [checked, setChecked] = useState(defaultValue);
+export const CheckBox: React.FC<CheckBoxProps> = ({ label, checked = false, onChange }) => {
+  const [isChecked, setChecked] = useState(checked);
 
   const handleClick = () => {
-    const newChecked = !checked;
-    setChecked(newChecked); // 상태 변경
-
-    // onClick 콜백이 전달된 경우 호출
-    if (onClick) {
-      onClick(newChecked);
-    }
+    setChecked(!isChecked);
+    onChange?.(!isChecked);
   };
 
   return (
     <div className={styles.checkboxContainer} onClick={handleClick}>
       <MantineCheckbox
-        checked={checked}
+        checked={isChecked}
         onChange={handleClick}
         size="sm"
         radius={"sm"}
