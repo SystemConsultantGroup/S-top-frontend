@@ -1,0 +1,50 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.registerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+/* Tablet Landscape */
+@media screen and (max-width: 1280px) {
+  .registerContainer {
+    margin-top: 80px;
+  }
+}
+
+/* Tablet Portrait */
+@media screen and (max-width: 1024px) {
+  .registerContainer {
+    margin-top: 60px;
+  }
+}
+
+/* Mobile Landscape and Small Tablets */
+@media screen and (max-width: 768px) {
+  .registerContainer {
+    margin-top: 40px;
+  }
+
+  .pageContainer {
+    padding: 0 20px;
+  }
+}
+
+/* Mobile Portrait */
+@media screen and (max-width: 480px) {
+  .registerContainer {
+    margin-top: 20px;
+  }
+
+  .pageContainer {
+    padding: 0 10px;
+  }
+}

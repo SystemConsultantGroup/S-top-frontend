@@ -118,14 +118,17 @@
     display: block;
   }
 
-  & > ul > li > ul > li {
-    padding: 12px 24px;
-    white-space: nowrap;
-    cursor: pointer;
-  }
   & > ul > li > ul > li:hover {
     /* background-color: var(--color-coverHover); */
     background-color: var(--color-surfaceVariant);
+  }
+
+  & > ul > li > ul > li > a {
+    display: block;
+    padding: 12px 24px;
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--mantine-color-text);
   }
 
   @media screen and (max-width: 1023px) {
@@ -270,6 +273,11 @@
   transition:
     visibility 0.2s,
     opacity 0.2s ease-in-out;
+
+  & a {
+    text-decoration: none;
+    color: var(--mantine-color-text);
+  }
 
   @media screen and (min-width: 1198px) {
     padding: 100px 180px;

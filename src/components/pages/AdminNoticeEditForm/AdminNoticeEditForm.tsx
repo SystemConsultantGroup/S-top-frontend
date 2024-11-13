@@ -10,7 +10,8 @@ import { CommonAxios } from "@/utils/CommonAxios";
 import { Checkbox, FileInput, Group, Stack, Textarea } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { EventImageSection } from "./EventImageSection";
 
 interface NoticeEditFormInputs {
   title: string;
@@ -19,7 +20,9 @@ interface NoticeEditFormInputs {
   fileIds?: number[];
 }
 
-export function AdminNoticeEditForm({ noticeId }: { noticeId?: number }) {
+export function AdminNoticeEditForm({ noticeId, event }: { noticeId?: number; event?: boolean }) {
+  const url = event ? "/eventNotices" : "/notices";
+
   /* next 라우터, 페이지 이동에 이용 */
   const { push } = useRouter();
 
@@ -33,6 +36,9 @@ export function AdminNoticeEditForm({ noticeId }: { noticeId?: number }) {
     getTempFile,
     uploadFiles,
   } = useFiles();
+
+  // 이벤트 공지사항의 첨부파일 이미지 미리보기를 위한 fileId state
+  const [fileIds, setFileIds] = useState<number[]>([]);
 
   // 공지사항 게시글 등록 및 수정을 위한  mantine form hook
   const { onSubmit, getInputProps, values, setValues } = useForm<NoticeEditFormInputs>({
@@ -58,9 +64,9 @@ export function AdminNoticeEditForm({ noticeId }: { noticeId?: number }) {
         fileIds: fileIds,
       };
       if (noticeId) {
-        await CommonAxios.put(`/notices/${noticeId}`, notice);
+        await CommonAxios.put(`${url}/${noticeId}`, notice);
       } else {
-        await CommonAxios.post("/notices", notice);
+        await CommonAxios.post(`${url}`, notice);
       }
 
       // TODO: 등록/수정 성공 시 알림
@@ -74,7 +80,7 @@ export function AdminNoticeEditForm({ noticeId }: { noticeId?: number }) {
   useEffect(() => {
     // 공지사항 관리 페이지 접근 시 이전 공지사항 정보를 불러옴
     const fetchPrevNotice = async () => {
-      const response = await CommonAxios.get(`/notices/${noticeId}`);
+      const response = await CommonAxios.get(`${url}/${noticeId}`);
       const prevNotice = response.data;
       setValues({
         title: prevNotice.title,
@@ -88,7 +94,10 @@ export function AdminNoticeEditForm({ noticeId }: { noticeId?: number }) {
           id: apiFile.id.toString(),
           file: getTempFile(apiFile),
         }));
+        const fileIds = prevNotice.files.map((apiFile: ApiFile) => apiFile.id);
+
         setFiles(convertedFiles);
+        setFileIds(fileIds);
       }
     };
     if (noticeId) fetchPrevNotice();
@@ -96,6 +105,7 @@ export function AdminNoticeEditForm({ noticeId }: { noticeId?: number }) {
 
   return (
     <Section>
+      {event && noticeId && <EventImageSection fileIds={fileIds} />}
       <form onSubmit={onSubmit(handleSubmit)}>
         <Stack gap="lg">
           <Row field="제목" fieldSize={150}>
@@ -113,10 +123,16 @@ export function AdminNoticeEditForm({ noticeId }: { noticeId?: number }) {
             <Checkbox id="input-fixed" checked={values.fixed} {...getInputProps("fixed")} />
           </Row>
           <Group pl={20}>
-            <PrimaryButton onClick={handleAddFile}>첨부파일 추가</PrimaryButton>
+            <PrimaryButton onClick={handleAddFile}>
+              {event ? "이미지 추가" : "첨부파일 추가"}
+            </PrimaryButton>
           </Group>
           {files.map((file, index) => (
-            <Row key={file.id} field={`첨부파일 ${index + 1}`} fieldSize={150}>
+            <Row
+              key={file.id}
+              field={event ? `이미지 ${index + 1}` : `첨부파일 ${index + 1}`}
+              fieldSize={150}
+            >
               <Group w={"50%"}>
                 <FileInput
                   id={file.id}
@@ -124,6 +140,8 @@ export function AdminNoticeEditForm({ noticeId }: { noticeId?: number }) {
                   value={file.file}
                   placeholder={file.file ? file.file.name : "파일을 선택해주세요."}
                   w={"50%"}
+                  // 이벤트 공지사항의 경우 이미지만 업로드
+                  {...(event ? { accept: "image/*" } : {})}
                 />
                 <DangerButton onClick={() => handleRemoveFile(file.id)}>삭제</DangerButton>
               </Group>

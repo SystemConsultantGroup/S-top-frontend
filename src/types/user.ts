@@ -3,7 +3,7 @@ export type Role =
   | "PROFESSOR"
   | "COMPANY"
   | "ADMIN"
-  | "INACTIVE_PROPESSOR"
+  | "INACTIVE_PROFESSOR"
   | "INACTIVE_COMPANY"
   | "OTHERS"
   | "TEMP";
