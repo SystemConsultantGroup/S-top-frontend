@@ -1,4 +1,4 @@
-.root {
+/*.root {
   display: flex;
   width: 471px;
   height: 139px;
@@ -23,12 +23,13 @@
   top: 17px;
   color: var(--normal, #19191b);
   /* material-theme/title/medium */
-
+/*
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
   /* 150% */
+/*
 }
 
 .people {
@@ -48,6 +49,7 @@
   font-weight: 500;
   line-height: 24px;
   /* 171.429% */
+/*
 }
 
 .company {
@@ -67,6 +69,7 @@
   font-weight: 500;
   line-height: 24px;
   /* 171.429% */
+/*
 }
 
 .model {
@@ -96,6 +99,7 @@
   font-weight: 700;
   line-height: 24px;
   /* 240% */
+/*
 }
 
 .side {
@@ -113,6 +117,88 @@
   width: 40px;
   height: 40px;
   right: -12px;
+  bottom: 0px;
+  position: absolute;
+}*/
+
+.root {
+  display: flex;
+  flex-direction: column;
+  /* Adjust to handle smaller widths */
+  width: 100%;
+  /* Allow the card to be responsive */
+  max-width: 471px;
+  /* Maximum width to maintain design */
+  height: 139px;
+  padding: 8px 0px 19px 23px;
+  align-items: flex-start;
+  gap: 8px;
+  border-radius: 12px;
+  border: 2px solid var(--background, #efeff0);
+  background: var(--white, #fff);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.title,
+.people,
+.company,
+.modeltext {
+  display: flex;
+  width: auto;
+  flex-direction: column;
+  position: absolute;
+  left: 28px;
+}
+
+.title {
+  top: 17px;
+  color: var(--normal, #19191b);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.people {
+  top: 41px;
+  color: var(--Schemes-Outline, #73777f);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.company {
+  bottom: 50px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.modeltext {
+  bottom: 17px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  /* Align text to the left */
+}
+
+.side {
+  width: 33px;
+  height: 135px;
+  border-radius: 0px 12px 12px 0px;
+  background: var(--color-surfaceVariant, #dfe2eb);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.Bookmark {
+  width: 40px;
+  height: 40px;
+  right: -12px;
+  /* Adjusted to ensure no overflow */
   bottom: 0px;
   position: absolute;
 }

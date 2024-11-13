@@ -13,7 +13,6 @@ export function useFiles() {
   // 파일 추가 함수, 첨부 파일 추가 버튼 등에서 호출
   const handleAddFile = () => {
     setFiles([...files, { id: getUniqueId(), file: null }]);
-    console.log(files);
   };
 
   // 파일 삭제 함수, 파일 삭제 버튼 등에서 호출
@@ -38,7 +37,18 @@ export function useFiles() {
    */
   const uploadFiles = async (files: { id: string; file: File | null }[]) => {
     const fileIds: string[] = [];
-    const filesToUpload: FormData = new FormData();
+
+    for (const { file, id } of files) {
+      if (file) {
+        // temp file의 경우에 id만 추가
+        if (file.size == 0) {
+          fileIds.push(id);
+          continue;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
 
     for (const { file, id } of files) {
       if (file) {
