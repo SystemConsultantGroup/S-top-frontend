@@ -1,50 +1,82 @@
-import { Quiz, Answers } from "@/types/Interview";
+import { Quiz } from "@/types/Interview";
 import { getUniqueId } from "@/utils/getUniqueId";
 import { useState } from "react";
 
-/**
- * 파일 첨부를 위한 커스텀 훅
- */
 export function useQuizs() {
-  // 파일 목록 state
-  const [quizs, setQuizs] = useState<Quiz[]>([]);
-  const [answers, setAnswers] = useState<Answers[]>([]);
-
-  const handleAddQuiz = () => {
-    setQuizs([...quizs, { id: getUniqueId(), question: "", correct: 0 }]);
-    console.log(quizs);
+  const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+  const addQuiz = () => {
+    const newQuiz: Quiz = {
+      id: getUniqueId(),
+      question: "",
+      answer: 0,
+      options: [],
+    };
+    setQuizzes([...quizzes, newQuiz]);
   };
 
-  const handleAddAnswer = (qid: string) => {
-    setAnswers([...answers, { id: getUniqueId(), qid: qid, answer: "" }]);
+  const removeQuiz = (id: string) => {
+    setQuizzes(quizzes.filter((quiz) => quiz.id !== id));
   };
 
-  const handleRemoveQuiz = (id: string) => {
-    setQuizs(quizs.filter((quiz) => quiz.id !== id));
-    setAnswers(answers.filter((answer) => answer.qid !== id));
+  const addOption = (quizId: string) => {
+    setQuizzes(
+      quizzes.map((quiz) =>
+        quiz.id === quizId ? { ...quiz, options: [...quiz.options, ""] } : quiz
+      )
+    );
+  };
+  const removeOption = (quizId: string, optionIndex: number) => {
+    setQuizzes((prevQuizzes) => {
+      return prevQuizzes.map((quiz) => {
+        if (quiz.id === quizId) {
+          const newOptions = quiz.options.filter((_, index) => index !== optionIndex);
+          // 정답 인덱스가 삭제된 옵션 인덱스보다 크면 정답 인덱스를 하나 줄입니다.
+          const newAnswer = quiz.answer > optionIndex ? quiz.answer - 1 : quiz.answer;
+          // 삭제 후 남은 옵션 개수보다 정답 인덱스가 크거나 같으면 마지막 옵션 인덱스로 설정합니다.
+          const adjustedAnswer = newAnswer >= newOptions.length ? newOptions.length - 1 : newAnswer;
+          return {
+            ...quiz,
+            options: newOptions,
+            answer: adjustedAnswer < 0 ? 0 : adjustedAnswer, // answer가 음수가 되지 않도록 처리
+          };
+        }
+        return quiz;
+      });
+    });
   };
 
-  const handleRemoveAnswer = (id: string) => {
-    setAnswers(answers.filter((answer) => answer.id !== id));
+  const handleOptionChange =
+    (quizId: string, optionIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newOptions = [...quizzes.find((q) => q.id === quizId)!.options];
+      newOptions[optionIndex] = event.currentTarget.value;
+      setQuizzes(
+        quizzes.map((quiz) => (quiz.id === quizId ? { ...quiz, options: newOptions } : quiz))
+      );
+    };
+
+  const handleAnswerChange = (quizId: string) => (value: string) => {
+    setQuizzes(
+      quizzes.map((quiz) => (quiz.id === quizId ? { ...quiz, answer: parseInt(value, 10) } : quiz))
+    );
   };
 
-  const handleChangeQuiz = (id: string) => (question: string) => {
-    setQuizs(quizs.map((q) => (q.id === id ? { ...q, question } : q)));
-  };
-  const handleChangeAnswer = (id: string) => (answer: string) => {
-    setAnswers(answers.map((a) => (a.id === id ? { ...a, answer } : a)));
+  const handleQuestionChange = (quizId: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuizzes(
+      quizzes.map((quiz) =>
+        quiz.id === quizId ? { ...quiz, question: event.currentTarget.value } : quiz
+      )
+    );
   };
 
   return {
-    quizs,
-    answers,
-    setQuizs,
-    setAnswers,
-    handleAddQuiz,
-    handleAddAnswer,
-    handleRemoveQuiz,
-    handleRemoveAnswer,
-    handleChangeQuiz,
-    handleChangeAnswer,
+    quizzes,
+    setQuizzes,
+    addQuiz,
+    removeQuiz,
+    addOption,
+    removeOption,
+    handleAnswerChange,
+    handleOptionChange,
+    handleQuestionChange,
   };
 }

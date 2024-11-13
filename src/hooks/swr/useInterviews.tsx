@@ -4,7 +4,7 @@ import { InterviewRequestParams, InterviewResponse } from "@/types/Interview";
 import useSWR from "swr";
 
 export function useInterviews({ params }: { params: InterviewRequestParams }) {
-  const result = useSWR<InterviewResponse>({ url: "/interviews", query: params });
+  const result = useSWR<InterviewResponse>({ url: "/talks", query: params });
 
   return {
     data: result.data?.content,
