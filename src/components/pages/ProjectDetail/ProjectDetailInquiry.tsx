@@ -5,11 +5,15 @@ import classes from "./ProjectDetailInfo.module.css";
 import { useRouter } from "next/navigation";
 import { PrimaryButton } from "@/components/common/Buttons";
 
-export function ProjectDetailInquiry() {
+interface Props {
+  projectId: string;
+}
+
+export function ProjectDetailInquiry({ projectId }: Props) {
   const router = useRouter();
 
   const handleButtonClick = () => {
-    router.push("/infodesk/inquries");
+    router.push(`/infodesk/inquries/write?id=${projectId}`);
   };
 
   return (

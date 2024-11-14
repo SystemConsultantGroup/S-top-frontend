@@ -12,7 +12,7 @@ export default function ProjectDetailPage({ params: { id } }: Props) {
   return (
     <div className={classes.container}>
       <ProjectDetailInfo projectId={id} />
-      <ProjectDetailInquiry />
+      <ProjectDetailInquiry projectId={id} />
     </div>
   );
 }
