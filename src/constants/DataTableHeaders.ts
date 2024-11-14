@@ -68,3 +68,11 @@ export const QUIZ_TABLE_HEADERS: DataTableHeaderProps[] = [
   { label: "전화번호", widthPercentage: 15, sort: true, selector: "phone" },
   { label: "푼 문제 개수", widthPercentage: 15, sort: true, selector: "successCount" },
 ];
+
+export const INQUIRIES_TABLE_HEADERS: DataTableHeaderProps[] = [
+  { label: "순번", widthPercentage: 7, sort: true, selector: "id" },
+  { label: "제목", widthPercentage: 15, sort: true, selector: "title" },
+  { label: "작성자", widthPercentage: 7, sort: false },
+  { label: "작성일", widthPercentage: 7, sort: false },
+  { label: "관리", widthPercentage: 7, sort: false },
+];
