@@ -19,7 +19,7 @@ export function ProjectDetailInquiry({ projectId }: Props) {
   return (
     <div className={classes.SectionInquiry}>
       <Text className={classes.title}>프로젝트 문의</Text>
-      <PrimaryButton onClick={handleButtonClick}>문의 게시판으로 이동</PrimaryButton>
+      <PrimaryButton onClick={handleButtonClick}>프로젝트 문의하기</PrimaryButton>
     </div>
   );
 }
