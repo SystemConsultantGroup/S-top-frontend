@@ -1,8 +1,8 @@
-import { INoticeDetailNav } from "@/types/PageBoardTypes";
 import { Group } from "@mantine/core";
 import { IconChevronUp, IconChevronDown } from "@tabler/icons-react";
 import Link from "next/link";
 import styles from "../NoticeDetail.module.css";
+import { INoticeDetailNav } from "@/types/PageBoardTypes";
 
 export function NoticeDetailSprint({ prev_page, next_page }: INoticeDetailNav) {
   return (

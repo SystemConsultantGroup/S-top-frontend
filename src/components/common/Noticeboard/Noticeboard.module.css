@@ -46,20 +46,40 @@
 
 .filterInput {
   width: 120px;
+  border-color: var(--color-inputBorder);
+  background-color: var(--color-inputSurface);
 
-  & input {
-    /* color: var(--color-text); */
-    color: var(--mantine-color-text);
+  &:focus {
+    border-color: var(--color-inputBorderFocus);
+  }
+  &:hover {
+    background-color: var(--color-inputSurfaceHover);
+  }
+}
+.filterDropdown {
+  border-color: var(--color-inputBorder);
+  background-color: var(--color-inputSurface);
+}
+.filterOption {
+  &:hover {
+    background-color: var(--color-inputSurfaceHover);
   }
 }
 
-.searchInput {
-  margin: 0 !important;
+.searchWrapper {
   width: 320px;
   height: 36px;
+}
+.searchInput {
+  border-radius: 0;
+  border-color: var(--color-inputBorder);
+  background-color: var(--color-inputSurface);
 
-  & > input {
-    border-radius: 0;
+  &:focus {
+    border-color: var(--color-inputBorderFocus);
+  }
+  &:hover {
+    background-color: var(--color-inputSurfaceHover);
   }
 }
 
