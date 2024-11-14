@@ -8,9 +8,18 @@ export interface Props {
   title: string;
   date: Date;
   viewCount?: number;
+  height?: number;
+  width?: number;
 }
 
-export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
+export function GalleryPreview({
+  imgUrl,
+  title,
+  date,
+  viewCount,
+  height = 180,
+  width = 300,
+}: Props) {
   // text color와 맞추기
   //const dimmedColor = colorScheme === "dark" ? theme.colors.dark[2] : theme.colors.gray[6];
 
@@ -29,8 +38,8 @@ export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
           <Image
             src={imgUrl}
             alt="gallery preview image"
-            height={178}
-            width={296}
+            height={height - 2}
+            width={width - 4}
             className={classes.image_view}
           />
         </CardSection>

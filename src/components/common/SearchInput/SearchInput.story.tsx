@@ -21,9 +21,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+
 export const Usage: Story = {
   args: {
     placeholder: "Input here to search...",
     iconSize: 16,
+    onChange: () => {},
   },
 };

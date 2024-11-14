@@ -1,3 +1,10 @@
-export default function EventNoticesPage() {
-  return <main>Hello, world!</main>;
+import { Suspense } from "react";
+import EventNoticesPage from "./EventNoticesPage";
+
+export default function EventNoticesPageSuspense() {
+  return (
+    <Suspense>
+      <EventNoticesPage />
+    </Suspense>
+  );
 }

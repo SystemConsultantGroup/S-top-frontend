@@ -1,0 +1,44 @@
+/* Full-width navbar */
+.subHeadNavbar {
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Banner section */
+.banner {
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+/* Main content section */
+.mainContent {
+  width: 80%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  padding-bottom: 200px;
+  padding-top: 80px;
+  position: relative;
+}
+
+/** 데스크탑 */
+
+@media screen and (max-width: 480px) {
+  /** 모바일 세로 */
+}
+
+@media screen and (max-width: 768px) {
+  /** 모바일 가로, 태블릿 세로 */
+}
+
+@media screen and (max-width: 1024px) {
+  /** 태블릿 가로 */
+}
+
+@media screen and (max-width: 1280px) {
+  /** 태블릿 가로, 노트북 */
+}

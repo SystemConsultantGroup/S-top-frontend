@@ -1,13 +1,16 @@
 import { Button } from "@mantine/core";
 import classes from "./ViewPostDetail.module.css";
+import Image from "next/image";
 
 export function ViewPostDetail({
   title,
   subtitle,
   articles,
+  img,
 }: {
   title: string;
   subtitle: string;
+  img: string;
   articles: string[];
 }) {
   return (
@@ -16,7 +19,9 @@ export function ViewPostDetail({
         <div className={classes.title}>{title}</div>
         <hr className={classes.hr}></hr>
         <div className={classes.subtitle}>{subtitle}</div>
-        <div className={classes.images}></div>
+        <div className={classes.images}>
+          <Image src={img} alt="" />
+        </div>
         <div className={classes.article}>
           {articles.map((e) => {
             return (

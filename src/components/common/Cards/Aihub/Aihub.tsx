@@ -46,8 +46,9 @@ export function AihubCard({
         <div className={classes.people}>{people}</div>
         <div className={classes.company}>{company}</div>
         <div className={classes.modeltext}>{model}</div>
-        <div className={classes.side}></div>
-        <Bookmark className={classes.Bookmark} />
+        <div className={classes.side}>
+          <Bookmark className={classes.Bookmark} />
+        </div>
       </div>
     </>
   );
