@@ -1,10 +1,31 @@
-import { INoticeDetailStage } from "@/types/PageBoardTypes";
-import { Group, Input, Button, Divider } from "@mantine/core";
-import { IconPlus, IconMinus, IconShare, IconPrinter } from "@tabler/icons-react";
+import {
+  Group,
+  Input,
+  Button,
+  Divider,
+  Menu,
+  MenuTarget,
+  MenuDropdown,
+  MenuItem,
+} from "@mantine/core";
+import {
+  IconPlus,
+  IconMinus,
+  IconShare,
+  IconPrinter,
+  IconPaperclip,
+  IconDownload,
+} from "@tabler/icons-react";
+import { IBoardAttachment } from "@/types/PageBoardTypes";
 import styles from "../NoticeDetail.module.css";
-import { FileDropdownMenu } from "./FileDropdownMenu";
 
-export function NoticeDetailStage({ attachment, children }: INoticeDetailStage) {
+interface INoticeDetailStage {
+  content: string;
+  files?: IBoardAttachment[];
+  handleDownloadClick?: (id: number, name: string) => void;
+}
+
+export function NoticeDetailStage({ content, files, handleDownloadClick }: INoticeDetailStage) {
   return (
     <div className={styles.stage}>
       <Group justify="flex-end" gap={5}>
@@ -34,9 +55,39 @@ export function NoticeDetailStage({ attachment, children }: INoticeDetailStage) 
 
         <Divider className={styles.divider} orientation="vertical" />
 
-        <FileDropdownMenu attachment={attachment} />
+        <Menu position="bottom-end" shadow="sm" offset={0} radius={0}>
+          <MenuTarget>
+            <Button className={`${styles.stageBtn} ${styles.stageFileBtn}`} variant="transparent">
+              <Group gap={5}>
+                <IconPaperclip />
+                <span>첨부파일 ({files?.length || 0})</span>
+              </Group>
+            </Button>
+          </MenuTarget>
+          {files ? (
+            <MenuDropdown className={styles.fileDropdown}>
+              {files.map((item, idx) => (
+                <MenuItem
+                  className={styles.dropdownItem}
+                  key={idx}
+                  leftSection={<IconPaperclip size={16} />}
+                  component="a"
+                  target="_blank"
+                  onClick={() => handleDownloadClick!(item.id, item.name)}
+                >
+                  {item.name}
+                </MenuItem>
+              ))}
+              <MenuItem className={styles.fileDownloadAll} leftSection={<IconDownload size={16} />}>
+                모두 다운로드
+              </MenuItem>
+            </MenuDropdown>
+          ) : (
+            ""
+          )}
+        </Menu>
       </Group>
-      <div className={styles.content}>{children}</div>
+      <div className={styles.content}>{content}</div>
     </div>
   );
 }
