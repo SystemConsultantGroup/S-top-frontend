@@ -37,6 +37,7 @@ export function useFiles() {
    */
   const uploadFiles = async (files: { id: string; file: File | null }[]) => {
     const fileIds: string[] = [];
+    const filesToUpload: FormData = new FormData();
 
     for (const { file, id } of files) {
       if (file) {
@@ -45,19 +46,7 @@ export function useFiles() {
           fileIds.push(id);
           continue;
         }
-
-        const formData = new FormData();
-        formData.append("file", file);
-
-
-    for (const { file, id } of files) {
-      if (file) {
-        // temp file의 경우에 id만 추가
-        if (file.size == 0) {
-          fileIds.push(id);
-          continue;
-        }
-
+        
         filesToUpload.append("files", file);
       }
     }
