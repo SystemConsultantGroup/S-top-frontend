@@ -1,5 +1,6 @@
 import { Input, InputProps, InputWrapper } from "@mantine/core";
 import { ReactNode } from "react";
+import styles from "./TextInput.module.css";
 
 interface IWrapperStyle {
   description?: string;
