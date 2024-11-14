@@ -1,7 +1,6 @@
 import { AdminNoticePreview } from "@/components/common/AdminNoticePreview/AdminNoticePreview";
 import { Statics, values } from "@/components/common/Statics/Statics";
 import { PageHeader } from "@/components/common/PageHeader";
-import "./layout.css";
 import classes from "./layout.module.css";
 
 const testdata = [
@@ -78,11 +77,11 @@ function Sinchung({ data }: { data?: sinchung[] }) {
         <table style={{ width: "100%" }}>
           <thead>
             <tr>
-              <td>ID</td>
-              <td>신청자</td>
-              <td>신청일</td>
-              <td>분류</td>
-              <td>비고</td>
+              <td style={{ alignItems: "center" }}>ID</td>
+              <td style={{ alignItems: "center" }}>신청자</td>
+              <td style={{ alignItems: "center" }}>신청일</td>
+              <td style={{ alignItems: "center" }}>분류</td>
+              <td style={{ alignItems: "center" }}>비고</td>
             </tr>
           </thead>
           <tbody>
@@ -93,11 +92,11 @@ function Sinchung({ data }: { data?: sinchung[] }) {
               return (
                 <>
                   <tr>
-                    <td>{i}</td>
-                    <td>{e.name}</td>
-                    <td>{e.date}</td>
-                    <td>{e.type}</td>
-                    <td>{e.etc}</td>
+                    <td style={{ alignItems: "center" }}>{i}</td>
+                    <td style={{ alignItems: "center" }}>{e.name}</td>
+                    <td style={{ alignItems: "center" }}>{e.date}</td>
+                    <td style={{ alignItems: "center" }}>{e.type}</td>
+                    <td style={{ alignItems: "center" }}>{e.etc}</td>
                   </tr>
                 </>
               );
@@ -137,16 +136,20 @@ function TodaysVisitor({
         >
           <tbody>
             <tr>
-              <td style={{ width: "50%", padding: 20 }}>총 접속자</td>
-              <td style={{ width: "50%", padding: 20 }}>{total}명</td>
+              <td style={{ width: "50%", padding: 20, alignItems: "center" }}>총 접속자</td>
+              <td style={{ width: "50%", padding: 20, alignItems: "center" }}>{total}명</td>
             </tr>
             <tr>
-              <td style={{ borderBlock: "1px dashed white", padding: 20 }}>오늘 접속자</td>
-              <td style={{ borderBlock: "1px dashed white", padding: 20 }}>{today}명</td>
+              <td style={{ borderBlock: "1px dashed white", padding: 20, alignItems: "center" }}>
+                오늘 접속자
+              </td>
+              <td style={{ borderBlock: "1px dashed white", padding: 20, alignItems: "center" }}>
+                {today}명
+              </td>
             </tr>
             <tr>
-              <td style={{ padding: 20 }}>일평균 접속자</td>
-              <td style={{ padding: 20 }}>{dailyAvg}명</td>
+              <td style={{ padding: 20, alignItems: "center" }}>일평균 접속자</td>
+              <td style={{ padding: 20, alignItems: "center" }}>{dailyAvg}명</td>
             </tr>
           </tbody>
         </table>
