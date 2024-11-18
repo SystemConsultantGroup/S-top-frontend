@@ -3,7 +3,7 @@
 import { PrimaryButton } from "@/components/common/Buttons";
 import { DataTableData } from "@/components/common/DataTable/elements/DataTableData";
 import { DataTableRow } from "@/components/common/DataTable/elements/DataTableRow";
-import { ProjectsCategoryLookupTable } from "@/constants/LookupTables";
+import { ProjectsCategoryLookupTable } from "@/constants/LookupTables/index";
 import { IProjectContent } from "@/types/project";
 import { getFileUrlById } from "@/utils/handleDownloadFile";
 import { Checkbox } from "@mantine/core";

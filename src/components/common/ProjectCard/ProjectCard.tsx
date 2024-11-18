@@ -21,9 +21,17 @@ export interface ProjectCardProps {
   data: ProjectCardDataType;
   width?: string;
   height?: string;
+  onClickLike: () => void;
+  onClickBookmark: () => void;
 }
 
-export function ProjectCard({ data, width, height }: ProjectCardProps) {
+export function ProjectCard({
+  data,
+  width,
+  height,
+  onClickLike,
+  onClickBookmark,
+}: ProjectCardProps) {
   const ParticipantsString = data.participants.join(", ");
   return (
     <Card className={classes.card} w={width} h={height}>
@@ -70,7 +78,12 @@ export function ProjectCard({ data, width, height }: ProjectCardProps) {
           </Group>
         </Stack>
       </CardSection>
-      <ProjectCardLikeSection likes={data.likes} isMarked={data.isMarked} />
+      <ProjectCardLikeSection
+        likes={data.likes}
+        isMarked={data.isMarked}
+        onClickLike={onClickLike}
+        onClickBookmark={onClickBookmark}
+      />
     </Card>
   );
 }

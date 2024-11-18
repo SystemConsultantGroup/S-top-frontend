@@ -11,7 +11,10 @@ import { PrimaryButton } from "@/components/common/Buttons";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { getYears } from "@/utils/getYears";
 import { AwardStatus, ProjectCategory, ProjectType } from "@/types/project";
-import { ProjectsCategoryLookupTable, ProjectsTypeLookupTable } from "@/constants/LookupTables";
+import {
+  ProjectsCategoryLookupTable,
+  ProjectsTypeLookupTable,
+} from "@/constants/LookupTables/index";
 import { useRouter } from "next/navigation";
 import { useFiles } from "@/hooks/useFiles/useFiles";
 import { CommonAxios } from "@/utils/CommonAxios";
@@ -79,15 +82,12 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
   const handleSubmit = async (values: ProjectEditFormInputs) => {
     try {
       const fileIds = { thumbnailId: values.thumbnailId, posterId: values.posterId };
+      // TODO: 파일 업로드 로직 수정
+      const uploadedThumbnail = await uploadFiles([{ id: "0", file: thumbnail }]);
+      fileIds.thumbnailId = Number(uploadedThumbnail[0]);
 
-      if (thumbnail?.arrayBuffer.length !== 0) {
-        const uploadedThumbnail = await uploadFiles([{ id: "0", file: thumbnail }]);
-        fileIds.thumbnailId = Number(uploadedThumbnail[0]);
-      }
-      if (poster?.arrayBuffer.length !== 0) {
-        const uploadedPoster = await uploadFiles([{ id: "0", file: poster }]);
-        fileIds.posterId = Number(uploadedPoster[0]);
-      }
+      const uploadedPoster = await uploadFiles([{ id: "0", file: poster }]);
+      fileIds.posterId = Number(uploadedPoster[0]);
 
       const professorsArr = professors?.split(",").map((professor) => ({
         name: professor,

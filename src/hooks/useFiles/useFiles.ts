@@ -46,7 +46,7 @@ export function useFiles() {
           fileIds.push(id);
           continue;
         }
-        
+
         filesToUpload.append("files", file);
       }
     }

@@ -42,6 +42,7 @@ export const INTERVIEW_TABLE_HEADERS: DataTableHeaderProps[] = [
   { label: "소속", widthPercentage: 20, sort: true, selector: "talkerBelonging" },
   { label: "이름", widthPercentage: 20, sort: true, selector: "talkerName" },
   { label: "작성일", widthPercentage: 10, sort: true, selector: "createdAt" },
+];
 
 export const PROJECT_TABLE_HEADERS: DataTableHeaderProps[] = [
   { label: "순번", widthPercentage: 7, sort: true, selector: "id" },

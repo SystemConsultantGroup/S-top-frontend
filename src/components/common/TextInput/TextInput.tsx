@@ -31,7 +31,15 @@ export function TextInput({
 }: InputProps & TextInputPropsType) {
   return (
     <InputWrapper classNames={wrapperClasses} label={label} description={description} error={error}>
-      <Input placeholder={placeholder} onChange={onChange} {...props} value={initialValue} />
+      <Input
+        classNames={{
+          input: styles.input,
+        }}
+        placeholder={placeholder}
+        onChange={onChange}
+        {...props}
+        value={initialValue}
+      />
     </InputWrapper>
   );
 }
