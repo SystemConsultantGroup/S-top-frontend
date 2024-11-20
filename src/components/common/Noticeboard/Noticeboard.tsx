@@ -56,7 +56,7 @@ export function Noticeboard({
               items.map((item, key) => <NoticeItem key={key} {...item} />)
             ) : (
               <li className={styles.item}>
-                <span>공지사항이 없습니다.</span>
+                <span>등록된 글이 없습니다.</span>
               </li>
             )}
           </ul>
