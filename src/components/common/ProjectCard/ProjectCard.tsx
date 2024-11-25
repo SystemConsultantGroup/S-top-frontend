@@ -13,8 +13,8 @@ export interface ProjectCardProps {
   thumbnailUrl: string;
   width?: string;
   height?: string;
-  onClickLike?: () => void;
-  onClickBookmark?: () => void;
+  onClickLike: () => void;
+  onClickBookmark: () => void;
 }
 
 export function ProjectCard({

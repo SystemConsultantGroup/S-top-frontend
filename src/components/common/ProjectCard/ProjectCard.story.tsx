@@ -22,5 +22,7 @@ export const Usage: Story = {
   args: {
     data: data,
     thumbnailUrl: "/images/mock-project-thumbnail.png",
+    onClickBookmark: () => {},
+    onClickLike: () => {},
   },
 };

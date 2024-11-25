@@ -5,6 +5,9 @@
 
 .navtit {
   margin: 0 30px;
+  height: 80px;
+  display: flex;
+  align-items: center;
 
   & > h3 {
     margin: 0;
@@ -34,8 +37,8 @@
   }
 
   & > div {
-    padding: 0 40px;
     height: 80px;
+    padding: 0 40px;
     display: flex;
     align-items: center;
   }

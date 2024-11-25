@@ -13,6 +13,7 @@ import { IOption } from "./type";
 import styles from "./Projects.module.css";
 import { ProjectBoard, ProjectFilterBox, ProjectSelectTab } from "./(utils)";
 import { useWindowSize } from "@/hooks/useWindowSize";
+import { getFileUrlById } from "@/utils/handleDownloadFile";
 
 export default function ProjectsPage() {
   /**
@@ -71,12 +72,8 @@ export default function ProjectsPage() {
   useEffect(() => {
     if (data && data.length) {
       const loadImages = async () => {
-        // const promises = data.map((item) => getFileUrlById(item.thumbnailInfo.id));
-        // const urls = await Promise.all(promises);
-        /** TODO: minio 대체 */
-        const urls = Array(data.length).fill(
-          "https://www.hellot.net/data/photos/20231252/art_17039301013143_a3d6ec.jpg"
-        );
+        const promises = data.map((item) => getFileUrlById(item.thumbnailInfo.id));
+        const urls = await Promise.all(promises);
         setThumbnails(urls);
       };
       loadImages();

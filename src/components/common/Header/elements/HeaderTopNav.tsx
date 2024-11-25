@@ -8,14 +8,24 @@ export function HeaderTopNav() {
       <ul>
         {USER_NAVS.map((topic, idx) => (
           <li key={idx}>
-            <div>{topic.title}</div>
-            <ul>
-              {topic.items.map((item, idx) => (
-                <li key={idx}>
-                  <Link href={item.link}>{item.name}</Link>
-                </li>
-              ))}
-            </ul>
+            <div>
+              {topic.link ? (
+                <Link href={topic.link} style={{ textDecoration: "none", color: "inherit" }}>
+                  {topic.title}
+                </Link>
+              ) : (
+                topic.title
+              )}
+            </div>
+            {topic.items && (
+              <ul>
+                {topic.items.map((item, idx) => (
+                  <li key={idx}>
+                    <Link href={item.link}>{item.name}</Link>
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
         ))}
       </ul>

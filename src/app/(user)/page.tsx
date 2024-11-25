@@ -14,6 +14,8 @@ import { ITalkContent } from "@/types/talks";
 import { IGalleryContent } from "@/types/galleries";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { GenerateCardsRow, getItemCountPerRow } from "@/components/pages/ItemGrid";
+import { getFileUrlById } from "@/utils/handleDownloadFile";
+import { CommonAxios } from "@/utils/CommonAxios";
 
 type Content = IProjectContent | ITalkContent | IGalleryContent;
 
@@ -28,9 +30,12 @@ export default function Home() {
 
   const projectHeadData = useRef<IProjectContent[]>([]);
   const projectThumbnails = useRef<string[]>([]);
+  const projectIsLikes = useRef<boolean[]>([]);
+  const projectIsMarks = useRef<boolean[]>([]);
 
   const talkHeadData = useRef<ITalkContent[]>([]);
   const talkThumbnails = useRef<string[]>([]);
+  const talkIsMarks = useRef<boolean[]>([]);
 
   const galleryHeadData = useRef<IGalleryContent[]>([]);
   const galleryThumbnails = useRef<string[]>([]);
@@ -51,18 +56,9 @@ export default function Home() {
 
   useEffect(() => {
     const targets = [
-      {
-        type: "PROJECT",
-        url: "/projects",
-      },
-      {
-        type: "TALK",
-        url: "/talks",
-      },
-      {
-        type: "GALLERY",
-        url: "/galleries",
-      },
+      { type: "PROJECT", url: "/projects" },
+      { type: "TALK", url: "/talks" },
+      { type: "GALLERY", url: "/galleries" },
     ];
 
     const dataSources = [
@@ -72,45 +68,44 @@ export default function Home() {
     ];
 
     const fetchThumbnails = async (items: Content[], type: string) => {
-      if (type === "PROJECT") {
-        // return Promise.all(
-        //   (items as IProjectContent[]).map(
-        //     async (item) => await getFileUrlById(item.thumbnailInfo.id)
-        //   )
-        // );
-        /** TODO: minio 대체 */
-        return Array(items.length).fill(
-          "https://www.hellot.net/data/photos/20231252/art_17039301013143_a3d6ec.jpg"
-        );
-      } else if (type === "TALK") {
-        return (items as ITalkContent[]).map(
-          (item) => `https://www.youtube.com/embed/${item.youtubeId}`
-        );
-      } else if (type === "GALLERY") {
-        // return Promise.all(
-        //   (items as IGalleryContent[]).map(async (item) => await getFileUrlById(item.files[0].id))
-        // );
-        /** TODO: minio 대체 */
-        return Array(items.length).fill(
-          "https://www.hellot.net/data/photos/20231252/art_17039301013143_a3d6ec.jpg"
-        );
+      switch (type) {
+        case "PROJECT":
+          return Promise.all(
+            (items as IProjectContent[]).map((item) => getFileUrlById(item.thumbnailInfo.id))
+          );
+        case "TALK":
+          return (items as ITalkContent[]).map(
+            (item) => `https://www.youtube.com/embed/${item.youtubeId}`
+          );
+        case "GALLERY":
+          return Promise.all(
+            (items as IGalleryContent[]).map((item) => getFileUrlById(item.files[0].id))
+          );
+        default:
+          return [];
       }
     };
 
     const fetchData = async () => {
       const promises = dataSources.map(async ({ headData, thumbnail, type }) => {
-        const data = await fetcher({
-          url: targets.find((item) => item.type === type)!.url,
-          query: { page: 0, size: 4 },
-        });
-        headData.current = data.content;
+        try {
+          const target = targets.find((item) => item.type === type);
+          if (!target) throw new Error(`Target not found for type: ${type}`);
 
-        const thumbnails = await fetchThumbnails(data.content, type);
-        thumbnail.current = thumbnails as string[];
+          const data = await fetcher({ url: target.url, query: { page: 0, size: 4 } });
+          headData.current = data.content;
+
+          thumbnail.current = await fetchThumbnails(data.content, type);
+        } catch {
+          thumbnail.current = [];
+        }
       });
 
-      await Promise.all(promises);
-      setLoaded(true);
+      try {
+        await Promise.all(promises);
+      } finally {
+        setLoaded(true);
+      }
     };
 
     fetchData();
@@ -136,8 +131,36 @@ export default function Home() {
                   const rowCount = getItemCountPerRow(screenWidth);
 
                   const props = headData.map((data, idx) => {
+                    projectIsLikes.current[idx] = data.like;
                     const thumbnailUrl = projectThumbnails.current[idx];
-                    return { data, thumbnailUrl };
+                    const handleClickLike = () => {
+                      if (projectIsLikes.current[idx]) {
+                        // 좋아요 취소할 경우
+                        projectIsLikes.current[idx] = false;
+                        CommonAxios.delete(`/projects/${data.id}/like`);
+                      } else {
+                        // 좋아요 추가할 경우
+                        projectIsLikes.current[idx] = true;
+                        CommonAxios.post(`/projects/${data.id}/like`);
+                      }
+                    };
+                    const handleClickMark = () => {
+                      if (projectIsMarks.current[idx]) {
+                        // 북마크 취소할 경우
+                        projectIsMarks.current[idx] = false;
+                        CommonAxios.delete(`/projects/${data.id}/favorite`);
+                      } else {
+                        // 북마크 추가할 경우
+                        projectIsMarks.current[idx] = true;
+                        CommonAxios.post(`/projects/${data.id}/favorite`);
+                      }
+                    };
+                    return {
+                      data,
+                      thumbnailUrl,
+                      onClickLike: handleClickLike,
+                      onClickBookmark: handleClickMark,
+                    };
                   });
 
                   return (
@@ -147,7 +170,7 @@ export default function Home() {
                       props={props}
                       length={headData.length}
                       rowCount={rowCount}
-                      cardWidth="320px"
+                      cardWidth="300px"
                     />
                   );
                 })(),
@@ -164,12 +187,25 @@ export default function Home() {
                   const rowCount = getItemCountPerRow(screenWidth);
 
                   const props = headData.map((data, idx) => {
+                    talkIsMarks.current[idx] = data.favorite;
                     const videoUrl = talkThumbnails.current[idx];
+                    const handleClickMark = () => {
+                      if (talkIsMarks.current[idx]) {
+                        // 북마크 취소할 경우
+                        talkIsMarks.current[idx] = false;
+                        CommonAxios.delete(`/talks/${data.id}/favorite`);
+                      } else {
+                        // 북마크 추가할 경우
+                        talkIsMarks.current[idx] = true;
+                        CommonAxios.post(`/talks/${data.id}/favorite`);
+                      }
+                    };
                     return {
                       title: data.title,
                       subtitle: data.talkerName,
                       videoUrl,
                       bookmarked: data.favorite,
+                      onBookmarkToggle: handleClickMark,
                     };
                   });
 
@@ -180,7 +216,7 @@ export default function Home() {
                       props={props}
                       length={headData.length}
                       rowCount={rowCount}
-                      cardWidth="320px"
+                      cardWidth="300px"
                     />
                   );
                 })(),
@@ -213,7 +249,7 @@ export default function Home() {
                       props={props}
                       length={headData.length}
                       rowCount={rowCount}
-                      cardWidth="320px"
+                      cardWidth="300px"
                     />
                   );
                 })(),
