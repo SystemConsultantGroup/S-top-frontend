@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 50px;
   gap: 30px;
   position: relative;
   background: var(--color-surfaceContainerLowest);
@@ -15,18 +15,28 @@
   word-wrap: break-word;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  /* Add gap between form elements */
+}
+
 .registerBox label {
   margin-bottom: 10px;
 }
 
 .text {
-  width: 300px;
+  width: 400px;
   height: 12%;
 }
 
 .logo {
   margin-bottom: 0px;
-  width: 150px;
+  width: 180px;
   height: auto;
 }
 
@@ -57,7 +67,7 @@
   }
 
   .logo {
-    width: 110px;
+    width: 160px;
   }
 
   .text {
@@ -73,7 +83,7 @@
   }
 
   .logo {
-    width: 90px;
+    width: 110px;
   }
 
   .text {
@@ -89,7 +99,7 @@
   }
 
   .logo {
-    width: 75px;
+    width: 90px;
   }
 
   .text {

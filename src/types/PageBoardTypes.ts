@@ -1,5 +1,5 @@
 import { ComboboxItem } from "@mantine/core";
-import { ChangeEvent, KeyboardEvent, MouseEvent, ReactNode } from "react";
+import { ChangeEvent } from "react";
 
 /** Noticeboard Types */
 interface INoticeClassifierItem {
@@ -14,14 +14,12 @@ export interface INoticeClassifier {
 }
 
 export interface INoticeAllItem {
+  id: number;
   title: string;
-  number: number;
-  author: string;
-  date: Date;
-  view: number;
-  pinned: boolean;
-  href: string;
-  contentTxt: string;
+  hitCount: number;
+  fixed: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface INoticeHeading {
@@ -30,46 +28,44 @@ export interface INoticeHeading {
 }
 
 export interface INoticeContent {
-  items: INoticeAllItem[];
+  items?: INoticeAllItem[];
 }
 
 export interface INoticeHandler {
-  inputValue: string;
-  handleInput: (event: MouseEvent | ChangeEvent, payload?: unknown) => void;
-  handleKeyDown: (event: KeyboardEvent, payload?: unknown) => void;
+  handleInput: (event: ChangeEvent<HTMLInputElement>, payload?: unknown) => void;
   handleSelect: (value: string | null, option?: ComboboxItem) => void;
-  handleSubmit: (event: MouseEvent, payload?: unknown) => void;
 }
 
 /** Noticeboard Detail Types */
 export interface IBoardAttachment {
+  id: number;
+  uuid: string;
   name: string;
-  url: string;
+  mimeType: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
-interface INavigationPage {
+export interface INoticeDetailItem {
+  id: number;
+  title: string;
+  content: string;
+  hitCount: number;
+  fixed: boolean;
+  createdAt: string;
+  updatedAt: string;
+  files?: IBoardAttachment[];
+}
+
+/** Noticeboard Detail Navigation */
+interface INavItem {
   title: string;
   url: string;
-}
-
-export type INoticeDetailItem = INoticeDetailHead & INoticeDetailStage & INoticeDetailNav;
-
-export interface INoticeDetailHead {
-  title: string;
-  author: string;
-  created_date: Date;
-  edited_date: Date;
-  pinned: boolean;
-}
-
-export interface INoticeDetailStage {
-  attachment?: IBoardAttachment[];
-  children?: ReactNode;
 }
 
 export interface INoticeDetailNav {
-  prev_page?: INavigationPage;
-  next_page?: INavigationPage;
+  prev_page?: INavItem;
+  next_page?: INavItem;
 }
 
 /** Board Pagination Types */

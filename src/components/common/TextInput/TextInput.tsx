@@ -1,5 +1,6 @@
 import { Input, InputProps, InputWrapper } from "@mantine/core";
 import { ReactNode } from "react";
+import styles from "./TextInput.module.css";
 
 interface IWrapperStyle {
   description?: string;
@@ -14,6 +15,7 @@ type TextInputPropsType = {
   error?: string | ReactNode;
   placeholder?: string;
   wrapperClasses?: IWrapperStyle;
+  initialValue?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -23,12 +25,21 @@ export function TextInput({
   error,
   placeholder,
   wrapperClasses,
+  initialValue,
   onChange,
   ...props
 }: InputProps & TextInputPropsType) {
   return (
     <InputWrapper classNames={wrapperClasses} label={label} description={description} error={error}>
-      <Input placeholder={placeholder} onChange={onChange} {...props} />
+      <Input
+        classNames={{
+          input: styles.input,
+        }}
+        placeholder={placeholder}
+        onChange={onChange}
+        {...props}
+        value={initialValue}
+      />
     </InputWrapper>
   );
 }

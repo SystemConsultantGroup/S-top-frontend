@@ -27,7 +27,7 @@ export function ProjectCard({
 }: ProjectCardProps) {
   const studentsString = data.studentNames.join(", ");
   const professorString = data.professorNames.join(", ");
-
+  
   return (
     <Card className={classes.card} w={width} h={height}>
       <CardSection className={classes["img-section"]}>

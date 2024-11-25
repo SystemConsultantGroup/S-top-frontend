@@ -163,6 +163,7 @@
 }
 
 .content {
+  margin-top: 10px;
   /* color: var(--color-text); */
   color: var(--mantine-color-text);
 }
@@ -202,17 +203,5 @@
     color: var(--mantine-color-text);
     /* background-color: var(--color-coverHover); */
     background-color: var(--color-surfaceVarient);
-  }
-}
-
-.filledTool {
-  /* background-color: var(--color-secondary1); */
-  background-color: var(--color-secondary);
-  color: var(--color-surface);
-
-  &:hover {
-    /* background-color: var(--color-secondaryHover); */
-    background-color: var(--color-secondary);
-    color: var(--color-surface);
   }
 }
