@@ -25,10 +25,12 @@ export interface IProjectContent {
   projectType: ProjectType;
   projectCategory: ProjectCategory;
   awardStatus: ProjectAwardStatus;
-  techStacks: string[];
+  year: number;
   likeCount: number;
   like: boolean;
   bookMark: boolean;
+  url: string;
+  description: string;
 }
 
 export type ProjectType = "RESEARCH_AND_BUSINESS_FOUNDATION" | "LAB" | "STARTUP" | "CLUB";
