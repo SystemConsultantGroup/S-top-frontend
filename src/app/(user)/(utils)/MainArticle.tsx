@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { Stack, Group, ActionIcon } from "@mantine/core";
 import { IconSquarePlus } from "@tabler/icons-react";
 import styles from "../Main.module.css";
+import { useRouter } from "next/navigation";
 
 type Alignment = "left" | "center" | "right";
 
@@ -10,10 +11,10 @@ interface IArticleTitle {
   align?: Alignment;
 }
 
-type IArticleDetail = {
+interface IArticleDetail {
   uri: string;
   align?: Alignment;
-};
+}
 
 interface IMainArticle {
   className?: string;
@@ -28,17 +29,25 @@ export function MainArticle({ className, title, detailUri, itemHead }: IMainArti
 
   const headingJustify = getHeadingJustify(titleAlign, uriAlign);
 
+  const router = useRouter();
+
   return (
     <>
       <Stack className={className} gap={10}>
         <Group className={styles.articleHead} justify={headingJustify.justify} gap={5}>
           <div style={{ display: headingJustify.display }}></div>
           <h2>{title.text}</h2>
-          <ActionIcon variant="transparent" size="xl">
+          <ActionIcon
+            variant="transparent"
+            size="xl"
+            onClick={() => router.push(detailUri ? detailUri.uri : "#")}
+          >
             <IconSquarePlus className={styles.articleDetail} size={48} stroke={1.5} />
           </ActionIcon>
         </Group>
-        <Group justify="space-between">{itemHead}</Group>
+        <Group justify="space-between" align="baseline">
+          {itemHead}
+        </Group>
       </Stack>
     </>
   );

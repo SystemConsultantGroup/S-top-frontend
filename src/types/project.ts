@@ -1,9 +1,10 @@
 import { PagedApiResponse } from "./common";
 
-export interface IProjectParams {
+export interface IProjectRequestParams {
   title?: string;
-  year?: number;
-  category?: ProjectCategory;
+  year?: string | null;
+  category?: string | null;
+  type?: string | null;
   page?: number;
   size?: number;
   sort?: string;
@@ -23,12 +24,13 @@ export interface IProjectContent {
   professorNames: string[];
   projectType: ProjectType;
   projectCategory: ProjectCategory;
-  awardStatus: AwardStatus;
-  techStacks: string[];
+  awardStatus: ProjectAwardStatus;
+  year: number;
   likeCount: number;
   like: boolean;
   bookMark: boolean;
-  year: number;
+  url: string;
+  description: string;
 }
 
 export type ProjectType = "RESEARCH_AND_BUSINESS_FOUNDATION" | "LAB" | "STARTUP" | "CLUB";
@@ -43,6 +45,6 @@ export type ProjectCategory =
   | "AI_MACHINE_LEARNING"
   | "INTERACTION_AUGMENTED_REALITY";
 
-export type AwardStatus = "NONE" | "FIRST" | "SECOND" | "THIRD" | "FOURTH" | "FIFTH";
+export type ProjectAwardStatus = "NONE" | "FIRST" | "SECOND" | "THIRD" | "FOURTH" | "FIFTH";
 
 export interface IProjectResponse extends PagedApiResponse<IProjectContent> {}

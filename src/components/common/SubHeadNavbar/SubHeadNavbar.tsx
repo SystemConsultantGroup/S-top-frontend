@@ -19,13 +19,14 @@ export function SubHeadNavbar({ title }: ISubHeadNavbar) {
           </div>
           <div className={styles.navlist}>
             <ul>
-              {NavTitList.map((item, idx) => (
-                <li className={styles.navitem} key={idx}>
-                  <div>
-                    <Link href={item.link}>{item.name}</Link>
-                  </div>
-                </li>
-              ))}
+              {NavTitList &&
+                NavTitList.map((item, idx) => (
+                  <li className={styles.navitem} key={idx}>
+                    <div>
+                      <Link href={item.link}>{item.name}</Link>
+                    </div>
+                  </li>
+                ))}
             </ul>
           </div>
         </Group>

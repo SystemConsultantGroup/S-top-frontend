@@ -33,13 +33,17 @@ export function GalleryPreview({
 
   return (
     <>
-      <Card padding="sm" radius="md" style={{ paddingBottom: 0, display: "inline-block" }}>
+      <Card
+        padding="sm"
+        radius="md"
+        style={{ width: width, paddingBottom: 0, display: "inline-block" }}
+      >
         <CardSection className={classes.image_section}>
           <Image
             src={imgUrl}
             alt="gallery preview image"
-            height={height - 2}
-            width={width - 4}
+            height={height}
+            width={width - 16}
             className={classes.image_view}
           />
         </CardSection>

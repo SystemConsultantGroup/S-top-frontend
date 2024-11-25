@@ -7,16 +7,18 @@ import { HeaderTopNav } from "./elements/HeaderTopNav";
 import { HeaderToolBar } from "./elements/HeaderToolBar";
 import { HandoutOverview } from "./elements/HandoutOverview";
 import { HandoutShortcut } from "./elements/HandoutShortcut";
+import { useAuth } from "../Auth";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const { isLoggedIn } = useAuth();
 
   return (
     <>
       <div className={styles.header} role="banner">
         <HeaderSymbol />
         <HeaderTopNav />
-        <HeaderToolBar isOpen={isOpen} setIsOpen={setIsOpen} />
+        <HeaderToolBar isOpen={isOpen} setIsOpen={setIsOpen} isLoggedIn={isLoggedIn} />
       </div>
       <div className={`${styles.handout} ${isOpen ? styles.show : ""}`}>
         <HandoutOverview />

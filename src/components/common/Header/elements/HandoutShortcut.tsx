@@ -5,7 +5,7 @@ export function HandoutShortcut() {
   return (
     <div className={styles.shortcuts}>
       <div>
-        <Link href="/#">VR 바로가기</Link>
+        <Link href="/kingoverse">VR 바로가기</Link>
       </div>
       <div>
         <Link href="https://www.skku.edu/skku/index.do">성균관대학교</Link>
