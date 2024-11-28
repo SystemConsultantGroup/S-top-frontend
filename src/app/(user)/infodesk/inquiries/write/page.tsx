@@ -32,7 +32,7 @@ export default function InquiryWritePage() {
     router.push(`/projects/${projectId}`);
   };
   useEffect(() => {
-    if (projectId) {
+    if (typeof window !== "undefined" && projectId) {
       // 여기는 또 is loading 쓰면 작동이 안되네요??
       console.log("Project ID:", projectId);
       //console.log('Token:', token);
