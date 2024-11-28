@@ -1,15 +1,91 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar/SubHeadNavbar";
 import { Banner } from "@/components/common/Banner/Banner";
 import { TextInput } from "@/components/common/TextInput";
-import { CheckBox } from "@/components/common/CheckBox/CheckBox";
+import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
 import { PrimaryButton } from "@/components/common/Buttons/PrimaryButton/PrimaryButton";
-
+import { useAuth } from "@/components/common/Auth/AuthProvider";
 import classes from "./writeQA.module.css";
 
+import { Textarea, Modal } from "@mantine/core";
+
+interface FormData {
+  title: string;
+  content: string;
+}
+
 export default function InquiryWritePage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [project, setProject] = useState<any>(null);
+  const projectId = searchParams.get("id");
+
+  const { token } = useAuth();
+
+  const [modalOpened, setModalOpened] = useState(false); // Modal state
+
+  const handleGoToProjectDetails = () => {
+    router.push(`/projects/${projectId}`);
+  };
+  useEffect(() => {
+    if (projectId) {
+      // 여기는 또 is loading 쓰면 작동이 안되네요??
+      console.log("Project ID:", projectId);
+      //console.log('Token:', token);
+      const fetchProject = async () => {
+        try {
+          const response = await CommonAxios.get(`/projects/${projectId}`);
+          console.log("Fetched project:", response.data);
+          setProject(response.data);
+        } catch (error) {
+          console.error("Error fetching project data:", error);
+        }
+      };
+      fetchProject();
+    }
+  }, [projectId, token]);
+
+  const handleBackToList = () => {
+    router.push("/infodesk/inquiries");
+  };
+
+  const [formData, setFormData] = useState<FormData>({
+    title: "",
+    content: "",
+  });
+
+  const handleChange = (field: string, value: any) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [field]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const dataToSend = {
+      title: formData.title,
+      content: formData.content,
+    };
+    /*
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+      withCredentials: true,
+    };*/
+
+    try {
+      const response = await CommonAxios.post(`/projects/${projectId}/inquiry`, dataToSend);
+
+      console.log("Inquiry submitted: ", response.data);
+      setModalOpened(true);
+    } catch (error) {
+      console.error("Error submitting inquiry: ", error);
+    }
+  };
+
   return (
     <>
       <div className={classes.subHeadNavbar}>
@@ -26,69 +102,50 @@ export default function InquiryWritePage() {
         />
       </div>
 
+      <h1 className={classes.heading}>프로젝트 문의</h1>
       <div className={classes.mainContent}>
-        <h1 className={classes.heading}>산학협력 과제 제안</h1>
-
-        <div className={classes.formRow}>
-          <TextInput label="이메일" placeholder="이메일을 입력하세요" />
-        </div>
-
-        <div className={classes.formRow}>
-          <TextInput label="웹사이트" placeholder="웹사이트를 입력하세요" />
-        </div>
-
-        <div className={classes.formRow}>
-          <TextInput label="프로젝트명" placeholder="프로젝트명을 입력하세요" />
-        </div>
-
-        <div className={classes.formRow}>
-          <label>프로젝트 분야</label>
-          <div className={classes.checkboxGroup}>
-            <CheckBox label="AI" />
-            <CheckBox label="Web Development" />
-            <CheckBox label="Mobile App" />
+        <h3 className={classes.projName}>{project ? project.projectName : "Loading..."}</h3>
+        <form onSubmit={handleSubmit}>
+          <div className={classes.formRow}>
+            <TextInput
+              label="문의 제목"
+              placeholder="제목을 입력하세요"
+              onChange={(e) => handleChange("title", e.target.value)}
+            />
           </div>
-        </div>
 
-        <div className={classes.formRow}>
-          <TextInput label="제목" placeholder="제목을 입력하세요" />
-        </div>
-
-        <div className={classes.formRow}>
-          <TextInput label="과제 요약" placeholder="과제 요약을 입력하세요" />
-        </div>
-
-        <div className={classes.formRow}>
-          <TextInput label="과제 설명" placeholder="과제 설명을 입력하세요" />
-        </div>
-
-        <div className={classes.formRow}>
-          <PrimaryButton>첨부파일 추가</PrimaryButton>
-        </div>
-
-        <div className={classes.formFile}>
-          <div className={classes.InputWrapper}>
-            <TextInput label="첨부파일 1" placeholder="" />
+          <div className={classes.formRow}>
+            <Textarea
+              label="문의 내용"
+              placeholder="문의 내용을 입력하세요"
+              minRows={15}
+              autosize
+              onChange={(e) => handleChange("content", e.target.value)}
+            />
           </div>
-          <div className={classes.buttonWrapper}>
-            <PrimaryButton style={{ backgroundColor: "#FF6B6B" }}>삭제</PrimaryButton>
+          <br />
+          <div className={classes.formActions}>
+            <PrimaryButton type="submit" style={{ marginRight: "10px" }}>
+              작성하기
+            </PrimaryButton>
+            <PrimaryButton onClick={handleBackToList}>문의 목록으로</PrimaryButton>
           </div>
-        </div>
-
-        <div className={classes.formFile}>
-          <div className={classes.InputWrapper}>
-            <TextInput label="첨부파일 2" placeholder="" />
-          </div>
-          <div className={classes.buttonWrapper}>
-            <PrimaryButton style={{ backgroundColor: "#FF6B6B" }}>삭제</PrimaryButton>
-          </div>
-        </div>
-
-        <div className={classes.formActions}>
-          <PrimaryButton style={{ marginRight: "10px" }}>작성하기</PrimaryButton>
-          <PrimaryButton>목록으로</PrimaryButton>
-        </div>
+        </form>
       </div>
+
+      <Modal
+        opened={modalOpened}
+        onClose={() => setModalOpened(false)}
+        title="문의 작성이 완료되었습니다."
+        centered
+      >
+        <div className={classes.modalActions}>
+          <PrimaryButton onClick={handleGoToProjectDetails}>프로젝트 상세 보기</PrimaryButton>
+          <PrimaryButton style={{ marginLeft: "10px" }} onClick={handleBackToList}>
+            문의 목록 보기
+          </PrimaryButton>
+        </div>
+      </Modal>
     </>
   );
 }
