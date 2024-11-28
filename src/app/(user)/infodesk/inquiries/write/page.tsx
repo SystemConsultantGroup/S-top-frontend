@@ -21,7 +21,8 @@ export default function InquiryWritePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [project, setProject] = useState<any>(null);
-  const projectId = searchParams.get("id");
+  //const projectId = searchParams.get("id");
+  const projectId = typeof window !== "undefined" ? searchParams.get("id") : null;
 
   const { token } = useAuth();
 
