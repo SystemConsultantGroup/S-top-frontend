@@ -9,14 +9,15 @@ export interface VideoCardProps {
   title: string;
   subtitle: string;
   videoUrl: string;
-  bookmarked?: boolean;
-  onBookmarkToggle?: () => void;
+  bookmarked: boolean;
+  onBookmarkToggle: () => void;
 }
 export const VideoCard: React.FC<VideoCardProps> = ({
   title,
   subtitle,
   videoUrl,
   bookmarked: initialBookmarked = false,
+  onBookmarkToggle,
 }) => {
   const [bookmarked, setBookmarked] = useState(initialBookmarked);
   const [quizModalOpened, setQuizModalOpened] = useState(false);
@@ -27,6 +28,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
 
   const handleBookmarkClick = () => {
     setBookmarked(!bookmarked);
+    onBookmarkToggle();
   };
 
   const openQuizModal = () => {
