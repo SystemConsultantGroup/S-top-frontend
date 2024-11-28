@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar/SubHeadNavbar";
 import { Banner } from "@/components/common/Banner/Banner";
@@ -17,12 +17,12 @@ interface FormData {
   content: string;
 }
 
-export default function InquiryWritePage() {
+function InquiryWritePageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [project, setProject] = useState<any>(null);
   //const projectId = searchParams.get("id");
-  const projectId = typeof window !== "undefined" ? searchParams.get("id") : null;
+  const projectId = searchParams.get("id");
 
   const { token } = useAuth();
 
@@ -32,14 +32,14 @@ export default function InquiryWritePage() {
     router.push(`/projects/${projectId}`);
   };
   useEffect(() => {
-    if (typeof window !== "undefined" && projectId) {
+    if (projectId) {
       // 여기는 또 is loading 쓰면 작동이 안되네요??
-      console.log("Project ID:", projectId);
+      //console.log("Project ID:", projectId);
       //console.log('Token:', token);
       const fetchProject = async () => {
         try {
           const response = await CommonAxios.get(`/projects/${projectId}`);
-          console.log("Fetched project:", response.data);
+          //console.log("Fetched project:", response.data);
           setProject(response.data);
         } catch (error) {
           console.error("Error fetching project data:", error);
@@ -133,7 +133,6 @@ export default function InquiryWritePage() {
           </div>
         </form>
       </div>
-
       <Modal
         opened={modalOpened}
         onClose={() => setModalOpened(false)}
@@ -148,5 +147,12 @@ export default function InquiryWritePage() {
         </div>
       </Modal>
     </>
+  );
+}
+export default function InquiryWritePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <InquiryWritePageContent />
+    </Suspense>
   );
 }
