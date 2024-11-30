@@ -42,7 +42,12 @@ export function EventAwardView() {
         {mock_projects.map((data, idx) => (
           <CarouselSlide key={idx}>
             <Text className={classes.awardType}>{mock_awards[idx]}</Text>
-            <ProjectCard data={data} />
+            <ProjectCard
+              data={data}
+              thumbnailUrl={""}
+              onClickBookmark={() => {}}
+              onClickLike={() => {}}
+            />
           </CarouselSlide>
         ))}
       </Carousel>
