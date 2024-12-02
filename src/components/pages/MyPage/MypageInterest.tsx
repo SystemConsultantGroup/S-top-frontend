@@ -9,7 +9,6 @@ import { Carousel, CarouselSlide } from "@mantine/carousel";
 import { VideoCard } from "@/components/common/VideoCard/VideoCard";
 import { IconReportSearch } from "@tabler/icons-react";
 
-import { IVideoCard, MockInterestProjects, MockInterestVideos } from "./_mock/mock-user";
 import { PrimaryButton } from "@/components/common/Buttons";
 import { IProjectContent } from "@/types/project";
 import { CommonAxios } from "@/utils/CommonAxios";

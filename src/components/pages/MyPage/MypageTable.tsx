@@ -2,7 +2,7 @@ import { CommonAxios } from "@/utils/CommonAxios";
 import classes from "./MypageTable.module.css";
 import { Text, Table, TableThead, TableTbody, TableTh, TableTr, TableTd } from "@mantine/core";
 import { IUserInquiry, IUserProposal } from "@/types/user";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function MypageTable() {
   const [proposals, setProposals] = useState<IUserProposal[]>([]);
@@ -33,6 +33,11 @@ export function MypageTable() {
     } finally {
     }
   };
+
+  useEffect(() => {
+    fetchInquiries();
+    fetchProposals();
+  });
 
   /**
    * 날짜 형식 (YYYY.MM.DD)
