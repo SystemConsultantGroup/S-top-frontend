@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import classes from "./MypageView.module.css";
-import { ProjectCard, ProjectCardDataType } from "@/components/common/ProjectCard/ProjectCard";
+import { ProjectCard } from "@/components/common/ProjectCard";
 import { Text } from "@mantine/core";
 import { Carousel, CarouselSlide } from "@mantine/carousel";
 import { VideoCard } from "@/components/common/VideoCard/VideoCard";
@@ -11,20 +11,67 @@ import { IconReportSearch } from "@tabler/icons-react";
 
 import { IVideoCard, MockInterestProjects, MockInterestVideos } from "./_mock/mock-user";
 import { PrimaryButton } from "@/components/common/Buttons";
+import { IProjectContent } from "@/types/project";
+import { CommonAxios } from "@/utils/CommonAxios";
+import { ITalkContent } from "@/types/talks";
+import { JobInterview } from "@/types/JobInterview";
+import { getFileUrlById } from "@/utils/handleDownloadFile";
 
 export function MypageInterest() {
-  const [projects, setProjects] = useState<ProjectCardDataType[] | null>(null);
-  const [videos, setVideos] = useState<IVideoCard[] | null>(null);
-  const [jobfairVideos, setJobfairVideos] = useState<IVideoCard[] | null>(null);
+  const [projects, setProjects] = useState<IProjectContent[]>([]);
+  const [thumbnailUrls, setThumbnailUrls] = useState<string[]>([]);
+  const [talks, setTalks] = useState<ITalkContent[]>([]);
+  const [jobfairInterviews, setJobfairInterviews] = useState<JobInterview[]>([]);
   const router = useRouter();
 
+  const fetchFavoriteProjects = async () => {
+    try {
+      const response = await CommonAxios.get("/users/favorites/projects");
+      setProjects(response.data);
+      // thumbnail url 가져오기
+      const promises = response.data.map((data: IProjectContent) =>
+        getFileUrlById(data.thumbnailInfo.id)
+      );
+      const urlResults = await Promise.all(promises);
+      setThumbnailUrls(urlResults);
+    } catch (error) {
+      console.error("Failed to fetch favorite projects: ", error);
+    } finally {
+    }
+  };
+
+  const fetchFavoriteTalks = async () => {
+    try {
+      const response = await CommonAxios.get("/users/favorites/talks");
+      setTalks(response.data);
+    } catch (error) {
+      console.error("Failed to fetch favorite talks: ", error);
+    } finally {
+    }
+  };
+
+  const fetchFavoriteJobfairInterviews = async () => {
+    try {
+      const response = await CommonAxios.get("/users/favorites/jobInterviews");
+      setJobfairInterviews(response.data);
+    } catch (error) {
+      console.error("Failed to fetch favorite jobfair interviews: ", error);
+    } finally {
+    }
+  };
+
+  /**
+   * 관심 등록 프로젝트, 영상 가져오기
+   */
   useEffect(() => {
-    /* 관심 등록 프로젝트, 비디오 가져오기 */
-    setProjects(MockInterestProjects);
-    setVideos(MockInterestVideos);
-    setJobfairVideos(null);
+    fetchFavoriteProjects();
+    fetchFavoriteTalks();
+    fetchFavoriteJobfairInterviews();
   }, []);
 
+  /**
+   * 프로젝트, 대담영상, 잡페어 인터뷰 영상 페이지로 이동
+   */
   const handleProjectButtonClick = () => {
     router.push("/projects");
   };
@@ -37,17 +84,113 @@ export function MypageInterest() {
     router.push("/jobfair/advices");
   };
 
+  /**
+   * like 핸들러
+   */
+  const handleClickLike = async (idx: number) => {
+    const data = projects[idx];
+    try {
+      if (data.like) {
+        await CommonAxios.delete(`/projects/${data.id}/like`);
+        updateProjectLikeStatus(idx, false);
+      } else {
+        await CommonAxios.post(`/projects/${data.id}/like`);
+        updateProjectLikeStatus(idx, true);
+      }
+    } catch (error) {
+      console.error("Failed to toggle like:", error);
+    }
+  };
+
+  /**
+   * 프로젝트 like 상태 업데이트
+   */
+  const updateProjectLikeStatus = (idx: number, likeStatus: boolean) => {
+    setProjects((prevProjects) =>
+      prevProjects.map((project, i) => (i === idx ? { ...project, like: likeStatus } : project))
+    );
+  };
+
+  /**
+   * 프로젝트 bookMark 핸들러
+   */
+  const handleClickBookMark = async (idx: number) => {
+    const data = projects[idx];
+    try {
+      if (data.bookMark) {
+        await CommonAxios.delete(`/projects/${data.id}/favorite`);
+        updateProjectBookMarkStatus(idx, false);
+      } else {
+        await CommonAxios.post(`/projects/${data.id}/favorite`);
+        updateProjectBookMarkStatus(idx, true);
+      }
+    } catch (error) {
+      console.error("Failed to toggle bookmark:", error);
+    }
+  };
+
+  /**
+   * 프로젝트 bookMark 상태 업데이트
+   */
+  const updateProjectBookMarkStatus = (idx: number, bookMarkStatus: boolean) => {
+    setProjects((prevProjects) =>
+      prevProjects.map((project, i) =>
+        i === idx ? { ...project, bookMark: bookMarkStatus } : project
+      )
+    );
+  };
+
+  /**
+   * 관심 대담영상 bookMark 핸들러
+   */
+  const handleClickTalksBookMark = async (idx: number) => {
+    const data = talks[idx];
+    try {
+      if (data.favorite) {
+        await CommonAxios.delete(`/talks/${data.id}/favorite`);
+      } else {
+        await CommonAxios.post(`/talks/${data.id}/favorite`);
+      }
+    } catch (error) {
+      console.error("Failed to toggle bookmark:", error);
+    }
+  };
+
+  /**
+   * 관심 잡페어 인터뷰 bookMark 핸들러
+   */
+  const handleClickJobsBookMark = async (idx: number) => {
+    const data = jobfairInterviews[idx];
+    try {
+      if (data.favorite) {
+        await CommonAxios.delete(`/jobInterviews/${data.id}/favorite`);
+      } else {
+        await CommonAxios.post(`/jobInterviews/${data.id}/favorite`);
+      }
+    } catch (error) {
+      console.error("Failed to toggle bookmark:", error);
+    }
+  };
+
   return (
     <>
       <div className={classes.interestContainer}>
         <Text className={classes.title}>관심 등록 프로젝트</Text>
-        {projects ? (
+        {projects && projects.length > 0 ? (
           <Carousel dragFree slideGap="md" slideSize="20%" align="start" containScroll="trimSnaps">
-            {projects.map((data, idx) => (
-              <CarouselSlide key={idx}>
-                <ProjectCard data={data} />
-              </CarouselSlide>
-            ))}
+            {projects.map((data, idx) => {
+              const thumbnailUrl = thumbnailUrls[idx];
+              return (
+                <CarouselSlide key={idx}>
+                  <ProjectCard
+                    data={data}
+                    thumbnailUrl={thumbnailUrl}
+                    onClickLike={() => handleClickLike(idx)}
+                    onClickBookmark={() => handleClickBookMark(idx)}
+                  />
+                </CarouselSlide>
+              );
+            })}
           </Carousel>
         ) : (
           <div className={classes.noContentDiv}>
@@ -64,11 +207,16 @@ export function MypageInterest() {
       </div>
       <div className={classes.interestContainer}>
         <Text className={classes.title}>관심 등록 대담 영상</Text>
-        {videos ? (
+        {talks && talks.length > 0 ? (
           <Carousel dragFree slideGap="md" slideSize="20%" align="start" containScroll="trimSnaps">
-            {videos.map((data, idx) => (
+            {talks.map((data, idx) => (
               <CarouselSlide key={idx}>
-                <VideoCard {...data} />
+                <VideoCard
+                  title={data.title}
+                  videoUrl={`https://www.youtube.com/embed/${data.youtubeId}`}
+                  bookmarked={data.favorite}
+                  onBookmarkToggle={() => handleClickTalksBookMark}
+                />
               </CarouselSlide>
             ))}
           </Carousel>
@@ -84,11 +232,16 @@ export function MypageInterest() {
       </div>
       <div className={classes.interestContainer}>
         <Text className={classes.title}>관심 등록 잡페어 영상</Text>
-        {jobfairVideos ? (
+        {jobfairInterviews && jobfairInterviews.length > 0 ? (
           <Carousel dragFree slideGap="md" slideSize="20%" align="start" containScroll="trimSnaps">
-            {jobfairVideos.map((data, idx) => (
+            {jobfairInterviews.map((data, idx) => (
               <CarouselSlide key={idx}>
-                <VideoCard {...data} />
+                <VideoCard
+                  title={data.title}
+                  videoUrl={`https://www.youtube.com/embed/${data.youtubeId}`}
+                  bookmarked={data.favorite}
+                  onBookmarkToggle={() => handleClickJobsBookMark}
+                />
               </CarouselSlide>
             ))}
           </Carousel>

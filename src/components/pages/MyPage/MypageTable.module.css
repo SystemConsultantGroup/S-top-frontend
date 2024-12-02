@@ -31,17 +31,13 @@
 .header .th:nth-child(1) {
   border-radius: 5px 0px 0px 0px;
   border-right: 1px solid var(--color-onPrimary);
-  min-width: 250px;
+  min-width: 200px;
+  width: 10%;
 }
 
 .header .th:nth-child(3) {
   border-radius: 0px 5px 0px 0px;
   border-left: 1px solid var(--color-onPrimary);
-  min-width: 182px;
-}
-
-.postTitle {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  min-width: 100px;
+  width: 5%;
 }
