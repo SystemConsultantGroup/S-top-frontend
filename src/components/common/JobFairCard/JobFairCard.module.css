@@ -8,21 +8,23 @@
   border: 1.3px solid var(--color-outlineVariant);
   border-radius: 15px;
   padding: 20px;
-  max-width: 280px; /* 가로 길이를 더 길게 조정 */
+  max-width: 310px; /* 가로 길이를 더 길게 조정 */
   font-family: "Pretendard Variable", __Pretendard_Fallback_e223ab, sans-serif;
   background-color: var(--color-surfaceContainerLowest);
+  height: 100%;
 }
 
 .logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .logo img {
-  max-width: 100%;
-  height: auto;
+  width: 250px; /* 고정 너비 */
+  height: 200px; /* 고정 높이 */
+  object-fit: contain;
 }
 
 .company {
@@ -51,9 +53,9 @@
 
 .label {
   color: material-theme/black;
-  font-size: 0.9em;
+  font-size: 1em;
   margin-right: 10px;
-  font-weight: 500;
+  font-weight: 700;
   white-space: nowrap;
 }
 
@@ -64,8 +66,8 @@
 }
 
 .tag {
-  background-color: var(--color-outlineVariant); /* 지금은 회색으로 보임 */
-  color: var(--color-surfaceContainerLowest); /* 지금은 흰색으로 보임 */
+  background-color: var(--color-primaryContainer); /* 지금은 회색으로 보임 */
+  color: var(--color-onPrimaryContainer); /* 지금은 흰색으로 보임 */
   padding: 5px 10px;
   border-radius: 5px;
   font-size: 0.9em;
@@ -74,4 +76,9 @@
 
 .location {
   font-size: 0.9em;
+  padding: 3px 5px;
+}
+
+.description {
+  padding: 0px 5px; /* 기존 여백 유지 */
 }

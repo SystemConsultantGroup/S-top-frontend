@@ -4,24 +4,13 @@ import styles from "./jobfairRe.module.css";
 import { Banner } from "@/components/common/Banner/Banner";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
 import { SearchInput } from "@/components/common/SearchInput";
-// import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { JobFairCard } from "@/components/common/JobFairCard/JobFairCard";
 import { Select } from "@mantine/core";
 import { FilterChip } from "@/components/common/FilterChips/FilterChip";
 import { SelectProps } from "@mantine/core";
-/** 프로젝트 필터링 옵션 분류 타입 */
-export type OptionKey = "YEAR" | "CATEGORY" | "TYPE";
-/**
- * 프로젝트 조회 필터링에 사용되는 옵션의 형태를 지정한 인터페이스.
- *
- * key 값에 "YEAR", "TYPE", "CATEGORY" 세 가지 중 하나를 쓸 수 있고, 해당 딕셔너리에는 카테고리에 맞게 옵션이 저장됨.
- *
- * 예를 들어, key 값이  "YEAR"인 딕셔너리는 프로젝트 연도 드롭다운에서 선택한 옵션을 value에 저장함.
- *
- * @interface IOption
- * @property {("YEAR" | "TYPE" | "CATEGORY")} key
- * @property {string} value
- */
+
+export type OptionKey = "REGION" | "CATEGORY" | "TYPE";
+
 export interface IOption {
   key: OptionKey;
   value: string;
@@ -45,8 +34,9 @@ interface JobInfo {
 const RecruitmentsPage = () => {
   const [jobInfos, setJobInfos] = useState<JobInfo[]>([]);
   const [options, setOptions] = useState<IOption[]>([]);
+  const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태 추가
 
-  const PROJECT_YEAR_LIST: string[] = ["2020", "2021", "2022", "2023", "2024"];
+  const PROJECT_REGION_LIST: string[] = ["region1", "region2", "region3", "region4"];
   const PROJECT_CATEGORY_MAPPED_LIST: string[] = [
     "AI 개발자",
     "Web SDK 개발자",
@@ -56,13 +46,49 @@ const RecruitmentsPage = () => {
   ];
   const PROJECT_TYPE_MAPPED_LIST: string[] = ["인턴", "신입 정규직", "type1", "type2", "type3"];
 
-  const HandleOption = (key: OptionKey, value: string) => {
+  // 필터링 로직
+  const filteredJobInfos = jobInfos.filter((jobInfo) => {
+    const matchesFilters = options.every((option) => {
+      if (option.key === "REGION") {
+        return jobInfo.region.includes(option.value); // 지역 필터
+      }
+      if (option.key === "CATEGORY") {
+        return jobInfo.position.includes(option.value); // 포지션 필터
+      }
+      if (option.key === "TYPE") {
+        return jobInfo.jobTypes.includes(option.value); // 고용 형태 필터
+      }
+      return true;
+    });
+
+    const matchesSearch = jobInfo.company.toLowerCase().includes(searchTerm.toLowerCase()); // 검색 필터
+
+    return matchesFilters && matchesSearch;
+  });
+
+  const getValueByLabel = (key: OptionKey, label: string): string | null => {
+    if (!label) return null;
+
+    const map = {
+      REGION: PROJECT_REGION_LIST,
+      CATEGORY: PROJECT_CATEGORY_MAPPED_LIST,
+      TYPE: PROJECT_TYPE_MAPPED_LIST,
+    };
+
+    const options = map[key];
+    if (!options) return null;
+
+    return options.find((option) => option === label) || null;
+  };
+
+  const HandleOption = (key: OptionKey, label: string) => {
+    const value = getValueByLabel(key, label)!;
     setOptions((prev) =>
       prev.some((option) => option.value === value) ? prev : [...prev, { key, value }]
     );
   };
+
   const UNMODIFIABLE_SELECT = "null";
-  /** 공통 필터링 드롭다운 props */
   const dropdownCommonProps = {
     classNames: {
       dropdown: styles.dropdown,
@@ -77,30 +103,30 @@ const RecruitmentsPage = () => {
       position: "bottom",
       middlewares: { flip: false, shift: false },
     },
+    maxDropdownHeight: "240px",
   } as SelectProps;
 
-  /** 프로젝트 연도(YEAR) 필터링을 위한 드롭다운 props */
-  const dropdownYearProps = {
-    data: PROJECT_YEAR_LIST, // string[]
-    placeholder: "연도",
-    onChange: (value: string | null) => HandleOption("YEAR", value!),
+  const dropdownRegionProps = {
+    data: PROJECT_REGION_LIST,
+    placeholder: "지역",
+    onChange: (value: string | null) => HandleOption("REGION", value!),
     ...dropdownCommonProps,
   };
-  /** 분야(CATEGORY) 필터링을 위한 드롭다운 props */
+
   const dropdownCategoryProps = {
-    data: Object.values(PROJECT_CATEGORY_MAPPED_LIST), // string[]
+    data: Object.values(PROJECT_CATEGORY_MAPPED_LIST),
     placeholder: "분야",
     onChange: (value: string | null) => HandleOption("CATEGORY", value!),
     ...dropdownCommonProps,
   };
-  /** 고용 형태(TYPE) 필터링을 위한 드롭다운 props */
+
   const dropdownTypeProps = {
-    data: Object.values(PROJECT_TYPE_MAPPED_LIST), // string[]
+    data: Object.values(PROJECT_TYPE_MAPPED_LIST),
     placeholder: "고용 형태",
     onChange: (value: string | null) => HandleOption("TYPE", value!),
     ...dropdownCommonProps,
   };
-  /** 선택한 필터링 옵션들의 props 배열 */
+
   const filterChipProps = options
     .map((option) => ({
       label: option.value,
@@ -126,9 +152,11 @@ const RecruitmentsPage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          const validContent = data.content.filter((item: any) => item.company !== null); // null인 항목 제거
-          setJobInfos(validContent); // 검증된 데이터로 상태 업데이트
-          console.log("Fetched data:", data); // 데이터를 콘솔에 출력
+          const validContent = data.content.map((item: any) => ({
+            ...item,
+            logo: item.logo || "/default-logo.png",
+          }));
+          setJobInfos(validContent);
         } else {
           console.error("Failed to fetch jobInfos");
         }
@@ -155,15 +183,18 @@ const RecruitmentsPage = () => {
         <div className={styles.search}>
           <h2 className={styles.title}>채용 포지션</h2>
           <div className={styles.searchArea}>
-            <SearchInput placeholder="채용 포지션 검색" />
+            <SearchInput
+              placeholder="회사명 검색"
+              onChange={(e) => setSearchTerm(e.target.value)} // 검색 상태 업데이트
+            />
           </div>
         </div>
         <div className={styles.dropdown}>
-          <Select {...dropdownYearProps} />
-          <Select {...dropdownTypeProps} />
           <Select {...dropdownCategoryProps} />
+          <Select {...dropdownRegionProps} />
+          <Select {...dropdownTypeProps} />
         </div>
-        <div>
+        <div className={styles.filterContainer}>
           {filterChipProps.map((prop, idx) => (
             <FilterChip key={idx} {...prop} />
           ))}
@@ -176,14 +207,14 @@ const RecruitmentsPage = () => {
           />
         </div>
         <div className={styles.videoGrid}>
-          {jobInfos.map((jobInfo) => (
+          {filteredJobInfos.map((jobInfo) => (
             <JobFairCard
               key={jobInfo.id}
-              logo={jobInfo.url} // 로고 이미지 URL
-              company={jobInfo.company} // 회사명
-              position={jobInfo.position} // 포지션 제목
-              employmentType={jobInfo.jobTypes} // 고용 형태 배열
-              location={jobInfo.region} // 근무 지역
+              logo={jobInfo.logo}
+              company={jobInfo.company}
+              position={jobInfo.position}
+              employmentType={jobInfo.jobTypes}
+              location={jobInfo.region}
             />
           ))}
         </div>
