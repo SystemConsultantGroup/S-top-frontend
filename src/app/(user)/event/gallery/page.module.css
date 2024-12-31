@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 50px 0px 0px 40px;
+  /* TODO: 다른 페이지와 padding 일치시키기 */
+}
+.title {
+  font-size: 32px;
+  font-weight: 700;
+}

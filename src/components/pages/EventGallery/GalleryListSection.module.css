@@ -1,0 +1,12 @@
+.container {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.gridItem {
+  margin: 16px;
+  cursor: pointer;
+}
