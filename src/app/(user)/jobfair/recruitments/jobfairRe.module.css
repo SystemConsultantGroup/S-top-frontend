@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1100px; /* 최대 너비 설정 */
   margin: 0 auto; /* 중앙 정렬 */
-  padding: 80px 90px 0px 90px; /* 상단과 양측 패딩 설정 */ /*위  왼  아래  오*/
+  padding: 80px 90px 20px 90px; /* 상단과 양측 패딩 설정 */ /*위  왼  아래  오*/
 }
 
 .title {
@@ -20,22 +20,70 @@
 }
 
 .dropdown {
-  margin-top: 20px;
-  margin-bottom: 60px;
+  gap: 10px; /* 드롭다운 간의 간격 설정 */
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-color: var(--color-inputBorder);
+  border-top: 0;
+  line-height: 24px;
   display: flex;
-  justify-content: flex-end; /* 드롭다운을 오른쪽으로 정렬 */
-  align-items: center; /* 드롭다운의 세로 정렬을 맞추기 위해 추가 */
+}
+
+.dropdown > * {
+  flex-grow: 1; /* 자식 요소가 남은 공간을 채우도록 설정 */
 }
 
 .videoGrid {
-  width: 100%;
-  max-width: 1300px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin-bottom: 80px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 최소 300px, 최대 1fr로 반응형 */
+  /* gap: 20px;카드들 간의 간격 */
+  justify-content: center; /* 그리드를 수평으로 가운데 정렬 */
+  align-items: center; /* 그리드를 수직으로 가운데 정렬 */
+  justify-items: center;
+  padding: 20px; /* 그리드 영역에 여백 추가 */
+  max-width: 1200px; /* 최대 그리드 너비 설정 */
+  width: 100%;
 }
 
 .space {
   width: 20px;
+}
+
+.input {
+  border-color: var(--color-inputBorder);
+  background-color: var(--color-inputSurface);
+  transition: none;
+
+  &::placeholder {
+    color: var(--color-onSurface);
+    opacity: 1;
+  }
+  &::-ms-input-placeholder {
+    color: var(--color-onSurface);
+  }
+
+  &:hover {
+    background-color: var(--color-inputSurfaceHover);
+  }
+
+  &[data-expanded] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.section {
+  & * {
+    color: var(--color-onSurface);
+  }
+}
+
+.filterContainer {
+  display: flex;
+  flex-wrap: wrap; /* 필터 칩이 줄바꿈되도록 설정 */
+  gap: 10px; /* 필터 칩 간의 간격 */
+  align-items: center; /* 필터 칩과 버튼을 수직 정렬 */
+  justify-content: center; /* 칩과 버튼이 왼쪽 정렬 */
+  max-width: 1100px; /* 최대 너비 */
+  margin: 10px auto 0px; /* 중앙 정렬 및 아래쪽 여백 */
 }
