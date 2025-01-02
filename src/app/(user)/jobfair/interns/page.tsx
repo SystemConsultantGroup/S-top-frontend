@@ -20,7 +20,7 @@ interface Interview {
   updatedAt: string;
 }
 
-const YEARS = ["All", "2024", "2023", "2022", "2021"];
+const YEARS = ["전체", "2024", "2023", "2022", "2021"];
 
 const InternsPage = () => {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
@@ -31,7 +31,7 @@ const InternsPage = () => {
     try {
       const response = await CommonAxios.get("/jobInterviews", {
         params: {
-          year: selectedYear !== "All" ? selectedYear : undefined, // "All"이면 연도 필터를 적용하지 않음
+          year: selectedYear !== "전체" ? selectedYear : undefined, // "All"이면 연도 필터를 적용하지 않음
           search: searchQuery || undefined, // 검색어 필터
           page: 0,
           size: 100,
@@ -61,7 +61,7 @@ const InternsPage = () => {
 
     const isMatchingYear =
       !selectedYear || // 선택된 연도가 없으면 무조건 true
-      selectedYear === "All" || // "All" 선택 시 모든 연도 허용
+      selectedYear === "전체" || // "All" 선택 시 모든 연도 허용
       String(interview.year) === selectedYear;
 
     return isMatchingSearch && isMatchingYear; // 검색어와 연도 둘 다 만족하는 경우

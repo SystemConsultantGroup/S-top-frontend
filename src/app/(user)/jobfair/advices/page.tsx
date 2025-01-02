@@ -20,7 +20,7 @@ interface Interview {
   updatedAt: string;
 }
 
-const YEARS = ["All", "2024", "2023", "2022", "2021"];
+const YEARS = ["전체", "2024", "2023", "2022", "2021"];
 
 const JobFairPage = () => {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
@@ -32,7 +32,7 @@ const JobFairPage = () => {
       try {
         const response = await CommonAxios.get("/jobInterviews", {
           params: {
-            year: selectedYear !== "All" ? selectedYear : undefined, // "All"이면 연도 필터를 적용하지 않음
+            year: selectedYear !== "전체" ? selectedYear : undefined, // "All"이면 연도 필터를 적용하지 않음
             search: searchQuery || undefined, // 검색어 필터
             page: 0, // 페이지 번호
             size: 100, // 한 페이지 크기
@@ -63,7 +63,7 @@ const JobFairPage = () => {
 
     const isMatchingYear =
       !selectedYear || // 선택된 연도가 없으면 무조건 true
-      selectedYear === "All" || // "All" 선택 시 모든 연도 허용
+      selectedYear === "전체" || // "All" 선택 시 모든 연도 허용
       String(interview.year) === selectedYear;
 
     return isMatchingSearch && isMatchingYear; // 검색어와 연도 둘 다 만족하는 경우
@@ -101,14 +101,15 @@ const JobFairPage = () => {
         </div>
         <div className={styles.videoGrid}>
           {filteredInterviews.map((interview) => (
-            <VideoCard
-              key={interview.id}
-              title={interview.title}
-              subtitle={interview.talkerName}
-              videoUrl={`https://www.youtube.com/embed/${interview.youtubeId}`}
-              bookmarked={false}
-              onBookmarkToggle={() => {}}
-            />
+            <div key={interview.id}>
+              <VideoCard
+                title={interview.title}
+                subtitle={interview.talkerName}
+                videoUrl={`https://www.youtube.com/embed/${interview.youtubeId}`}
+                bookmarked={false}
+                onBookmarkToggle={() => {}}
+              />
+            </div>
           ))}
         </div>
       </div>

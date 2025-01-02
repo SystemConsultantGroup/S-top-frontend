@@ -5,7 +5,7 @@ import { Banner } from "@/components/common/Banner/Banner";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
 import { SearchInput } from "@/components/common/SearchInput";
 import { JobFairCard } from "@/components/common/JobFairCard/JobFairCard";
-import { Select } from "@mantine/core";
+import { Group, Select } from "@mantine/core";
 import { FilterChip } from "@/components/common/FilterChips/FilterChip";
 import { SelectProps } from "@mantine/core";
 
@@ -154,7 +154,7 @@ const RecruitmentsPage = () => {
           const data = await response.json();
           const validContent = data.content.map((item: any) => ({
             ...item,
-            logo: item.logo || "/default-logo.png",
+            logo: item.logo || "/images/logo.png",
           }));
           setJobInfos(validContent);
         } else {
@@ -182,29 +182,29 @@ const RecruitmentsPage = () => {
       <div className={styles.backColor}>
         <div className={styles.search}>
           <h2 className={styles.title}>채용 포지션</h2>
-          <div className={styles.searchArea}>
-            <SearchInput
-              placeholder="회사명 검색"
-              onChange={(e) => setSearchTerm(e.target.value)} // 검색 상태 업데이트
-            />
-          </div>
-        </div>
-        <div className={styles.dropdown}>
-          <Select {...dropdownCategoryProps} />
-          <Select {...dropdownRegionProps} />
-          <Select {...dropdownTypeProps} />
-        </div>
-        <div className={styles.filterContainer}>
-          {filterChipProps.map((prop, idx) => (
-            <FilterChip key={idx} {...prop} />
-          ))}
-          <FilterChip
-            label="전체해제"
-            onRemove={() => {
-              setOptions(() => []);
-            }}
-            isReset
+          <SearchInput
+            placeholder="회사명 검색"
+            onChange={(e) => setSearchTerm(e.target.value)} // 검색 상태 업데이트
           />
+          <Group justify="space-between" grow mt={15}>
+            <Select radius={8} {...dropdownCategoryProps} />
+            <Select radius={8} {...dropdownRegionProps} />
+            <Select radius={8} {...dropdownTypeProps} />
+          </Group>
+          <div className={styles.filterContainer}>
+            {filterChipProps.map((prop, idx) => (
+              <FilterChip key={idx} {...prop} />
+            ))}
+            {filterChipProps.length ? (
+              <FilterChip
+                label="전체해제"
+                onRemove={() => {
+                  setOptions(() => []);
+                }}
+                isReset
+              />
+            ) : null}
+          </div>
         </div>
         <div className={styles.videoGrid}>
           {filteredJobInfos.map((jobInfo) => (
