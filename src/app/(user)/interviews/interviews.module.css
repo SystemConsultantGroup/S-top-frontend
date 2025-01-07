@@ -26,6 +26,11 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
+  margin-right: 20px;
+}
+
+.dropdown {
+  margin-right: 0px;
 }
 
 /* Grid container for video cards */
