@@ -14,6 +14,7 @@
   border: 1.8px solid var(--color-surfaceVariant);
   overflow: hidden;
   width: 100%; /* 부모 요소의 너비에 맞게 설정 */
+  margin-bottom: 10px; /* 익명 선택 체크박스와의 거리 조정 */
 }
 
 .verticalDivider {

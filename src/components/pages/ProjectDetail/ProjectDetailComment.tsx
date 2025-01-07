@@ -2,29 +2,42 @@
 
 import { useEffect, useState } from "react";
 import { CommentBox, Comment } from "@/components/common/CommentBox/CommentBox";
-import { comments as commentList } from "./_mock/mock-project";
+import { CommentDto } from "./_type/comment";
+import { CommonAxios } from "@/utils/CommonAxios";
 
 interface Props {
   projectId: string;
+  comments?: CommentDto[];
+  onRefresh?: () => void;
 }
 
-export function ProjectDetailComment({ projectId }: Props) {
-  const [comments, setComments] = useState<Comment[]>(commentList);
+export function ProjectDetailComment({ projectId, comments = [], onRefresh }: Props) {
+  const [commentList, setCommentList] = useState<Comment[]>([]);
 
   useEffect(() => {
-    /**
-     * TODO: 댓글 목록 불러오기
-     */
-    console.log("projectId: ", projectId);
-  }, [projectId]);
+    // 댓글 목록을 comment 형식에 맞게 변환
+    const formattedComments: Comment[] = [];
+    comments.forEach((element) => {
+      formattedComments.push({
+        author: element.userName,
+        content: element.content,
+        isAnonymous: element.isAnonymous,
+      });
+    });
+    if (formattedComments.length > 0) setCommentList(formattedComments);
+  }, [comments]);
 
-  const handleCommentSubmit = (comment: string) => {
-    /**
-     * TODO: 댓글 등록하기
-     */
-    const newComment = { author: "사람", content: comment };
-    setComments([...comments, newComment]);
+  const handleCommentSubmit = async (comment: string, isAnonymous: boolean) => {
+    // 댓글 등록
+    const body = {
+      content: comment,
+      isAnonymous: isAnonymous,
+    };
+    const response = await CommonAxios.post(`/projects/${projectId}/comment`, body);
+    if (response.status === 201 && onRefresh) {
+      onRefresh();
+    }
   };
 
-  return <CommentBox commentList={comments} onSubmit={handleCommentSubmit} />;
+  return <CommentBox commentList={commentList} onSubmit={handleCommentSubmit} />;
 }
