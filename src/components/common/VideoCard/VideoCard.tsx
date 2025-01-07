@@ -7,7 +7,7 @@ import { QuizModal } from "./QuizModal";
 
 export interface VideoCardProps {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   videoUrl: string;
   bookmarked: boolean;
   onBookmarkToggle: () => void;

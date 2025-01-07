@@ -1,0 +1,43 @@
+.tableContainer {
+  max-width: 100%;
+  overflow-x: scroll;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 32px;
+  margin: 50px 0px 10px 2px;
+}
+
+.table {
+  line-height: 40px;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.header {
+  background-color: var(--color-primaryContainer);
+}
+
+.header .th {
+  text-align: center;
+  font-weight: 500;
+}
+
+.header .th:nth-child(1) {
+  border-radius: 5px 0px 0px 0px;
+  border-right: 1px solid var(--color-onPrimary);
+  min-width: 200px;
+  width: 10%;
+}
+
+.header .th:nth-child(3) {
+  border-radius: 0px 5px 0px 0px;
+  border-left: 1px solid var(--color-onPrimary);
+  min-width: 100px;
+  width: 5%;
+}

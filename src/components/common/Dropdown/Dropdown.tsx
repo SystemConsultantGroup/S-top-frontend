@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Menu, MenuTarget, MenuDropdown, MenuItem } from "@mantine/core";
 import classes from "./Dropdown.module.css";
 
@@ -9,6 +9,7 @@ interface DropdownProps {
   placeholder: string;
   selectedOption?: string | null;
   onOptionClick?: (option: string) => void;
+  fullWidth?: boolean;
 }
 
 export function Dropdown({
@@ -18,8 +19,17 @@ export function Dropdown({
   onOptionClick = function (): void {
     throw new Error("Function not implemented.");
   },
+  fullWidth = false,
 }: DropdownProps) {
   const [opened, setOpened] = React.useState<boolean>(false);
+  const [dropdownWidth, setDropdownWidth] = useState<number | undefined>(undefined);
+  const menuTargetRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (fullWidth && menuTargetRef.current) {
+      setDropdownWidth(menuTargetRef.current.offsetWidth - 2);
+    }
+  }, [fullWidth, opened]);
 
   const handleOptionClick = (option: string) => {
     onOptionClick(option);
@@ -30,8 +40,9 @@ export function Dropdown({
     <Menu offset={0} opened={opened} onChange={setOpened}>
       <MenuTarget>
         <Button
+          ref={menuTargetRef}
           justify="space-between"
-          className={`${classes.dropdownToggle} ${opened ? classes.opened : ""}`}
+          className={`${classes.dropdownToggle} ${opened ? classes.opened : ""} ${fullWidth && classes.fullWidthToggle}`}
           onClick={() => setOpened(!opened)}
           leftSection={<span className={classes.buttonLabel}>{selectedOption || placeholder}</span>}
           rightSection={
@@ -63,11 +74,11 @@ export function Dropdown({
           }
         ></Button>
       </MenuTarget>
-      <MenuDropdown className={classes.dropdownList}>
+      <MenuDropdown className={classes.dropdownList} style={{ width: dropdownWidth }}>
         {options.map((option) => (
           <MenuItem
             key={option}
-            className={classes.dropdownItem}
+            className={`${classes.dropdownItem} ${fullWidth && classes.fullWidthItem}`}
             onClick={() => handleOptionClick(option)}
           >
             {option}
