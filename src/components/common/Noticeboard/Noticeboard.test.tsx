@@ -15,40 +15,30 @@ describe("Noticeboard component", () => {
     };
     const items = [
       {
-        title: "Important",
-        number: 1,
-        author: "admin",
-        date: new Date(),
-        view: 123,
-        pinned: true,
-        href: "/1",
-        contentTxt: "this is important!",
+        id: 1,
+        title: "공지 사항 1",
+        hitCount: 10,
+        fixed: true,
+        createdAt: "2024-10-29T22:38:56.662802",
+        updatedAt: "2024-10-29T22:38:56.662804",
       },
       {
-        title: "Content",
-        number: 2,
-        author: "admin",
-        date: new Date(),
-        view: 456,
-        pinned: false,
-        href: "/2",
-        contentTxt: "this is a content.",
+        id: 2,
+        title: "공지 사항 2",
+        hitCount: 10,
+        fixed: false,
+        createdAt: "2024-10-29T22:38:56.662818",
+        updatedAt: "2024-10-29T22:38:56.662819",
       },
     ];
 
     render(
       <Noticeboard
-        inputValue=""
         handleInput={() => {}}
-        handleKeyDown={() => {}}
         handleSelect={() => {}}
-        handleSubmit={() => {}}
         heading="Board"
         classifier={classifier}
         items={items}
-        paginShow={10}
-        paginJustify="end"
-        paginMarginTop="20px"
       />
     );
     expect(screen.getByRole("region", { name: "Noticeboard" })).toBeInTheDocument();

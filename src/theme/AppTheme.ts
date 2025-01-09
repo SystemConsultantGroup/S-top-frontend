@@ -76,7 +76,7 @@ export const AppTheme = createTheme({
       tableRow: "#EFEFEF",
       inputBorder: "#191C20",
       inputBorderFocus: "#228BE6",
-      inputSurface: "FFFFFF",
+      inputSurface: "#FFFFFF",
       inputSurfaceHover: "#F8F9FF",
     },
     dark: {
