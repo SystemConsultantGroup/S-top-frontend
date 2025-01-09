@@ -24,7 +24,7 @@
     "@mantine/form": "^7.12.1",
     "@mantine/hooks": "^7.11.2",
     "@mantine/styles": "^6.0.22",
-    "@tabler/icons-react": "^3.11.0",
+    "@tabler/icons-react": "^3.28.1",
     "@types/js-cookie": "^3.0.6",
     "axios": "^1.7.3",
     "classnames": "^2.5.1",
