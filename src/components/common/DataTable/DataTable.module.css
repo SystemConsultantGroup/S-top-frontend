@@ -1,0 +1,32 @@
+.container {
+  table-layout: "fixed";
+  overflow: visible;
+}
+
+.header {
+  height: 44px;
+  position: sticky;
+  top: 0;
+  background-color: var(--color-primaryContainer);
+}
+.select {
+  border-color: var(--color-outlineVariant);
+}
+.select > * > input {
+  --input-bd: var(--color-outlineVariant);
+  &:focus,
+  &:focus-within {
+    border-color: var(--color-outlineVariant);
+  }
+}
+
+.pagination-control {
+  border: none;
+  background-color: transparent;
+
+  font-weight: 500;
+  --pagination-active-color: var(--color-primary);
+  &:hover {
+    background-color: var(--color-outlineVariant);
+  }
+}

@@ -1,0 +1,22 @@
+.image_section {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+}
+
+.image_view {
+  border-radius: 8px;
+}
+
+.viewcount_icon {
+  margin-right: 3px;
+  margin-bottom: 8px;
+}
+
+.title {
+  margin-top: 8px;
+}
+
+.viewcount {
+  margin-bottom: 6px;
+}

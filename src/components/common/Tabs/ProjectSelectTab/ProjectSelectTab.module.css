@@ -1,0 +1,28 @@
+.element {
+  background-color: var(--color-background);
+  width: 100%;
+}
+
+.tablist {
+  border: none;
+}
+
+.tab {
+  background-color: none;
+  margin: 10px 40px;
+  border-radius: 8px;
+  border-bottom: 0;
+  font-weight: var(--mantine-other-font-weights-semibold);
+  font-size: 24px;
+
+  width: 20%;
+  height: 60px;
+}
+
+.activeTab {
+  background-color: var(--color-surfaceVariant);
+}
+
+.panel {
+  padding-top: 20px;
+}

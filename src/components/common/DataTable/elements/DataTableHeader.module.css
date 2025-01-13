@@ -1,0 +1,12 @@
+.element {
+  white-space: nowrap;
+  background-color: transparent;
+}
+
+.element:first-child {
+  border-top-left-radius: 10px;
+}
+
+.element:last-child {
+  border-top-right-radius: 10px;
+}

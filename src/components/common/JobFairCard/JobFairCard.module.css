@@ -1,0 +1,84 @@
+@import url("../../../theme/fonts/pretendard.css");
+
+/* :root {
+  --primary-container: #d2e4ff;  
+}  */
+
+.card {
+  border: 1.3px solid var(--color-outlineVariant);
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 310px; /* 가로 길이를 더 길게 조정 */
+  font-family: "Pretendard Variable", __Pretendard_Fallback_e223ab, sans-serif;
+  background-color: var(--color-surfaceContainerLowest);
+  height: 100%;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.logo img {
+  width: 250px; /* 고정 너비 */
+  height: 200px; /* 고정 높이 */
+  object-fit: contain;
+}
+
+.company {
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.position {
+  color: var(--primary-outline);
+  margin-bottom: 10px;
+  font-size: 1em;
+  line-height: 21px;
+}
+
+.divider {
+  border-top: 1px solid #ddd;
+  margin: 10px 0;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.label {
+  color: material-theme/black;
+  font-size: 1em;
+  margin-right: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tagContainer {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background-color: var(--color-primaryContainer); /* 지금은 회색으로 보임 */
+  color: var(--color-onPrimaryContainer); /* 지금은 흰색으로 보임 */
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.location {
+  font-size: 0.9em;
+  padding: 3px 5px;
+}
+
+.description {
+  padding: 0px 5px; /* 기존 여백 유지 */
+}

@@ -1,0 +1,95 @@
+.card {
+  width: 300px;
+  background-color: var(--color-surfaceContainerLowest);
+  border: 1px solid var(--color-outlineVariant);
+  border-radius: 12px;
+}
+
+.img-section {
+  padding: 8px;
+  position: relative;
+}
+
+.img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 8px;
+}
+
+.img:hover ~ .icon {
+  transform: scale(1.5);
+  top: 75%;
+  left: 85%;
+  transition: 0.5s;
+}
+
+.icon {
+  color: var(--color-outlineVariant);
+  position: absolute;
+  top: 85%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+}
+
+.badge-group {
+  height: fit-content;
+}
+
+.title {
+  font-size: 24px;
+  line-height: 25px;
+  font-weight: 700;
+  color: var(--color-onSurface);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: keep-all;
+}
+
+.participants-container {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  height: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--color-outline);
+}
+
+.attr-wrapper {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--color-onSurface);
+  flex-shrink: 0;
+}
+
+.value-wrapper {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-onSurface);
+  flex-grow: 1;
+  flex-basis: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.section-container {
+  padding: 7px 20px;
+}
+
+.like-section {
+  background-color: var(--color-surfaceVariant);
+}
+
+.likes-wrapper {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--color-primary);
+}

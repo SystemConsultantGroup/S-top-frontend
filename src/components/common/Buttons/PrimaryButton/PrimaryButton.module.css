@@ -1,0 +1,12 @@
+.element {
+  background-color: var(--color-primary);
+  color: var(--color-onPrimary);
+  &:hover {
+    background-color: var(--color-primaryFixed);
+    color: var(--color-onPrimaryFixed);
+  }
+  &:disabled {
+    background-color: var(--color-primaryFixedDim);
+    color: var(--color-onPrimaryFixedDim);
+  }
+}

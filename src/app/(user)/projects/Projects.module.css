@@ -1,0 +1,120 @@
+.container {
+  margin: 0 auto;
+  width: 1280px;
+
+  @media screen and (max-width: 1280px) {
+    /** 태블릿 가로, 노트북 */
+    width: 1024px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    /** 태블릿 가로 */
+    width: 768px;
+  }
+
+  @media screen and (max-width: 768px) {
+    /** 모바일 가로, 태블릿 세로 */
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  @media screen and (max-width: 480px) {
+    /** 모바일 세로 */
+    width: 100%;
+    padding: 0 10px;
+  }
+}
+
+.filterBox {
+  width: 968px;
+
+  @media screen and (max-width: 1280px) {
+    /** 태블릿 가로, 노트북 */
+    width: 768px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    /** 태블릿 가로 */
+    width: 600px;
+  }
+
+  @media screen and (max-width: 768px) {
+    /** 모바일 가로, 태블릿 세로 */
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  @media screen and (max-width: 480px) {
+    /** 모바일 세로 */
+    width: 100%;
+    padding: 0 10px;
+  }
+}
+
+.tabBtnBox {
+  width: 100%;
+}
+.tabBtn {
+  height: 60px;
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--color-onSurface) !important;
+}
+.active {
+  background-color: var(--color-surfaceVariant);
+}
+.dormant {
+  background-color: var(--color-surfaceContainerLowest);
+}
+
+.dropdown {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-color: var(--color-inputBorder);
+  border-top: 0;
+  line-height: 24px;
+}
+.input {
+  border-color: var(--color-inputBorder);
+  background-color: var(--color-inputSurface);
+  transition: none;
+
+  &::placeholder {
+    color: var(--color-onSurface);
+    opacity: 1;
+  }
+  &::-ms-input-placeholder {
+    color: var(--color-onSurface);
+  }
+
+  &:hover {
+    background-color: var(--color-inputSurfaceHover);
+  }
+
+  &[data-expanded] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+.section {
+  & * {
+    color: var(--color-onSurface);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .active:hover {
+    background-color: #d0d3dc;
+  }
+  .dormant:hover {
+    background-color: #f0f0f0;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .active:hover {
+    background-color: #52565d;
+  }
+  .dormant:hover {
+    background-color: #3d3d3d;
+  }
+}

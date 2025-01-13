@@ -1,0 +1,207 @@
+/** Light mode {
+  --color-primary: #37618e;
+  --color-primaryHover: #285582;
+  --color-secondary1: #4a672d;
+  --color-secondaryHover: #425e27;
+  --color-text: #000;
+  --color-description: #888;
+  --color-background1: #eee;
+  --color-backgroundHover: #ececec;
+  --color-backgroundTint: #ececec;
+  --color-backgroundTintHover: #e7e7e7;
+  --color-cover: #fff;
+  --color-coverHover: #f5f5f5;
+}*/
+
+/** Dark mode {
+  --color-primary: #37618e;
+  --color-primaryHover: #285582;
+  --color-secondary1: #4a672d;
+  --color-secondaryHover: #4e6d30;
+  --color-text: #c9c9c9;
+  --color-description: #888;
+  --color-background1: #2e2e2e;
+  --color-backgroundHover: #313131;
+  --color-backgroundTint: #353535;
+  --color-backgroundTintHover: #3c3c3c;
+  --color-cover: #2c2c2c;
+  --color-coverHover: #303030;
+}*/
+
+.heading {
+  margin: 30px 0;
+
+  & > h2 {
+    margin: 0;
+    /* color: var(--color-text); */
+    color: var(--mantine-color-text);
+  }
+}
+
+.container {
+  /* border-top: 1px solid var(--color-text); */
+  border-top: 1px solid var(--mantine-color-text);
+}
+
+.head {
+  padding: 20px 15px;
+  /* border-bottom: 1px solid var(--color-description); */
+  border-bottom: 1px solid var(--color-outline);
+
+  & h3 {
+    margin: 0;
+    /* color: var(--color-text); */
+    color: var(--mantine-color-text);
+  }
+}
+
+.primaryFilledPin {
+  color: var(--color-primary);
+}
+
+.info {
+  margin-top: 5px;
+  /* color: var(--color-text); */
+  color: var(--mantine-color-text);
+}
+
+.ml35 {
+  margin-left: 35px;
+}
+
+.stage {
+  padding: 10px 15px;
+  /* border-bottom: 1px solid var(--color-text); */
+  border-bottom: 1px solid var(--mantine-color-text);
+}
+
+.stageBtn {
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  /* color: var(--color-text); */
+  color: var(--mantine-color-text);
+
+  &:hover {
+    /* color: var(--color-text); */
+    color: var(--mantine-color-text);
+  }
+}
+
+.stageResizePanel {
+  width: 45px;
+  height: unset;
+
+  & input {
+    border: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 16px;
+    /* background-color: var(--color-background1); */
+    background-color: var(--color-surfaceDim);
+    /* color: var(--color-text); */
+    color: var(--mantine-color-text);
+  }
+}
+
+.filledBtn {
+  /* background-color: var(--color-background1); */
+  background-color: var(--color-surfaceDim);
+
+  &:hover {
+    /* background-color: var(--color-backgroundHover); */
+    background-color: var(--color-outlineVariant);
+  }
+}
+
+.divider {
+  margin: 5px 0;
+  /* border-inline-start: 1px solid var(--color-description); */
+  border-inline-start: 1px solid var(--color-outline);
+}
+
+.stageFileBtn {
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active {
+    transform: none;
+  }
+}
+
+.fileDropdown {
+  padding: 0;
+  border: 0;
+  /* background-color: var(--color-cover); */
+  background-color: var(--color-background);
+}
+
+.dropdownItem {
+  padding: 8px 12px;
+  /* color: var(--color-text); */
+  color: var(--mantine-color-text);
+  /* background-color: var(--color-cover); */
+  background-color: var(--color-background);
+
+  &:hover {
+    /* background-color: var(--color-coverHover); */
+    background-color: var(--color-surfaceContainer);
+  }
+}
+
+.fileDownloadAll {
+  /* background-color: var(--color-backgroundTint); */
+  background-color: var(--color-surfaceContainerHigh);
+  /* color: var(--color-text); */
+  color: var(--mantine-color-text);
+
+  &:hover {
+    /* background-color: var(--color-backgroundTintHover); */
+    background-color: var(--color-surfaceContainerHighest);
+  }
+}
+
+.content {
+  margin-top: 10px;
+  /* color: var(--color-text); */
+  color: var(--mantine-color-text);
+}
+
+.movebox {
+  padding: 20px 15px;
+  /* border-bottom: 1px solid var(--color-description); */
+  border-bottom: 1px solid var(--color-outline);
+  /* color: var(--color-description); */
+  color: var(--color-outline);
+}
+
+.moveboxLink {
+  /* color: var(--color-text); */
+  color: var(--mantine-color-text);
+  text-decoration: none;
+
+  &:hover {
+    /* color: var(--color-text); */
+    color: var(--mantine-color-text);
+    text-decoration: underline;
+  }
+}
+
+.toolbar {
+  margin: 20px 0;
+}
+
+.outlineTool {
+  /* border: 2px solid var(--color-text); */
+  border: 2px solid var(--mantine-color-text);
+  /* color: var(--color-text); */
+  color: var(--mantine-color-text);
+
+  &:hover {
+    /* color: var(--color-text); */
+    color: var(--mantine-color-text);
+    /* background-color: var(--color-coverHover); */
+    background-color: var(--color-surfaceVarient);
+  }
+}
