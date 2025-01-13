@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar/SubHeadNavbar";
 import { Banner } from "@/components/common/Banner/Banner";
 import { SearchInput } from "@/components/common/SearchInput";
@@ -9,9 +9,18 @@ import { FilterChip } from "@/components/common/FilterChips/FilterChip";
 import { AihubCard } from "@/components/common/Cards/Aihub/Aihub";
 
 import classes from "./AIHub.module.css";
+import { CommonAxios } from "@/utils/CommonAxios";
+
+const YEARS = ["2020", "2021", "2022", "2023", "2024"];
+const TYPES = ["tag1", "tag2", "tag3", "tag4", "tag5"];
+const SIZE = ["필터1", "필터2", "필터3", "필터4", "필터5"];
 
 export default function DatasetsPage() {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [selectedYearOptions, setSelectedYearOptions] = useState<string[]>([]);
+  const [selectedTopicOptions, setSelectedTopicOptions] = useState<string[]>([]);
+  const [datasets, setDatasets] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleOptionSelect = (option: string) => {
     if (!selectedOptions.includes(option)) {
@@ -19,9 +28,66 @@ export default function DatasetsPage() {
     }
   };
 
+  const handleYearOptionSelect = (option: string) => {
+    if (!selectedYearOptions.includes(option)) {
+      setSelectedYearOptions((prev) => [...prev, option]);
+    }
+  };
+
+  const handleTopicOptionSelect = (option: string) => {
+    if (!selectedTopicOptions.includes(option)) {
+      setSelectedTopicOptions((prev) => [...prev, option]);
+    }
+  };
+
   const handleRemoveChip = (option: string) => {
     setSelectedOptions((prev) => prev.filter((item) => item !== option));
+    setSelectedYearOptions((prev) => prev.filter((item) => item !== option));
+    setSelectedTopicOptions((prev) => prev.filter((item) => item !== option));
   };
+
+  const fetchData = async () => {
+    try {
+      const filters: Record<string, any> = {
+        title: searchQuery || null,
+        dataTypes: selectedOptions,
+        topics: selectedTopicOptions,
+        developmentYears: selectedYearOptions.map((year) => parseInt(year, 10)),
+        professor: null, // 추후 필요 시 추가
+        participants: null, // 추후 필요 시 추가
+      };
+
+      const response = await CommonAxios.post("/aihub/datasets", filters, {
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+      });
+
+      const transformedDatasets = response.data.content.map((data: any) => ({
+        id: data.id,
+        title: data.title,
+        participants: data.participants,
+        professor: data.professor,
+        dataTypes: data.dataTypes,
+        years: data.developmentYears,
+        categories: data.topics,
+        url: data.url,
+      }));
+      setDatasets(transformedDatasets);
+    } catch (error) {
+      console.error("Error fetching datasets:", error);
+    }
+  };
+
+  // Fetch all datasets on initial load
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // Refetch datasets whenever filters or search query changes
+  useEffect(() => {
+    fetchData(); // Fetch with filters if any of them changes
+  }, [searchQuery, selectedYearOptions, selectedTopicOptions, selectedOptions]);
 
   return (
     <>
@@ -41,59 +107,39 @@ export default function DatasetsPage() {
 
       <div className={classes.mainContent}>
         <div className={classes.searchSection}>
-          <SearchInput placeholder="데이터셋 검색" />
+          <SearchInput
+            placeholder="데이터셋 검색"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
 
           <div className={classes.filters}>
+            <Dropdown options={YEARS} placeholder="연도" onOptionClick={handleYearOptionSelect} />
             <Dropdown
-              options={["Option 1", "Option 2", "Option 3"]}
-              placeholder="연도"
-              onOptionClick={handleOptionSelect}
-            />
-            <Dropdown
-              options={["Option 4", "Option 5", "Option 6"]}
+              options={TYPES}
               placeholder="파일 타입"
-              onOptionClick={handleOptionSelect}
+              onOptionClick={handleTopicOptionSelect}
             />
-            <Dropdown
-              options={["Option 7", "Option 8", "Option 9"]}
-              placeholder="파일 사이즈"
-              onOptionClick={handleOptionSelect}
-            />
+            <Dropdown options={SIZE} placeholder="파일 사이즈" onOptionClick={handleOptionSelect} />
           </div>
 
           <div className={classes.chips}>
-            {selectedOptions.map((option) => (
+            {[...selectedYearOptions, ...selectedTopicOptions, ...selectedOptions].map((option) => (
               <FilterChip key={option} label={option} onRemove={() => handleRemoveChip(option)} />
             ))}
           </div>
         </div>
 
         <div className={classes.gridContainer}>
-          <AihubCard
-            title="AI 모델 데이터셋 1"
-            people="개발자 A"
-            company="회사 A"
-            model="이미지 분류 모델"
-          />
-          <AihubCard
-            title="AI 모델 데이터셋 2"
-            people="개발자 B"
-            company="회사 B"
-            model="텍스트 분석 모델"
-          />
-          <AihubCard
-            title="AI 모델 데이터셋 2"
-            people="개발자 B"
-            company="회사 B"
-            model="텍스트 분석 모델"
-          />
-          <AihubCard
-            title="AI 모델 데이터셋 2"
-            people="개발자 B"
-            company="회사 B"
-            model="텍스트 분석 모델"
-          />
-          {/* Add more AihubCard components as needed */}
+          {datasets.map((dataset) => (
+            <AihubCard
+              key={dataset.id}
+              title={dataset.title}
+              people={dataset.professor}
+              company={dataset.participants.join(", ")}
+              model={dataset.dataTypes.join(", ")}
+            />
+          ))}
         </div>
       </div>
     </>
