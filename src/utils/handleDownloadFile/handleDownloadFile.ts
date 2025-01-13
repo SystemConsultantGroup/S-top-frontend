@@ -30,3 +30,14 @@ export async function getFileUrlById(fileId: number) {
 
   return url;
 }
+
+export async function handleDownloadBlob(obj: Blob, fileName: string) {
+  const url = window.URL.createObjectURL(obj);
+  const link = document.createElement("a");
+  link.href = url;
+  link.setAttribute("download", fileName);
+  link.style.visibility = "hidden";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}

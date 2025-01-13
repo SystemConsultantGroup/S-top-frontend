@@ -12,6 +12,7 @@ import { isNotEmpty, useForm } from "@mantine/form";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { EventImageSection } from "./EventImageSection";
+import classes from "./AdminNoticeEditForm.module.css";
 
 interface NoticeEditFormInputs {
   title: string;
@@ -109,7 +110,12 @@ export function AdminNoticeEditForm({ noticeId, event }: { noticeId?: number; ev
       <form onSubmit={onSubmit(handleSubmit)}>
         <Stack gap="lg">
           <Row field="제목" fieldSize={150}>
-            <TextInput id="input-title" {...getInputProps("title")} w={"50%"} />
+            <TextInput
+              id="input-title"
+              wrapperClasses={{ root: classes.input }}
+              initialValue={values.title}
+              {...getInputProps("title")}
+            />
           </Row>
           <Row field="내용" fieldSize={150}>
             <Textarea
