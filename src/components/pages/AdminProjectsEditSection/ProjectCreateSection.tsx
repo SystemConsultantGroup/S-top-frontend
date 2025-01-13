@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { PrimaryButton } from "@/components/common/Buttons";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { getYears } from "@/utils/getYears";
-import { AwardStatus, ProjectCategory, ProjectType } from "@/types/project";
+import { ProjectAwardStatus, ProjectCategory, ProjectType } from "@/types/project";
 import {
   ProjectsCategoryLookupTable,
   ProjectsTypeLookupTable,
@@ -36,7 +36,7 @@ export interface ProjectEditFormInputs {
   teamName: string;
   youtubeId: string;
   year: number;
-  awardStatus: AwardStatus;
+  awardStatus: ProjectAwardStatus;
   members: Member[];
   url: string;
   description: string;

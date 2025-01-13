@@ -29,23 +29,27 @@ export default function InquiriesPage() {
   const items = [
     {
       title: "프로젝트 문의입니다",
-      number: 1,
+      id: 1,
       author: "관리자",
       date: new Date("2024-08-01"),
-      view: 150,
-      pinned: true,
+      hitCount: 150,
+      fixed: true,
       href: "/inquiries/1",
       contentTxt: "this is a content.",
+      createdAt: "2024-08-01",
+      updatedAt: "2024-08-01",
     },
     {
       title: "프로젝트 문의입니다",
-      number: 2,
+      id: 2,
       author: "관리자",
       date: new Date("2024-08-05"),
-      view: 100,
-      pinned: false,
+      hitCount: 100,
+      fixed: false,
       href: "/inquiries/2",
       contentTxt: "this is a content.",
+      createdAt: "2024-08-01",
+      updatedAt: "2024-08-01",
     },
     // More items can be added here
   ];
@@ -72,17 +76,11 @@ export default function InquiriesPage() {
 
       <div className={classes.mainContent}>
         <Noticeboard
-          inputValue=""
           handleInput={() => {}}
-          handleKeyDown={() => {}}
           handleSelect={() => {}}
-          handleSubmit={() => {}}
           heading={heading}
           classifier={classifier}
           items={items}
-          paginShow={10}
-          paginJustify="end"
-          paginMarginTop="20px"
         />
 
         <PrimaryButton
