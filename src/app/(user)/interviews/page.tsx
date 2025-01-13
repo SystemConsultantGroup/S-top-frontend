@@ -72,6 +72,9 @@ export default function InterviewsPage() {
               subtitle={video.subtitle}
               videoUrl={video.videoUrl}
               bookmarked={false} // Default to not bookmarked
+              onBookmarkToggle={function (): void {
+                throw new Error("Function not implemented.");
+              }}
             />
           ))}
         </div>
