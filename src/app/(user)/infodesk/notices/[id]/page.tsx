@@ -25,7 +25,7 @@ export default function NoticeDetailPage() {
     const fetchData = async () => {
       if (!ID) return;
       try {
-        const response = await CommonAxios.get(`/eventNotices/${ID}`);
+        const response = await CommonAxios.get(`/notices/${ID}`);
         setData(response.data);
       } catch (err) {
         setError(err instanceof Error ? err : new Error("알 수 없는 오류가 발생했습니다."));

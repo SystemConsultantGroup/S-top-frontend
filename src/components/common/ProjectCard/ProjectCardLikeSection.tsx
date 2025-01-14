@@ -9,6 +9,7 @@ import {
 } from "@tabler/icons-react";
 import classes from "./ProjectCard.module.css";
 import { useState } from "react";
+import { useAuth } from "../Auth";
 
 export interface ProjectCardLikeSectionProps {
   likes: number;
@@ -28,16 +29,25 @@ export function ProjectCardLikeSection({
   const [like, setLike] = useState<number>(likes);
   const [isLike, setIsLike] = useState<boolean>(isLiked);
   const [isMark, setIsMark] = useState<boolean>(isMarked);
+  const { isLoggedIn } = useAuth();
 
   const handleLike = () => {
-    setIsLike((prev) => !prev);
-    if (isLike) setLike((prev) => prev - 1);
-    else setLike((prev) => prev + 1);
-    onClickLike();
+    if (isLoggedIn) {
+      setIsLike((prev) => !prev);
+      if (isLike) setLike((prev) => prev - 1);
+      else setLike((prev) => prev + 1);
+      onClickLike();
+    } else {
+      alert("프로젝트에 좋아요를 표시하려면 로그인해야 합니다.");
+    }
   };
   const handleBookmark = () => {
-    setIsMark((prev) => !prev);
-    onClickBookmark();
+    if (isLoggedIn) {
+      setIsMark((prev) => !prev);
+      onClickBookmark();
+    } else {
+      alert("프로젝트를 북마크에 추가하려면 로그인해야 합니다.");
+    }
   };
   return (
     <CardSection className={classes["like-section"]}>
