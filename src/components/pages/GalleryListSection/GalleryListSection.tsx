@@ -73,6 +73,7 @@ export function GalleryListSection() {
       value: event.target.value,
       setQuery,
     });
+    setPageNumber(1);
   };
 
   /* 삭제 버튼 핸들러 */
