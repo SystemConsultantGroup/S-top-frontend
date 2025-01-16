@@ -108,36 +108,19 @@ export default function InquiriesPage() {
       </div>
 
       <div className={classes.mainContent}>
-        {loading ? (
-          <p>Loading inquiries...</p> // Loading message
-        ) : error ? (
-          <p>{error}</p> // Display error message
-        ) : (
-          <>
-            <Noticeboard
-              handleInput={handleInput}
-              handleSelect={handleSelect}
-              heading={heading}
-              classifier={classifier}
-              items={inquiries.map((inquiry) => ({
-                title: inquiry.title,
-                id: inquiry.id,
-                authorName: inquiry.authorName,
-                createdAt: new Date(inquiry.createdAt).toISOString(), // Convert to ISO string
-                view: 0, // Set view count if available
-                pinned: false, // Adjust if you have a pinned feature
-                href: `/inquiries/${inquiry.id}`,
-                contentTxt: inquiry.title,
-                hitCount: 0,
-                fixed: false,
-                updatedAt: new Date().toISOString(),
-              }))}
-            />
-            <Group justify="center" mt={20}>
-              <Pagination value={pageNumber} onChange={setPageNumber} total={pageData.totalPages} />
-            </Group>
-          </>
-        )}
+        <Noticeboard
+          handleInput={() => {}}
+          handleSelect={() => {}}
+          heading={heading}
+          classifier={classifier}
+          items={items}
+        />
+
+        <PrimaryButton
+          style={{ position: "absolute", bottom: "120px", right: "20px" }} // Position the button
+        >
+          작성하기
+        </PrimaryButton>
       </div>
     </>
   );
