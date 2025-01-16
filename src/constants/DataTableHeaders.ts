@@ -42,6 +42,7 @@ export const INTERVIEW_TABLE_HEADERS: DataTableHeaderProps[] = [
   { label: "소속", widthPercentage: 20, sort: true, selector: "talkerBelonging" },
   { label: "이름", widthPercentage: 20, sort: true, selector: "talkerName" },
   { label: "작성일", widthPercentage: 10, sort: true, selector: "createdAt" },
+  { label: "관리", widthPercentage: 7, sort: false },
 ];
 
 export const PROJECT_TABLE_HEADERS: DataTableHeaderProps[] = [
@@ -71,6 +72,14 @@ export const QUIZ_TABLE_HEADERS: DataTableHeaderProps[] = [
 ];
 
 export const INQUIRIES_TABLE_HEADERS: DataTableHeaderProps[] = [
+  { label: "순번", widthPercentage: 7, sort: true, selector: "id" },
+  { label: "제목", widthPercentage: 15, sort: true, selector: "title" },
+  { label: "작성자", widthPercentage: 7, sort: false },
+  { label: "작성일", widthPercentage: 7, sort: false },
+  { label: "관리", widthPercentage: 7, sort: false },
+];
+
+export const PROPOSALS_TABLE_HEADERS: DataTableHeaderProps[] = [
   { label: "순번", widthPercentage: 7, sort: true, selector: "id" },
   { label: "제목", widthPercentage: 15, sort: true, selector: "title" },
   { label: "작성자", widthPercentage: 7, sort: false },
