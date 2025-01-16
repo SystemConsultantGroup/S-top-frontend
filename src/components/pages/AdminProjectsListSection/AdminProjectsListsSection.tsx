@@ -7,7 +7,7 @@ import { PROJECT_TABLE_HEADERS } from "@/constants/DataTableHeaders";
 import { PAGE_SIZES } from "@/constants/PageSize";
 import { useProjects } from "@/hooks/swr/useProjects";
 import { useTableSort } from "@/hooks/useTableSort";
-import { IProjectParams } from "@/types/project";
+import { IProjectRequestParams } from "@/types/project";
 import { CommonAxios } from "@/utils/CommonAxios";
 import { handleChangeSearch } from "@/utils/handleChangeSearch";
 import { Group, Stack } from "@mantine/core";
@@ -26,7 +26,7 @@ export function AdminProjectsListSection() {
   /* 데이터 정렬 훅 */
   const { sortBy, order, handleSortButton } = useTableSort();
   /* 쿼리 debounced state, 검색창에 이용 */
-  const [query, setQuery] = useDebouncedState<IProjectParams>(
+  const [query, setQuery] = useDebouncedState<IProjectRequestParams>(
     {
       page: pageNumber - 1,
       size: Number(pageSize),
@@ -63,11 +63,12 @@ export function AdminProjectsListSection() {
 
   /* 검색창 핸들러 */
   const onSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-    handleChangeSearch<string, IProjectParams>({
+    handleChangeSearch<string, IProjectRequestParams>({
       name: "title",
       value: event.target.value,
       setQuery,
     });
+    setPageNumber(1);
   };
 
   /* 삭제 버튼 핸들러 */

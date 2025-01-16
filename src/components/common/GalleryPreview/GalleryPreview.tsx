@@ -52,7 +52,7 @@ export function GalleryPreview({
           {title}
         </Text>
 
-        <Flex justify="space-between" mt="xs">
+        <Flex justify="space-between" mt="xs" className={classes.bottom}>
           <Text c="dimmed" size="sm">
             {formatDate(date)}
           </Text>
