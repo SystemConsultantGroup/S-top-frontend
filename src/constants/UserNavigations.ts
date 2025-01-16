@@ -83,6 +83,10 @@ export const USER_NAVS: INavList[] = [
         link: "/infodesk/cooperation",
       },
       {
+        name: "공지사항",
+        link: "/infodesk/notices",
+      },
+      {
         name: "산학협력 과제 제안",
         link: "/infodesk/proposals",
       },
