@@ -12,101 +12,8 @@ import classes from "./AIHub.module.css";
 import { CommonAxios } from "@/utils/CommonAxios";
 
 const YEARS = ["2020", "2021", "2022", "2023", "2024"];
-// 필터링 옵션 리스트 만들기 ...
-
-interface RichText {
-  type: string;
-  text: {
-    content: string;
-    link: string | null;
-  };
-  annotations: {
-    bold: boolean;
-    italic: boolean;
-    strikethrough: boolean;
-    underline: boolean;
-    code: boolean;
-    color: string;
-  };
-  plain_text: string;
-  href: string | null;
-}
-
-interface MultiSelect {
-  id: string;
-  name: string;
-  color: string;
-}
-
-interface Title {
-  type: string;
-  text: {
-    content: string;
-    link: string | null;
-  };
-  annotations: {
-    bold: boolean;
-    italic: boolean;
-    strikethrough: boolean;
-    underline: boolean;
-    code: boolean;
-    color: string;
-  };
-  plain_text: string;
-  href: string | null;
-}
-
-interface Properties {
-  Professor: {
-    id: string;
-    type: "rich_text";
-    rich_text: RichText[];
-  };
-  dataType: {
-    id: string;
-    type: "multi_select";
-    multi_select: MultiSelect[];
-  };
-  Participants: {
-    id: string;
-    type: "rich_text";
-    rich_text: RichText[];
-  };
-  category: {
-    id: string;
-    type: "multi_select";
-    multi_select: MultiSelect[];
-  };
-  year: {
-    id: string;
-    type: "multi_select";
-    multi_select: MultiSelect[];
-  };
-  title: {
-    id: string;
-    type: "title";
-    title: Title[];
-  };
-}
-
-interface NotionPage {
-  object: "page";
-  id: string;
-  created_time: string;
-  last_edited_time: string;
-  properties: Properties;
-  url: string;
-}
-
-interface NotionResponse {
-  object: "list";
-  results: NotionPage[];
-  next_cursor: string | null;
-  has_more: boolean;
-}
-
-const dbID = "1308cc9731cd810d9f33f8019784bacc";
-const dbKey = "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";
+const TYPES = ["tag1", "tag2", "tag3", "tag4", "tag5"];
+const SIZE = ["필터1", "필터2", "필터3", "필터4", "필터5"];
 
 export default function DatasetsPage() {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
@@ -139,95 +46,47 @@ export default function DatasetsPage() {
     setSelectedTopicOptions((prev) => prev.filter((item) => item !== option));
   };
 
-  const fetchData = async (applyFilters = false) => {
+  const fetchData = async () => {
     try {
-      const filters: any[] = [];
+      const filters: Record<string, any> = {
+        title: searchQuery || null,
+        dataTypes: selectedOptions,
+        topics: selectedTopicOptions,
+        developmentYears: selectedYearOptions.map((year) => parseInt(year, 10)),
+        professor: null, // 추후 필요 시 추가
+        participants: null, // 추후 필요 시 추가
+      };
 
-      if (applyFilters) {
-        if (searchQuery) {
-          filters.push({
-            property: "title",
-            text: {
-              contains: searchQuery,
-            },
-          });
-        }
-
-        if (selectedYearOptions.length > 0) {
-          selectedYearOptions.forEach((year) => {
-            filters.push({
-              property: "year",
-              multi_select: {
-                contains: year,
-              },
-            });
-          });
-        }
-
-        if (selectedTopicOptions.length > 0) {
-          selectedTopicOptions.forEach((category) => {
-            filters.push({
-              property: "category",
-              multi_select: {
-                contains: category,
-              },
-            });
-          });
-        }
-
-        if (selectedOptions.length > 0) {
-          selectedOptions.forEach((dataType) => {
-            filters.push({
-              property: "dataType",
-              multi_select: {
-                contains: dataType,
-              },
-            });
-          });
-        }
-      }
-
-      // 클릭해서 temporal access 받아와야 합니다 !! 추후 수정 ...
-      const response = await CommonAxios.post<NotionResponse>(
-        "https://cors-anywhere.herokuapp.com/https://api.notion.com/v1/databases/" +
-          dbID +
-          "/query",
-        {
-          filter: { or: filters },
-          page_size: 100,
+      const response = await CommonAxios.post("/aihub/datasets", filters, {
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8",
         },
-        {
-          headers: {
-            Authorization: `Bearer ${dbKey}`,
-            "Notion-Version": "2021-08-16",
-          },
-        }
-      );
+      });
 
-      const transformedDatasets = response.data.results.map((data) => ({
+      const transformedDatasets = response.data.content.map((data: any) => ({
         id: data.id,
-        title: data.properties.title.title[0]?.text.content || "Untitled",
-        participants: data.properties.Participants.rich_text[0]?.text.content.split(", ") || [],
-        professor: data.properties.Professor.rich_text[0]?.text.content || "Unknown",
-        dataTypes: data.properties.dataType.multi_select.map((lm) => lm.name),
-        years: data.properties.year.multi_select.map((year) => year.name),
-        categories: data.properties.category.multi_select.map((category) => category.name),
+        title: data.title,
+        participants: data.participants,
+        professor: data.professor,
+        dataTypes: data.dataTypes,
+        years: data.developmentYears,
+        categories: data.topics,
         url: data.url,
       }));
       setDatasets(transformedDatasets);
     } catch (error) {
-      console.error("Error fetching data from Notion:", error);
+      console.error("Error fetching datasets:", error);
     }
   };
 
-  // Fetch all models on initial load
+  // Fetch all datasets on initial load
   useEffect(() => {
     fetchData();
   }, []);
 
-  // Refetch models whenever filters or search query changes
+  // Refetch datasets whenever filters or search query changes
   useEffect(() => {
-    fetchData(true); // Fetch with filters if any of them changes
+    fetchData(); // Fetch with filters if any of them changes
   }, [searchQuery, selectedYearOptions, selectedTopicOptions, selectedOptions]);
 
   return (
@@ -257,15 +116,11 @@ export default function DatasetsPage() {
           <div className={classes.filters}>
             <Dropdown options={YEARS} placeholder="연도" onOptionClick={handleYearOptionSelect} />
             <Dropdown
-              options={["type1", "type2", "type3"]}
+              options={TYPES}
               placeholder="파일 타입"
               onOptionClick={handleTopicOptionSelect}
             />
-            <Dropdown
-              options={["tag1", "tag2", "tag3"]}
-              placeholder="파일 사이즈"
-              onOptionClick={handleOptionSelect}
-            />
+            <Dropdown options={SIZE} placeholder="파일 사이즈" onOptionClick={handleOptionSelect} />
           </div>
 
           <div className={classes.chips}>

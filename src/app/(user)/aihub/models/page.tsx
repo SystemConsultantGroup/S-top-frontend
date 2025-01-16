@@ -14,6 +14,11 @@ const YEARS = ["2020", "2021", "2022", "2023", "2024"];
 // 필터링 옵션들 리스트 만들면 됨
 
 import classes from "./AIHub.module.css";
+import { CommonAxios } from "@/utils/CommonAxios";
+
+const YEARS = ["2020", "2021", "2022", "2023", "2024"];
+const TYPES = ["tag1", "tag2", "tag3", "tag4", "tag5"];
+const FRAMEWORK = ["필터1", "필터2", "필터3", "필터4", "필터5"];
 
 interface RichText {
   type: string;
@@ -113,6 +118,8 @@ export default function ModelsPage() {
   const [selectedYearOptions, setSelectedYearOptions] = useState<string[]>([]);
   const [selectedTopicOptions, setSelectedTopicOptions] = useState<string[]>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [selectedYearOptions, setSelectedYearOptions] = useState<string[]>([]);
+  const [selectedTopicOptions, setSelectedTopicOptions] = useState<string[]>([]);
   const [models, setModels] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -140,95 +147,47 @@ export default function ModelsPage() {
     setSelectedTopicOptions((prev) => prev.filter((item) => item !== option));
   };
 
-  const fetchModels = async (applyFilters = false) => {
+  const fetchModels = async () => {
     try {
-      const filters: any[] = [];
+      const filters: Record<string, any> = {
+        title: searchQuery || "",
+        learningModels: selectedOptions,
+        topics: selectedTopicOptions,
+        developmentYears: selectedYearOptions.map(Number),
+        professor: "", // 추가적인 필드가 있다면 이곳에서 처리
+        participants: [], // 초기화, 필요시 추가
+      };
 
-      if (applyFilters) {
-        if (searchQuery) {
-          filters.push({
-            property: "title",
-            text: {
-              contains: searchQuery,
-            },
-          });
-        }
-
-        if (selectedYearOptions.length > 0) {
-          selectedYearOptions.forEach((year) => {
-            filters.push({
-              property: "year",
-              multi_select: {
-                contains: year,
-              },
-            });
-          });
-        }
-
-        if (selectedTopicOptions.length > 0) {
-          selectedTopicOptions.forEach((topic) => {
-            filters.push({
-              property: "topic",
-              multi_select: {
-                contains: topic,
-              },
-            });
-          });
-        }
-
-        if (selectedOptions.length > 0) {
-          selectedOptions.forEach((model) => {
-            filters.push({
-              property: "model",
-              multi_select: {
-                contains: model,
-              },
-            });
-          });
-        }
-      }
-
-      // 클릭해서 temporal access 받아와야 합니다 !! 추후 노션 받으면 수정 ...
-      const response = await CommonAxios.post<NotionResponse>(
-        "https://cors-anywhere.herokuapp.com/https://api.notion.com/v1/databases/" +
-          dbID +
-          "/query",
-        {
-          filter: { or: filters },
-          page_size: 100,
+      const response = await CommonAxios.post("/aihub/models", filters, {
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8",
         },
-        {
-          headers: {
-            Authorization: `Bearer ${dbKey}`,
-            "Notion-Version": "2021-08-16",
-          },
-        }
-      );
+      });
 
-      const transformedModels = response.data.results.map((model) => ({
+      const transformedModels = response.data.content.map((model: any) => ({
         id: model.id,
-        title: model.properties.title.title[0]?.text.content || "Untitled",
-        participants: model.properties.participants.rich_text[0]?.text.content.split(", ") || [],
-        professor: model.properties.professor.rich_text[0]?.text.content || "Unknown",
-        learningModels: model.properties.model.multi_select.map((lm) => lm.name),
-        years: model.properties.year.multi_select.map((year) => year.name),
-        categories: model.properties.topic.multi_select.map((category) => category.name),
+        title: model.title,
+        professor: model.professor,
+        participants: model.participants,
+        learningModels: model.learningModels,
+        topics: model.topics,
+        developmentYears: model.developmentYears,
         url: model.url,
       }));
-
       setModels(transformedModels);
     } catch (error) {
-      console.error("Error fetching models from Notion:", error);
+      console.error("Error fetching AI Hub models:", error);
     }
   };
 
-  // Fetch all models on initial load
+  // 초기 데이터 로드
   useEffect(() => {
     fetchModels();
   }, []);
 
+  // 필터 변경 시 데이터 로드
   useEffect(() => {
-    fetchModels(true); // Fetch with filters if any of them changes
+    fetchModels();
   }, [searchQuery, selectedYearOptions, selectedTopicOptions, selectedOptions]);
 
   return (
@@ -258,12 +217,12 @@ export default function ModelsPage() {
           <div className={classes.filters}>
             <Dropdown options={YEARS} placeholder="연도" onOptionClick={handleYearOptionSelect} />
             <Dropdown
-              options={["type1", "type2", "type3"]}
+              options={TYPES}
               placeholder="데이터 타입"
               onOptionClick={handleTopicOptionSelect}
             />
             <Dropdown
-              options={["tag1", "tag2", "tag3"]}
+              options={FRAMEWORK}
               placeholder="프레임워크"
               onOptionClick={handleOptionSelect}
             />
