@@ -1,0 +1,89 @@
+.backColor {
+  background-color: var(--color-background);
+}
+
+.formContainer {
+  background-color: var(--color-surfaceContainerLowest);
+  width: 90%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 45px;
+  box-sizing: border-box;
+}
+.heading {
+  margin-bottom: 45px;
+  font-size: 23pt;
+}
+
+.formRow {
+  width: 100%;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.formFile {
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.formFile .InputWrapper {
+  margin-right: 30px;
+  /* TextInput과 버튼 사이에 간격 추가 */
+}
+
+.formFile .buttonWrapper {
+  margin-top: 0px;
+  /* 버튼 위에만 마진을 줌 */
+}
+
+.formFile .fileInput {
+  font-size: 14px;
+}
+
+.checkboxGroup {
+  margin-top: 15px;
+  display: flex;
+  gap: 30px;
+}
+
+.formRow label {
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-size: 13pt;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.formRowbtn {
+  margin-top: 38px;
+}
+
+.mainContent {
+  width: 80%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  padding-bottom: 100px;
+}
+
+@media screen and (max-width: 480px) {
+  /** 모바일 세로 */
+}
+
+@media screen and (max-width: 768px) {
+  /** 모바일 가로, 태블릿 세로 */
+}
+
+@media screen and (max-width: 1024px) {
+  /** 태블릿 가로 */
+}
+
+@media screen and (max-width: 1280px) {
+  /** 태블릿 가로, 노트북 */
+}
