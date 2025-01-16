@@ -141,7 +141,7 @@ const ProposalWritePage = () => {
           <form onSubmit={onSubmit(handleSubmit)}>
             <div className={styles.formRow}>
               <TextInput
-                label="제목"
+                label="제목 *"
                 placeholder="제목을 입력하세요"
                 {...getInputProps("title")} // 에러 메시지 자동 연결
               />
@@ -149,7 +149,7 @@ const ProposalWritePage = () => {
 
             <div className={styles.formRow}>
               <Textarea
-                label="내용"
+                label="내용 *"
                 placeholder="내용을 입력하세요"
                 minRows={6}
                 autosize
@@ -159,7 +159,7 @@ const ProposalWritePage = () => {
 
             <div className={styles.formRow}>
               <TextInput
-                label="이메일"
+                label="이메일 *"
                 placeholder="이메일을 입력하세요"
                 {...getInputProps("email")}
               />
@@ -174,11 +174,14 @@ const ProposalWritePage = () => {
             </div>
 
             <div className={styles.formRow}>
-              <label>프로젝트 타입</label>
+              <label>프로젝트 타입 *</label>
               <div className={styles.checkboxGroup}>
                 {projectTypeOptions.map(({ label, value }) => (
                   <Checkbox
                     key={value}
+                    classNames={{
+                      label: styles.label,
+                    }}
                     label={label} // 화면에 표시될 한글 이름
                     checked={values.projectTypes.includes(value)} // 선택 상태 확인
                     onChange={() => handleCheckboxChange("projectTypes", value)} // 값 업데이트

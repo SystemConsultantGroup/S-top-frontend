@@ -16,7 +16,7 @@ const ProposalsPage = () => {
   const HEADING = "산학협력 과제 제안";
 
   /** 한 페이지 당 아이템 개수 */
-  const [pageSize] = useState(20);
+  const [pageSize] = useState(5);
   /** 페이지네이션 페이지 숫자 */
   const [pageNumber, setPageNumber] = useState(1);
   /** 쿼리 정보 */

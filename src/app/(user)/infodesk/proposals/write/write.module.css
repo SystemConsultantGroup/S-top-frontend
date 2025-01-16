@@ -59,6 +59,10 @@
   margin-top: 20px;
 }
 
+.label {
+  font-size: 16px !important; /* 볼드 제거 */
+}
+
 .formRowbtn {
   margin-top: 38px;
 }
