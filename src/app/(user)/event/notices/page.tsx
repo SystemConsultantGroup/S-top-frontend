@@ -30,38 +30,35 @@ export default function EventNoticesPage() {
     event: true,
   });
 
-  type OptionType = "TITLE" | "CONTENT" | "ALL";
-  const [option, setOption] = useState<OptionType>("TITLE");
+  type OptionType = "title" | "content" | "both";
+  const [option, setOption] = useState<OptionType>("title");
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setQuery((prev) => ({
       ...prev,
-      title: option === "TITLE" && value !== "" ? value : undefined,
+      scope: option,
+      terms: value !== "" ? value : undefined,
     }));
   };
 
   const handleSelect = (value: string | null) => {
     if (value === "0") {
-      setOption(() => "TITLE");
+      setOption(() => "title");
+    } else if (value === "1") {
+      setOption(() => "content");
+    } else if (value === "2") {
+      setOption(() => "both");
     }
-    // TODO: 내용, 제목+내용 필터링 추가
-    // else if (value === "1") {
-    //   optionValue = "CONTENT";
-    // }
-    // else {
-    //   optionValue = "ALL";
-    // }
   };
 
   const classifier = {
     data: [
       { value: "0", label: "제목" },
-      // TODO: same as the previous one
-      // { value: "1", label: "내용" },
-      // { value: "2", label: "제목+내용" },
+      { value: "1", label: "내용" },
+      { value: "2", label: "전체" },
     ],
-    defaultLabel: 0,
+    defaultLabel: 2,
     searchPlaceholder: "검색어를 입력하세요",
   };
 

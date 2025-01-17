@@ -45,22 +45,24 @@ export function useFiles() {
         if (file.size == 0) {
           fileIds.push(id);
           continue;
+        } else {
+          filesToUpload.append("files", file);
         }
-
-        filesToUpload.append("files", file);
       }
     }
 
     try {
-      const response = await CommonAxios.post("/files", filesToUpload, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      if (filesToUpload.get("files") !== null) {
+        const response = await CommonAxios.post("/files", filesToUpload, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
 
-      response.data.forEach((file: ApiFile) => {
-        fileIds.push(String(file.id));
-      });
+        response.data.forEach((file: ApiFile) => {
+          fileIds.push(String(file.id));
+        });
+      }
     } catch (error) {
       console.error(`파일 업로드에 실패했습니다.`, error);
     }

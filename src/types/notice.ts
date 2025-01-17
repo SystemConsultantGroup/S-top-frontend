@@ -1,9 +1,10 @@
 import { PagedApiRequestParams, PagedApiResponse } from "./common";
 
+type NoticeArgScope = "title" | "content" | "both";
+
 export interface PagedNoticesRequestParams extends PagedApiRequestParams {
-  title?: string;
-  sort?: string;
-  size?: number;
+  terms?: string;
+  scope?: NoticeArgScope;
 }
 
 export interface Notice {

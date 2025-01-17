@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { PrimaryButton } from "@/components/common/Buttons";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { getYears } from "@/utils/getYears";
-import { AwardStatus, ProjectCategory, ProjectType } from "@/types/project";
+import { ProjectAwardStatus, ProjectCategory, ProjectType } from "@/types/project";
 import {
   ProjectsCategoryLookupTable,
   ProjectsTypeLookupTable,
@@ -36,7 +36,7 @@ export interface ProjectEditFormInputs {
   teamName: string;
   youtubeId: string;
   year: number;
-  awardStatus: AwardStatus;
+  awardStatus: ProjectAwardStatus;
   members: Member[];
   url: string;
   description: string;
@@ -82,11 +82,13 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
   const handleSubmit = async (values: ProjectEditFormInputs) => {
     try {
       const fileIds = { thumbnailId: values.thumbnailId, posterId: values.posterId };
-      // TODO: 파일 업로드 로직 수정
-      const uploadedThumbnail = await uploadFiles([{ id: "0", file: thumbnail }]);
+ 
+      const uploadedThumbnail = await uploadFiles([
+        { id: String(values.thumbnailId), file: thumbnail },
+      ]);
       fileIds.thumbnailId = Number(uploadedThumbnail[0]);
 
-      const uploadedPoster = await uploadFiles([{ id: "0", file: poster }]);
+      const uploadedPoster = await uploadFiles([{ id: String(values.posterId), file: poster }]);
       fileIds.posterId = Number(uploadedPoster[0]);
 
       const professorsArr = professors?.split(",").map((professor) => ({
