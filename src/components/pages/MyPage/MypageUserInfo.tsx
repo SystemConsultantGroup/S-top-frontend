@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import classes from "./MypageView.module.css";
-import { Modal, Text } from "@mantine/core";
+import classes from "./Mypage.module.css";
+import { Group, Modal, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
 import { IUser } from "@/types/user";
@@ -32,7 +32,6 @@ export function MypageUserInfo() {
   const handleUserUpdate = () => {
     close();
     fetchUserData();
-    // TODO: 정보 업데이트 완료 알림
   };
 
   return (
@@ -81,7 +80,9 @@ export function MypageUserInfo() {
             )}
           </div>
         </div>
-        <PrimaryButton onClick={open}>회원정보 수정</PrimaryButton>
+        <Group justify="flex-end">
+          <PrimaryButton onClick={open}>회원정보 수정</PrimaryButton>
+        </Group>
       </div>
       <Modal opened={opened} onClose={close} title="회원정보 수정" centered>
         <MypageForm initialData={userData} onUserUpdate={handleUserUpdate} />

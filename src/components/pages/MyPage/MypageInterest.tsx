@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import classes from "./MypageView.module.css";
+import classes from "./Mypage.module.css";
 import { ProjectCard } from "@/components/common/ProjectCard";
 import { Text } from "@mantine/core";
 import { Carousel, CarouselSlide } from "@mantine/carousel";
