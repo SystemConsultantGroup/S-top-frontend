@@ -34,7 +34,7 @@
 .userInfoContainer > .rowGroup > .row > .firstCol,
 .UserInfoEditModal > .rowGroup > .row > .firstCol {
   font-weight: 700;
-  width: 25%;
+  width: 135px;
   flex-shrink: 0;
 }
 
