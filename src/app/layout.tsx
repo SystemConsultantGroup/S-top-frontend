@@ -2,11 +2,9 @@ import { AppTheme, resolver } from "@/theme";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "@/theme/global.css";
-import "@mantine/carousel/styles.css";
 import type { Metadata } from "next";
 import { AuthProvider } from "@/components/common/Auth";
 import { SWRProvider } from "@/components/common/SWRProvider";
-import "@mantine/carousel/styles.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { headers } from "next/headers";
 
