@@ -82,7 +82,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
   const handleSubmit = async (values: ProjectEditFormInputs) => {
     try {
       const fileIds = { thumbnailId: values.thumbnailId, posterId: values.posterId };
- 
+
       const uploadedThumbnail = await uploadFiles([
         { id: String(values.thumbnailId), file: thumbnail },
       ]);

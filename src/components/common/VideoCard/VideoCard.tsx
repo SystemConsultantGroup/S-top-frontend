@@ -9,7 +9,7 @@ import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
 export interface VideoCardProps {
   key?: number;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   videoUrl: string;
   bookmarked: boolean;
   onBookmarkToggle: () => void;
