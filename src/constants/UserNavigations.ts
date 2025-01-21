@@ -58,12 +58,16 @@ export const USER_NAVS: INavList[] = [
     title: "Events",
     items: [
       {
-        name: "갤러리",
-        link: "/event/gallery",
-      },
-      {
         name: "이벤트 공지사항",
         link: "/event/notices",
+      },
+      {
+        name: "작품 수상 결과",
+        link: "/event/award",
+      },
+      {
+        name: "갤러리",
+        link: "/event/gallery",
       },
     ],
   },
@@ -77,6 +81,10 @@ export const USER_NAVS: INavList[] = [
       {
         name: "산학협력프로젝트 소개",
         link: "/infodesk/cooperation",
+      },
+      {
+        name: "공지사항",
+        link: "/infodesk/notices",
       },
       {
         name: "산학협력 과제 제안",

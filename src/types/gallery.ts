@@ -14,7 +14,7 @@ export interface Gallery {
   year: number;
   month: number;
   hitCount: number;
-  fixed: boolean;
+  fixed?: boolean;
   createdAt: string;
   updatedAt: string;
   files: ApiFile[];

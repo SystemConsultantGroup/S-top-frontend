@@ -4,15 +4,18 @@ import React, { useState, useEffect } from "react";
 import { Group, Button } from "@mantine/core";
 import styles from "./VideoCard.module.css";
 import { QuizModal } from "./QuizModal";
+import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
 
 export interface VideoCardProps {
+  key?: number;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   videoUrl: string;
   bookmarked: boolean;
   onBookmarkToggle: () => void;
 }
 export const VideoCard: React.FC<VideoCardProps> = ({
+  key,
   title,
   subtitle,
   videoUrl,
@@ -21,6 +24,13 @@ export const VideoCard: React.FC<VideoCardProps> = ({
 }) => {
   const [bookmarked, setBookmarked] = useState(initialBookmarked);
   const [quizModalOpened, setQuizModalOpened] = useState(false);
+  const [quizData, setQuizData] = useState<
+    Array<{
+      question: string;
+      answer: number; // Correct answer index
+      options: string[]; // Options for the question
+    }>
+  >([]);
 
   useEffect(() => {
     setBookmarked(initialBookmarked);
@@ -29,14 +39,41 @@ export const VideoCard: React.FC<VideoCardProps> = ({
   const handleBookmarkClick = () => {
     setBookmarked(!bookmarked);
     onBookmarkToggle();
+
+    /*
+    try {
+      if (bookmarked) {
+        await CommonAxios.delete(`/talks/${key}/favorite`);
+      } else {
+        await CommonAxios.post(`/talks/${key}/favorite`);
+      }
+      setBookmarked(!bookmarked);
+    } catch (error) {
+      console.error("Error toggling bookmark:", error);
+    }*/
   };
 
-  const openQuizModal = () => {
-    setQuizModalOpened(true);
+  const openQuizModal = async () => {
+    try {
+      const response = await CommonAxios.get(`/talks/${key}/quiz`);
+      setQuizData(response.data.quiz || []);
+      setQuizModalOpened(true);
+    } catch (error) {
+      console.error("Error fetching quiz data:", error);
+    }
   };
 
   const closeQuizModal = () => {
     setQuizModalOpened(false);
+  };
+
+  const submitQuiz = async (quizAnswers: Record<string, number>) => {
+    try {
+      const response = await CommonAxios.post(`/talks/${key}/quiz`, { result: quizAnswers });
+      alert(response.data.success ? "Quiz submitted successfully!" : "Quiz submission failed.");
+    } catch (error) {
+      console.error("Error submitting quiz:", error);
+    }
   };
 
   return (
@@ -99,7 +136,8 @@ export const VideoCard: React.FC<VideoCardProps> = ({
           opened={quizModalOpened}
           onClose={closeQuizModal}
           videoUrl={videoUrl}
-          quizContent={<div>퀴즈 내용이 여기에 들어갑니다.</div>}
+          quizData={quizData} // Pass the quiz data here
+          onSubmit={submitQuiz}
         />
       </div>
     </div>
