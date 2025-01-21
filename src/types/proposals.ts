@@ -1,19 +1,17 @@
-import { PagedApiRequestParams, PagedApiResponse } from "./common";
+import { PagedApiResponse } from "./common";
 
-export interface PagedProposalsRequestParams extends PagedApiRequestParams {
-  title?: string;
-  sort?: string;
+export interface ProposalsRequestParams {
+  scope?: number;
+  term?: number;
+  page?: number;
+  size?: number;
 }
 
-export interface Proposal {
+export interface Proposals {
   id: number;
-  authorName: string;
-  projectId: number;
-  projectName: string;
   title: string;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
+  name: string;
+  createdDate: string;
 }
 
-export interface PagedProposalsResponse extends PagedApiResponse<Proposal> {}
+export interface ProposalsResponse extends PagedApiResponse<Proposals> {}
