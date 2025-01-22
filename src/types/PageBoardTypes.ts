@@ -16,10 +16,15 @@ export interface INoticeClassifier {
 export interface INoticeAllItem {
   id: number;
   title: string;
-  hitCount: number;
-  fixed: boolean;
-  createdAt: string;
-  updatedAt: string;
+  hitCount?: number;
+  fixed?: boolean;
+  /** TODO: inquires와 proposals prop key가 다름 */
+  authorName?: string; // inquires
+  name?: string; // proposals
+  /** TODO: notices와 inquires, proposals prop key가 다름 */
+  createdAt?: string; // notices
+  createdDate?: string; // inquires, proposals
+  updatedAt?: string;
 }
 
 export interface INoticeHeading {
