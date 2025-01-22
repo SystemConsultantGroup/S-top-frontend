@@ -42,6 +42,7 @@ jobs:
         run: |
           echo NEXT_PUBLIC_API_ENDPOINT=${{secrets.API_ENDPOINT_PROD}} >> .env
           echo NEXT_PUBLIC_GA_ID=${{secrets.GA_ID}} >> .env
+          echo KAKAO_CLIENT_ID=${{secrets.KAKAO_CLIENT_ID}} >> .env
           cat .env
       - name: Docker 이미지 빌드+푸시
         id: build-and-push
