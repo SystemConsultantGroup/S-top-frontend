@@ -79,6 +79,7 @@ export default function AdminInquiriesListSection() {
       value: event.target.value,
       setQuery,
     });
+    setPageNumber(1);
   };
 
   return (

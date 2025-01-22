@@ -82,11 +82,13 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
   const handleSubmit = async (values: ProjectEditFormInputs) => {
     try {
       const fileIds = { thumbnailId: values.thumbnailId, posterId: values.posterId };
-      // TODO: 파일 업로드 로직 수정
-      const uploadedThumbnail = await uploadFiles([{ id: "0", file: thumbnail }]);
+
+      const uploadedThumbnail = await uploadFiles([
+        { id: String(values.thumbnailId), file: thumbnail },
+      ]);
       fileIds.thumbnailId = Number(uploadedThumbnail[0]);
 
-      const uploadedPoster = await uploadFiles([{ id: "0", file: poster }]);
+      const uploadedPoster = await uploadFiles([{ id: String(values.posterId), file: poster }]);
       fileIds.posterId = Number(uploadedPoster[0]);
 
       const professorsArr = professors?.split(",").map((professor) => ({
