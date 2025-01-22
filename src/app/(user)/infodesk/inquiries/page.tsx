@@ -122,7 +122,7 @@ export default function InquiriesPage() {
   //const handleButtonClick = () => {
   //router.push("/inquiries/write");
   //};
-        
+
   return (
     <>
       <div className={classes.subHeadNavbar}>

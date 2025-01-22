@@ -59,7 +59,7 @@ export function ProjectCard({
         <Stack gap={8}>
           <Link
             href={{
-              pathname: `/${data.id}`,
+              pathname: `/projects/${data.id}`,
             }}
             style={{ textDecorationLine: "none" }}
           >

@@ -16,10 +16,15 @@ export interface INoticeClassifier {
 export interface INoticeAllItem {
   id: number;
   title: string;
-  hitCount: number;
-  fixed: boolean;
-  createdAt: string;
-  updatedAt: string;
+  hitCount?: number;
+  fixed?: boolean;
+  /** TODO: inquires와 proposals prop key가 다름 */
+  authorName?: string; // inquires
+  name?: string; // proposals
+  /** TODO: notices와 inquires, proposals prop key가 다름 */
+  createdAt?: string; // notices
+  createdDate?: string; // inquires, proposals
+  updatedAt?: string;
 }
 
 export interface INoticeHeading {
@@ -46,16 +51,40 @@ export interface IBoardAttachment {
   updatedAt: string;
 }
 
-export interface INoticeDetailItem {
+interface INoticeDetailCommon {
   id: number;
   title: string;
   content: string;
-  hitCount: number;
-  fixed: boolean;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
   files?: IBoardAttachment[];
 }
+
+interface INoticeDetailNotices {
+  hitCount?: number;
+  fixed?: boolean;
+}
+
+interface INoticeDetailInquiries {
+  authorName?: string;
+  projectId?: number;
+  projectName?: string;
+  replied?: boolean;
+}
+
+interface INoticeDetailProposals {
+  authorName?: string;
+  email?: string;
+  website?: string;
+  projectTypes?: string[];
+  replied?: boolean;
+}
+
+export interface INoticeDetailItem
+  extends INoticeDetailCommon,
+    INoticeDetailNotices,
+    INoticeDetailInquiries,
+    INoticeDetailProposals {}
 
 /** Noticeboard Detail Navigation */
 interface INavItem {

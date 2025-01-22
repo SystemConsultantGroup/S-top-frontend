@@ -8,8 +8,13 @@ import { useDebouncedState } from "@mantine/hooks";
 import styles from "@/styles/UserBoard.module.css";
 import { Noticeboard } from "@/components/common/Noticeboard";
 import { Group, Pagination } from "@mantine/core";
+import { bannerList } from "@/constants/BannerList";
+import { Banner } from "@/components/common/Banner/Banner";
+import { VerticalGapBox } from "@/components/pages/VerticalGapBox";
 
 export default function EventNoticesPage() {
+  const S_TOP_BANNER_INFO = bannerList.find((item) => item.type === "S_TOP")!;
+
   const HEADING = "이벤트 공지사항";
   /** 한 페이지 당 아이템 개수 */
   const [pageSize] = useState(20);
@@ -65,6 +70,8 @@ export default function EventNoticesPage() {
   return (
     <>
       <SubHeadNavbar title="Events" />
+      <Banner {...S_TOP_BANNER_INFO} />
+      <VerticalGapBox gap="30px" />
       <div className={styles.container}>
         <Noticeboard
           heading={HEADING}
