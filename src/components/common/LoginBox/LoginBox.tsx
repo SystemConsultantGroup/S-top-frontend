@@ -4,10 +4,11 @@ import React from "react";
 import { Button } from "@mantine/core";
 import classes from "./LoginBox.module.css";
 
+const kakaoClientId = process.env.KAKAO_CLIENT_ID;
+const redirectUri = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/login/kakao`;
+
 export function LoginBox() {
   const handleKakaoLogin = () => {
-    const kakaoClientId = "71c7a5552be46df39f8781d45361e718";
-    const redirectUri = "http://localhost:8000/auth/login/kakao";
     const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoClientId}&redirect_uri=${redirectUri}`;
     window.location.href = kakaoUrl;
   };
