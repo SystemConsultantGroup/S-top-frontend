@@ -132,6 +132,7 @@ export default function Home() {
 
                   const props = headData.map((data, idx) => {
                     projectIsLikes.current[idx] = data.like;
+                    projectIsMarks.current[idx] = data.bookMark;
                     const thumbnailUrl = projectThumbnails.current[idx];
                     const handleClickLike = () => {
                       if (projectIsLikes.current[idx]) {
