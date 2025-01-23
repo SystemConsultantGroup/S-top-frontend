@@ -1,0 +1,69 @@
+/* coop.module.css */
+/* 전체 배경 색 통일 */
+
+.pageBackground {
+  background-color: var(--color-surfaceContainerLowest); /* 배경색 */
+  min-height: 100vh; /* 화면 전체 높이 */
+  display: flex; /* Flexbox 사용 */
+  flex-direction: column; /* 세로 정렬 */
+  justify-content: space-between; /* 위, 아래로 채우기 */
+  align-items: stretch; /* 수평으로 늘리기 */
+  margin: 0; /* 기본 여백 제거 */
+  padding: 0; /* 기본 패딩 제거 */
+}
+
+.content {
+  margin: 20px auto;
+  width: 70%;
+  min-width: 700px;
+  background-color: var(--color-surfaceContainerLowest);
+  line-height: 1.6;
+  font-size: 19px;
+  color: var(--color-onBackground);
+}
+
+.content img {
+  margin: 20px 0;
+}
+
+.content ul {
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.header {
+  text-align: left;
+  font-size: 38px;
+  margin-top: 80px;
+}
+
+.subHeader {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 27px;
+  font-weight: bold;
+}
+
+.subHeader hr {
+  margin: 10px auto;
+  margin-bottom: 50px;
+  width: 40%;
+  border: 0;
+  border-top: 2px solid var(--color-onBackground);
+}
+
+@media screen and (max-width: 480px) {
+  /** 모바일 세로 */
+}
+
+@media screen and (max-width: 768px) {
+  /** 모바일 가로, 태블릿 세로 */
+}
+
+@media screen and (max-width: 1024px) {
+  /** 태블릿 가로 */
+}
+
+@media screen and (max-width: 1280px) {
+  /** 태블릿 가로, 노트북 */
+}
