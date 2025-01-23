@@ -27,6 +27,7 @@ export function ProjectBoard({ data, loaded, thumbnails, screenWidth }: IProject
 
           const projectCards = data.map((item, idx) => {
             projectIsLikes.current[idx] = item.like;
+            projectIsMarks.current[idx] = item.bookMark;
             const handleClickLike = () => {
               if (projectIsLikes.current[idx]) {
                 // 좋아요 취소할 경우
