@@ -97,7 +97,7 @@ export const USER_NAVS: INavList[] = [
       },
       {
         name: "프로젝트 QnA",
-        link: "/infodesk/inquries",
+        link: "/infodesk/inquiries",
       },
     ],
   },

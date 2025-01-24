@@ -7,12 +7,6 @@ import { SearchInput } from "@/components/common/SearchInput";
 import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { FilterChip } from "@/components/common/FilterChips/FilterChip";
 import { AihubCard } from "@/components/common/Cards/Aihub/Aihub";
-
-import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
-
-const YEARS = ["2020", "2021", "2022", "2023", "2024"];
-// 필터링 옵션들 리스트 만들면 됨
-
 import classes from "./AIHub.module.css";
 import { CommonAxios } from "@/utils/CommonAxios";
 
@@ -20,103 +14,7 @@ const YEARS = ["2020", "2021", "2022", "2023", "2024"];
 const TYPES = ["tag1", "tag2", "tag3", "tag4", "tag5"];
 const FRAMEWORK = ["필터1", "필터2", "필터3", "필터4", "필터5"];
 
-interface RichText {
-  type: string;
-  text: {
-    content: string;
-    link: string | null;
-  };
-  annotations: {
-    bold: boolean;
-    italic: boolean;
-    strikethrough: boolean;
-    underline: boolean;
-    code: boolean;
-    color: string;
-  };
-  plain_text: string;
-  href: string | null;
-}
-
-interface MultiSelect {
-  id: string;
-  name: string;
-  color: string;
-}
-
-interface Title {
-  type: string;
-  text: {
-    content: string;
-    link: string | null;
-  };
-  annotations: {
-    bold: boolean;
-    italic: boolean;
-    strikethrough: boolean;
-    underline: boolean;
-    code: boolean;
-    color: string;
-  };
-  plain_text: string;
-  href: string | null;
-}
-
-interface Properties {
-  professor: {
-    id: string;
-    type: "rich_text";
-    rich_text: RichText[];
-  };
-  model: {
-    id: string;
-    type: "multi_select";
-    multi_select: MultiSelect[];
-  };
-  participants: {
-    id: string;
-    type: "rich_text";
-    rich_text: RichText[];
-  };
-  topic: {
-    id: string;
-    type: "multi_select";
-    multi_select: MultiSelect[];
-  };
-  year: {
-    id: string;
-    type: "multi_select";
-    multi_select: MultiSelect[];
-  };
-  title: {
-    id: string;
-    type: "title";
-    title: Title[];
-  };
-}
-
-interface NotionPage {
-  object: "page";
-  id: string;
-  created_time: string;
-  last_edited_time: string;
-  properties: Properties;
-  url: string;
-}
-
-interface NotionResponse {
-  object: "list";
-  results: NotionPage[];
-  next_cursor: string | null;
-  has_more: boolean;
-}
-
-const dbID = "1308cc9731cd81eda3fee42063d18418";
-const dbKey = "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";
-
 export default function ModelsPage() {
-  const [selectedYearOptions, setSelectedYearOptions] = useState<string[]>([]);
-  const [selectedTopicOptions, setSelectedTopicOptions] = useState<string[]>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [selectedYearOptions, setSelectedYearOptions] = useState<string[]>([]);
   const [selectedTopicOptions, setSelectedTopicOptions] = useState<string[]>([]);

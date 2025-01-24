@@ -34,11 +34,14 @@ export function Banner({ type, title, subtitle, text, width, height }: BannerPro
         className={classes.img}
         src={IMAGE_LOCATION_LOOKUP_TABLE[type]}
         alt={"Banner Image"}
-        objectFit="contain"
         width={0}
         height={0}
         sizes="100vw"
-        style={{ width: "100%", height: "auto" }}
+        style={{
+          width: "100%",
+          height: "auto",
+          objectFit: "contain", // CSS를 통해 설정
+        }}
         priority
       ></Image>
       <Group className={classes.group} gap={0}>
