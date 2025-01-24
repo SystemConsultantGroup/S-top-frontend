@@ -15,8 +15,8 @@ type NoticeDetailProps = {
 };
 
 export function NoticeDetail({ heading, item, nav, handleDownloadClick }: NoticeDetailProps) {
-  const CreatedDate = formatDate(new Date(item.createdAt));
-  const EditedDate = formatDate(new Date(item.updatedAt));
+  const CreatedDate = formatDate(new Date(item.createdAt ?? "NONE"));
+  const EditedDate = formatDate(new Date(item.updatedAt ?? item.createdAt ?? "NONE"));
 
   const fullPath = window.location.pathname;
   const parentPath = fullPath.substring(0, fullPath.lastIndexOf("/"));
@@ -29,18 +29,20 @@ export function NoticeDetail({ heading, item, nav, handleDownloadClick }: Notice
       <div className={styles.container}>
         <div className={styles.head}>
           <Group gap={10}>
-            {item.fixed ? <IconPinFilled className={styles.primaryFilledPin} /> : null}
+            {item.fixed && <IconPinFilled className={styles.primaryFilledPin} />}
             <h3>{item.title}</h3>
           </Group>
           <Group
             className={`${styles.info} ${item.fixed ? styles.ml35 : ""}`}
             justify="space-between"
           >
-            <span>admin</span>
-            <Group gap={5}>
-              <span>작성일시 {CreatedDate}</span>
-              {CreatedDate === EditedDate ? "" : <span>수정일시 {EditedDate}</span>}
-            </Group>
+            <span>{item.authorName ?? "admin"}</span>
+            {item.createdAt && (
+              <Group gap={5}>
+                <span>작성일시 {CreatedDate}</span>
+                {CreatedDate === EditedDate ? "" : <span>수정일시 {EditedDate}</span>}
+              </Group>
+            )}
           </Group>
         </div>
         <NoticeDetailStage

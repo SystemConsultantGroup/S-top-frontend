@@ -17,6 +17,7 @@ export const USER_NAVS: INavList[] = [
   },
   {
     title: "Interviews",
+    link: "/interviews",
     items: [
       {
         name: "대담 영상",
@@ -26,6 +27,7 @@ export const USER_NAVS: INavList[] = [
   },
   {
     title: "Job Fair",
+    link: "/jobfair/advices",
     items: [
       {
         name: "선배님들의 조언",
@@ -43,6 +45,7 @@ export const USER_NAVS: INavList[] = [
   },
   {
     title: "AI Hub",
+    link: "/aihub/datasets",
     items: [
       {
         name: "AI Dataset",
@@ -56,6 +59,7 @@ export const USER_NAVS: INavList[] = [
   },
   {
     title: "Events",
+    link: "/event/notices",
     items: [
       {
         name: "이벤트 공지사항",
@@ -73,6 +77,7 @@ export const USER_NAVS: INavList[] = [
   },
   {
     title: "Info Desk",
+    link: "/infodesk/s-top",
     items: [
       {
         name: "S-TOP 소개",

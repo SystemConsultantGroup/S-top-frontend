@@ -1,7 +1,10 @@
 "use client";
 
+import { Banner } from "@/components/common/Banner/Banner";
 import { Noticeboard } from "@/components/common/Noticeboard";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
+import { VerticalGapBox } from "@/components/pages/VerticalGapBox";
+import { bannerList } from "@/constants/BannerList";
 import { useNotices } from "@/hooks/swr/useNotices";
 import styles from "@/styles/UserBoard.module.css";
 import { PagedNoticesRequestParams } from "@/types/notice";
@@ -10,6 +13,8 @@ import { useDebouncedState } from "@mantine/hooks";
 import { ChangeEvent, useState } from "react";
 
 export default function NoticesPage() {
+  const S_TOP_BANNER_INFO = bannerList.find((item) => item.type === "S_TOP")!;
+
   const HEADING = "공지사항";
   /** 한 페이지 당 아이템 개수 */
   const [pageSize] = useState(20);
@@ -65,6 +70,8 @@ export default function NoticesPage() {
   return (
     <>
       <SubHeadNavbar title="Info Desk" />
+      <Banner {...S_TOP_BANNER_INFO} />
+      <VerticalGapBox gap="30px" />
       <div className={styles.container}>
         <Noticeboard
           heading={HEADING}
