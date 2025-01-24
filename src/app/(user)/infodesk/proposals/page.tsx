@@ -7,11 +7,11 @@ import { Banner } from "@/components/common/Banner/Banner";
 import { Noticeboard } from "@/components/common/Noticeboard/Noticeboard";
 import { PrimaryButton } from "@/components/common/Buttons";
 import styles from "./pp.module.css";
-import { PagedNoticesRequestParams } from "@/types/notice";
 import { Group, Pagination } from "@mantine/core";
 import { useDebouncedState } from "@mantine/hooks";
 import { useProposals } from "@/hooks/swr/useProposals";
 import { useAuth } from "@/components/common/Auth/AuthProvider"; // 로그인 상태 확인
+import { ProposalsRequestParams } from "@/types/proposals";
 
 const ProposalsPage = () => {
   const HEADING = "산학협력 과제 제안";
@@ -22,7 +22,7 @@ const ProposalsPage = () => {
   /** 페이지네이션 페이지 숫자 */
   const [pageNumber, setPageNumber] = useState(1);
   /** 쿼리 정보 */
-  const [query, setQuery] = useDebouncedState<PagedNoticesRequestParams>(
+  const [query, setQuery] = useDebouncedState<ProposalsRequestParams>(
     {
       page: pageNumber - 1,
       size: pageSize,
@@ -44,7 +44,7 @@ const ProposalsPage = () => {
     const value = event.target.value;
     setQuery((prev) => ({
       ...prev,
-      scope: option,
+      scope: option === "both" ? 0 : option === "title" ? 1 : option === "content" ? 2 : 3,
       terms: value !== "" ? value : undefined,
     }));
   };
