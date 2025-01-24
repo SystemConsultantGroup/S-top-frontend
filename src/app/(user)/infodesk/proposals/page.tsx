@@ -22,6 +22,7 @@ const ProposalsPage = () => {
   /** 페이지네이션 페이지 숫자 */
   const [pageNumber, setPageNumber] = useState(1);
   /** 쿼리 정보 */
+
   const [query, setQuery] = useDebouncedState<ProposalsRequestParams>(
     {
       page: pageNumber - 1,
@@ -79,7 +80,6 @@ const ProposalsPage = () => {
           text="성균관대학교 소프트웨어융합대학과 기업들이 협약을 맺고, 기업이 필요로 하는 주제를 바탕으로 실무 중심의 프로젝트를 수행합니다."
         />
       </div>
-
       {!isLoggedIn ? ( // 로그인 여부에 따라 분기 처리
         <div className={styles.notLoggedIn}>
           <p>로그인 후 이용 가능합니다.</p>

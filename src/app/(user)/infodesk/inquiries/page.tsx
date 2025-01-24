@@ -8,6 +8,7 @@ import classes from "./projectQA.module.css";
 import { PagedNoticesRequestParams } from "@/types/notice";
 import { Group, Pagination } from "@mantine/core";
 import { useDebouncedState } from "@mantine/hooks";
+
 import { useInquiries } from "@/hooks/swr/useInquiries";
 
 export default function InquiriesPage() {
