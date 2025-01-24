@@ -18,8 +18,8 @@
     "chromatic": "npx chromatic --project-token=chpt_4df1876da1b9766"
   },
   "dependencies": {
-    "@mantine/carousel": "^7.16.1",
-    "@mantine/core": "^7.16.1",
+    "@mantine/carousel": "^7.12.2",
+    "@mantine/core": "^7.11.2",
     "@mantine/dates": "^7.12.2",
     "@mantine/form": "^7.12.1",
     "@mantine/hooks": "^7.11.2",
