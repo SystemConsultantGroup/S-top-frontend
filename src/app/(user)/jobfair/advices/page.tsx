@@ -5,7 +5,7 @@ import styles from "./jobfair.module.css"; // CSS 파일 import
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
 import { SearchInput } from "@/components/common/SearchInput";
 import { Dropdown } from "@/components/common/Dropdown/Dropdown";
-import { VideoCard } from "@/components/common/VideoCard/VideoCard";
+import { VideoCard } from "@/components/common/VideoCard_noQuiz/VideoCard";
 import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
 
 interface Interview {
@@ -43,8 +43,6 @@ const JobFairPage = () => {
         const filteredInterviews = response.data.content.filter(
           (item: Interview) => item.category === "SENIOR" // category 필터를 "SENIOR"로 유지
         );
-
-        console.log("API Response:", response.data); // API 응답 로그 출력
         setInterviews(filteredInterviews); // 필터링된 데이터를 상태에 저장
       } catch (error) {
         console.error("Error fetching interviews:", error); // 에러 처리
@@ -93,7 +91,7 @@ const JobFairPage = () => {
           <div className={styles.dropdown}>
             <Dropdown
               options={YEARS}
-              placeholder="연도 선택"
+              placeholder="전체"
               selectedOption={selectedYear}
               onOptionClick={handleYearSelect}
             />

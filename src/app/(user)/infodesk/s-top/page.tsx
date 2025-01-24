@@ -20,7 +20,6 @@ const STOPOutlinePage = () => {
         <Image
           src="/images/stop_info.png"
           alt="S-TOP Info"
-          className={styles.image}
           layout="responsive" // 또는 필요한 레이아웃 설정
           width={700} // 이미지의 원본 너비
           height={475} // 이미지의 원본 높이

@@ -5,7 +5,7 @@ import { Banner } from "@/components/common/Banner/Banner";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
 import { SearchInput } from "@/components/common/SearchInput";
 import { Dropdown } from "@/components/common/Dropdown/Dropdown";
-import { VideoCard } from "@/components/common/VideoCard/VideoCard";
+import { VideoCard } from "@/components/common/VideoCard_noQuiz/VideoCard";
 import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
 
 interface Interview {
@@ -41,7 +41,6 @@ const InternsPage = () => {
       const filteredInterviewss = response.data.content.filter(
         (item: Interview) => item.category === "INTERN" // category 필터
       );
-      console.log("API Response:", response.data);
       setInterviews(filteredInterviewss);
     } catch (error) {
       console.error("Error fetching interviews:", error);
@@ -91,7 +90,7 @@ const InternsPage = () => {
           <div className={styles.dropdown}>
             <Dropdown
               options={YEARS}
-              placeholder="연도 선택"
+              placeholder="전체"
               selectedOption={selectedYear}
               onOptionClick={handleYearSelect}
             />

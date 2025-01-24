@@ -11,9 +11,11 @@ import { PagedNoticesRequestParams } from "@/types/notice";
 import { Group, Pagination } from "@mantine/core";
 import { useDebouncedState } from "@mantine/hooks";
 import { useProposals } from "@/hooks/swr/useProposals";
+import { useAuth } from "@/components/common/Auth/AuthProvider"; // 로그인 상태 확인
 
 const ProposalsPage = () => {
   const HEADING = "산학협력 과제 제안";
+  const { isLoggedIn } = useAuth(); // 로그인 여부 확인
 
   /** 한 페이지 당 아이템 개수 */
   const [pageSize] = useState(5);
@@ -78,43 +80,49 @@ const ProposalsPage = () => {
         />
       </div>
 
-      <div className={styles.propose}>
-        {error ? (
-          <p>{error.message}</p>
-        ) : (
-          <>
-            <Noticeboard
-              handleInput={handleInput}
-              handleSelect={handleSelect}
-              heading={HEADING}
-              classifier={classifier}
-              items={data?.map((proposal) => ({
-                id: proposal.id,
-                title: proposal.title,
-                hitCount: 0,
-                fixed: false,
-                createdAt: proposal.createdDate,
-                updatedAt: proposal.createdDate,
-              }))}
-            />
-            <div style={{ textAlign: "right", marginTop: "20px" }}>
-              <Link href="/infodesk/proposals/write" passHref>
-                <PrimaryButton style={{ width: "110px" }}>작성하기</PrimaryButton>
-              </Link>
-            </div>
-            <Group justify="center" mt={20}>
-              <Pagination
-                value={pageNumber}
-                onChange={(newPage) => {
-                  setPageNumber(newPage);
-                  setQuery((prev) => ({ ...prev, page: newPage - 1 }));
-                }}
-                total={pageData ? pageData.totalPages : 0}
+      {!isLoggedIn ? ( // 로그인 여부에 따라 분기 처리
+        <div className={styles.notLoggedIn}>
+          <p>로그인 후 이용 가능합니다.</p>
+        </div>
+      ) : (
+        <div className={styles.propose}>
+          {error ? (
+            <p>{error.message}</p>
+          ) : (
+            <>
+              <Noticeboard
+                handleInput={handleInput}
+                handleSelect={handleSelect}
+                heading={HEADING}
+                classifier={classifier}
+                items={data?.map((proposal) => ({
+                  id: proposal.id,
+                  title: proposal.title,
+                  hitCount: 0,
+                  fixed: false,
+                  createdAt: proposal.createdDate,
+                  updatedAt: proposal.createdDate,
+                }))}
               />
-            </Group>
-          </>
-        )}
-      </div>
+              <div style={{ textAlign: "right", marginTop: "20px" }}>
+                <Link href="/infodesk/proposals/write" passHref>
+                  <PrimaryButton style={{ width: "110px" }}>작성하기</PrimaryButton>
+                </Link>
+              </div>
+              <Group justify="center" mt={20}>
+                <Pagination
+                  value={pageNumber}
+                  onChange={(newPage) => {
+                    setPageNumber(newPage);
+                    setQuery((prev) => ({ ...prev, page: newPage - 1 }));
+                  }}
+                  total={pageData ? pageData.totalPages : 0}
+                />
+              </Group>
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 };

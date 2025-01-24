@@ -12,7 +12,7 @@
 }
 
 .backColor {
-  background-color: var(--color-background);
+  background-color: var(--color-surfaceContainerLowest);
   display: flex;
   justify-content: center; /* 콘텐츠를 가로로 중앙에 정렬 */
   align-items: center; /* 콘텐츠를 세로로 중앙에 정렬 */
@@ -36,13 +36,14 @@
 .videoGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 최소 300px, 최대 1fr로 반응형 */
-  /* gap: 20px;카드들 간의 간격 */
+  gap: 30px 30px; /* 카드 간의 간격: 행 간격 20px, 열 간격 30px */
   justify-content: center; /* 그리드를 수평으로 가운데 정렬 */
   align-items: center; /* 그리드를 수직으로 가운데 정렬 */
   justify-items: center;
   padding: 20px; /* 그리드 영역에 여백 추가 */
   max-width: 1200px; /* 최대 그리드 너비 설정 */
   width: 100%;
+  margin-bottom: 70px;
 }
 
 .space {
@@ -86,4 +87,20 @@
   justify-content: center; /* 칩과 버튼이 왼쪽 정렬 */
   max-width: 1100px; /* 최대 너비 */
   margin: 10px auto 0px; /* 중앙 정렬 및 아래쪽 여백 */
+}
+
+@media screen and (max-width: 480px) {
+  /** 모바일 세로 */
+}
+
+@media screen and (max-width: 768px) {
+  /** 모바일 가로, 태블릿 세로 */
+}
+
+@media screen and (max-width: 1024px) {
+  /** 태블릿 가로 */
+}
+
+@media screen and (max-width: 1280px) {
+  /** 태블릿 가로, 노트북 */
 }
