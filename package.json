@@ -18,12 +18,14 @@
     "chromatic": "npx chromatic --project-token=chpt_4df1876da1b9766"
   },
   "dependencies": {
+    "@mantine/carousel": "^7.16.1",
+    "@mantine/core": "^7.16.1",
     "@mantine/dates": "^7.12.2",
     "@mantine/form": "^7.12.1",
     "@mantine/hooks": "^7.11.2",
     "@mantine/styles": "^6.0.22",
-    "@tabler/icons-react": "^3.28.1",
     "@next/third-parties": "^15.1.4",
+    "@tabler/icons-react": "^3.28.1",
     "@types/js-cookie": "^3.0.6",
     "axios": "^1.7.3",
     "classnames": "^2.5.1",
