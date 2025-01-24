@@ -7,12 +7,6 @@ import { SearchInput } from "@/components/common/SearchInput";
 import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { FilterChip } from "@/components/common/FilterChips/FilterChip";
 import { AihubCard } from "@/components/common/Cards/Aihub/Aihub";
-
-import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
-
-const YEARS = ["2020", "2021", "2022", "2023", "2024"];
-// 필터링 옵션들 리스트 만들면 됨
-
 import classes from "./AIHub.module.css";
 import { CommonAxios } from "@/utils/CommonAxios";
 
@@ -21,8 +15,6 @@ const TYPES = ["tag1", "tag2", "tag3", "tag4", "tag5"];
 const FRAMEWORK = ["필터1", "필터2", "필터3", "필터4", "필터5"];
 
 export default function ModelsPage() {
-  const [selectedYearOptions, setSelectedYearOptions] = useState<string[]>([]);
-  const [selectedTopicOptions, setSelectedTopicOptions] = useState<string[]>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [selectedYearOptions, setSelectedYearOptions] = useState<string[]>([]);
   const [selectedTopicOptions, setSelectedTopicOptions] = useState<string[]>([]);
