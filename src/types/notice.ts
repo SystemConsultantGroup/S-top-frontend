@@ -1,6 +1,6 @@
 import { PagedApiRequestParams, PagedApiResponse } from "./common";
 
-type NoticeArgScope = "title" | "content" | "both";
+type NoticeArgScope = "title" | "content" | "both" | "author";
 
 export interface PagedNoticesRequestParams extends PagedApiRequestParams {
   terms?: string;

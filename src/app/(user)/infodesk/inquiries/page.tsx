@@ -1,24 +1,19 @@
 "use client";
 
-import React, { useEffect, useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar/SubHeadNavbar";
 import { Banner } from "@/components/common/Banner/Banner";
 import { Noticeboard } from "@/components/common/Noticeboard/Noticeboard";
-import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
-import { useAuth } from "@/components/common/Auth/AuthProvider";
 import classes from "./projectQA.module.css";
 import { PagedNoticesRequestParams } from "@/types/notice";
 import { Group, Pagination } from "@mantine/core";
 import { useDebouncedState } from "@mantine/hooks";
 
-interface Inquiry {
-  id: number;
-  authorName: string;
-  title: string;
-  createdAt: string;
-}
+import { useInquiries } from "@/hooks/swr/useInquiries";
 
 export default function InquiriesPage() {
+  const heading = "프로젝트 문의";
+
   const [pageSize] = useState(10);
   const [pageNumber, setPageNumber] = useState(1);
   const [query, setQuery] = useDebouncedState<PagedNoticesRequestParams>(
@@ -28,101 +23,43 @@ export default function InquiriesPage() {
     },
     300
   );
-  const [inquiries, setInquiries] = useState<Inquiry[]>([]); // Specify the type for inquiries
-  const [pageData, setPageData] = useState({ totalPages: 1 });
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState<string | null>(null); // Error state allowing string or null
 
-  type OptionType = "TITLE" | "CONTENT" | "ALL";
-  const [option, setOption] = useState<OptionType>("TITLE");
+  const { data, pageData } = useInquiries({
+    params: { ...query, page: pageNumber - 1, size: pageSize },
+  });
 
-  const { token, isLoading } = useAuth();
-
-  const fetchInquiries = async () => {
-    setLoading(true);
-    try {
-      const response = await CommonAxios.get("/inquiries", {
-        withCredentials: true,
-        headers: { Authorization: `Bearer ${token}` },
-        params: { ...query },
-      });
-      setInquiries(response.data.content);
-      setPageData({ totalPages: response.data.totalPages });
-    } catch (err) {
-      setError("Failed to fetch inquiries.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (!isLoading) fetchInquiries();
-  }, [token, query]);
+  type OptionType = "title" | "content" | "both";
+  const [option, setOption] = useState<OptionType>("both");
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setQuery((prev) => ({
       ...prev,
-      title: option === "TITLE" && value !== "" ? value : undefined,
-      //title: option === "TITLE" ? (value !== "" ? value : undefined) : prev.title,
-      //content: option === "CONTENT" ? (value !== "" ? value : undefined) : prev.content,
+      scope: option,
+      terms: value !== "" ? value : undefined,
     }));
   };
 
   const handleSelect = (value: string | null) => {
-    if (value === "1") {
-      setOption(() => "TITLE");
+    if (value === "0") {
+      setOption(() => "title");
+    } else if (value === "1") {
+      setOption(() => "content");
     } else if (value === "2") {
-      setOption(() => "CONTENT");
-    } else {
-      setOption(() => "ALL");
+      setOption(() => "both");
     }
   };
 
-  const heading = "프로젝트 문의";
-
   const classifier = {
     data: [
-      { value: "0", label: "제목+내용" },
-      { value: "1", label: "제목" },
-      { value: "2", label: "내용" },
+      { value: "0", label: "제목" },
+      { value: "1", label: "내용" },
+      { value: "2", label: "전체" },
     ],
-    defaultLabel: 0,
+    defaultLabel: 2,
     searchPlaceholder: "검색어를 입력하세요",
   };
 
-  const items = [
-    {
-      title: "프로젝트 문의입니다",
-      id: 1,
-      author: "관리자",
-      date: new Date("2024-08-01"),
-      hitCount: 150,
-      fixed: true,
-      href: "/inquiries/1",
-      contentTxt: "this is a content.",
-      createdAt: "2024-08-01",
-      updatedAt: "2024-08-01",
-    },
-    {
-      title: "프로젝트 문의입니다",
-      id: 2,
-      author: "관리자",
-      date: new Date("2024-08-05"),
-      hitCount: 100,
-      fixed: false,
-      href: "/inquiries/2",
-      contentTxt: "this is a content.",
-      createdAt: "2024-08-01",
-      updatedAt: "2024-08-01",
-    },
-    // More items can be added here
-  ];
-
-  //const handleButtonClick = () => {
-  //router.push("/inquiries/write");
-  //};
-        
   return (
     <>
       <div className={classes.subHeadNavbar}>
@@ -141,18 +78,17 @@ export default function InquiriesPage() {
 
       <div className={classes.mainContent}>
         <Noticeboard
-          handleInput={() => {}}
-          handleSelect={() => {}}
           heading={heading}
+          handleInput={handleInput}
+          handleSelect={handleSelect}
           classifier={classifier}
-          items={items}
+          items={data}
         />
-
-        <PrimaryButton
-          style={{ position: "absolute", bottom: "120px", right: "20px" }} // Position the button
-        >
-          작성하기
-        </PrimaryButton>
+        {pageNumber && setPageNumber && pageData && (
+          <Group justify="center" mt={20}>
+            <Pagination value={pageNumber} onChange={setPageNumber} total={pageData.totalPages} />
+          </Group>
+        )}
       </div>
     </>
   );

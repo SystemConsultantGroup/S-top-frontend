@@ -14,7 +14,7 @@ import { CommonAxios } from "@/utils/CommonAxios";
 import { SearchInput } from "@/components/common/SearchInput";
 import { handleChangeSearch } from "@/utils/handleChangeSearch";
 import { useDebouncedState } from "@mantine/hooks";
-import { PagedProposalsRequestParams } from "@/types/proposals";
+import { ProposalsRequestParams } from "@/types/proposals";
 import { useRouter } from "next/navigation";
 
 export default function AdminProposalListSection() {
@@ -28,7 +28,7 @@ export default function AdminProposalListSection() {
   const { sortBy, order, handleSortButton } = useTableSort();
 
   /* 쿼리 debounced state, 검색창에 이용 */
-  const [query, setQuery] = useDebouncedState<PagedProposalsRequestParams>(
+  const [query, setQuery] = useDebouncedState<ProposalsRequestParams>(
     {
       page: pageNumber - 1,
       size: Number(pageSize),
@@ -74,7 +74,7 @@ export default function AdminProposalListSection() {
 
   /* 검색창 핸들러 */
   const onSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-    handleChangeSearch<string, PagedProposalsRequestParams>({
+    handleChangeSearch<string, ProposalsRequestParams>({
       name: "title",
       value: event.target.value,
       setQuery,
@@ -115,8 +115,8 @@ export default function AdminProposalListSection() {
               </DataTableData>
               <DataTableData>{index + 1 + (pageNumber - 1) * Number(pageSize)}</DataTableData>
               <DataTableData>{inquiry.title}</DataTableData>
-              <DataTableData>{inquiry.authorName}</DataTableData>
-              <DataTableData>{inquiry.createdAt}</DataTableData>
+              <DataTableData>{inquiry.name}</DataTableData>
+              <DataTableData>{inquiry.createdDate}</DataTableData>
               <DataTableData text={false}>
                 <Button
                   onClick={() => {

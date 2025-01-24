@@ -160,7 +160,7 @@ const ProposalWritePage = () => {
             <div className={styles.formRow}>
               <TextInput
                 label="이메일 *"
-                placeholder="이메일을 입력하세요"
+                placeholder="example@email.com"
                 {...getInputProps("email")}
               />
             </div>
@@ -168,7 +168,7 @@ const ProposalWritePage = () => {
             <div className={styles.formRow}>
               <TextInput
                 label="웹사이트"
-                placeholder="웹사이트를 입력하세요"
+                placeholder="www.example.com"
                 onChange={(e) => handleChange("webSite", e.target.value)}
               />
             </div>

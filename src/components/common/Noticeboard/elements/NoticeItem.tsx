@@ -4,12 +4,22 @@ import { IconPinFilled } from "@tabler/icons-react";
 import Link from "next/link";
 import styles from "../Noticeboard.module.css";
 
-export function NoticeItem({ id, title, hitCount, fixed, updatedAt }: INoticeAllItem) {
+export function NoticeItem({
+  id,
+  title,
+  hitCount,
+  fixed,
+  authorName, // AUTHOR inquires
+  name, // AUTHOR proposals
+  createdAt, // CREATED_AT notices
+  createdDate, // CREATED_AT inquires, proposals
+  updatedAt,
+}: INoticeAllItem) {
   const formattedDate = new Intl.DateTimeFormat("ko-KR", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
-  }).format(new Date(updatedAt));
+  }).format(new Date(updatedAt ?? createdAt ?? createdDate ?? "ERROR"));
 
   const fullPath = window.location.pathname;
 
@@ -23,9 +33,9 @@ export function NoticeItem({ id, title, hitCount, fixed, updatedAt }: INoticeAll
       </Group>
       <Group className={styles.bottom} gap={10}>
         <span>#{id}</span>
-        <span>admin</span>
+        <span>{authorName ?? name ?? "admin"}</span>
         <span>{formattedDate}</span>
-        <span>조회수 {hitCount}</span>
+        {hitCount && <span>조회수 {hitCount}</span>}
       </Group>
     </li>
   );
