@@ -19,14 +19,14 @@ export function NoticeItem({
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
-  }).format(new Date(updatedAt ?? createdAt ?? createdDate ?? "ERROR"));
+  }).format(new Date(updatedAt ?? createdAt ?? createdDate ?? "NONE"));
 
   const fullPath = window.location.pathname;
 
   return (
     <li className={styles.item}>
       <Group className={styles.top} gap={10}>
-        {fixed ? <IconPinFilled className={styles.primaryFilledPin} /> : null}
+        {fixed && <IconPinFilled className={styles.primaryFilledPin} />}
         <Link className={styles.title} href={`${fullPath}/${id}`}>
           {title}
         </Link>
@@ -34,7 +34,7 @@ export function NoticeItem({
       <Group className={styles.bottom} gap={10}>
         <span>#{id}</span>
         <span>{authorName ?? name ?? "admin"}</span>
-        <span>{formattedDate}</span>
+        {(updatedAt || createdAt || createdDate) && <span>{formattedDate}</span>}
         {hitCount && <span>조회수 {hitCount}</span>}
       </Group>
     </li>

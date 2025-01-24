@@ -5,18 +5,17 @@ import { SubHeadNavbar } from "@/components/common/SubHeadNavbar/SubHeadNavbar";
 import { Banner } from "@/components/common/Banner/Banner";
 import { Noticeboard } from "@/components/common/Noticeboard/Noticeboard";
 import classes from "./projectQA.module.css";
-import { PagedNoticesRequestParams } from "@/types/notice";
 import { Group, Pagination } from "@mantine/core";
 import { useDebouncedState } from "@mantine/hooks";
-
 import { useInquiries } from "@/hooks/swr/useInquiries";
+import { PagedInquiriesRequestParams } from "@/types/inquiry";
 
 export default function InquiriesPage() {
   const heading = "프로젝트 문의";
 
   const [pageSize] = useState(10);
   const [pageNumber, setPageNumber] = useState(1);
-  const [query, setQuery] = useDebouncedState<PagedNoticesRequestParams>(
+  const [query, setQuery] = useDebouncedState<PagedInquiriesRequestParams>(
     {
       page: pageNumber - 1,
       size: pageSize,

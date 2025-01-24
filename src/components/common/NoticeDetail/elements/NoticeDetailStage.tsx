@@ -8,21 +8,14 @@ import {
   MenuDropdown,
   MenuItem,
 } from "@mantine/core";
-import {
-  IconPlus,
-  IconMinus,
-  IconShare,
-  IconPrinter,
-  IconPaperclip,
-  IconDownload,
-} from "@tabler/icons-react";
+import { IconPlus, IconMinus, IconShare, IconPrinter, IconPaperclip } from "@tabler/icons-react";
 import { IBoardAttachment } from "@/types/PageBoardTypes";
 import styles from "../NoticeDetail.module.css";
 
 interface INoticeDetailStage {
   content: string;
   files?: IBoardAttachment[];
-  handleDownloadClick?: (id: number, name: string) => void;
+  handleDownloadClick: (id: number, name: string) => void;
 }
 
 export function NoticeDetailStage({ content, files, handleDownloadClick }: INoticeDetailStage) {
@@ -73,14 +66,15 @@ export function NoticeDetailStage({ content, files, handleDownloadClick }: INoti
                   leftSection={<IconPaperclip size={16} />}
                   component="a"
                   target="_blank"
-                  onClick={() => handleDownloadClick!(item.id, item.name)}
+                  onClick={() => handleDownloadClick(item.id, item.name)}
                 >
                   {item.name}
                 </MenuItem>
               ))}
+              {/* TODO: zip 파일을 받아와야 하는데 어떻게 할지 논의 필요
               <MenuItem className={styles.fileDownloadAll} leftSection={<IconDownload size={16} />}>
                 모두 다운로드
-              </MenuItem>
+              </MenuItem> */}
             </MenuDropdown>
           ) : (
             ""
