@@ -86,12 +86,15 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
 
   const handleSubmitData = async () => {
     try {
-      const youtubeIdMatch = reg.exec(form.values.youtubeId);
-      const youtubeId = youtubeIdMatch ? youtubeIdMatch[6] : null;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      // 두번해야 되더라 왜인지는 모름름
+      const youtubeId1 = (reg.exec(form.values.youtubeId) || [0, 0, 0, 0, 0, 0, ""])[6];
+      const youtubeId2 = (reg.exec(form.values.youtubeId) || [0, 0, 0, 0, 0, 0, ""])[6];
+      const youtubeId = youtubeId1 == "" ? youtubeId2 : youtubeId1;
 
       const data = {
         title: form.values.title,
-        youtubeId: `https://www.youtube.com/watch?v=${youtubeId ? youtubeId : "1_OyJLcGDh4"}`, // 유튜브 ID 변환 및 처리
+        youtubeId: `https://www.youtube.com/watch?v=${youtubeId ? youtubeId : ""}`, // 유튜브 ID 변환 및 처리
         year: form.values.year,
         talkerBelonging: form.values.talkerBelonging,
         talkerName: form.values.talkerName,
@@ -183,9 +186,9 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
           <Group justify="center">
             <PrimaryButton
               onClick={() => {
-                console.log(form.values.youtubeId.match(reg));
-                console.log(reg.exec(form.values.youtubeId));
-                // push("/admin/interviews");
+                // console.log(form.values.youtubeId.match(reg));
+                // console.log((reg.exec(form.values.youtubeId) || [0, 0, 0, 0, 0, 0, ""])[6]);
+                push("/admin/interviews");
               }}
             >
               목록으로

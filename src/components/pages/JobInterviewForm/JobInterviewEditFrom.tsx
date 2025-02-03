@@ -79,6 +79,7 @@ export function JobInterviewEditFrom({ jobInterviewID }: { jobInterviewID?: numb
     const fetchPrevJobInterview = async () => {
       try {
         const response = await CommonAxios.get(`${url}/${jobInterviewID}`);
+        console.log(response.data);
         const prevJobInterview = response.data;
         const newdate = new Date();
         newdate.setFullYear(prevJobInterview.year);
