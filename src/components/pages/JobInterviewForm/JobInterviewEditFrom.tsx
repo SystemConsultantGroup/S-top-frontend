@@ -33,7 +33,7 @@ export function JobInterviewEditFrom({ jobInterviewID }: { jobInterviewID?: numb
     initialValues: {
       title: "",
       date: new Date(),
-      youtubeId: "",
+      youtubeId: " ",
       belonging: "",
       name: "",
       category: "",
