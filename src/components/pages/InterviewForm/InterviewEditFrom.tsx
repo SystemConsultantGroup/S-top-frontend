@@ -59,7 +59,7 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
           const data = response.data;
           form.setValues({
             title: data.title,
-            youtubeId: data.youtubeId,
+            youtubeId: "https://www.youtube.com/watch?v=" + data.youtubeId,
             year: data.year,
             talkerBelonging: data.talkerBelonging,
             talkerName: data.talkerName,
@@ -102,9 +102,9 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
       };
 
       if (interviewID) {
-        await CommonAxios.put(`/talks/${interviewID}`, data);
+        await CommonAxios.put(`/${url}/${interviewID}`, data);
       } else {
-        await CommonAxios.post(`/talks`, data);
+        await CommonAxios.post(`/${url}`, data);
       }
 
       // 성공적으로 전송된 후 페이지 이동
