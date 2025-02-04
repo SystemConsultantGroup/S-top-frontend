@@ -80,7 +80,7 @@ export function JobInterviewEditFrom({ jobInterviewID }: { jobInterviewID?: numb
       const jobInterview = {
         title: form.values.title,
         year: form.values.date.getFullYear(),
-        youtubeId: `https://www.youtube.com/watch?v=${youtubeId ? youtubeId : ""}`, // 유튜브 ID 변환 및 처리
+        youtubeId: youtubeId ? youtubeId : "", // 유튜브 ID 변환 및 처리
         talkerBelonging: form.values.belonging,
         talkerName: form.values.name,
         category: form.values.category,

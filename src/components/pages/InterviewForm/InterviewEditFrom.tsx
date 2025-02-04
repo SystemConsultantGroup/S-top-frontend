@@ -94,7 +94,7 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
 
       const data = {
         title: form.values.title,
-        youtubeId: `https://www.youtube.com/watch?v=${youtubeId ? youtubeId : ""}`, // 유튜브 ID 변환 및 처리
+        youtubeId: youtubeId ? youtubeId : "", // 유튜브 ID 변환 및 처리
         year: form.values.year,
         talkerBelonging: form.values.talkerBelonging,
         talkerName: form.values.talkerName,
