@@ -4,7 +4,7 @@ import React from "react";
 import { Button } from "@mantine/core";
 import classes from "./LoginBox.module.css";
 
-const kakaoClientId = process.env.KAKAO_CLIENT_ID;
+const kakaoClientId = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
 const redirectUri = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/login/kakao`;
 
 export function LoginBox() {
