@@ -1,6 +1,5 @@
 import { PageHeader } from "@/components/common/PageHeader";
 import {
-  IconHome,
   IconUserFilled,
   IconCalendarEvent,
   IconFiles,
@@ -9,18 +8,13 @@ import {
 } from "@tabler/icons-react";
 import { Button, Grid, GridCol, Group, Text } from "@mantine/core";
 
-const BTNSIZE = 350;
+const BTNSIZE = 400;
 const MAINICONSIZE = 60;
 const MAINTEXTSIZE = 35;
 const SUBICONSIZE = 40;
 const SUBTEXTSIZE = 20;
 
 const AdminMenuList = [
-  {
-    label: "관리자 메인",
-    icon: <IconHome size={MAINICONSIZE} />,
-    href: "/admin",
-  },
   {
     label: "가입 신청 관리",
     icon: <IconUserFilled size={MAINICONSIZE} />,
