@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/components/common/Auth";
 import { PrimaryButton } from "@/components/common/Buttons";
 import { CardBadge } from "@/components/common/CardBadge";
 import { CommonAxios } from "@/utils/CommonAxios";
@@ -90,15 +91,19 @@ export function ProjectDetailInfo({ projectId }: Props) {
     }
   };
 
+  const { isLoggedIn } = useAuth();
+
   const handleThumbupClick = async () => {
+    if (!isLoggedIn) {
+      alert("프로젝트에 좋아요를 표시하려면 로그인해야 합니다.");
+      return;
+    }
     if (isThumbup) {
-      // 좋아요 삭제
       const response = await CommonAxios.delete(`/projects/${projectId}/like`);
       if (response.status === 204) {
         handleRefresh();
       }
     } else {
-      // 좋아요 등록
       const response = await CommonAxios.post(`/projects/${projectId}/like`);
       if (response.status === 201) {
         handleRefresh();
@@ -107,26 +112,36 @@ export function ProjectDetailInfo({ projectId }: Props) {
   };
 
   const handleInterestClick = async () => {
+    if (!isLoggedIn) {
+      alert("프로젝트를 북마크에 추가하려면 로그인해야 합니다.");
+      return;
+    }
     if (isInterest) {
-      // 관심 삭제
       const response = await CommonAxios.delete(`/projects/${projectId}/favorite`);
-      if (response.status == 204) {
+      if (response.status === 204) {
         handleRefresh();
       }
     } else {
-      // 관심 등록
       const response = await CommonAxios.post(`/projects/${projectId}/favorite`);
-      if (response.status == 201) {
+      if (response.status === 201) {
         handleRefresh();
       }
     }
   };
 
   const handleProposalClick = () => {
+    if (!isLoggedIn) {
+      alert("산학 과제를 제안하려면 로그인해야 합니다.");
+      return;
+    }
     router.push("/infodesk/proposals");
   };
 
   const handleInquiryClick = () => {
+    if (!isLoggedIn) {
+      alert("프로젝트 문의를 하려면 로그인해야 합니다.");
+      return;
+    }
     router.push(`/infodesk/inquiries/write?id=${projectId}`);
   };
 
