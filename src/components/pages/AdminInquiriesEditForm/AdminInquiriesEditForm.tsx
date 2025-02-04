@@ -16,7 +16,13 @@ interface InquiryEditFormInputs {
   content: string;
 }
 
-export function AdminInquiriesEditForm({ id }: { id: string }) {
+export function AdminInquiriesEditForm({
+  id,
+  proposal = false,
+}: {
+  id: string;
+  proposal?: boolean;
+}) {
   /* next 라우터, 페이지 이동에 이용 */
   const { push } = useRouter();
 
@@ -69,7 +75,7 @@ export function AdminInquiriesEditForm({ id }: { id: string }) {
       } else {
         await CommonAxios.post(`/inquiries/${id}/reply`, values);
       }
-      push("../inquiries");
+      proposal ? push("../proposals") : push("../inquiries");
     } catch (error) {
       console.error(error);
     }
@@ -111,7 +117,7 @@ export function AdminInquiriesEditForm({ id }: { id: string }) {
           <Group justify="center">
             <PrimaryButton
               onClick={() => {
-                push("../inquiries");
+                proposal ? push("../proposals") : push("../inquiries");
               }}
             >
               목록으로
