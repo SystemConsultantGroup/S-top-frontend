@@ -79,12 +79,10 @@ export function GalleryListSection() {
   /* 삭제 버튼 핸들러 */
   const handleDelete = () => {
     // TODO: 삭제 확인하는 모달 추가
-    Promise.all(selectedGalleries.map((id) => CommonAxios.delete(`/admin/${url}/${id}`))).then(
-      () => {
-        setSelectedGalleries([]);
-        mutate();
-      }
-    );
+    Promise.all(selectedGalleries.map((id) => CommonAxios.delete(`/${url}/${id}`))).then(() => {
+      setSelectedGalleries([]);
+      mutate();
+    });
   };
 
   useEffect(() => {
