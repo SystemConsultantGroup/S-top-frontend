@@ -66,7 +66,7 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
           });
           setQuizzes(
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            data.quiz.map((q: any, idx: number) => ({ ...q, id: getUniqueId(), answer: idx }))
+            data.quiz.map((q: any) => ({ ...q, id: getUniqueId() }))
           );
         } catch (error) {
           console.error("Error fetching interview:", error);
@@ -98,7 +98,16 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
         year: form.values.year,
         talkerBelonging: form.values.talkerBelonging,
         talkerName: form.values.talkerName,
-        quiz: quizzes,
+        quiz: quizzes.map((quiz) => {
+          console.log(quiz);
+          if (!quiz.question || quiz.question.trim().length === 0) {
+            quiz.question = "기본 질문입니다.";
+          }
+          if (quiz.answer > quiz.options.length - 1) {
+            quiz.answer = quiz.options.length - 1;
+          }
+          return quiz;
+        }),
       };
 
       if (interviewID) {
@@ -153,6 +162,7 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
                 onChange={handleQuestionChange(quiz.id)}
                 w={"100%"}
               />
+              {quiz.answer}
               <RadioGroup value={quiz.answer.toString()} onChange={handleAnswerChange(quiz.id)}>
                 {quiz.options.map((option, index) => (
                   <Group key={index} mt="xs">
@@ -163,13 +173,17 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
                       onChange={handleOptionChange(quiz.id, index)}
                       w={"60%"}
                     />
-                    <DangerButton
-                      color="red"
-                      variant="outline"
-                      onClick={() => removeOption(quiz.id, index)}
-                    >
-                      삭제
-                    </DangerButton>
+                    {quiz.options.length > 1 ? (
+                      <DangerButton
+                        color="red"
+                        variant="outline"
+                        onClick={() => removeOption(quiz.id, index)}
+                      >
+                        삭제
+                      </DangerButton>
+                    ) : (
+                      <></>
+                    )}
                   </Group>
                 ))}
               </RadioGroup>
@@ -177,9 +191,13 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
                 <PrimaryButton mt="xs" onClick={() => addOption(quiz.id)}>
                   선지 추가
                 </PrimaryButton>
-                <DangerButton mt="xs" onClick={() => removeQuiz(quiz.id)}>
-                  퀴즈 삭제
-                </DangerButton>
+                {quizzes.length > 1 ? (
+                  <DangerButton mt="xs" onClick={() => removeQuiz(quiz.id)}>
+                    퀴즈 삭제
+                  </DangerButton>
+                ) : (
+                  <></>
+                )}
               </Group>
             </Card>
           ))}
