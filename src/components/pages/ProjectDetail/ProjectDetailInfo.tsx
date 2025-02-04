@@ -1,22 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { Flex, Text, AspectRatio, Button, Group, Stack, Divider } from "@mantine/core";
-import classes from "./ProjectDetailInfo.module.css";
-import { ProjectDetailDto, categoryMapping } from "./_type/project";
-import { CardBadge } from "@/components/common/CardBadge";
 import { PrimaryButton } from "@/components/common/Buttons";
+import { CardBadge } from "@/components/common/CardBadge";
+import { CommonAxios } from "@/utils/CommonAxios";
+import { getFileUrlById } from "@/utils/handleDownloadFile";
+import { AspectRatio, Button, Divider, Flex, Group, Stack, Text } from "@mantine/core";
 import {
-  IconThumbUp,
-  IconThumbUpFilled,
   IconBookmark,
   IconBookmarkFilled,
+  IconThumbUp,
+  IconThumbUpFilled,
 } from "@tabler/icons-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { CommonAxios } from "@/utils/CommonAxios";
+import { useEffect, useState } from "react";
 import { ProjectDetailComment } from "./ProjectDetailComment";
-import { getFileUrlById } from "@/utils/handleDownloadFile";
+import classes from "./ProjectDetailInfo.module.css";
+import { ProjectDetailDto, categoryMapping } from "./_type/project";
 
 interface Props {
   projectId: string;
@@ -127,7 +127,7 @@ export function ProjectDetailInfo({ projectId }: Props) {
   };
 
   const handleInquiryClick = () => {
-    router.push(`/infodesk/inquries/write?id=${projectId}`);
+    router.push(`/infodesk/inquiries/write?id=${projectId}`);
   };
 
   return (
