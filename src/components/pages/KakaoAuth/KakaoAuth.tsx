@@ -1,12 +1,12 @@
 "use client";
 
 import { useAuth } from "@/components/common/Auth";
+import { JWT_COOKIE_NAME } from "@/constants/Auth";
+import { CustomJwtPayload } from "@/types/jwtPayload";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import Cookies from "js-cookie";
-import { JWT_COOKIE_NAME } from "@/constants/Auth";
-import { jwtDecode } from "jwt-decode";
-import { CustomJwtPayload } from "@/types/jwtPayload";
 
 export function KakaoAuth() {
   const router = useRouter();
@@ -18,7 +18,7 @@ export function KakaoAuth() {
     if (accessToken) {
       login(accessToken);
       const claims: CustomJwtPayload = jwtDecode(accessToken);
-      if (claims.type === "TEMP") {
+      if (claims.userType === "TEMP") {
         // 가입되지 않은 사용자
         router.push("/register");
       } else {
