@@ -1,11 +1,11 @@
 "use client";
 
 import { INoticeDetailItem, INoticeDetailNav } from "@/types/PageBoardTypes";
-import { IconMenu2, IconPinFilled } from "@tabler/icons-react";
 import { Button, Group } from "@mantine/core";
+import { IconMenu2, IconPinFilled } from "@tabler/icons-react";
 import styles from "./NoticeDetail.module.css";
-import { NoticeDetailStage } from "./elements/NoticeDetailStage";
 import { NoticeDetailSprint } from "./elements/NoticeDetailSprint";
+import { NoticeDetailStage } from "./elements/NoticeDetailStage";
 
 type NoticeDetailProps = {
   heading: string;
