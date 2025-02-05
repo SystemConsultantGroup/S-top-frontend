@@ -20,6 +20,7 @@ export function NoticeDetailStage({ content, files, handleDownloadClick }: INoti
             <Button className={`${styles.stageBtn} ${styles.stageFileBtn}`} variant="transparent">
               <Group gap={5}>
                 <IconPaperclip />
+
                 <span>첨부파일 ({files?.length || 0})</span>
               </Group>
             </Button>

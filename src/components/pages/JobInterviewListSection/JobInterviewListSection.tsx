@@ -78,12 +78,10 @@ export function JobInterviewListSection() {
   /* 삭제 버튼 핸들러 */
   const handleDelete = () => {
     // TODO: 삭제 확인하는 모달 추가
-    Promise.all(selectedJobInterviews.map((id) => CommonAxios.delete(`/admin/${url}/${id}`))).then(
-      () => {
-        setSelectedJobInterviews([]);
-        mutate();
-      }
-    );
+    Promise.all(selectedJobInterviews.map((id) => CommonAxios.delete(`/${url}/${id}`))).then(() => {
+      setSelectedJobInterviews([]);
+      mutate();
+    });
   };
 
   useEffect(() => {
