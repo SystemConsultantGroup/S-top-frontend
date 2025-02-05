@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
-import styles from "../Header.module.css";
-import { IconLock, IconUser } from "@tabler/icons-react";
-import Link from "next/link";
 import { fetcher } from "@/utils/fetcher";
+import { IconLock, IconUser } from "@tabler/icons-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { CommonAxios } from "@/utils/CommonAxios";
+import { useAuth } from "../../Auth";
+import styles from "../Header.module.css";
 
 interface IHeaderToolBarProps {
   isOpen: boolean;
@@ -16,6 +16,8 @@ interface IHeaderToolBarProps {
 
 export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarProps) {
   const [userData, setUserData] = useState<{ name: string } | null>(null);
+
+  const { logout } = useAuth();
 
   const toggleHamburger = () => {
     setIsOpen(!isOpen);
@@ -57,13 +59,7 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
                     </Link>
                   </li>
                   <li>
-                    <a
-                      onClick={() => {
-                        CommonAxios.post("/auth/logout");
-                      }}
-                    >
-                      로그아웃
-                    </a>
+                    <a onClick={logout}>로그아웃</a>
                   </li>
                 </ul>
               </div>

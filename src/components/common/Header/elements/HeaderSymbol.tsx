@@ -7,7 +7,7 @@ export function HeaderSymbol() {
     <Link href="/" className={styles.symbol}>
       <div className={styles.logo}>
         <Image
-          src="/images/logo.png"
+          src="/images/S-TopLogo.png"
           alt="Sungkyun Technology Open Party"
           width={0}
           height={0}

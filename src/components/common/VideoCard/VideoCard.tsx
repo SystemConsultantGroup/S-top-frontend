@@ -1,29 +1,51 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Group, Button } from "@mantine/core";
 import styles from "./VideoCard.module.css";
 import { QuizModal } from "./QuizModal";
+import { DetailsModal } from "./DetailModal";
 import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
+import { AxiosError } from "axios";
 
 export interface VideoCardProps {
   key?: number;
+  id: number;
   title: string;
   subtitle?: string;
   videoUrl: string;
   bookmarked: boolean;
-  onBookmarkToggle: () => void;
+  onBookmarkToggle: (id: number) => void;
+  isLoggedIn: boolean;
 }
 export const VideoCard: React.FC<VideoCardProps> = ({
-  key,
+  id,
   title,
   subtitle,
   videoUrl,
-  bookmarked: initialBookmarked = false,
+  bookmarked,
   onBookmarkToggle,
+  isLoggedIn,
 }) => {
-  const [bookmarked, setBookmarked] = useState(initialBookmarked);
+  const cardRef = useRef<HTMLDivElement>(null); // Ref for the card
+
+  const handleCardClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    // Check if the click originated from the iframe, bookmark icon, or quiz button
+    if (
+      event.target instanceof Element &&
+      (event.target.closest("iframe") || // Clicked inside iframe
+        event.target.closest(`.${styles.bookmarkIcon}`) || // Clicked on bookmark
+        event.target.closest("button")) // Clicked on quiz button
+    ) {
+      return; // Do nothing if click is within these elements
+    }
+
+    // Otherwise, open the details modal
+    setDetailsModalOpened(true);
+  };
+
   const [quizModalOpened, setQuizModalOpened] = useState(false);
+  const [detailsModalOpened, setDetailsModalOpened] = useState(false);
   const [quizData, setQuizData] = useState<
     Array<{
       question: string;
@@ -32,33 +54,25 @@ export const VideoCard: React.FC<VideoCardProps> = ({
     }>
   >([]);
 
-  useEffect(() => {
-    setBookmarked(initialBookmarked);
-  }, [initialBookmarked]);
-
   const handleBookmarkClick = () => {
-    setBookmarked(!bookmarked);
-    onBookmarkToggle();
-
-    /*
-    try {
-      if (bookmarked) {
-        await CommonAxios.delete(`/talks/${key}/favorite`);
-      } else {
-        await CommonAxios.post(`/talks/${key}/favorite`);
-      }
-      setBookmarked(!bookmarked);
-    } catch (error) {
-      console.error("Error toggling bookmark:", error);
-    }*/
+    onBookmarkToggle(id);
   };
 
   const openQuizModal = async () => {
+    if (!isLoggedIn) {
+      alert("퀴즈 이벤트 참여를 위해서는 로그인이 필요합니다.");
+      return;
+    }
+
     try {
-      const response = await CommonAxios.get(`/talks/${key}/quiz`);
+      const response = await CommonAxios.get(`/talks/${id}/quiz`);
+
       setQuizData(response.data.quiz || []);
       setQuizModalOpened(true);
     } catch (error) {
+      if (error instanceof AxiosError && error.response?.data?.code === 8401) {
+        alert("퀴즈 데이터가 존재하지 않습니다.");
+      }
       console.error("Error fetching quiz data:", error);
     }
   };
@@ -67,17 +81,40 @@ export const VideoCard: React.FC<VideoCardProps> = ({
     setQuizModalOpened(false);
   };
 
+  const handleQuizButtonClick = () => {
+    setDetailsModalOpened(false); // Close the details modal
+    openQuizModal(); // Open the quiz modal (your existing function)
+  };
+
   const submitQuiz = async (quizAnswers: Record<string, number>) => {
     try {
-      const response = await CommonAxios.post(`/talks/${key}/quiz`, { result: quizAnswers });
+      const response = await CommonAxios.post(`/talks/${id}/quiz`, { result: quizAnswers }); // Use the id prop
       alert(response.data.success ? "Quiz submitted successfully!" : "Quiz submission failed.");
     } catch (error) {
+      if (error instanceof AxiosError && error.response?.data?.code === 8401) {
+        alert("퀴즈 데이터가 존재하지 않습니다.");
+      }
+      if (error instanceof AxiosError && error.response?.data?.code === 8804) {
+        alert("퀴즈 이벤트 참여 기간이 아닙니다.");
+      }
+      if (error instanceof AxiosError && error.response?.data?.code === 8805) {
+        alert("현재 이벤트 참여 연도의 대담 영상이 아닙니다다.");
+      }
+      if (error instanceof AxiosError && error.response?.data?.code === 8901) {
+        alert("퀴즈 최대 시도 횟수를 초과하였습니다.");
+      }
       console.error("Error submitting quiz:", error);
     }
   };
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      data-videoid={id}
+      ref={cardRef} // Attach the ref to the container
+      onClick={handleCardClick} // Add the click handler
+      style={{ cursor: "pointer" }} // Indicate clickable area
+    >
       <div className={styles.videoFrame}>
         <iframe
           width="100%"
@@ -131,12 +168,22 @@ export const VideoCard: React.FC<VideoCardProps> = ({
           </Button>
         </Group>
 
+        <DetailsModal
+          opened={detailsModalOpened}
+          onClose={() => setDetailsModalOpened(false)}
+          videoUrl={videoUrl}
+          title={title}
+          subtitle={subtitle ?? ""}
+          onQuizButtonClick={handleQuizButtonClick}
+        />
         {/* Quiz modal */}
         <QuizModal
           opened={quizModalOpened}
           onClose={closeQuizModal}
           videoUrl={videoUrl}
           quizData={quizData} // Pass the quiz data here
+          title={title} // title prop 전달
+          subtitle={subtitle ?? ""}
           onSubmit={submitQuiz}
         />
       </div>
