@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import classes from "./Mypage.module.css";
 import { ProjectCard } from "@/components/common/ProjectCard";
 import { Text } from "@mantine/core";
-import { Carousel, CarouselSlide } from "@mantine/carousel";
 import { VideoCard } from "@/components/common/VideoCard_noQuiz/VideoCard";
 import { IconReportSearch } from "@tabler/icons-react";
 
@@ -174,23 +173,22 @@ export function MypageInterest() {
   return (
     <>
       <div className={classes.interestContainer}>
-        <Text className={classes.title}>관심 등록 프로젝트</Text>
+      <Text className={classes.title}>관심 등록 프로젝트</Text>
         {projects && projects.length > 0 ? (
-          <Carousel dragFree slideGap="md" slideSize="20%" align="start" containScroll="trimSnaps">
+          <div className={classes.interestGrid}>
             {projects.map((data, idx) => {
               const thumbnailUrl = thumbnailUrls[idx];
               return (
-                <CarouselSlide key={idx}>
-                  <ProjectCard
-                    data={data}
-                    thumbnailUrl={thumbnailUrl}
-                    onClickLike={() => handleClickLike(idx)}
-                    onClickBookmark={() => handleClickBookMark(idx)}
-                  />
-                </CarouselSlide>
+                <ProjectCard
+                  key={idx}
+                  data={data}
+                  thumbnailUrl={thumbnailUrl}
+                  onClickLike={() => handleClickLike(idx)}
+                  onClickBookmark={() => handleClickBookMark(idx)}
+                />
               );
             })}
-          </Carousel>
+          </div>
         ) : (
           <div className={classes.noContentDiv}>
             <IconReportSearch stroke={0.5} size={60} />
@@ -207,19 +205,18 @@ export function MypageInterest() {
       <div className={classes.interestContainer}>
         <Text className={classes.title}>관심 등록 대담 영상</Text>
         {talks && talks.length > 0 ? (
-          <Carousel dragFree slideGap="md" slideSize="20%" align="start" containScroll="trimSnaps">
-            {talks.map((data, idx) => (
-              <CarouselSlide key={idx}>
+          <div className={classes.interestGrid}>
+              {talks.map((data, idx) => (
                 <VideoCard
+                key={idx}
                   id={data.id}
                   title={data.title}
                   videoUrl={`https://www.youtube.com/embed/${data.youtubeId}`}
                   bookmarked={data.favorite}
                   onBookmarkToggle={() => handleClickTalksBookMark}
                 />
-              </CarouselSlide>
             ))}
-          </Carousel>
+            </div>
         ) : (
           <div className={classes.noContentDiv}>
             <IconReportSearch stroke={0.5} size={60} />
@@ -233,19 +230,18 @@ export function MypageInterest() {
       <div className={classes.interestContainer}>
         <Text className={classes.title}>관심 등록 잡페어 영상</Text>
         {jobfairInterviews && jobfairInterviews.length > 0 ? (
-          <Carousel dragFree slideGap="md" slideSize="20%" align="start" containScroll="trimSnaps">
+          <div className={classes.interestGrid}>
             {jobfairInterviews.map((data, idx) => (
-              <CarouselSlide key={idx}>
-                <VideoCard
-                  id={data.id}
-                  title={data.title}
-                  videoUrl={`https://www.youtube.com/embed/${data.youtubeId}`}
-                  bookmarked={data.favorite}
-                  onBookmarkToggle={() => handleClickJobsBookMark}
-                />
-              </CarouselSlide>
+              <VideoCard
+              key={idx}
+              id={data.id}
+              title={data.title}
+              videoUrl={`https://www.youtube.com/embed/${data.youtubeId}`}
+              bookmarked={data.favorite}
+              onBookmarkToggle={() => handleClickJobsBookMark}
+            />
             ))}
-          </Carousel>
+          </div>
         ) : (
           <div className={classes.noContentDiv}>
             <IconReportSearch stroke={0.5} size={60} />
