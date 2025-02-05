@@ -26,6 +26,8 @@ export function AdminInquiriesEditForm({
   /* next 라우터, 페이지 이동에 이용 */
   const { push } = useRouter();
 
+  const url = !proposal ? "inquiries" : "proposals";
+
   const [inquiry, setInquiry] = useState<Inquiry | null>(null);
   const [prevReplyFlag, setPrevReplyFlag] = useState<boolean>(false);
 
@@ -44,13 +46,13 @@ export function AdminInquiriesEditForm({
   /* id를 통해 데이터 패칭 */
   useEffect(() => {
     const fetchInquiry = async () => {
-      const response = await CommonAxios.get(`/inquiries/${id}`);
+      const response = await CommonAxios.get(`/${url}/${id}`);
       setInquiry(response.data);
       console.log(response.data);
     };
 
     const fetchPrevReply = async () => {
-      const response = await CommonAxios.get(`/inquiries/${id}/reply`);
+      const response = await CommonAxios.get(`/${url}/${id}/reply`);
       if (response.data.title.length > 0) {
         setPrevReplyFlag(true);
         setValues(response.data);
@@ -65,17 +67,18 @@ export function AdminInquiriesEditForm({
         console.error(error);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   // 문의 답변 등록/수정 request 함수
   const handleSubmit = async (values: InquiryEditFormInputs) => {
     try {
       if (prevReplyFlag) {
-        await CommonAxios.put(`/inquiries/${id}/reply`, values);
+        await CommonAxios.put(`/${url}/${id}/reply`, values);
       } else {
-        await CommonAxios.post(`/inquiries/${id}/reply`, values);
+        await CommonAxios.post(`/${url}/${id}/reply`, values);
       }
-      proposal ? push("../proposals") : push("../inquiries");
+      push(`../${url}`);
     } catch (error) {
       console.error(error);
     }
@@ -117,7 +120,7 @@ export function AdminInquiriesEditForm({
           <Group justify="center">
             <PrimaryButton
               onClick={() => {
-                proposal ? push("../proposals") : push("../inquiries");
+                push(`../${url}`);
               }}
             >
               목록으로

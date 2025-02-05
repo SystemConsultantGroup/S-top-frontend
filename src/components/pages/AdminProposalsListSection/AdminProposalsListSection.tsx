@@ -5,7 +5,7 @@ import { DataTable } from "@/components/common/DataTable";
 import { DataTableData } from "@/components/common/DataTable/elements/DataTableData";
 import { DataTableRow } from "@/components/common/DataTable/elements/DataTableRow";
 import { PROPOSALS_TABLE_HEADERS } from "@/constants/DataTableHeaders";
-import { Button, Checkbox, Group, Stack } from "@mantine/core";
+import { Checkbox, Group, Stack } from "@mantine/core";
 import { useProposals } from "@/hooks/swr/useProposals";
 import { ChangeEvent, useState } from "react";
 import { useTableSort } from "@/hooks/useTableSort";
@@ -15,11 +15,8 @@ import { SearchInput } from "@/components/common/SearchInput";
 import { handleChangeSearch } from "@/utils/handleChangeSearch";
 import { useDebouncedState } from "@mantine/hooks";
 import { ProposalsRequestParams } from "@/types/proposals";
-import { useRouter } from "next/navigation";
 
 export default function AdminProposalListSection() {
-  const { push } = useRouter();
-
   const url = "proposals";
 
   /* 페이지당 행 개수 */
@@ -94,7 +91,7 @@ export default function AdminProposalListSection() {
           <DangerButton onClick={handleDelete}>선택 삭제</DangerButton>
         </Group>
         <DataTable
-          headers={PROPOSALS_TABLE_HEADERS}
+          headers={PROPOSALS_TABLE_HEADERS.slice(0, PROPOSALS_TABLE_HEADERS.length - 1)}
           sortBy={sortBy}
           order={order}
           handleSortButton={handleSortButton}
@@ -119,7 +116,7 @@ export default function AdminProposalListSection() {
               <DataTableData>{inquiry.title}</DataTableData>
               <DataTableData>{inquiry.name}</DataTableData>
               <DataTableData>{inquiry.createdDate}</DataTableData>
-              <DataTableData text={false}>
+              {/* <DataTableData text={false}>
                 <Button
                   onClick={() => {
                     push(`proposals/${inquiry.id}`);
@@ -127,7 +124,7 @@ export default function AdminProposalListSection() {
                 >
                   수정
                 </Button>
-              </DataTableData>
+              </DataTableData> */}
             </DataTableRow>
           ))}
         </DataTable>
