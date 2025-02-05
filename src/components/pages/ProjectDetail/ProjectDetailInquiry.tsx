@@ -1,9 +1,9 @@
 "use client";
 
-import { Text } from "@mantine/core";
-import classes from "./ProjectDetailInfo.module.css";
-import { useRouter } from "next/navigation";
 import { PrimaryButton } from "@/components/common/Buttons";
+import { Text } from "@mantine/core";
+import { useRouter } from "next/navigation";
+import classes from "./ProjectDetailInfo.module.css";
 
 interface Props {
   projectId: string;
@@ -13,7 +13,7 @@ export function ProjectDetailInquiry({ projectId }: Props) {
   const router = useRouter();
 
   const handleButtonClick = () => {
-    router.push(`/infodesk/inquries/write?id=${projectId}`);
+    router.push(`/infodesk/inquiries/write?id=${projectId}`);
   };
 
   return (
