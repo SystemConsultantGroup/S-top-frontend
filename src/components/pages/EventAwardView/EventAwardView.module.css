@@ -9,10 +9,24 @@
 .subtitle {
   padding-left: 5px;
   font-size: 24px;
+  font-size: 28px; /* 제목 크기 조정 */
+  font-weight: bold; /* 강조 */
 }
 
 .awardType {
   padding-left: 15px;
   margin-bottom: 10px;
   font-size: 22px;
+  margin-top: 30px;
+}
+
+/* 수상 내역 목록 그리드 */
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(300px, 1fr)
+  ); /* 최소 300px, 나머지 공간 균등 배분 */
+  gap: 20px; /* 카드 간 간격 */
+  margin-bottom: 20px;
 }

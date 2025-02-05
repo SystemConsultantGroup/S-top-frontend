@@ -16,6 +16,7 @@ import { useWindowSize } from "@/hooks/useWindowSize";
 import { GenerateCardsRow, getItemCountPerRow } from "@/components/pages/ItemGrid";
 import { getFileUrlById } from "@/utils/handleDownloadFile";
 import { CommonAxios } from "@/utils/CommonAxios";
+import { useAuth } from "@/components/common/Auth";
 
 type Content = IProjectContent | ITalkContent | IGalleryContent;
 
@@ -53,6 +54,7 @@ export default function Home() {
    * 숫자를 맞추기 위해 채워야 하는 더미 아이템을 dynamic하게 만들어 그리드를 유지하는 역할을 수행함.
    */
   const { width: screenWidth } = useWindowSize();
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
     const targets = [
@@ -191,22 +193,28 @@ export default function Home() {
                     talkIsMarks.current[idx] = data.favorite;
                     const videoUrl = talkThumbnails.current[idx];
                     const handleClickMark = () => {
-                      if (talkIsMarks.current[idx]) {
-                        // 북마크 취소할 경우
-                        talkIsMarks.current[idx] = false;
-                        CommonAxios.delete(`/talks/${data.id}/favorite`);
+                      if (isLoggedIn) {
+                        if (talkIsMarks.current[idx]) {
+                          // 북마크 취소할 경우
+                          talkIsMarks.current[idx] = false;
+                          CommonAxios.delete(`/talks/${data.id}/favorite`);
+                        } else {
+                          // 북마크 추가할 경우
+                          talkIsMarks.current[idx] = true;
+                          CommonAxios.post(`/talks/${data.id}/favorite`);
+                        }
                       } else {
-                        // 북마크 추가할 경우
-                        talkIsMarks.current[idx] = true;
-                        CommonAxios.post(`/talks/${data.id}/favorite`);
+                        alert("대담영상을 북마크에 추가하려면 로그인이 필요합니다.");
                       }
                     };
                     return {
+                      id: data.id,
                       title: data.title,
                       subtitle: data.talkerName,
                       videoUrl,
                       bookmarked: data.favorite,
                       onBookmarkToggle: handleClickMark,
+                      isLoggedIn: isLoggedIn,
                     };
                   });
 
@@ -238,7 +246,7 @@ export default function Home() {
                     return {
                       title: data.title,
                       imgUrl,
-                      date: new Date(data.updatedAt),
+                      date: new Date(data.createdAt),
                       viewCount: data.hitCount,
                     };
                   });

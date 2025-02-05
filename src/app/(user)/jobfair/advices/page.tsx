@@ -7,6 +7,7 @@ import { SearchInput } from "@/components/common/SearchInput";
 import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { VideoCard } from "@/components/common/VideoCard_noQuiz/VideoCard";
 import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
+import { useAuth } from "@/components/common/Auth";
 
 interface Interview {
   id: number;
@@ -18,14 +19,33 @@ interface Interview {
   category: string;
   createdAt: string;
   updatedAt: string;
+  favorite: boolean;
 }
 
-const YEARS = ["전체", "2024", "2023", "2022", "2021"];
+const YEARS = ["전체", "2025", "2024", "2023", "2022", "2021"];
 
 const JobFairPage = () => {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
   const [interviews, setInterviews] = useState<Interview[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [videoData, setVideoData] = useState<Interview[]>([]);
+  const { isLoggedIn } = useAuth();
+
+  const handleBookmarkToggle = (id: number) => {
+    if (isLoggedIn) {
+      setVideoData((prevData) =>
+        prevData.map((video) => (video.id === id ? { ...video, favorite: !video.favorite } : video))
+      );
+
+      CommonAxios.post(`/jobInterviews/${id}/favorite`, {
+        favorite: videoData.find((video) => video.id === id)?.favorite,
+      }).catch((error) => {
+        console.error("Failed to update bookmark status on the server", error);
+      });
+    } else {
+      alert("인터뷰 영상을 북마크에 추가하려면 로그인이 필요합니다.");
+    }
+  };
 
   useEffect(() => {
     const fetchInterviews = async () => {
@@ -101,11 +121,12 @@ const JobFairPage = () => {
           {filteredInterviews.map((interview) => (
             <div key={interview.id}>
               <VideoCard
+                id={interview.id}
                 title={interview.title}
                 subtitle={interview.talkerName}
                 videoUrl={`https://www.youtube.com/embed/${interview.youtubeId}`}
-                bookmarked={false}
-                onBookmarkToggle={() => {}}
+                bookmarked={interview.favorite}
+                onBookmarkToggle={() => handleBookmarkToggle(interview.id)}
               />
             </div>
           ))}

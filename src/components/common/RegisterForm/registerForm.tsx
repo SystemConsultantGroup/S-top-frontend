@@ -1,17 +1,18 @@
-import React, { useState } from "react";
-import { TextInput } from "@/components/common/TextInput/TextInput";
-import { Dropdown } from "@/components/common/Dropdown/Dropdown";
-import { CheckBox } from "@/components/common/CheckBox/CheckBox";
-import { PrimaryButton } from "@/components/common/Buttons/PrimaryButton/PrimaryButton";
-import classes from "./registerForm.module.css";
-// refresh token 안됨 !! 왜지 ??
-//import { getServerSideToken } from "@/components/common/Auth/getServerSideToken";
 import { useAuth } from "@/components/common/Auth/AuthProvider";
+import { PrimaryButton } from "@/components/common/Buttons/PrimaryButton/PrimaryButton";
+import { CheckBox } from "@/components/common/CheckBox/CheckBox";
+import { Dropdown } from "@/components/common/Dropdown/Dropdown";
+import { TextInput } from "@/components/common/TextInput/TextInput";
 import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
+import { useRouter } from "next/navigation"; // 추가
+import React, { useState } from "react";
+import classes from "./registerForm.module.css";
 
 const MEMBER_TYPES = ["학생", "교수/교직원", "기업관계자", "외부인"];
 const SIGNUP_SOURCES = ["학과 게시판", "s-top 홍보자료", "학과 카톡방", "지인 소개", "기타"];
+
 export function RegisterForm() {
+  const router = useRouter(); // 추가
   const [formData, setFormData] = useState({
     name: "",
     phoneNumber: "",
@@ -25,8 +26,6 @@ export function RegisterForm() {
 
   const [selectedMemberType, setSelectedMemberType] = useState<string | null>(null);
   const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null);
-  //const [selectedSignupSource, setSelectedSignupSource] = useState<String | null>(null);
-
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
 
@@ -80,8 +79,6 @@ export function RegisterForm() {
     }
 
     try {
-      //const { accessToken, refreshToken } = await getServerSideToken()
-
       const config = {
         headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
@@ -94,6 +91,9 @@ export function RegisterForm() {
       );
 
       console.log("Registration Successful: ", response.data);
+
+      // 회원가입 성공 후 "/"로 이동
+      router.push("/");
     } catch (error) {
       console.error("Error registering: ", error);
     }

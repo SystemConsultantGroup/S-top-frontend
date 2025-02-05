@@ -46,12 +46,7 @@ export default function NoticeDetailPage() {
           <p>내용을 불러오는 중</p>
         ) : (
           data && (
-            <NoticeDetail
-              heading={HEADING}
-              item={data}
-              nav={{}}
-              handleDownloadClick={handleDownloadClick}
-            />
+            <NoticeDetail heading={HEADING} item={data} handleDownloadClick={handleDownloadClick} />
           )
         )}
       </div>

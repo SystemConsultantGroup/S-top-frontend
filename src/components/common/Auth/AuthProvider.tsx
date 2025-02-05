@@ -26,14 +26,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const previousToken = Cookies.get(JWT_COOKIE_NAME);
     if (previousToken) {
       setToken(previousToken);
-      CommonAxios.defaults.headers.Authorization = `Bearer ${token}`;
+      CommonAxios.defaults.headers.Authorization = `Bearer ${previousToken}`;
       CommonAxios.defaults.withCredentials = true;
     } else {
       setToken(null);
     }
 
     setIsLoadingCookie(false);
-  }, [token]);
+  }, []);
 
   function login(token: string) {
     setIsLoadingCookie(true);

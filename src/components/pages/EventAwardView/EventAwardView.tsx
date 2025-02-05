@@ -5,7 +5,6 @@ import { ProjectCard } from "@/components/common/ProjectCard";
 import { useEffect, useState } from "react";
 import classes from "./EventAwardView.module.css";
 import { Text } from "@mantine/core";
-import { Carousel, CarouselSlide } from "@mantine/carousel";
 import { getYears } from "@/utils/getYears";
 import { CommonAxios } from "@/utils/CommonAxios";
 import { AWARD_TYPE_LOOKUP_TABLE } from "@/constants/LookupTables";
@@ -23,8 +22,27 @@ export function EventAwardView() {
    * 가장 최근 연도를 디폴트로 설정
    */
   useEffect(() => {
+    const setDefaultYear = async () => {
+      try {
+        // 가장 최근 연도의 데이터를 가져옵니다.
+        const recentYear = years[0]; // 가장 최근 연도
+        const response = await CommonAxios.get(`projects/award?year=${recentYear}`);
+        const projectDatas: IProjectContent[] = response.data?.content;
+
+        // 수상자가 존재하면 해당 연도를 설정, 그렇지 않으면 years[1] 설정
+        if (projectDatas && projectDatas.length > 0) {
+          setSelectedYear(recentYear);
+        } else {
+          setSelectedYear(years[1]); // 두 번째 연도를 기본값으로 설정
+        }
+      } catch (error) {
+        console.error("Error checking recent year awards:", error);
+        setSelectedYear(years[1]); // 오류 발생 시에도 기본값 설정
+      }
+    };
+
     if (!selectedYear && years && years.length > 0) {
-      setSelectedYear(years[0]);
+      setDefaultYear();
     }
   }, [years, selectedYear]);
 
@@ -114,11 +132,11 @@ export function EventAwardView() {
         selectedOption={selectedYear}
       ></Dropdown>
       <Text className={classes.subtitle}>{selectedYear}년도 수상 내역</Text>
-      <Carousel dragFree slideGap="md" slideSize="20%" align="start" containScroll="trimSnaps">
+      <div className={classes.projectGrid}>
         {projects.map((data, idx) => {
           const thumbnailUrl = thumbnailUrls[idx];
           return (
-            <CarouselSlide key={idx}>
+            <div key={idx}>
               <Text className={classes.awardType}>{AWARD_TYPE_LOOKUP_TABLE[data.awardStatus]}</Text>
               <ProjectCard
                 data={data}
@@ -126,10 +144,10 @@ export function EventAwardView() {
                 onClickLike={() => handleClickLike(idx)}
                 onClickBookmark={() => handleClickBookMark(idx)}
               />
-            </CarouselSlide>
+            </div>
           );
         })}
-      </Carousel>
+      </div>
     </div>
   );
 }

@@ -78,12 +78,10 @@ export function InterviewListSection() {
   /* 삭제 버튼 핸들러 */
   const handleDelete = () => {
     // TODO: 삭제 확인하는 모달 추가
-    Promise.all(selectedInterviews.map((id) => CommonAxios.delete(`/admin/${url}/${id}`))).then(
-      () => {
-        setSelectedInterviews([]);
-        mutate();
-      }
-    );
+    Promise.all(selectedInterviews.map((id) => CommonAxios.delete(`/${url}/${id}`))).then(() => {
+      setSelectedInterviews([]);
+      mutate();
+    });
   };
 
   useEffect(() => {
