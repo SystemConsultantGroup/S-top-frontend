@@ -49,7 +49,6 @@ export default function NoticeDetailPage() {
             <NoticeDetail
               heading={HEADING}
               item={data}
-              nav={{}}
               handleDownloadClick={handleDownloadClick}
             />
           )

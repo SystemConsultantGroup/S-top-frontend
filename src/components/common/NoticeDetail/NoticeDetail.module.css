@@ -39,10 +39,15 @@
 }
 
 .container {
-  /* border-top: 1px solid var(--color-text); */
   border-top: 1px solid var(--mantine-color-text);
 }
-
+.content {
+  min-height: 80px; /* 최소 높이를 설정해서 글이 짧아도 여백이 생기도록 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 내용과 툴바를 아래쪽으로 밀기 */
+  margin-bottom: 20px;
+}
 .head {
   padding: 20px 15px;
   /* border-bottom: 1px solid var(--color-description); */
@@ -190,7 +195,10 @@
 }
 
 .toolbar {
-  margin: 20px 0;
+  margin: 40px 0 20px; /* 위쪽 마진을 늘려서 여백 추가 */
+  display: flex;
+  justify-content: flex-end; /* 버튼을 오른쪽 끝으로 정렬 */
+  position: relative;
 }
 
 .outlineTool {

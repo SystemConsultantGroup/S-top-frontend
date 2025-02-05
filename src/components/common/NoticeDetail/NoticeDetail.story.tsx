@@ -52,12 +52,6 @@ export const Usage: Story = {
         },
       ],
     },
-    nav: {
-      next_page: {
-        title: "이건 다음 글입니다.",
-        url: "/infodesk/notices/2",
-      },
-    },
     handleDownloadClick,
   },
 };
