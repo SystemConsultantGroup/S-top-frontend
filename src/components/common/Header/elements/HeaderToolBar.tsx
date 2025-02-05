@@ -18,6 +18,7 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
   const [userData, setUserData] = useState<{ name: string } | null>(null);
 
   const { logout } = useAuth();
+  const [isDarkMode, setIsDarkMode] = useState(false); // 다크모드 상태 추가
 
   const toggleHamburger = () => {
     setIsOpen(!isOpen);
@@ -37,6 +38,19 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
       fetchData();
     }
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)"); // 다크모드 여부 확인
+    setIsDarkMode(darkModeQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setIsDarkMode(e.matches); // 다크모드 변경 시 업데이트
+    };
+
+    darkModeQuery.addEventListener("change", handleChange);
+
+    return () => darkModeQuery.removeEventListener("change", handleChange);
+  }, []);
 
   return (
     <div className={styles.toolbar}>
@@ -90,6 +104,10 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
           width={0}
           height={0}
           sizes="100vw"
+          style={{
+            filter: isDarkMode ? "invert(1)" : "none", // 다크모드 색상 반전
+            opacity: isDarkMode ? 0.7 : 1, // 다크모드 투명도 80%
+          }}
         />
       </div>
       <div className={`${styles.hamburger} ${isOpen ? styles.open : ""}`} onClick={toggleHamburger}>
