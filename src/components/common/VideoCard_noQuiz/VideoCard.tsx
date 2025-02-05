@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef  } from "react";
+import React, { useState, useRef } from "react";
 import { Group } from "@mantine/core";
 import { DetailsModal } from "./DetailModal";
 import styles from "./VideoCard.module.css";
@@ -21,7 +21,6 @@ export const VideoCard: React.FC<VideoCardProps> = ({
   bookmarked,
   onBookmarkToggle,
 }) => {
-
   const cardRef = useRef<HTMLDivElement>(null); // Ref for the card
 
   const handleCardClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -39,7 +38,6 @@ export const VideoCard: React.FC<VideoCardProps> = ({
     setDetailsModalOpened(true);
   };
 
-  
   const [detailsModalOpened, setDetailsModalOpened] = useState(false);
 
   const handleBookmarkClick = () => {
@@ -105,12 +103,12 @@ export const VideoCard: React.FC<VideoCardProps> = ({
         </Group>
 
         <DetailsModal
-               opened={detailsModalOpened}
-               onClose={() => setDetailsModalOpened(false)}
-               videoUrl={videoUrl}
-               title={title}
-               subtitle={subtitle ?? ""}
-             /> 
+          opened={detailsModalOpened}
+          onClose={() => setDetailsModalOpened(false)}
+          videoUrl={videoUrl}
+          title={title}
+          subtitle={subtitle ?? ""}
+        />
       </div>
     </div>
   );

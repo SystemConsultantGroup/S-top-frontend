@@ -22,7 +22,7 @@ interface Interview {
   favorite: boolean;
 }
 
-const YEARS = ["전체","2025", "2024", "2023", "2022", "2021"];
+const YEARS = ["전체", "2025", "2024", "2023", "2022", "2021"];
 
 const JobFairPage = () => {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
@@ -34,9 +34,7 @@ const JobFairPage = () => {
   const handleBookmarkToggle = (id: number) => {
     if (isLoggedIn) {
       setVideoData((prevData) =>
-        prevData.map((video) =>
-          video.id === id ? { ...video, favorite: !video.favorite } : video
-        )
+        prevData.map((video) => (video.id === id ? { ...video, favorite: !video.favorite } : video))
       );
 
       CommonAxios.post(`/jobInterviews/${id}/favorite`, {
@@ -127,7 +125,7 @@ const JobFairPage = () => {
                 title={interview.title}
                 subtitle={interview.talkerName}
                 videoUrl={`https://www.youtube.com/embed/${interview.youtubeId}`}
-                bookmarked={interview.favorite} 
+                bookmarked={interview.favorite}
                 onBookmarkToggle={() => handleBookmarkToggle(interview.id)}
               />
             </div>
