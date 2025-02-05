@@ -164,8 +164,9 @@
 
 .content {
   margin-top: 10px;
-  /* color: var(--color-text); */
   color: var(--mantine-color-text);
+  white-space: pre-wrap; /* ✅ 줄바꿈과 공백 유지 */
+  word-wrap: break-word; /* 긴 단어도 자동 줄바꿈 */
 }
 
 .movebox {
