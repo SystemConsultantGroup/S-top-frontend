@@ -1,48 +1,59 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef  } from "react";
 import { Group } from "@mantine/core";
+import { DetailsModal } from "./DetailModal";
 import styles from "./VideoCard.module.css";
 
 export interface VideoCardProps {
+  id: number;
   title: string;
   subtitle?: string;
   videoUrl: string;
   bookmarked: boolean;
-  onBookmarkToggle: () => void;
+  onBookmarkToggle: (id: number) => void;
 }
 export const VideoCard: React.FC<VideoCardProps> = ({
+  id,
   title,
   subtitle,
   videoUrl,
-  bookmarked: initialBookmarked = false,
+  bookmarked,
   onBookmarkToggle,
 }) => {
-  const [bookmarked, setBookmarked] = useState(initialBookmarked);
 
-  useEffect(() => {
-    setBookmarked(initialBookmarked);
-  }, [initialBookmarked]);
+  const cardRef = useRef<HTMLDivElement>(null); // Ref for the card
+
+  const handleCardClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    // Check if the click originated from the iframe, bookmark icon, or quiz button
+    if (
+      event.target instanceof Element &&
+      (event.target.closest("iframe") || // Clicked inside iframe
+        event.target.closest(`.${styles.bookmarkIcon}`) || // Clicked on bookmark
+        event.target.closest("button")) // Clicked on quiz button
+    ) {
+      return; // Do nothing if click is within these elements
+    }
+
+    // Otherwise, open the details modal
+    setDetailsModalOpened(true);
+  };
+
+  
+  const [detailsModalOpened, setDetailsModalOpened] = useState(false);
 
   const handleBookmarkClick = () => {
-    setBookmarked(!bookmarked);
-    onBookmarkToggle();
-
-    /*
-    try {
-      if (bookmarked) {
-        await CommonAxios.delete(`/talks/${key}/favorite`);
-      } else {
-        await CommonAxios.post(`/talks/${key}/favorite`);
-      }
-      setBookmarked(!bookmarked);
-    } catch (error) {
-      console.error("Error toggling bookmark:", error);
-    }*/
+    onBookmarkToggle(id);
   };
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      data-videoid={id}
+      ref={cardRef} // Attach the ref to the container
+      onClick={handleCardClick} // Add the click handler
+      style={{ cursor: "pointer" }} // Indicate clickable area
+    >
       <div className={styles.videoFrame}>
         <iframe
           width="100%"
@@ -92,6 +103,14 @@ export const VideoCard: React.FC<VideoCardProps> = ({
             )}
           </div>
         </Group>
+
+        <DetailsModal
+               opened={detailsModalOpened}
+               onClose={() => setDetailsModalOpened(false)}
+               videoUrl={videoUrl}
+               title={title}
+               subtitle={subtitle ?? ""}
+             /> 
       </div>
     </div>
   );
