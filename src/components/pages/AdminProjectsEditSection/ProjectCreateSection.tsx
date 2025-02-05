@@ -184,7 +184,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
     <Section>
       <form onSubmit={onSubmit(handleSubmit)}>
         <Title order={2} fz={24} pl={20} mb={24}>
-          {projectId ? "프로젝트 수정" : "개별등록"}
+          {projectId ? "프로젝트 수정" : "프로젝트 등록"}
         </Title>
         <Stack>
           <Row field="프로젝트 종류" fieldSize={130}>
@@ -332,6 +332,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
                 ></Radio>
                 <Radio value={ProjectsAwardStatusLookupTable["우수상"]} label={"우수상"}></Radio>
                 <Radio value={ProjectsAwardStatusLookupTable["인기상"]} label={"인기상"}></Radio>
+                <Radio value={ProjectsAwardStatusLookupTable["미정"]} label={"없음"}></Radio>
               </Group>
             </RadioGroup>
           </Row>
