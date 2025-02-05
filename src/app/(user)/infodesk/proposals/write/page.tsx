@@ -59,6 +59,12 @@ const ProposalWritePage = () => {
         }
         return null;
       },
+      fileIds: () => {
+        if (files.length === 0) {
+          return "첨부파일을 추가해주세요.";
+        }
+        return null;
+      },
     },
   });
 
@@ -212,7 +218,12 @@ const ProposalWritePage = () => {
             </div>
 
             <div className={styles.formRowbtn}>
-              <PrimaryButton onClick={handleAddFile}>첨부파일 추가</PrimaryButton>
+              <PrimaryButton onClick={handleAddFile}>첨부파일 추가 *</PrimaryButton>
+              {getInputProps("fileIds").error && (
+                <div style={{ color: "red", marginTop: "5px" }}>
+                  {getInputProps("fileIds").error}
+                </div>
+              )}
             </div>
             {files.map((file, index) => (
               <Row key={file.id} field={`파일 ${index + 1}`} fieldSize={150}>

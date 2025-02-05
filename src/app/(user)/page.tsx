@@ -194,18 +194,18 @@ export default function Home() {
                     const videoUrl = talkThumbnails.current[idx];
                     const handleClickMark = () => {
                       if (isLoggedIn) {
-                      if (talkIsMarks.current[idx]) {
-                        // 북마크 취소할 경우
-                        talkIsMarks.current[idx] = false;
-                        CommonAxios.delete(`/talks/${data.id}/favorite`);
+                        if (talkIsMarks.current[idx]) {
+                          // 북마크 취소할 경우
+                          talkIsMarks.current[idx] = false;
+                          CommonAxios.delete(`/talks/${data.id}/favorite`);
+                        } else {
+                          // 북마크 추가할 경우
+                          talkIsMarks.current[idx] = true;
+                          CommonAxios.post(`/talks/${data.id}/favorite`);
+                        }
                       } else {
-                        // 북마크 추가할 경우
-                        talkIsMarks.current[idx] = true;
-                        CommonAxios.post(`/talks/${data.id}/favorite`);
+                        alert("대담영상을 북마크에 추가하려면 로그인이 필요합니다.");
                       }
-                    } else {
-                      alert("대담영상을 북마크에 추가하려면 로그인이 필요합니다.");
-                    }
                     };
                     return {
                       id: data.id,

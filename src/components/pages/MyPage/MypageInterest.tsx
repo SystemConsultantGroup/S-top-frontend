@@ -173,7 +173,7 @@ export function MypageInterest() {
   return (
     <>
       <div className={classes.interestContainer}>
-      <Text className={classes.title}>관심 등록 프로젝트</Text>
+        <Text className={classes.title}>관심 등록 프로젝트</Text>
         {projects && projects.length > 0 ? (
           <div className={classes.interestGrid}>
             {projects.map((data, idx) => {
@@ -206,17 +206,17 @@ export function MypageInterest() {
         <Text className={classes.title}>관심 등록 대담 영상</Text>
         {talks && talks.length > 0 ? (
           <div className={classes.interestGrid}>
-              {talks.map((data, idx) => (
-                <VideoCard
+            {talks.map((data, idx) => (
+              <VideoCard
                 key={idx}
-                  id={data.id}
-                  title={data.title}
-                  videoUrl={`https://www.youtube.com/embed/${data.youtubeId}`}
-                  bookmarked={data.favorite}
-                  onBookmarkToggle={() => handleClickTalksBookMark}
-                />
+                id={data.id}
+                title={data.title}
+                videoUrl={`https://www.youtube.com/embed/${data.youtubeId}`}
+                bookmarked={data.favorite}
+                onBookmarkToggle={() => handleClickTalksBookMark}
+              />
             ))}
-            </div>
+          </div>
         ) : (
           <div className={classes.noContentDiv}>
             <IconReportSearch stroke={0.5} size={60} />
@@ -233,13 +233,13 @@ export function MypageInterest() {
           <div className={classes.interestGrid}>
             {jobfairInterviews.map((data, idx) => (
               <VideoCard
-              key={idx}
-              id={data.id}
-              title={data.title}
-              videoUrl={`https://www.youtube.com/embed/${data.youtubeId}`}
-              bookmarked={data.favorite}
-              onBookmarkToggle={() => handleClickJobsBookMark}
-            />
+                key={idx}
+                id={data.id}
+                title={data.title}
+                videoUrl={`https://www.youtube.com/embed/${data.youtubeId}`}
+                bookmarked={data.favorite}
+                onBookmarkToggle={() => handleClickJobsBookMark}
+              />
             ))}
           </div>
         ) : (
