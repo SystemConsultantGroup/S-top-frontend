@@ -22,10 +22,12 @@ export default function InquiriesDetailPage() {
   }, []);
 
   useEffect(() => {
+    if (!ID) return;
+
     const fetchData = async () => {
-      if (!ID) return;
+      setLoading(true); // 요청 시작 시 로딩 상태 변경
       try {
-        const response = await CommonAxios.get(`/inquiries/${ID}`);
+        const response = await CommonAxios.get(`/proposals/${ID}`);
         setData(response.data);
       } catch (err) {
         setError(err instanceof Error ? err : new Error("알 수 없는 오류가 발생했습니다."));
@@ -36,7 +38,7 @@ export default function InquiriesDetailPage() {
     if (!data && !error) {
       fetchData();
     }
-  }, [ID, data, error]);
+  }, [ID]);
 
   return (
     <>

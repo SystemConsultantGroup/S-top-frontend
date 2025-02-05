@@ -19,7 +19,7 @@ export function NoticeItem({
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
-  }).format(new Date(updatedAt ?? createdAt ?? createdDate ?? "NONE"));
+  }).format(new Date(createdAt ?? createdDate ?? updatedAt ?? "NONE"));
 
   const fullPath = window.location.pathname;
 
@@ -34,7 +34,7 @@ export function NoticeItem({
       <Group className={styles.bottom} gap={10}>
         <span>#{id}</span>
         <span>{authorName ?? name ?? "admin"}</span>
-        {(updatedAt || createdAt || createdDate) && <span>{formattedDate}</span>}
+        {(createdAt || createdDate || updatedAt) && <span>{formattedDate}</span>}
         {hitCount && <span>조회수 {hitCount}</span>}
       </Group>
     </li>

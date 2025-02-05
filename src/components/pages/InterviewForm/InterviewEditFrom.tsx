@@ -59,14 +59,14 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
           const data = response.data;
           form.setValues({
             title: data.title,
-            youtubeId: data.youtubeId,
+            youtubeId: "https://www.youtube.com/watch?v=" + data.youtubeId,
             year: data.year,
             talkerBelonging: data.talkerBelonging,
             talkerName: data.talkerName,
           });
           setQuizzes(
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            data.quiz.map((q: any, idx: number) => ({ ...q, id: getUniqueId(), answer: idx }))
+            data.quiz.map((q: any) => ({ ...q, id: getUniqueId() }))
           );
         } catch (error) {
           console.error("Error fetching interview:", error);
@@ -86,22 +86,34 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
 
   const handleSubmitData = async () => {
     try {
-      const youtubeIdMatch = reg.exec(form.values.youtubeId);
-      const youtubeId = youtubeIdMatch ? youtubeIdMatch[6] : null;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      // 두번해야 되더라 왜인지는 모름름
+      const youtubeId1 = (reg.exec(form.values.youtubeId) || [0, 0, 0, 0, 0, 0, ""])[6];
+      const youtubeId2 = (reg.exec(form.values.youtubeId) || [0, 0, 0, 0, 0, 0, ""])[6];
+      const youtubeId = youtubeId1 == "" ? youtubeId2 : youtubeId1;
 
       const data = {
         title: form.values.title,
-        youtubeId: `https://www.youtube.com/watch?v=${youtubeId ? youtubeId : "1_OyJLcGDh4"}`, // 유튜브 ID 변환 및 처리
+        youtubeId: youtubeId ? youtubeId : "", // 유튜브 ID 변환 및 처리
         year: form.values.year,
         talkerBelonging: form.values.talkerBelonging,
         talkerName: form.values.talkerName,
-        quiz: quizzes,
+        quiz: quizzes.map((quiz) => {
+          console.log(quiz);
+          if (!quiz.question || quiz.question.trim().length === 0) {
+            quiz.question = "기본 질문입니다.";
+          }
+          if (quiz.answer > quiz.options.length - 1) {
+            quiz.answer = quiz.options.length - 1;
+          }
+          return quiz;
+        }),
       };
 
       if (interviewID) {
-        await CommonAxios.put(`/talks/${interviewID}`, data);
+        await CommonAxios.put(`/${url}/${interviewID}`, data);
       } else {
-        await CommonAxios.post(`/talks`, data);
+        await CommonAxios.post(`/${url}`, data);
       }
 
       // 성공적으로 전송된 후 페이지 이동
@@ -150,6 +162,7 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
                 onChange={handleQuestionChange(quiz.id)}
                 w={"100%"}
               />
+              {quiz.answer}
               <RadioGroup value={quiz.answer.toString()} onChange={handleAnswerChange(quiz.id)}>
                 {quiz.options.map((option, index) => (
                   <Group key={index} mt="xs">
@@ -160,13 +173,17 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
                       onChange={handleOptionChange(quiz.id, index)}
                       w={"60%"}
                     />
-                    <DangerButton
-                      color="red"
-                      variant="outline"
-                      onClick={() => removeOption(quiz.id, index)}
-                    >
-                      삭제
-                    </DangerButton>
+                    {quiz.options.length > 1 ? (
+                      <DangerButton
+                        color="red"
+                        variant="outline"
+                        onClick={() => removeOption(quiz.id, index)}
+                      >
+                        삭제
+                      </DangerButton>
+                    ) : (
+                      <></>
+                    )}
                   </Group>
                 ))}
               </RadioGroup>
@@ -174,18 +191,22 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
                 <PrimaryButton mt="xs" onClick={() => addOption(quiz.id)}>
                   선지 추가
                 </PrimaryButton>
-                <DangerButton mt="xs" onClick={() => removeQuiz(quiz.id)}>
-                  퀴즈 삭제
-                </DangerButton>
+                {quizzes.length > 1 ? (
+                  <DangerButton mt="xs" onClick={() => removeQuiz(quiz.id)}>
+                    퀴즈 삭제
+                  </DangerButton>
+                ) : (
+                  <></>
+                )}
               </Group>
             </Card>
           ))}
           <Group justify="center">
             <PrimaryButton
               onClick={() => {
-                console.log(form.values.youtubeId.match(reg));
-                console.log(reg.exec(form.values.youtubeId));
-                // push("/admin/interviews");
+                // console.log(form.values.youtubeId.match(reg));
+                // console.log((reg.exec(form.values.youtubeId) || [0, 0, 0, 0, 0, 0, ""])[6]);
+                push("/admin/interviews");
               }}
             >
               목록으로

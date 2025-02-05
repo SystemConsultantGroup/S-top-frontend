@@ -1,20 +1,21 @@
 "use client";
 
-import { INoticeDetailItem, INoticeDetailNav } from "@/types/PageBoardTypes";
+//import { INoticeDetailItem, INoticeDetailNav } from "@/types/PageBoardTypes";
+import { INoticeDetailItem } from "@/types/PageBoardTypes";
 import { Button, Group } from "@mantine/core";
 import { IconMenu2, IconPinFilled } from "@tabler/icons-react";
 import styles from "./NoticeDetail.module.css";
-import { NoticeDetailSprint } from "./elements/NoticeDetailSprint";
+//import { NoticeDetailSprint } from "./elements/NoticeDetailSprint";
 import { NoticeDetailStage } from "./elements/NoticeDetailStage";
 
 type NoticeDetailProps = {
   heading: string;
   item: INoticeDetailItem;
-  nav: INoticeDetailNav;
+  //nav: INoticeDetailNav;
   handleDownloadClick: (id: number, name: string) => void;
 };
 
-export function NoticeDetail({ heading, item, nav, handleDownloadClick }: NoticeDetailProps) {
+export function NoticeDetail({ heading, item, handleDownloadClick }: NoticeDetailProps) {
   const CreatedDate = formatDate(new Date(item.createdAt ?? "NONE"));
   const EditedDate = formatDate(new Date(item.updatedAt ?? item.createdAt ?? "NONE"));
 
@@ -45,12 +46,14 @@ export function NoticeDetail({ heading, item, nav, handleDownloadClick }: Notice
             )}
           </Group>
         </div>
-        <NoticeDetailStage
-          content={item.content}
-          files={item.files}
-          handleDownloadClick={handleDownloadClick}
-        />
-        <NoticeDetailSprint prev_page={nav.prev_page} next_page={nav.next_page} />
+        <div className={styles.content}>
+          <NoticeDetailStage
+            content={item.content}
+            files={item.files}
+            handleDownloadClick={handleDownloadClick}
+          />
+          {/*<NoticeDetailSprint prev_page={nav.prev_page} next_page={nav.next_page} />*/}
+        </div>
         <Group className={styles.toolbar} justify="start">
           <Button
             className={styles.outlineTool}
