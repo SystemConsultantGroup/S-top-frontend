@@ -47,12 +47,12 @@ export function NoticeDetail({ heading, item, handleDownloadClick }: NoticeDetai
           </Group>
         </div>
         <div className={styles.content}>
-        <NoticeDetailStage
-          content={item.content}
-          files={item.files}
-          handleDownloadClick={handleDownloadClick}
-        />
-        {/*<NoticeDetailSprint prev_page={nav.prev_page} next_page={nav.next_page} />*/}
+          <NoticeDetailStage
+            content={item.content}
+            files={item.files}
+            handleDownloadClick={handleDownloadClick}
+          />
+          {/*<NoticeDetailSprint prev_page={nav.prev_page} next_page={nav.next_page} />*/}
         </div>
         <Group className={styles.toolbar} justify="start">
           <Button
