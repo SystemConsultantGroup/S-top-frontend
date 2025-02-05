@@ -246,7 +246,7 @@ export default function Home() {
                     return {
                       title: data.title,
                       imgUrl,
-                      date: new Date(data.updatedAt),
+                      date: new Date(data.createdAt),
                       viewCount: data.hitCount,
                     };
                   });
