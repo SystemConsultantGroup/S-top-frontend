@@ -102,6 +102,7 @@ export function AdminNoticeEditForm({ noticeId, event }: { noticeId?: number; ev
       }
     };
     if (noticeId) fetchPrevNotice();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [noticeId]);
 
   return (
@@ -121,7 +122,8 @@ export function AdminNoticeEditForm({ noticeId, event }: { noticeId?: number; ev
             <Textarea
               id="input-content"
               w={"90%"}
-              resize="vertical"
+              autosize
+              minRows={10}
               {...getInputProps("content")}
             />
           </Row>

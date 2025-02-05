@@ -1,204 +1,173 @@
-import { AdminNoticePreview } from "@/components/common/AdminNoticePreview/AdminNoticePreview";
-import { Statics, values } from "@/components/common/Statics/Statics";
 import { PageHeader } from "@/components/common/PageHeader";
-import classes from "./layout.module.css";
+import {
+  IconUserFilled,
+  IconCalendarEvent,
+  IconFiles,
+  IconAlignBoxLeftTop,
+  IconChartDotsFilled,
+} from "@tabler/icons-react";
+import { Button, Grid, GridCol, Group, Text } from "@mantine/core";
 
-const testdata = [
+const BTNSIZE = 400;
+const MAINICONSIZE = 60;
+const MAINTEXTSIZE = 35;
+const SUBICONSIZE = 40;
+const SUBTEXTSIZE = 20;
+
+const AdminMenuList = [
   {
-    data: [
+    label: "가입 신청 관리",
+    icon: <IconUserFilled size={MAINICONSIZE} />,
+    href: "/admin/applications",
+  },
+  {
+    label: "이벤트 기간 설정",
+    icon: <IconCalendarEvent size={MAINICONSIZE} />,
+    href: "/admin/event-period",
+  },
+  {
+    label: "프로젝트 관리",
+    icon: <IconFiles size={MAINICONSIZE} />,
+    children: [
       {
-        pinned: true,
-        title: "S-TOP 리뉴얼 안내",
-        writer: "SCG",
-        registeredDate: new Date(),
+        label: (
+          <>
+            프로젝트<br></br>조회 및 수정
+          </>
+        ),
+        href: "/admin/projects",
+        icon: <IconFiles size={SUBICONSIZE} />,
       },
       {
-        pinned: true,
-        title: "S-TOP 리뉴얼 안내 재공지",
-        writer: "SCG",
-        registeredDate: new Date(),
+        label: "프로젝트 등록",
+        href: "/admin/projects/create",
+        icon: <IconFiles size={SUBICONSIZE} />,
       },
       {
-        pinned: true,
-        title: "S-TOP 리뉴얼 안내 22",
-        writer: "SCG",
-        registeredDate: new Date(),
+        label: <>과제 제안 관리</>,
+        href: "/admin/projects/proposals",
+        icon: <IconFiles size={SUBICONSIZE} />,
       },
       {
-        pinned: false,
-        title: "공지사항 제목입니다. 엄청 긴 제목입니다. 더 긴 제목",
-        writer: "행정실",
-        registeredDate: new Date(),
-      },
-      {
-        pinned: false,
-        title: "공지사항 제목입니다.",
-        writer: "소프트웨어융합대학 행정실",
-        registeredDate: new Date(),
+        label: (
+          <>
+            프로젝트<br></br>문의 관리
+          </>
+        ),
+        href: "/admin/projects/inquiries",
+        icon: <IconFiles size={SUBICONSIZE} />,
       },
     ],
   },
   {
-    data: [
+    label: "게시판 관리",
+    icon: <IconAlignBoxLeftTop size={MAINICONSIZE} />,
+    children: [
       {
-        pinned: false,
-        title: "공지사항 제목입니다.",
-        writer: "행정실",
-        registeredDate: new Date(),
+        label: "공지사항",
+        href: "/admin/notices",
+        icon: <IconAlignBoxLeftTop size={SUBICONSIZE} />,
       },
       {
-        pinned: false,
-        title: "공지사항 제목입니다. 2",
-        writer: "소프트웨어융합대학 행정실",
-        registeredDate: new Date(),
+        label: "이벤트 공지사항",
+        href: "/admin/event/notices",
+        icon: <IconAlignBoxLeftTop size={SUBICONSIZE} />,
+      },
+    ],
+  },
+  {
+    label: "컨텐츠 관리",
+    icon: <IconFiles size={MAINICONSIZE} />,
+    children: [
+      {
+        label: (
+          <>
+            대담<br></br>영상 관리
+          </>
+        ),
+        href: "/admin/interviews",
+        icon: <IconFiles size={SUBICONSIZE} />,
+      },
+      {
+        label: (
+          <>
+            잡페어<br></br>영상 관리
+          </>
+        ),
+        href: "/admin/jobfair",
+        icon: <IconFiles size={SUBICONSIZE} />,
+      },
+      { label: "갤러리 관리", href: "/admin/gallery", icon: <IconFiles size={SUBICONSIZE} /> },
+      { label: "퀴즈 제출 목록", href: "/admin/quiz-list", icon: <IconFiles size={SUBICONSIZE} /> },
+    ],
+  },
+  {
+    label: "접속 통계 관리",
+    icon: <IconChartDotsFilled size={MAINICONSIZE} />,
+    children: [
+      {
+        label: "접속 통계",
+        href: "/admin/accesses",
+        icon: <IconChartDotsFilled size={SUBICONSIZE} />,
+      },
+      {
+        label: "유입 경로 분석",
+        href: "/admin/funnels",
+        icon: <IconChartDotsFilled size={SUBICONSIZE} />,
       },
     ],
   },
 ];
-const array: values[] = Array(0);
-for (let i = 0; i < 9; i++) {
-  array.push({
-    value: Math.random() * 100 + 100,
-    plotvalue: undefined,
-    label: Math.round(Math.random() * 100 + 100).toString(),
-  });
-}
-
-interface sinchung {
-  name: string;
-  date: string;
-  type: string;
-  etc?: string;
-}
-function Sinchung({ data }: { data?: sinchung[] }) {
-  return (
-    <>
-      <section style={{ width: "auto" }}>
-        <table style={{ width: "100%" }}>
-          <thead>
-            <tr>
-              <td style={{ alignItems: "center" }}>ID</td>
-              <td style={{ alignItems: "center" }}>신청자</td>
-              <td style={{ alignItems: "center" }}>신청일</td>
-              <td style={{ alignItems: "center" }}>분류</td>
-              <td style={{ alignItems: "center" }}>비고</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style={{ borderTop: "2px solid white" }} colSpan={5}></td>
-            </tr>
-            {data?.map((e, i) => {
-              return (
-                <>
-                  <tr>
-                    <td style={{ alignItems: "center" }}>{i}</td>
-                    <td style={{ alignItems: "center" }}>{e.name}</td>
-                    <td style={{ alignItems: "center" }}>{e.date}</td>
-                    <td style={{ alignItems: "center" }}>{e.type}</td>
-                    <td style={{ alignItems: "center" }}>{e.etc}</td>
-                  </tr>
-                </>
-              );
-            })}
-          </tbody>
-        </table>
-        <div style={{ width: "auto" }}>
-          <div> </div>
-          <div> </div>
-        </div>
-      </section>
-    </>
-  );
-}
-function TodaysVisitor({
-  total,
-  today,
-  dailyAvg,
-}: {
-  total?: number;
-  today?: number;
-  dailyAvg?: number;
-}) {
-  return (
-    <>
-      <section>
-        <table
-          style={{
-            textAlign: "center",
-            alignContent: "center",
-            alignItems: "center",
-            width: "100%",
-            height: "100%",
-            borderTop: "3px solid white",
-            borderBottom: "3px solid white",
-          }}
-        >
-          <tbody>
-            <tr>
-              <td style={{ width: "50%", padding: 20, alignItems: "center" }}>총 접속자</td>
-              <td style={{ width: "50%", padding: 20, alignItems: "center" }}>{total}명</td>
-            </tr>
-            <tr>
-              <td style={{ borderBlock: "1px dashed white", padding: 20, alignItems: "center" }}>
-                오늘 접속자
-              </td>
-              <td style={{ borderBlock: "1px dashed white", padding: 20, alignItems: "center" }}>
-                {today}명
-              </td>
-            </tr>
-            <tr>
-              <td style={{ padding: 20, alignItems: "center" }}>일평균 접속자</td>
-              <td style={{ padding: 20, alignItems: "center" }}>{dailyAvg}명</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-    </>
-  );
-}
 
 export default function AdminMainPage() {
   return (
     <>
       <PageHeader title="관리자 메인" />
-      <table className={classes.container}>
-        <tbody>
-          <tr>
-            <td style={{ width: "40%" }} valign="top">
-              <Sinchung></Sinchung>
-            </td>
-            <td style={{ width: "60%" }} align="center">
-              <AdminNoticePreview title={""} pagingData={testdata}></AdminNoticePreview>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <h2>가입 신청 목록</h2>
-            </td>
-            <td>
-              <h2>공지사항 게시판</h2>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <TodaysVisitor today={123} total={456} dailyAvg={79}></TodaysVisitor>
-            </td>
-            <td>
-              <Statics values={array} title=""></Statics>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <h2>방문자수</h2>
-            </td>
-            <td>
-              <h2>접속 통계</h2>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <section></section>
+      <Group>
+        {AdminMenuList.map((e) => {
+          if (e.children) {
+            return (
+              <>
+                <Grid w={BTNSIZE}>
+                  {e.children.map((c) => {
+                    return (
+                      <>
+                        <GridCol span={6}>
+                          <Button
+                            h={e.children.length > 2 ? (BTNSIZE - 20) / 2 : BTNSIZE}
+                            w={(BTNSIZE - 20) / 2}
+                            variant="outline"
+                            component="a"
+                            href={c.href}
+                          >
+                            <Text fz={SUBTEXTSIZE.toString()}>
+                              {c.icon}
+                              <br></br>
+                              {c.label}
+                            </Text>
+                          </Button>
+                        </GridCol>
+                      </>
+                    );
+                  })}
+                </Grid>
+              </>
+            );
+          } else {
+            return (
+              <>
+                <Button h={BTNSIZE} w={BTNSIZE} variant="outline" component="a" href={e.href}>
+                  <Text fz={MAINTEXTSIZE}>
+                    {e.icon}
+                    <br></br>
+                    {e.label}
+                  </Text>
+                </Button>
+              </>
+            );
+          }
+        })}
+      </Group>
     </>
   );
 }
