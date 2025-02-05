@@ -1,15 +1,15 @@
 "use client";
 
 import { PrimaryButton } from "@/components/common/Buttons";
-import { DateTimePicker } from "@mantine/dates";
 import { PageHeader } from "@/components/common/PageHeader";
-import { useState, useEffect } from "react";
 import { CommonAxios } from "@/utils/CommonAxios";
-import { Stack, Title, Group, Text } from "@mantine/core";
+import { Group, Stack, Text, Title } from "@mantine/core";
+import { DateTimePicker } from "@mantine/dates";
 import "@mantine/dates/styles.css";
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
+import { useEffect, useState } from "react";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -49,12 +49,13 @@ export function EventPeriodForm() {
       .set("hour", startTime.getHours())
       .set("minute", startTime.getMinutes())
       .tz("Asia/Seoul")
-      .format();
+      .format("YYYY-MM-DDTHH:mm:ss"); // 수정: 타임존 오프셋 제거
+
     const end = dayjs(endDate)
       .set("hour", endTime.getHours())
       .set("minute", endTime.getMinutes())
       .tz("Asia/Seoul")
-      .format();
+      .format("YYYY-MM-DDTHH:mm:ss"); // 수정: 타임존 오프셋 제거
 
     try {
       await CommonAxios.post("/eventPeriods", { start, end });
