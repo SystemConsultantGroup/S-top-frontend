@@ -6,7 +6,7 @@ import classes from "./Mypage.module.css";
 import { ProjectCard } from "@/components/common/ProjectCard";
 import { Text } from "@mantine/core";
 import { Carousel, CarouselSlide } from "@mantine/carousel";
-import { VideoCard } from "@/components/common/VideoCard/VideoCard";
+import { VideoCard } from "@/components/common/VideoCard_noQuiz/VideoCard";
 import { IconReportSearch } from "@tabler/icons-react";
 
 import { PrimaryButton } from "@/components/common/Buttons";
@@ -211,6 +211,7 @@ export function MypageInterest() {
             {talks.map((data, idx) => (
               <CarouselSlide key={idx}>
                 <VideoCard
+                  id={data.id}
                   title={data.title}
                   videoUrl={`https://www.youtube.com/embed/${data.youtubeId}`}
                   bookmarked={data.favorite}
@@ -236,6 +237,7 @@ export function MypageInterest() {
             {jobfairInterviews.map((data, idx) => (
               <CarouselSlide key={idx}>
                 <VideoCard
+                  id={data.id}
                   title={data.title}
                   videoUrl={`https://www.youtube.com/embed/${data.youtubeId}`}
                   bookmarked={data.favorite}
