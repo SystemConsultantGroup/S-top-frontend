@@ -45,6 +45,7 @@ export function GalleryPreview({
             height={height}
             width={width - 16}
             className={classes.image_view}
+            priority
           />
         </CardSection>
 

@@ -9,7 +9,7 @@ export function useQuizs() {
       id: getUniqueId(),
       question: "",
       answer: 0,
-      options: [],
+      options: [""],
     };
     setQuizzes([...quizzes, newQuiz]);
   };
@@ -31,7 +31,7 @@ export function useQuizs() {
         if (quiz.id === quizId) {
           const newOptions = quiz.options.filter((_, index) => index !== optionIndex);
           // 정답 인덱스가 삭제된 옵션 인덱스보다 크면 정답 인덱스를 하나 줄입니다.
-          const newAnswer = quiz.answer > optionIndex ? quiz.answer - 1 : quiz.answer;
+          const newAnswer = quiz.answer > optionIndex ? quiz.options.length - 1 : quiz.answer;
           // 삭제 후 남은 옵션 개수보다 정답 인덱스가 크거나 같으면 마지막 옵션 인덱스로 설정합니다.
           const adjustedAnswer = newAnswer >= newOptions.length ? newOptions.length - 1 : newAnswer;
           return {

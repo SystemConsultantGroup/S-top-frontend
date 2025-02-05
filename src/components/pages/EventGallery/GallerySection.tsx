@@ -157,6 +157,7 @@ export function GallerySection({ galleryId }: Props) {
                   height={60}
                   style={{ width: gallery.files.length <= 2 ? "60%" : "100%", height: "auto" }}
                   className={`${isSelected ? classes.selected : ""}`}
+                  priority
                 />
               </div>
             );
