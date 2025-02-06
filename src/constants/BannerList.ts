@@ -17,13 +17,13 @@ export const bannerList: BannerProps[] = [
     type: "INTERVIEW",
     title: "스타트업 대담 영상",
     subtitle: "Start-up Interview",
-    text: "스타트업 대담 영상에 대한 소개가 들어갈 예정입니다.",
+    text: "다양한 스타트업의 기술 전문가들이 한자리에 모여 아이디어와 성공 스토리를 나누는 특별한 대담 영상들을 공개합니다.",
   },
   {
     type: "PROJECT",
     title: "프로젝트",
     subtitle: "Projects",
-    text: "프로젝트 페이지에 대한 소개가 들어갈 예정입니다.",
+    text: "S-TOP을 통해 출품된 다양한 프로젝트를 확인할 수 있습니다. 학생들이 수행한 창의적인 연구와 실무 중심의 프로젝트를 살펴보고, 혁신적인 아이디어와 성과를 만나보세요.",
   },
   {
     type: "S_TOP",
