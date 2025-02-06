@@ -94,3 +94,45 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 5vw; /* 제목 글씨 크기 줄이기 */
+    margin-bottom: 7px; /* 약간의 여백 추가 */
+  }
+
+  .terms > a {
+    font-size: 14px; /* 링크 글씨 크기 줄이기 */
+  }
+
+  .detail {
+    font-size: 12px; /* 세부 텍스트 크기 줄이기 */
+    line-height: 1.4; /* 줄 간격 조정 */
+  }
+
+  .logos > img {
+    height: 40px !important; /* 로고 이미지 크기 줄이기 */
+    width: auto; /* 비율 유지 */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .title {
+    font-size: 5vw; /* 제목 글씨 크기 줄이기 */
+    margin-bottom: 7px; /* 약간의 여백 추가 */
+  }
+
+  .terms > a {
+    font-size: 12px; /* 링크 글씨 크기 줄이기 */
+  }
+
+  .detail {
+    font-size: 12px; /* 세부 텍스트 크기 줄이기 */
+    line-height: 1.4; /* 줄 간격 조정 */
+  }
+
+  .logos > img {
+    height: 30px !important; /* 로고 이미지 크기 줄이기 */
+    width: auto; /* 비율 유지 */
+  }
+}
