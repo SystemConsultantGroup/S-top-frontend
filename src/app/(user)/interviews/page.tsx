@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { Banner } from "@/components/common/Banner/Banner";
 import { SearchInput } from "@/components/common/SearchInput";
@@ -121,6 +121,7 @@ export default function InterviewsPage() {
                 placeholder="전체 연도"
                 selectedOption={yearFilter}
                 onOptionClick={handleYearSelect}
+                width={200}
               />
             </div>
           </div>

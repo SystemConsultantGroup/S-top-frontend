@@ -4,12 +4,20 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button, Menu, MenuTarget, MenuDropdown, MenuItem } from "@mantine/core";
 import classes from "./Dropdown.module.css";
 
+const DROPDOWN_SIDE_MARGIN = 1;
+
 interface DropdownProps {
   options: string[];
   placeholder: string;
   selectedOption?: string | null;
   onOptionClick?: (option: string) => void;
   fullWidth?: boolean;
+  /**
+   * FIXME: css 에서 이미 고정 300px 의 너비를 주는 것을 한 번에 수정하기 부담스러워 점진적으로 optional 한 prop 으로 받음
+   * 부여하지 않으면 css 에서 고정된 300px 의 너비를 가짐
+   * @example width={300}
+   */
+  width?: number;
 }
 
 export function Dropdown({
@@ -20,6 +28,7 @@ export function Dropdown({
     throw new Error("Function not implemented.");
   },
   fullWidth = false,
+  width,
 }: DropdownProps) {
   const [opened, setOpened] = React.useState<boolean>(false);
   const [dropdownWidth, setDropdownWidth] = useState<number | undefined>(undefined);
@@ -42,7 +51,10 @@ export function Dropdown({
         <Button
           ref={menuTargetRef}
           justify="space-between"
-          className={`${classes.dropdownToggle} ${opened ? classes.opened : ""} ${fullWidth && classes.fullWidthToggle}`}
+          className={`${classes.dropdownToggle} ${opened ? classes.opened : ""} ${
+            fullWidth && classes.fullWidthToggle
+          }`}
+          style={width ? { width } : {}}
           onClick={() => setOpened(!opened)}
           leftSection={<span className={classes.buttonLabel}>{selectedOption || placeholder}</span>}
           rightSection={
@@ -79,6 +91,7 @@ export function Dropdown({
           <MenuItem
             key={option}
             className={`${classes.dropdownItem} ${fullWidth && classes.fullWidthItem}`}
+            style={width ? { width: width - DROPDOWN_SIDE_MARGIN * 2 } : {}}
             onClick={() => handleOptionClick(option)}
           >
             {option}
