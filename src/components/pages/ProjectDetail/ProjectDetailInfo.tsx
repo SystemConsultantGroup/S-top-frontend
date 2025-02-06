@@ -14,7 +14,7 @@ import {
 } from "@tabler/icons-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { ProjectDetailComment } from "./ProjectDetailComment";
 import classes from "./ProjectDetailInfo.module.css";
 import { ProjectDetailDto, categoryMapping } from "./_type/project";
@@ -31,7 +31,24 @@ export function ProjectDetailInfo({ projectId }: Props) {
   const [thumbnail, setThumbnail] = useState<string>("");
   const [poster, setPoster] = useState<string>("");
 
-  const handleRefresh = async () => {
+  // const handleRefresh = async () => {
+  //   if (projectId) {
+  //     console.log("refresh 함수 실행: ");
+  //     const response = await CommonAxios.get(`/projects/${projectId}`);
+  //     console.log("response: ", response);
+  //     console.log("refresh 함수 실행: ", response.status);
+  //     if (response.status === 200) {
+  //       console.log("load data!");
+  //       const data = response.data;
+  //       setProject(data);
+
+  //       setIsThumbup(data.like);
+  //       setIsInterest(data.bookMark);
+  //     }
+  //   }
+  // };
+
+  const handleRefresh = useCallback(async () => {
     if (projectId) {
       console.log("refresh 함수 실행: ");
       const response = await CommonAxios.get(`/projects/${projectId}`);
@@ -40,13 +57,19 @@ export function ProjectDetailInfo({ projectId }: Props) {
       if (response.status === 200) {
         console.log("load data!");
         const data = response.data;
-        setProject(data);
+        //setProject(data);
+        setProject((prevProject) => {
+          if (JSON.stringify(prevProject) !== JSON.stringify(data)) {
+            return data;
+          }
+          return prevProject;
+        });
 
         setIsThumbup(data.like);
         setIsInterest(data.bookMark);
       }
     }
-  };
+  }, [projectId]);
 
   useEffect(() => {
     console.log("projectId: ", projectId);
@@ -57,7 +80,13 @@ export function ProjectDetailInfo({ projectId }: Props) {
         const response = await CommonAxios.get(`/projects/${projectId}`);
         if (response.status === 200) {
           const data = response.data;
-          setProject(data);
+          // setProject(data);
+          setProject((prevProject) => {
+            if (JSON.stringify(prevProject) !== JSON.stringify(data)) {
+              return data;
+            }
+            return prevProject;
+          });
 
           setIsThumbup(data.like);
           setIsInterest(data.bookMark);
@@ -68,7 +97,7 @@ export function ProjectDetailInfo({ projectId }: Props) {
       }
     };
     fetchProject();
-  }, [projectId]);
+  }, [projectId, handleRefresh]);
 
   const fetchImages = (thumbnailId: number, posterId: number) => {
     if (thumbnailId) {

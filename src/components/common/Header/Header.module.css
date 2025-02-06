@@ -378,7 +378,7 @@
 .shortcuts {
   display: flex;
   flex-direction: row;
-  gap: 50px;
+  gap: 35px;
 
   & a {
     margin-bottom: 20px;
