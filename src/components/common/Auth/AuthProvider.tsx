@@ -19,6 +19,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
   const [isLoadingCookie, setIsLoadingCookie] = useState(true);
 
+  // 🔹 me API 요청 함수 추가
+  async function fetchMe() {
+    try {
+      const response = await CommonAxios.get("/users/me");
+      if (response.status === 200) {
+        console.log("User data:", response.data);
+      } else {
+        console.error("Failed to fetch user data:", response);
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  }
+
   // fetch previous token
   useEffect(() => {
     setIsLoadingCookie(true);
@@ -35,6 +49,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsLoadingCookie(false);
   }, []);
 
+  useEffect(() => {
+    if (token) {
+      fetchMe();
+    }
+  }, [token]);
+
   function login(token: string) {
     setIsLoadingCookie(true);
 
@@ -43,7 +63,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     CommonAxios.defaults.withCredentials = true;
     Cookies.set(JWT_COOKIE_NAME, token, { "max-age": String(JWT_MAX_AGE), secure: true });
 
-    setIsLoadingCookie(false);
+    setTimeout(() => {
+      fetchMe(); // 토큰 설정 후 약간의 딜레이를 두고 me API 호출
+      setIsLoadingCookie(false);
+    }, 0);
   }
 
   function logout() {

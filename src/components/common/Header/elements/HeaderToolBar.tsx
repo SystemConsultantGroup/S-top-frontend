@@ -17,7 +17,7 @@ interface IHeaderToolBarProps {
 export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarProps) {
   const [userData, setUserData] = useState<{ name: string } | null>(null);
 
-  const { logout } = useAuth();
+  const { logout, isLoading } = useAuth();
   const [isDarkMode, setIsDarkMode] = useState(false); // 다크모드 상태 추가
 
   const toggleHamburger = () => {
@@ -27,17 +27,18 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
   const fetchData = async () => {
     try {
       const data = await fetcher({ url: "/users/me" });
-      setUserData(() => data);
+      //setUserData(() => data);
+      setUserData(data);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
   };
 
   useEffect(() => {
-    if (isLoggedIn) {
-      fetchData();
+    if (isLoggedIn && !isLoading && !userData) {
+      fetchData(); // 로그인하고 유저 데이터가 없을 경우 데이터를 가져오기
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, isLoading, userData]);
 
   useEffect(() => {
     const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)"); // 다크모드 여부 확인
