@@ -1,13 +1,12 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import styles from "./jobfairRe.module.css";
 import { Banner } from "@/components/common/Banner/Banner";
-import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
-import { SearchInput } from "@/components/common/SearchInput";
-import { JobFairCard } from "@/components/common/JobFairCard/JobFairCard";
-import { Group, Select } from "@mantine/core";
 import { FilterChip } from "@/components/common/FilterChips/FilterChip";
-import { SelectProps } from "@mantine/core";
+import { JobFairCard } from "@/components/common/JobFairCard/JobFairCard";
+import { SearchInput } from "@/components/common/SearchInput";
+import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
+import { Group, Select, SelectProps } from "@mantine/core";
+import { useEffect, useState } from "react";
+import styles from "./jobfairRe.module.css";
 
 export type OptionKey = "REGION" | "CATEGORY" | "TYPE";
 
@@ -139,7 +138,7 @@ const RecruitmentsPage = () => {
   useEffect(() => {
     const fetchJobInfos = async () => {
       try {
-        const response = await fetch("http://localhost:8000/jobInfos", {
+        const response = await fetch("https://stop.scg.skku.ac.kr/jobInfos", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
