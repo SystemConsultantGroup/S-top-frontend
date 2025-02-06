@@ -149,7 +149,7 @@
   position: relative;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 25px;
 
   @media screen and (max-width: 1277px) {
     gap: 20px;
@@ -161,9 +161,9 @@
   flex-direction: row;
   align-items: center;
 
-  @media screen and (max-width: 1023px) {
+  /*@media screen and (max-width: 1023px) {
     display: none;
-  }
+  }*/
 }
 
 .userctrl > div {
