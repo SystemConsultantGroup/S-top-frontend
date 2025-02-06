@@ -326,7 +326,7 @@
   }
 
   @media screen and (max-width: 1023px) {
-    display: none;
+    display: flex;
   }
 }
 
@@ -338,6 +338,9 @@
 .overview {
   display: grid;
   gap: 50px;
+
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
 
   & ul {
     margin: 0;
@@ -365,6 +368,10 @@
 
   @media screen and (max-width: 1471px) {
     grid-template-columns: repeat(4, auto);
+  }
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr; /* 작은 화면에서는 한 줄씩 표시 */
   }
 }
 

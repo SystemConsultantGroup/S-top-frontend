@@ -1,9 +1,27 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./Footer.module.css";
 import { LogoList } from "./LogoList";
+import { useEffect, useState } from "react";
 
 export function Footer() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)"); // 다크모드 여부 확인
+    setIsDarkMode(darkModeQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setIsDarkMode(e.matches); // 다크모드 변경 시 업데이트
+    };
+
+    darkModeQuery.addEventListener("change", handleChange);
+
+    return () => darkModeQuery.removeEventListener("change", handleChange);
+  }, []);
+
   return (
     <>
       <div className={styles.footer}>
@@ -23,9 +41,24 @@ export function Footer() {
           <span>Copyright 2024. Sungkyunkwan University All Rights reserved.</span>
         </div>
         <div className={styles.logos}>
-          {LogoList.map((logo, index) => (
-            <Image key={index} src={logo.src} alt={logo.alt} width={0} height={0} sizes="100vw" />
-          ))}
+          {LogoList.map((logo, index) => {
+            const appliedStyle =
+              isDarkMode && index === 2
+                ? { filter: "invert(1)", opacity: "0.7" }
+                : { filter: "none", opacity: "1" };
+
+            return (
+              <Image
+                key={index}
+                src={logo.src}
+                alt={logo.alt}
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={appliedStyle}
+              />
+            );
+          })}
         </div>
       </div>
     </>
