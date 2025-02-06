@@ -5,7 +5,7 @@ on:
     branches: ["main"]
 env:
   dockerimage_tag: ${{ github.sha }}
-  dockerimage_name: scgskku/stop-fe
+  dockerimage_name: scgskku/stop-fe-prod
 jobs:
   build:
     runs-on: ubuntu-latest
