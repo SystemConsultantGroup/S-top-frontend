@@ -84,11 +84,7 @@ export function RegisterForm() {
         withCredentials: true,
       };
 
-      const response = await CommonAxios.post(
-        "http://localhost:8000/auth/register",
-        formData,
-        config
-      );
+      const response = await CommonAxios.post("/auth/register", formData, config);
 
       console.log("Registration Successful: ", response.data);
 
