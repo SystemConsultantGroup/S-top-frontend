@@ -6,7 +6,7 @@ import { HeaderSymbol } from "./elements/HeaderSymbol";
 import { HeaderTopNav } from "./elements/HeaderTopNav";
 import { HeaderToolBar } from "./elements/HeaderToolBar";
 import { HandoutOverview } from "./elements/HandoutOverview";
-import { HandoutShortcut } from "./elements/HandoutShortcut";
+
 import { useAuth } from "../Auth";
 
 export function Header() {
@@ -21,8 +21,7 @@ export function Header() {
         <HeaderToolBar isOpen={isOpen} setIsOpen={setIsOpen} isLoggedIn={isLoggedIn} />
       </div>
       <div className={`${styles.handout} ${isOpen ? styles.show : ""}`}>
-        <HandoutOverview />
-        <HandoutShortcut />
+        <HandoutOverview setIsOpen={setIsOpen} />
       </div>
     </>
   );
