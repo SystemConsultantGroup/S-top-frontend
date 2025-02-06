@@ -149,7 +149,7 @@
   position: relative;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 25px;
 
   @media screen and (max-width: 1277px) {
     gap: 20px;
@@ -161,9 +161,9 @@
   flex-direction: row;
   align-items: center;
 
-  @media screen and (max-width: 1023px) {
+  /*@media screen and (max-width: 1023px) {
     display: none;
-  }
+  }*/
 }
 
 .userctrl > div {
@@ -337,7 +337,7 @@
 
 .overview {
   display: grid;
-  gap: 50px;
+  gap: 55px;
 
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
@@ -359,26 +359,37 @@
   }
 
   @media screen and (min-width: 1578px) {
-    grid-template-columns: repeat(6, auto);
+    grid-template-columns: repeat(7, auto);
   }
 
   @media screen and (max-width: 1577px) and (min-width: 1472px) {
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(6, auto);
   }
 
   @media screen and (max-width: 1471px) {
+    grid-template-columns: repeat(5, auto);
+  }
+
+  @media screen and (max-width: 1000px) {
     grid-template-columns: repeat(4, auto);
   }
 
   @media screen and (max-width: 768px) {
-    grid-template-columns: 1fr; /* 작은 화면에서는 한 줄씩 표시 */
+    grid-template-columns: repeat(3, auto);
+  }
+  @media screen and (max-width: 608px) {
+    grid-template-columns: repeat(2, auto);
+  }
+
+  @media screen and (max-width: 450px) {
+    grid-template-columns: 1fr;
   }
 }
 
 .shortcuts {
   display: flex;
   flex-direction: row;
-  gap: 50px;
+  gap: 35px;
 
   & a {
     margin-bottom: 20px;

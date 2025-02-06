@@ -16,7 +16,10 @@ export interface Comment {
 export const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit, commentList = [] }) => {
   const [comment, setComment] = useState("");
   const [isAnonymous, setIsAnonymous] = useState<boolean>(true);
-  const [anonymousIndex, setAnonymousIndex] = useState<number>(0);
+
+  // 익명 번호 매핑을 위한 Map 객체
+  const anonymousMap = new Map<string, number>();
+  let anonymousCounter = 1;
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
@@ -30,11 +33,9 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit, commentList = 
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    console.log("isAnonymous: ", isAnonymous);
     e.preventDefault();
     if (comment.trim()) {
       if (onSubmit) onSubmit(comment, isAnonymous);
-      //setComments([...comments, { author: "사람", content: comment }]);
       setComment("");
     }
   };
@@ -65,14 +66,23 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ onSubmit, commentList = 
       <div className={classes.divider}></div>
       <div className={classes.commentsList}>
         {commentList.map((commentItem, index) => {
-          // 익명인 경우에는 anonymousIndex를 증가시키고, 아니면 그대로 유지
-          if (commentItem.isAnonymous) setAnonymousIndex((val) => val + 1);
+          let displayAuthor = commentItem.author;
+
+          if (commentItem.isAnonymous) {
+            // 익명 댓글일 경우
+            if (!anonymousMap.has(commentItem.author)) {
+              // 익명 번호가 없는 경우 새 번호 부여
+              anonymousMap.set(commentItem.author, anonymousCounter++);
+            }
+            displayAuthor = `익명${anonymousMap.get(commentItem.author)}`;
+          }
 
           return (
             <div key={index} className={classes.commentItem}>
-              <div className={classes.commentAuthor}>
+              {/* <div className={classes.commentAuthor}>
                 {commentItem.isAnonymous ? `익명${anonymousIndex}` : commentItem.author}
-              </div>
+              </div> */}
+              <div className={classes.commentAuthor}>{displayAuthor}</div>
               <div className={classes.commentContent}>{commentItem.content}</div>
             </div>
           );

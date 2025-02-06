@@ -1,33 +1,3 @@
-/** Light mode {
-  --color-primary: #37618e;
-  --color-primaryHover: #285582;
-  --color-secondary1: #4a672d;
-  --color-secondaryHover: #425e27;
-  --color-text: #000;
-  --color-description: #888;
-  --color-background1: #eee;
-  --color-backgroundHover: #ececec;
-  --color-backgroundTint: #ececec;
-  --color-backgroundTintHover: #e7e7e7;
-  --color-cover: #fff;
-  --color-coverHover: #f5f5f5;
-}
-
-/** Dark mode {
-  --color-primary: #37618e;
-  --color-primaryHover: #285582;
-  --color-secondary1: #4a672d;
-  --color-secondaryHover: #4e6d30;
-  --color-text: #c9c9c9;
-  --color-description: #888;
-  --color-background1: #2e2e2e;
-  --color-backgroundHover: #313131;
-  --color-backgroundTint: #353535;
-  --color-backgroundTintHover: #3c3c3c;
-  --color-cover: #2c2c2c;
-  --color-coverHover: #303030;
-}*/
-
 .heading {
   margin-bottom: 30px;
   display: flex;

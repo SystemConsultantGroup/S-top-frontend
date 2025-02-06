@@ -6,7 +6,27 @@
 }
 
 @media screen and (max-width: 480px) {
-  /** 모바일 세로 */
+  .heading {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .search-input {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .dropdown {
+    margin: 15px 0;
+  }
+
+  .notice-item {
+    padding: 12px;
+  }
+
+  .pagination {
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width: 768px) {

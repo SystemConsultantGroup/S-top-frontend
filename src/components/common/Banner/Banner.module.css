@@ -45,3 +45,52 @@
   line-height: 140%;
   word-break: keep-all;
 }
+
+/* 모바일 화면에서 subtitle과 text 숨기기 */
+@media screen and (max-width: 768px) {
+  .text {
+    display: none; /* 모바일 화면에서 숨김 */
+  }
+
+  .title {
+    font-size: 8vw; /* 모바일에서 title 크기 조정 */
+    text-align: center; /* 제목을 중앙 정렬 */
+    margin-bottom: 7px;
+  }
+
+  .stack {
+    width: 100%; /* 모바일에서 스택 너비 전체 확장 */
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    display: flex;
+  }
+
+  .group {
+    top: 50%; /* 제목 위치 중앙으로 설정 */
+    transform: translate(0, -50%); /* 완전한 중앙 정렬 */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .text {
+    display: none; /* 모바일 화면에서 숨김 */
+  }
+
+  .title {
+    font-size: 6vw; /* 작은 화면에서 title 크기 조정 */
+    text-align: center; /* 제목을 중앙 정렬 */
+    margin-bottom: 7px;
+  }
+
+  .stack {
+    width: 100%; /* 스택 너비 전체 확장 */
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    display: flex;
+  }
+
+  .group {
+    top: 50%; /* 제목 위치 중앙 */
+    transform: translate(0, -50%); /* 중앙 정렬 유지 */
+  }
+}

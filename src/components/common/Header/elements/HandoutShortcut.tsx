@@ -4,9 +4,9 @@ import styles from "../Header.module.css";
 export function HandoutShortcut() {
   return (
     <div className={styles.shortcuts}>
-      <div>
+      {/* <div>
         <Link href="/kingoverse">VR 바로가기</Link>
-      </div>
+      </div> */}
       <div>
         <Link href="https://www.skku.edu/skku/index.do">성균관대학교</Link>
         <Link href="https://sw.skku.edu/sw/index.do">소프트웨어융합대학</Link>

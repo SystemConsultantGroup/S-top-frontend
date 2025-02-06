@@ -1,7 +1,7 @@
 "use client";
 
 import { Banner } from "@/components/common/Banner/Banner";
-import { VRLink } from "@/components/common/VRLink";
+// import { VRLink } from "@/components/common/VRLink";
 import { VerticalGapBox } from "@/components/pages/VerticalGapBox";
 import { bannerList } from "@/constants/BannerList";
 import styles from "./Main.module.css";
@@ -116,7 +116,7 @@ export default function Home() {
   return (
     <main>
       <Banner {...S_TOP_BANNER_INFO} />
-      <VRLink />
+      {/* <VRLink /> */}
       <VerticalGapBox gap="30px" />
       <Stack className={styles.container} align="center" gap="30px">
         {!loaded ? (

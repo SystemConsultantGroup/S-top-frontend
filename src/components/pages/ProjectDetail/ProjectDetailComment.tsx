@@ -39,5 +39,11 @@ export function ProjectDetailComment({ projectId, comments = [], onRefresh }: Pr
     }
   };
 
-  return <CommentBox commentList={commentList} onSubmit={handleCommentSubmit} />;
+  // return <CommentBox commentList={commentList} onSubmit={handleCommentSubmit} />;
+  return (
+    <CommentBox
+      commentList={commentList.length > 0 ? commentList : []} // 빈 배열로 초기화
+      onSubmit={handleCommentSubmit}
+    />
+  );
 }
