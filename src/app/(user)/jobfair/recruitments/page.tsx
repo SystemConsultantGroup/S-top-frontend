@@ -138,7 +138,7 @@ const RecruitmentsPage = () => {
   useEffect(() => {
     const fetchJobInfos = async () => {
       try {
-        const response = await fetch("http://stop.scg.skku.ac.kr/jobInfos", {
+        const response = await fetch("https://stop.scg.skku.ac.kr/jobInfos", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
