@@ -1,20 +1,17 @@
 "use client";
 
+import { fetcher } from "@/utils/fetcher";
 import { IconLock, IconUser } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../Auth";
 import styles from "../Header.module.css";
-import { CommonAxios } from "@/utils/CommonAxios";
 
 interface IHeaderToolBarProps {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   isLoggedIn: boolean;
-}
-interface newType {
-  name: string;
 }
 
 export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarProps) {
@@ -31,9 +28,9 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
 
   const fetchData = async () => {
     try {
-      const data2 = await CommonAxios.get("/users/me");
+      const data2 = await fetcher({ url: "/users/me" });
       //setUserData(() => data);
-      setUserData(data2 as unknown as newType);
+      setUserData(data2);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
