@@ -36,8 +36,8 @@ export function Header() {
   return (
     <>
       <div className={styles.header} role="banner">
-        <HeaderSymbol />
-        <HeaderTopNav />
+        <HeaderSymbol setIsOpen={setIsOpen} />
+        <HeaderTopNav setIsOpen={setIsOpen} />
         <HeaderToolBar isOpen={isOpen} setIsOpen={setIsOpen} isLoggedIn={isLoggedIn} />
       </div>
       <div className={`${styles.handout} ${isOpen ? styles.show : ""}`}>
