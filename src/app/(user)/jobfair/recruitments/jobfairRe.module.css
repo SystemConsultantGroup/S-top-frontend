@@ -79,6 +79,13 @@
   }
 }
 
+.noDataMessage {
+  text-align: center;
+  font-size: 18px;
+  color: #888; /* 적절한 색상 */
+  margin-top: 50px;
+}
+
 .filterContainer {
   display: flex;
   flex-wrap: wrap; /* 필터 칩이 줄바꿈되도록 설정 */

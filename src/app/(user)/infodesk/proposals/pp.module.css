@@ -37,12 +37,37 @@
   padding: 0;
 }
 
+.noPermission {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: var(--color-onBackground);
+  text-align: center;
+  width: 100%; /* 부모 컨테이너의 전체 너비 */
+  height: 50vh; /* 화면 높이의 50%만 사용 */
+  background-color: var(--color-surfaceContainerLowest); /* 배경 색상 */
+  box-sizing: border-box; /* 패딩과 보더 포함 */
+  margin: 0;
+  padding: 0;
+}
+
 @media screen and (max-width: 480px) {
   /** 모바일 세로 */
+  .propose {
+    margin: 40px auto;
+    padding: 60px;
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 768px) {
   /** 모바일 가로, 태블릿 세로 */
+  .propose {
+    margin: 40px auto;
+    padding: 60px;
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 1024px) {

@@ -11,24 +11,28 @@ import styles from "../Header.module.css";
 interface IHeaderToolBarProps {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
-  isLoggedIn: boolean;
 }
 
-export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarProps) {
+export function HeaderToolBar({ isOpen, setIsOpen }: IHeaderToolBarProps) {
   const [userData, setUserData] = useState<{ name: string } | null>(null);
 
   const { logout, isLoading } = useAuth();
   const [isDarkMode, setIsDarkMode] = useState(false); // 다크모드 상태 추가
 
+  const { token, isLoggedIn } = useAuth();
+
   const toggleHamburger = () => {
     setIsOpen(!isOpen);
+  };
+  const offHamburger = () => {
+    setIsOpen(false);
   };
 
   const fetchData = async () => {
     try {
-      const data = await fetcher({ url: "/users/me" });
+      const data2 = await fetcher({ url: "/users/me" });
       //setUserData(() => data);
-      setUserData(data);
+      setUserData(data2);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -36,9 +40,11 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
 
   useEffect(() => {
     if (isLoggedIn && !isLoading && !userData) {
-      fetchData(); // 로그인하고 유저 데이터가 없을 경우 데이터를 가져오기
+      if (token) {
+        fetchData();
+      } // 로그인하고 유저 데이터가 없을 경우 데이터를 가져오기
     }
-  }, [isLoggedIn, isLoading, userData]);
+  }, [token, isLoggedIn, isLoading, userData]);
 
   useEffect(() => {
     const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)"); // 다크모드 여부 확인
@@ -63,13 +69,21 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
               <div className={styles.userctrl}>
                 <div>
                   <IconUser />
-                  <Link href="/mypage" style={{ textDecoration: "none", color: "inherit" }}>
+                  <Link
+                    href="/mypage"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                    onClick={offHamburger}
+                  >
                     {userData.name}
                   </Link>
                 </div>
                 <ul>
                   <li>
-                    <Link href="/mypage" style={{ textDecoration: "none", color: "inherit" }}>
+                    <Link
+                      href="/mypage"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                      onClick={offHamburger}
+                    >
                       내 정보
                     </Link>
                   </li>
@@ -91,7 +105,11 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
           <>
             <IconLock className={styles.lockico} />
             <div>
-              <Link href="/login" style={{ textDecoration: "none", color: "inherit" }}>
+              <Link
+                href="/login"
+                style={{ textDecoration: "none", color: "inherit" }}
+                onClick={offHamburger}
+              >
                 Login
               </Link>
             </div>

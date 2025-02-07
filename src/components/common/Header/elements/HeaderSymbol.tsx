@@ -2,9 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../Header.module.css";
 
-export function HeaderSymbol() {
+interface HandoutOverviewProps {
+  setIsOpen: (value: boolean) => void;
+}
+
+export function HeaderSymbol({ setIsOpen }: HandoutOverviewProps) {
+  const handleLinkClick = () => {
+    setIsOpen(false); // Handout 창 닫기
+  };
+
   return (
-    <Link href="/" className={styles.symbol}>
+    <Link href="/" className={styles.symbol} onClick={handleLinkClick}>
       <div className={styles.logo}>
         <Image
           src="/images/S-TopLogo.png"

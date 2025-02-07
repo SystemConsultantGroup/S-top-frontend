@@ -206,16 +206,20 @@ const RecruitmentsPage = () => {
           </div>
         </div>
         <div className={styles.videoGrid}>
-          {filteredJobInfos.map((jobInfo) => (
-            <JobFairCard
-              key={jobInfo.id}
-              logo={jobInfo.logo}
-              company={jobInfo.company}
-              position={jobInfo.position}
-              employmentType={jobInfo.jobTypes}
-              location={jobInfo.region}
-            />
-          ))}
+          {filteredJobInfos.length > 0 ? (
+            filteredJobInfos.map((jobInfo) => (
+              <JobFairCard
+                key={jobInfo.id}
+                logo={jobInfo.logo}
+                company={jobInfo.company}
+                position={jobInfo.position}
+                employmentType={jobInfo.jobTypes}
+                location={jobInfo.region}
+              />
+            ))
+          ) : (
+            <div className={styles.noDataMessage}>현재 채용 정보가 없습니다</div>
+          )}
         </div>
       </div>
     </div>
