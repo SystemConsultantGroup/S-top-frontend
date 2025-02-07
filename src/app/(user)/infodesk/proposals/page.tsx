@@ -12,10 +12,29 @@ import { useDebouncedState } from "@mantine/hooks";
 import { useProposals } from "@/hooks/swr/useProposals";
 import { useAuth } from "@/components/common/Auth/AuthProvider"; // 로그인 상태 확인
 import { ProposalsRequestParams } from "@/types/proposals";
+import { jwtDecode } from "jwt-decode";
+import { CustomJwtPayload } from "@/types/jwtPayload";
 
 const ProposalsPage = () => {
   const HEADING = "산학협력 과제 제안";
-  const { isLoggedIn } = useAuth(); // 로그인 여부 확인
+  const { isLoggedIn, token } = useAuth(); // 로그인 여부 확인
+
+  //권한 확인
+  const [hasAccess, setHasAccess] = useState<boolean | null>(null);
+  if (token && hasAccess === null) {
+    try {
+      const decoded = jwtDecode<CustomJwtPayload>(token);
+      // ADMIN 또는 COMPANY 권한 확인
+      if (decoded.userType === "ADMIN" || decoded.userType === "COMPANY") {
+        setHasAccess(true);
+      } else {
+        setHasAccess(false);
+      }
+    } catch (error) {
+      console.error("JWT Decode Error: ", error);
+      setHasAccess(false);
+    }
+  }
 
   /** 한 페이지 당 아이템 개수 */
   const [pageSize] = useState(5);
@@ -80,9 +99,13 @@ const ProposalsPage = () => {
           text="성균관대학교 소프트웨어융합대학과 기업들이 협약을 맺고, 기업이 필요로 하는 주제를 바탕으로 실무 중심의 프로젝트를 수행합니다."
         />
       </div>
-      {!isLoggedIn ? ( // 로그인 여부에 따라 분기 처리
+      {!isLoggedIn ? ( // 로그인하지 않은 경우
         <div className={styles.notLoggedIn}>
           <p>로그인 후 이용 가능합니다.</p>
+        </div>
+      ) : hasAccess === false ? ( // 권한이 없는 경우
+        <div className={styles.noPermission}>
+          <p>열람 권한이 없습니다.</p>
         </div>
       ) : (
         <div className={styles.propose}>
