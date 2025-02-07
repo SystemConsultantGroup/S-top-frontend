@@ -11,19 +11,21 @@ import styles from "../Header.module.css";
 interface IHeaderToolBarProps {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
-  isLoggedIn: boolean;
 }
 
-export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarProps) {
+export function HeaderToolBar({ isOpen, setIsOpen }: IHeaderToolBarProps) {
   const [userData, setUserData] = useState<{ name: string } | null>(null);
 
   const { logout, isLoading } = useAuth();
   const [isDarkMode, setIsDarkMode] = useState(false); // 다크모드 상태 추가
 
-  const { token } = useAuth();
+  const { token, isLoggedIn } = useAuth();
 
   const toggleHamburger = () => {
     setIsOpen(!isOpen);
+  };
+  const offHamburger = () => {
+    setIsOpen(false);
   };
 
   const fetchData = async () => {
@@ -70,7 +72,7 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
                   <Link
                     href="/mypage"
                     style={{ textDecoration: "none", color: "inherit" }}
-                    onClick={toggleHamburger}
+                    onClick={offHamburger}
                   >
                     {userData.name}
                   </Link>
@@ -80,7 +82,7 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
                     <Link
                       href="/mypage"
                       style={{ textDecoration: "none", color: "inherit" }}
-                      onClick={toggleHamburger}
+                      onClick={offHamburger}
                     >
                       내 정보
                     </Link>
@@ -106,7 +108,7 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
               <Link
                 href="/login"
                 style={{ textDecoration: "none", color: "inherit" }}
-                onClick={toggleHamburger}
+                onClick={offHamburger}
               >
                 Login
               </Link>

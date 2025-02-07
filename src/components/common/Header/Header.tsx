@@ -38,7 +38,7 @@ export function Header() {
       <div className={styles.header} role="banner">
         <HeaderSymbol setIsOpen={setIsOpen} />
         <HeaderTopNav setIsOpen={setIsOpen} />
-        <HeaderToolBar isOpen={isOpen} setIsOpen={setIsOpen} isLoggedIn={isLoggedIn} />
+        <HeaderToolBar isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
       <div className={`${styles.handout} ${isOpen ? styles.show : ""}`}>
         <HandoutOverview setIsOpen={setIsOpen} />
