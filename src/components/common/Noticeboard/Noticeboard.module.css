@@ -107,3 +107,38 @@
   /* color: var(--color-description); */
   color: var(--color-outline);
 }
+
+@media screen and (max-width: 480px) {
+  /** 모바일 세로 */
+  .searchWrapper {
+    width: 100%;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+
+  .item {
+    padding: 15px 13px;
+  }
+  .bottom {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /** 모바일 가로, 태블릿 세로 */
+  .searchWrapper {
+    width: 100%;
+  }
+  .title {
+    font-size: 17px;
+  }
+
+  .item {
+    padding: 15px 13px;
+  }
+  .bottom {
+    font-size: 14px;
+  }
+}

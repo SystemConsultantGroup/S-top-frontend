@@ -96,6 +96,5 @@ export function useAuth() {
   if (context == null) {
     throw new Error("Error: Please use inside AuthProvider");
   }
-
   return context;
 }
