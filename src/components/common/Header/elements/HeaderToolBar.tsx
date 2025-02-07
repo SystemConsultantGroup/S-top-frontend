@@ -63,13 +63,21 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
               <div className={styles.userctrl}>
                 <div>
                   <IconUser />
-                  <Link href="/mypage" style={{ textDecoration: "none", color: "inherit" }}>
+                  <Link
+                    href="/mypage"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                    onClick={toggleHamburger}
+                  >
                     {userData.name}
                   </Link>
                 </div>
                 <ul>
                   <li>
-                    <Link href="/mypage" style={{ textDecoration: "none", color: "inherit" }}>
+                    <Link
+                      href="/mypage"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                      onClick={toggleHamburger}
+                    >
                       내 정보
                     </Link>
                   </li>
@@ -91,7 +99,11 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
           <>
             <IconLock className={styles.lockico} />
             <div>
-              <Link href="/login" style={{ textDecoration: "none", color: "inherit" }}>
+              <Link
+                href="/login"
+                style={{ textDecoration: "none", color: "inherit" }}
+                onClick={toggleHamburger}
+              >
                 Login
               </Link>
             </div>
