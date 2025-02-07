@@ -20,7 +20,7 @@ export function Header() {
   useEffect(() => {
     if (isLoggedIn) {
       CommonAxios.get("/users/me")
-        .then((response) => {
+        .then(() => {
           // 유저 정보가 정상적으로 확인되었다면 특별한 동작 없이 OK
         })
         .catch((error) => {
