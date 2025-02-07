@@ -14,21 +14,22 @@ import { CommonAxios } from "@/utils/CommonAxios";
 import { ITalkContent } from "@/types/talks";
 import { JobInterview } from "@/types/JobInterview";
 import { getFileUrlById } from "@/utils/handleDownloadFile";
+import { useAuth } from "@/components/common/Auth";
 
 export function MypageInterest() {
   const [projects, setProjects] = useState<IProjectContent[]>([]);
   const [thumbnailUrls, setThumbnailUrls] = useState<string[]>([]);
   const [talks, setTalks] = useState<ITalkContent[]>([]);
   const [jobfairInterviews, setJobfairInterviews] = useState<JobInterview[]>([]);
+  const { token } = useAuth();
   const router = useRouter();
 
   const fetchFavoriteProjects = async () => {
     try {
       const response1 = await CommonAxios.get("/users/favorites/projects");
-      const response2 = await CommonAxios.get("/users/favorites/projects");
-      setProjects((response1 ?? response2).data);
+      setProjects(response1.data);
       // thumbnail url 가져오기
-      const promises = (response1 ?? response2).data.map((data: IProjectContent) =>
+      const promises = response1.data.map((data: IProjectContent) =>
         getFileUrlById(data.thumbnailInfo.id)
       );
       const urlResults = await Promise.all(promises);
@@ -42,8 +43,7 @@ export function MypageInterest() {
   const fetchFavoriteTalks = async () => {
     try {
       const response1 = await CommonAxios.get("/users/favorites/talks");
-      const response2 = await CommonAxios.get("/users/favorites/talks");
-      setTalks((response1 ?? response2).data);
+      setTalks(response1.data);
     } catch (error) {
       console.error("Failed to fetch favorite talks: ", error);
     } finally {
@@ -53,8 +53,7 @@ export function MypageInterest() {
   const fetchFavoriteJobfairInterviews = async () => {
     try {
       const response1 = await CommonAxios.get("/users/favorites/jobInterviews");
-      const response2 = await CommonAxios.get("/users/favorites/jobInterviews");
-      setJobfairInterviews((response1 ?? response2).data);
+      setJobfairInterviews(response1.data);
     } catch (error) {
       console.error("Failed to fetch favorite jobfair interviews: ", error);
     } finally {
@@ -65,10 +64,12 @@ export function MypageInterest() {
    * 관심 등록 프로젝트, 영상 가져오기
    */
   useEffect(() => {
-    fetchFavoriteProjects();
-    fetchFavoriteTalks();
-    fetchFavoriteJobfairInterviews();
-  }, []);
+    if (token) {
+      fetchFavoriteProjects();
+      fetchFavoriteTalks();
+      fetchFavoriteJobfairInterviews();
+    }
+  }, [token]);
 
   /**
    * 프로젝트, 대담영상, 잡페어 인터뷰 영상 페이지로 이동
