@@ -26,9 +26,10 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
 
   const fetchData = async () => {
     try {
-      const data = await fetcher({ url: "/users/me" });
+      const data2 = await fetcher({ url: "/users/me" });
+      const data1 = await fetcher({ url: "/users/me" });
       //setUserData(() => data);
-      setUserData(data);
+      setUserData(data1 ?? data2);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }

@@ -24,10 +24,11 @@ export function MypageInterest() {
 
   const fetchFavoriteProjects = async () => {
     try {
-      const response = await CommonAxios.get("/users/favorites/projects");
-      setProjects(response.data);
+      const response1 = await CommonAxios.get("/users/favorites/projects");
+      const response2 = await CommonAxios.get("/users/favorites/projects");
+      setProjects((response1 ?? response2).data);
       // thumbnail url 가져오기
-      const promises = response.data.map((data: IProjectContent) =>
+      const promises = (response1 ?? response2).data.map((data: IProjectContent) =>
         getFileUrlById(data.thumbnailInfo.id)
       );
       const urlResults = await Promise.all(promises);
@@ -40,8 +41,9 @@ export function MypageInterest() {
 
   const fetchFavoriteTalks = async () => {
     try {
-      const response = await CommonAxios.get("/users/favorites/talks");
-      setTalks(response.data);
+      const response1 = await CommonAxios.get("/users/favorites/talks");
+      const response2 = await CommonAxios.get("/users/favorites/talks");
+      setTalks((response1 ?? response2).data);
     } catch (error) {
       console.error("Failed to fetch favorite talks: ", error);
     } finally {
@@ -50,8 +52,9 @@ export function MypageInterest() {
 
   const fetchFavoriteJobfairInterviews = async () => {
     try {
-      const response = await CommonAxios.get("/users/favorites/jobInterviews");
-      setJobfairInterviews(response.data);
+      const response1 = await CommonAxios.get("/users/favorites/jobInterviews");
+      const response2 = await CommonAxios.get("/users/favorites/jobInterviews");
+      setJobfairInterviews((response1 ?? response2).data);
     } catch (error) {
       console.error("Failed to fetch favorite jobfair interviews: ", error);
     } finally {
