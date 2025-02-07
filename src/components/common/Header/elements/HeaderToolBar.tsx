@@ -1,17 +1,20 @@
 "use client";
 
-import { fetcher } from "@/utils/fetcher";
 import { IconLock, IconUser } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../Auth";
 import styles from "../Header.module.css";
+import { CommonAxios } from "@/utils/CommonAxios";
 
 interface IHeaderToolBarProps {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   isLoggedIn: boolean;
+}
+interface newType {
+  name: string;
 }
 
 export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarProps) {
@@ -20,16 +23,17 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
   const { logout, isLoading } = useAuth();
   const [isDarkMode, setIsDarkMode] = useState(false); // 다크모드 상태 추가
 
+  const { token } = useAuth();
+
   const toggleHamburger = () => {
     setIsOpen(!isOpen);
   };
 
   const fetchData = async () => {
     try {
-      const data2 = await fetcher({ url: "/users/me" });
-      const data1 = await fetcher({ url: "/users/me" });
+      const data2 = await CommonAxios.get("/users/me");
       //setUserData(() => data);
-      setUserData(data1 ?? data2);
+      setUserData(data2 as unknown as newType);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -37,9 +41,11 @@ export function HeaderToolBar({ isOpen, setIsOpen, isLoggedIn }: IHeaderToolBarP
 
   useEffect(() => {
     if (isLoggedIn && !isLoading && !userData) {
-      fetchData(); // 로그인하고 유저 데이터가 없을 경우 데이터를 가져오기
+      if (token) {
+        fetchData();
+      } // 로그인하고 유저 데이터가 없을 경우 데이터를 가져오기
     }
-  }, [isLoggedIn, isLoading, userData]);
+  }, [token, isLoggedIn, isLoading, userData]);
 
   useEffect(() => {
     const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)"); // 다크모드 여부 확인
