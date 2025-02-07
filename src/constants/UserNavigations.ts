@@ -37,26 +37,26 @@ export const USER_NAVS: INavList[] = [
         name: "인턴들의 이야기",
         link: "/jobfair/interns",
       },
-      {
-        name: "채용 포지션",
-        link: "/jobfair/recruitments",
-      },
+      // {
+      //   name: "채용 포지션",
+      //   link: "/jobfair/recruitments",
+      // },
     ],
   },
-  {
-    title: "AI Hub",
-    link: "/aihub/datasets",
-    items: [
-      {
-        name: "AI Dataset",
-        link: "/aihub/datasets",
-      },
-      {
-        name: "AI Model",
-        link: "/aihub/models",
-      },
-    ],
-  },
+  // {
+  //   title: "AI Hub",
+  //   link: "/aihub/datasets",
+  //   items: [
+  //     {
+  //       name: "AI Dataset",
+  //       link: "/aihub/datasets",
+  //     },
+  //     {
+  //       name: "AI Model",
+  //       link: "/aihub/models",
+  //     },
+  //   ],
+  // },
   {
     title: "Events",
     link: "/event/notices",
