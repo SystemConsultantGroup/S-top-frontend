@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./jonfairInterns.module.css";
 import { Banner } from "@/components/common/Banner/Banner";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
@@ -8,6 +8,7 @@ import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { VideoCard } from "@/components/common/VideoCard_noQuiz/VideoCard";
 import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
 import { useAuth } from "@/components/common/Auth";
+import { handleJobInterviewBookmarkToggle } from "@/utils/jobInterview/handleJobInterviewBookmarkToggle";
 
 interface Interview {
   id: number;
@@ -28,23 +29,22 @@ const InternsPage = () => {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
   const [interviews, setInterviews] = useState<Interview[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [videoData, setVideoData] = useState<Interview[]>([]);
   const { isLoggedIn } = useAuth();
 
   const handleBookmarkToggle = (id: number) => {
-    if (isLoggedIn) {
-      setVideoData((prevData) =>
-        prevData.map((video) => (video.id === id ? { ...video, favorite: !video.favorite } : video))
-      );
-
-      CommonAxios.post(`/jobInterviews/${id}/favorite`, {
-        favorite: videoData.find((video) => video.id === id)?.favorite,
-      }).catch((error) => {
-        console.error("Failed to update bookmark status on the server", error);
-      });
-    } else {
-      alert("인터뷰 영상을 북마크에 추가하려면 로그인이 필요합니다.");
-    }
+    handleJobInterviewBookmarkToggle({
+      jobInterviewId: id,
+      isLoggedIn,
+      //TODO: 특정 ID 의 job interview 를 못 찾은 경우 에러 처리 필요
+      isAlreadyBookmarked: interviews.find((interview) => interview.id === id)?.favorite ?? false,
+      onToggleSuccess: fetchInterviews,
+      onToggleFail: () => {
+        alert("북마크 상태를 변경하는 데 실패했습니다.");
+      },
+      onLoginCheckFail: () => {
+        alert("인터뷰 영상을 북마크에 추가하려면 로그인이 필요합니다.");
+      },
+    });
   };
 
   const fetchInterviews = async () => {
