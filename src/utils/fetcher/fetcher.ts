@@ -53,6 +53,7 @@ const getIsomorphicToken = async () => {
     // 서버 환경
     // getServerSideToken 내부의 next/headers 에서 가져오는 cookies 가
     // 클라이언트 프로덕션 환경에서는 문제를 일으켜서 우선 임시로 이렇게 해결
+
     const { accessToken } = await getServerSideToken();
     return { accessToken: accessToken ?? null };
   }
