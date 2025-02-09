@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { JWT_COOKIE_NAME, JWT_MAX_AGE } from "@/constants/Auth";
 import { CommonAxios } from "@/utils/CommonAxios";
 import Cookies from "js-cookie";
@@ -55,7 +55,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [token]);
 
-  function login(token: string) {
+  // useCallback 으로 감싸주지 않으면, `useAuth()` 사용처에서 의존성 배열에 이 함수를 넣을 경우
+  // 무한 렌더링이 발생할 수 있습니다.
+  const login = useCallback((token: string) => {
     setIsLoadingCookie(true);
 
     setToken(token);
@@ -67,7 +69,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       fetchMe(); // 토큰 설정 후 약간의 딜레이를 두고 me API 호출
       setIsLoadingCookie(false);
     }, 0);
-  }
+  }, []);
 
   function logout() {
     setIsLoadingCookie(true);
