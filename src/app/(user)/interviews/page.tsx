@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { Banner } from "@/components/common/Banner/Banner";
 import { SearchInput } from "@/components/common/SearchInput";
@@ -33,17 +33,23 @@ export default function InterviewsPage() {
   const [totalPages, setTotalPages] = useState(1); // 총 페이지 수
 
   // Handler for toggling bookmark state
-  const handleBookmarkToggle = (id: number) => {
+  const handleBookmarkToggle = async (id: number) => {
     if (isLoggedIn) {
-      setVideoData((prevData) =>
-        prevData.map((video) => (video.id === id ? { ...video, favorite: !video.favorite } : video))
-      );
+      const isVideoBookmarked = videoData.find((video) => video.id === id)?.favorite;
 
-      CommonAxios.post(`/talks/${id}/favorite`, {
-        favorite: videoData.find((video) => video.id === id)?.favorite,
-      }).catch((error) => {
-        console.error("Failed to update bookmark status on the server", error);
-      });
+      try {
+        if (isVideoBookmarked) {
+          // 북마크 취소할 경우
+          await CommonAxios.delete(`/talks/${id}/favorite`);
+        } else {
+          // 북마크 추가할 경우
+          await CommonAxios.post(`/talks/${id}/favorite`);
+        }
+      } catch (error) {
+        alert("북마크 상태를 업데이트하는 데 실패했습니다.");
+      }
+
+      fetchVideoData();
     } else {
       alert("대담영상을 북마크에 추가하려면 로그인이 필요합니다.");
     }
