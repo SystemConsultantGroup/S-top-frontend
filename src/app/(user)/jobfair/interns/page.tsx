@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./jonfairInterns.module.css";
 import { Banner } from "@/components/common/Banner/Banner";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
@@ -8,6 +8,7 @@ import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { VideoCard } from "@/components/common/VideoCard_noQuiz/VideoCard";
 import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
 import { useAuth } from "@/components/common/Auth";
+import { handleJobInterviewBookmarkToggle } from "@/utils/jobInterview/handleJobInterviewBookmarkToggle";
 
 interface Interview {
   id: number;
@@ -28,23 +29,22 @@ const InternsPage = () => {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
   const [interviews, setInterviews] = useState<Interview[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [videoData, setVideoData] = useState<Interview[]>([]);
   const { isLoggedIn } = useAuth();
 
   const handleBookmarkToggle = (id: number) => {
-    if (isLoggedIn) {
-      setVideoData((prevData) =>
-        prevData.map((video) => (video.id === id ? { ...video, favorite: !video.favorite } : video))
-      );
-
-      CommonAxios.post(`/jobInterviews/${id}/favorite`, {
-        favorite: videoData.find((video) => video.id === id)?.favorite,
-      }).catch((error) => {
-        console.error("Failed to update bookmark status on the server", error);
-      });
-    } else {
-      alert("인터뷰 영상을 북마크에 추가하려면 로그인이 필요합니다.");
-    }
+    handleJobInterviewBookmarkToggle({
+      jobInterviewId: id,
+      isLoggedIn,
+      //TODO: 특정 ID 의 job interview 를 못 찾은 경우 에러 처리 필요
+      isAlreadyBookmarked: interviews.find((interview) => interview.id === id)?.favorite ?? false,
+      onToggleSuccess: fetchInterviews,
+      onToggleFail: () => {
+        alert("북마크 상태를 변경하는 데 실패했습니다.");
+      },
+      onLoginCheckFail: () => {
+        alert("인터뷰 영상을 북마크에 추가하려면 로그인이 필요합니다.");
+      },
+    });
   };
 
   const fetchInterviews = async () => {
@@ -69,7 +69,10 @@ const InternsPage = () => {
 
   useEffect(() => {
     fetchInterviews();
-  }, [selectedYear, searchQuery]);
+    // TODO: isLoggedIn 을 추가한 이유는, 최초 요청 시 토큰 없이 요청이 되고
+    // 이후에 로그인을 하면 토큰이 추가되어 요청이 가서, 북마크가 올바르게 동작하게 된다.
+    // 토큰 검증이 모든 API 호출 전에 이루어질 수 있도록 근본적인 해결이 필요하다
+  }, [selectedYear, searchQuery, isLoggedIn]);
 
   const filteredInterviews = interviews.filter((interview) => {
     const searchLower = searchQuery.trim().normalize("NFC").toLowerCase(); // 검색어 소문자로 변환 및 공백 제거
