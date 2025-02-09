@@ -57,7 +57,10 @@ export default function InterviewsPage() {
 
   useEffect(() => {
     fetchVideoData();
-  }, [searchQuery, yearFilter, pageNumber]);
+    // TODO: isLoggedIn 을 추가한 이유는, 최초 요청 시 토큰 없이 요청이 되고
+    // 이후에 로그인을 하면 토큰이 추가되어 요청이 가서, 북마크가 올바르게 동작하게 된다.
+    // 토큰 검증이 모든 API 호출 전에 이루어질 수 있도록 근본적인 해결이 필요하다
+  }, [searchQuery, yearFilter, pageNumber, isLoggedIn]);
 
   const fetchVideoData = async () => {
     try {
