@@ -56,7 +56,7 @@ export function RegisterForm() {
           : type === "교수/교직원"
             ? "INACTIVE_PROFESSOR"
             : type === "기업관계자"
-              ? "INACTUVE_COMPANY"
+              ? "INACTIVE_COMPANY"
               : "EXTERNAL",
     }));
     setSelectedDepartment(null);
