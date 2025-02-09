@@ -117,7 +117,7 @@ export function MypageInterest() {
    * 프로젝트 bookMark 핸들러
    */
   const handleClickBookMark = async (idx: number) => {
-    const data = projects[idx];
+    const data = projects[idx]; // TODO: 여기도 ID 기반 또는 더 나은 방법으로 변경 필요
     try {
       if (data.bookMark) {
         await CommonAxios.delete(`/projects/${data.id}/favorite`);
@@ -127,8 +127,10 @@ export function MypageInterest() {
         updateProjectBookMarkStatus(idx, true);
       }
     } catch (error) {
-      console.error("Failed to toggle bookmark:", error);
+      alert("북마크 상태를 업데이트하는 데 실패했습니다.");
     }
+
+    fetchFavoriteProjects();
   };
 
   /**
@@ -145,8 +147,11 @@ export function MypageInterest() {
   /**
    * 관심 대담영상 bookMark 핸들러
    */
-  const handleClickTalksBookMark = async (idx: number) => {
-    const data = talks[idx];
+  const handleClickTalksBookMark = async (talkId: number) => {
+    const data = talks.find((talk) => talk.id === talkId);
+
+    if (!data) return; // TODO: 더 잘 다룰 수 있는 방법으로 변경 필요
+
     try {
       if (data.favorite) {
         await CommonAxios.delete(`/talks/${data.id}/favorite`);
@@ -154,15 +159,18 @@ export function MypageInterest() {
         await CommonAxios.post(`/talks/${data.id}/favorite`);
       }
     } catch (error) {
-      console.error("Failed to toggle bookmark:", error);
+      alert("북마크 상태를 업데이트하는 데 실패했습니다.");
     }
+    fetchFavoriteTalks();
   };
 
   /**
    * 관심 잡페어 인터뷰 bookMark 핸들러
    */
-  const handleClickJobsBookMark = async (idx: number) => {
-    const data = jobfairInterviews[idx];
+  const handleClickJobsBookMark = async (jobInterviewId: number) => {
+    const data = jobfairInterviews.find((jobInterview) => jobInterview.id === jobInterviewId);
+
+    if (!data) return; // TODO: 더 잘 다룰 수 있는 방법으로 변경 필요
     try {
       if (data.favorite) {
         await CommonAxios.delete(`/jobInterviews/${data.id}/favorite`);
@@ -170,8 +178,9 @@ export function MypageInterest() {
         await CommonAxios.post(`/jobInterviews/${data.id}/favorite`);
       }
     } catch (error) {
-      console.error("Failed to toggle bookmark:", error);
+      alert("북마크 상태를 업데이트하는 데 실패했습니다.");
     }
+    fetchFavoriteJobfairInterviews();
   };
 
   return (
@@ -217,7 +226,7 @@ export function MypageInterest() {
                 title={data.title}
                 videoUrl={`https://www.youtube.com/embed/${data.youtubeId}`}
                 bookmarked={data.favorite}
-                onBookmarkToggle={() => handleClickTalksBookMark}
+                onBookmarkToggle={handleClickTalksBookMark}
               />
             ))}
           </div>
@@ -242,7 +251,7 @@ export function MypageInterest() {
                 title={data.title}
                 videoUrl={`https://www.youtube.com/embed/${data.youtubeId}`}
                 bookmarked={data.favorite}
-                onBookmarkToggle={() => handleClickJobsBookMark}
+                onBookmarkToggle={handleClickJobsBookMark}
               />
             ))}
           </div>
