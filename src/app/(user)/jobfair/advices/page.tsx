@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Banner } from "@/components/common/Banner/Banner";
 import styles from "./jobfair.module.css"; // CSS 파일 import
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
@@ -8,6 +8,7 @@ import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { VideoCard } from "@/components/common/VideoCard_noQuiz/VideoCard";
 import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
 import { useAuth } from "@/components/common/Auth";
+import { handleJobInterviewBookmarkToggle } from "@/utils/jobInterview/handleJobInterviewBookmarkToggle";
 
 interface Interview {
   id: number;
@@ -28,47 +29,46 @@ const JobFairPage = () => {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
   const [interviews, setInterviews] = useState<Interview[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [videoData, setVideoData] = useState<Interview[]>([]);
   const { isLoggedIn } = useAuth();
 
   const handleBookmarkToggle = (id: number) => {
-    if (isLoggedIn) {
-      setVideoData((prevData) =>
-        prevData.map((video) => (video.id === id ? { ...video, favorite: !video.favorite } : video))
-      );
+    handleJobInterviewBookmarkToggle({
+      jobInterviewId: id,
+      isLoggedIn,
+      //TODO: 특정 ID 의 job interview 를 못 찾은 경우 에러 처리 필요
+      isAlreadyBookmarked: interviews.find((interview) => interview.id === id)?.favorite ?? false,
+      onToggleSuccess: fetchInterviews,
+      onToggleFail: () => {
+        alert("북마크 상태를 변경하는 데 실패했습니다.");
+      },
+      onLoginCheckFail: () => {
+        alert("인터뷰 영상을 북마크에 추가하려면 로그인이 필요합니다.");
+      },
+    });
+  };
 
-      CommonAxios.post(`/jobInterviews/${id}/favorite`, {
-        favorite: videoData.find((video) => video.id === id)?.favorite,
-      }).catch((error) => {
-        console.error("Failed to update bookmark status on the server", error);
+  const fetchInterviews = async () => {
+    try {
+      const response = await CommonAxios.get("/jobInterviews", {
+        params: {
+          year: selectedYear !== "전체" ? selectedYear : undefined, // "All"이면 연도 필터를 적용하지 않음
+          search: searchQuery || undefined, // 검색어 필터
+          page: 0, // 페이지 번호
+          size: 100, // 한 페이지 크기
+        },
       });
-    } else {
-      alert("인터뷰 영상을 북마크에 추가하려면 로그인이 필요합니다.");
+
+      // category 필터 적용
+      const filteredInterviews = response.data.content.filter(
+        (item: Interview) => item.category === "SENIOR" // category 필터를 "SENIOR"로 유지
+      );
+      setInterviews(filteredInterviews); // 필터링된 데이터를 상태에 저장
+    } catch (error) {
+      console.error("Error fetching interviews:", error); // 에러 처리
     }
   };
 
   useEffect(() => {
-    const fetchInterviews = async () => {
-      try {
-        const response = await CommonAxios.get("/jobInterviews", {
-          params: {
-            year: selectedYear !== "전체" ? selectedYear : undefined, // "All"이면 연도 필터를 적용하지 않음
-            search: searchQuery || undefined, // 검색어 필터
-            page: 0, // 페이지 번호
-            size: 100, // 한 페이지 크기
-          },
-        });
-
-        // category 필터 적용
-        const filteredInterviews = response.data.content.filter(
-          (item: Interview) => item.category === "SENIOR" // category 필터를 "SENIOR"로 유지
-        );
-        setInterviews(filteredInterviews); // 필터링된 데이터를 상태에 저장
-      } catch (error) {
-        console.error("Error fetching interviews:", error); // 에러 처리
-      }
-    };
-
     fetchInterviews(); // 데이터 가져오기 함수 호출
   }, [selectedYear, searchQuery]); // 의존성 배열 추가 (필요에 따라 수정)
 
