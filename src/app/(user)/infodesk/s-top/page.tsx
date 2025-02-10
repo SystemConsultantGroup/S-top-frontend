@@ -46,6 +46,7 @@ const STOPOutlinePage = () => {
         </p>
         <p className={styles.paragraph}>2025년 새해 여러분의 건강과 행복을 기원합니다.</p>
         <p className={styles.paragraph}>감사합니다.</p>
+        <p className={styles.paragraph}>소프트웨어융합대학장 이은석</p>
       </div>
     </div>
   );
