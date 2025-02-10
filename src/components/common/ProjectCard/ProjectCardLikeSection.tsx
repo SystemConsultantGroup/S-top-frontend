@@ -8,7 +8,7 @@ import {
   IconThumbUpFilled,
 } from "@tabler/icons-react";
 import classes from "./ProjectCard.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../Auth";
 
 export interface ProjectCardLikeSectionProps {
@@ -49,6 +49,13 @@ export function ProjectCardLikeSection({
       alert("프로젝트를 북마크에 추가하려면 로그인해야 합니다.");
     }
   };
+
+  useEffect(() => {
+    setLike(likes);
+    setIsLike(isLiked);
+    setIsMark(isMarked);
+  }, [likes, isLiked, isMarked]);
+
   return (
     <CardSection className={classes["like-section"]}>
       <Group align="center" justify="space-between" p="8px 16px">

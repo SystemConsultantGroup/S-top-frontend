@@ -40,9 +40,24 @@ export function Header() {
         <HeaderTopNav setIsOpen={setIsOpen} />
         <HeaderToolBar isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
-      <div className={`${styles.handout} ${isOpen ? styles.show : ""}`}>
-        <HandoutOverview setIsOpen={setIsOpen} />
-      </div>
+
+      <>
+        {/* handout 컨테이너 영역 클릭 시 창 닫기 */}
+        <div
+          className={`${styles.handout} ${isOpen ? styles.show : ""}`}
+          onClick={() => setIsOpen(false)}
+        >
+          {/* content 영역 클릭 이벤트 차단 */}
+          <div onClick={(e) => e.stopPropagation()}>
+            <HandoutOverview setIsOpen={setIsOpen} />
+          </div>
+        </div>
+        {/* handout 아래 overlay 영역 클릭 시 창 닫기 */}
+        <div
+          className={`${styles.overlay} ${isOpen ? styles.show : ""}`}
+          onClick={() => setIsOpen(false)}
+        />
+      </>
     </>
   );
 }

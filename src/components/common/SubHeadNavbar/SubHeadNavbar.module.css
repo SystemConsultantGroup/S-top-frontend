@@ -50,3 +50,15 @@
     display: none; /* 모바일 화면에서 숨김 */
   }
 }
+
+/* 다크모드 색상 */
+@media (prefers-color-scheme: dark) {
+  .navbar {
+    background-color: #2e3135;
+    color: #ffffff;
+  }
+
+  .navitem a {
+    color: #ffffff;
+  }
+}
