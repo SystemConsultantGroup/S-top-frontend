@@ -386,6 +386,21 @@
   }
 }
 
+.overlay {
+  position: fixed;
+  top: auto;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 9;
+
+  display: none;
+}
+.overlay.show {
+  display: block;
+}
+
 .shortcuts {
   display: flex;
   flex-direction: row;
