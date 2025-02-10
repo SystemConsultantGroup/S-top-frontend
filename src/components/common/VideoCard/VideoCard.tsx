@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { Group, Button } from "@mantine/core";
-import styles from "./VideoCard.module.css";
-import { QuizModal } from "./QuizModal";
-import { DetailsModal } from "./DetailModal";
 import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
+import { Button, Group } from "@mantine/core";
 import { AxiosError } from "axios";
+import React, { useRef, useState } from "react";
+import { DetailsModal } from "./DetailModal";
+import { QuizModal } from "./QuizModal";
+import styles from "./VideoCard.module.css";
 
 export interface VideoCardProps {
   key?: number;
@@ -89,7 +89,9 @@ export const VideoCard: React.FC<VideoCardProps> = ({
   const submitQuiz = async (quizAnswers: Record<string, number>) => {
     try {
       const response = await CommonAxios.post(`/talks/${id}/quiz`, { result: quizAnswers }); // Use the id prop
-      alert(response.data.success ? "Quiz submitted successfully!" : "Quiz submission failed.");
+      alert(
+        response.data.success ? "성공적으로 퀴즈가 제출되었습니다!" : "퀴즈 답변이 틀렸습니다!"
+      );
     } catch (error) {
       if (error instanceof AxiosError && error.response?.data?.code === 8401) {
         alert("퀴즈 데이터가 존재하지 않습니다.");
