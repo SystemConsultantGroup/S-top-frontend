@@ -6,6 +6,7 @@ export type Role =
   | "INACTIVE_PROFESSOR"
   | "INACTIVE_COMPANY"
   | "OTHERS"
+  | "EXTERNAL"
   | "TEMP";
 
 export interface IUser {
