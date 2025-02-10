@@ -99,6 +99,8 @@ export function ProjectDetailInfo({ projectId }: Props) {
     fetchProject();
   }, [projectId, handleRefresh]);
 
+  useEffect(() => {}, [isThumbup, isInterest]);
+
   const fetchImages = (thumbnailId: number, posterId: number) => {
     if (thumbnailId) {
       getFileUrlById(thumbnailId)
