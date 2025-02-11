@@ -37,7 +37,6 @@ CommonAxios.interceptors.response.use(
     } else if (error.response?.status === 401) {
       // 401: 인증 실패 → 로그인 페이지(또는 메인)로 리다이렉트
       redirect("/");
-      return Promise.reject(error);
     }
     return Promise.reject(error);
   }
