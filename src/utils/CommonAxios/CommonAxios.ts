@@ -17,14 +17,7 @@ CommonAxios.interceptors.response.use(
     return response;
   },
   async function (error) {
-    // 401: 인증 실패 → 로그인 페이지(또는 메인)로 리다이렉트
-    // if (error.response?.status === 401) {
-    //   redirect("/");
-    //   return Promise.reject(error);
-    // }
-
     // 특정 에러 코드(4002, 3001)로 로그아웃이 필요한 상황
-
     if (
       error.response?.data?.code === 4002 ||
       error.response?.data?.code === 3001 ||
@@ -41,7 +34,10 @@ CommonAxios.interceptors.response.use(
         })
         .catch((error) => console.error("Logout failed:", error));
     }
-
+    else if (error.response?.status === 401) { // 401: 인증 실패 → 로그인 페이지(또는 메인)로 리다이렉트
+      redirect("/");
+      return Promise.reject(error);
+    }
     return Promise.reject(error);
   }
 );
