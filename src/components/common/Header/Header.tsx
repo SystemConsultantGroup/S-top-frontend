@@ -30,7 +30,11 @@ export function Header() {
           }
 
           // 예: code 4000, 4002이 응답되면 로그아웃 수행
-          if (error.response?.data?.code === 4000 || error.response?.data?.code === 4002) {
+          if (
+            error.response?.data?.code === 4000 ||
+            error.response?.data?.code === 4002 ||
+            error.response?.data?.code === 3001
+          ) {
             logout();
           }
         });
