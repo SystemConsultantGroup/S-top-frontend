@@ -13,7 +13,7 @@ import { useAuth } from "../Auth";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isLoggedIn, logout } = useAuth(); // Destructure logout here
+  const { isLoggedIn } = useAuth(); // Destructure logout here
   const router = useRouter();
   const pathname = usePathname(); // 현재 경로 가져오기
 
@@ -27,15 +27,6 @@ export function Header() {
           // 예: code 4001이 응답되면 회원가입 페이지로 이동
           if (error.response?.data?.code === 4001) {
             router.push("/register");
-          }
-
-          // 예: code 4000, 4002이 응답되면 로그아웃 수행
-          if (
-            error.response?.data?.code === 4000 ||
-            error.response?.data?.code === 4002 ||
-            error.response?.data?.code === 3001
-          ) {
-            logout();
           }
         });
     }
