@@ -1,6 +1,7 @@
 import { JWT_COOKIE_NAME } from "@/constants/Auth";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { redirect } from "next/navigation";
 
 /**
  * 클라이언트에서 사용하는 공통 axios
@@ -33,8 +34,8 @@ CommonAxios.interceptors.response.use(
           window.location.replace("/");
         })
         .catch((error) => console.error("Logout failed:", error));
-    }
-    else if (error.response?.status === 401) { // 401: 인증 실패 → 로그인 페이지(또는 메인)로 리다이렉트
+    } else if (error.response?.status === 401) {
+      // 401: 인증 실패 → 로그인 페이지(또는 메인)로 리다이렉트
       redirect("/");
       return Promise.reject(error);
     }
