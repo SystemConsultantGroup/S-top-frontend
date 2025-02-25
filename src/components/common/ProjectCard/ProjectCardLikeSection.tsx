@@ -55,7 +55,7 @@ export function ProjectCardLikeSection({
     setIsLike(isLiked);
     setIsMark(isMarked);
   }, [likes, isLiked, isMarked]);
-  
+
   return (
     <CardSection className={classes["like-section"]}>
       <Group align="center" justify="space-between" p="8px 16px">
