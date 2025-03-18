@@ -11,9 +11,11 @@ export default function EventAwardPage() {
     <>
       <SubHeadNavbar title="Events" />
       <Banner {...S_TOP_BANNER_INFO} />
-      <div className={classes.container}>
-        <Text className={classes.title}>작품 수상 결과</Text>
-        <EventAwardView />
+      <div className={classes.wrapper}>
+        <div className={classes.container}>
+          <Text className={classes.title}>작품 수상 결과</Text>
+          <EventAwardView />
+        </div>
       </div>
     </>
   );

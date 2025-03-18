@@ -11,7 +11,7 @@ export function SubHeadNavbar({ title }: ISubHeadNavbar) {
   const NavTitList = USER_NAVS.find((item) => item.title === title)!.items;
 
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.navbar}>
         <Group gap={0}>
           <div className={styles.navtit}>
@@ -31,6 +31,6 @@ export function SubHeadNavbar({ title }: ISubHeadNavbar) {
           </div>
         </Group>
       </div>
-    </>
+    </div>
   );
 }
