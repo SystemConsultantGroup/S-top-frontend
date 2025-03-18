@@ -16,19 +16,24 @@
   --color-coverHover: #303030;
 } */
 
-.header {
+.container {
   position: fixed;
+  z-index: 100;
   top: 0;
-  left: 0;
-  right: 0;
+  width: 100vw;
+
   background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   --webkit-backdrop-filter: blur(10px);
   z-index: 100;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
-  padding: 0 30px;
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
   height: 100px;
   display: flex;
   flex-direction: row;
@@ -40,10 +45,34 @@
   @media screen and (max-width: 1023px) {
     justify-content: space-between;
   }
+
+  width: 1280px;
+
+  @media screen and (max-width: 1280px) {
+    /** 태블릿 가로, 노트북 */
+    width: 1024px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    /** 태블릿 가로 */
+    width: 768px;
+  }
+
+  @media screen and (max-width: 768px) {
+    /** 모바일 가로, 태블릿 세로 */
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  @media screen and (max-width: 480px) {
+    /** 모바일 세로 */
+    width: 100%;
+    padding: 0 10px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
-  .header {
+  .container {
     background-color: rgba(25, 25, 25, 0.8);
   }
 }

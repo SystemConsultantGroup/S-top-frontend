@@ -1,10 +1,41 @@
-.navbar {
+.container {
   background-color: var(--color-primary);
   color: var(--color-onPrimary);
+  width: 100vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar {
+  width: 1280px;
+
+  @media screen and (max-width: 1280px) {
+    /** 태블릿 가로, 노트북 */
+    width: 1024px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    /** 태블릿 가로 */
+    width: 768px;
+  }
+
+  @media screen and (max-width: 768px) {
+    /** 모바일 가로, 태블릿 세로 */
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  @media screen and (max-width: 480px) {
+    /** 모바일 세로 */
+    width: 100%;
+    padding: 0 10px;
+  }
 }
 
 .navtit {
-  margin: 0 30px;
+  margin: 0 px;
   height: 80px;
   display: flex;
   align-items: center;
@@ -53,7 +84,7 @@
 
 /* 다크모드 색상 */
 @media (prefers-color-scheme: dark) {
-  .navbar {
+  .container {
     background-color: #2e3135;
     color: #ffffff;
   }

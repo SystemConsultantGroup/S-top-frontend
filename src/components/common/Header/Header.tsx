@@ -34,7 +34,7 @@ export function Header() {
   // pathname을 의존성 배열에 추가 -> 경로가 바뀔 때마다 다시 실행
 
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.header} role="banner">
         <HeaderSymbol setIsOpen={setIsOpen} />
         <HeaderTopNav setIsOpen={setIsOpen} />
@@ -58,6 +58,6 @@ export function Header() {
           onClick={() => setIsOpen(false)}
         />
       </>
-    </>
+    </div>
   );
 }

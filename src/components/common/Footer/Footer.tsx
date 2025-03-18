@@ -23,7 +23,7 @@ export function Footer() {
   }, []);
 
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.footer}>
         <div className={styles.title}>
           <h2>성균관대학교 S-TOP</h2>
@@ -61,6 +61,6 @@ export function Footer() {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }
