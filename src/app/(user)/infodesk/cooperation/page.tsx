@@ -1,5 +1,6 @@
 import { Banner } from "@/components/common/Banner/Banner";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar/SubHeadNavbar";
+import Image from "next/image";
 import styles from "./coop.module.css";
 
 const STOPOutlinePage = () => {
