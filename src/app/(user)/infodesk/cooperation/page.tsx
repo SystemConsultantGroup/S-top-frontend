@@ -1,8 +1,7 @@
-import React from "react";
-import { SubHeadNavbar } from "@/components/common/SubHeadNavbar/SubHeadNavbar";
-import styles from "./coop.module.css";
 import { Banner } from "@/components/common/Banner/Banner";
+import { SubHeadNavbar } from "@/components/common/SubHeadNavbar/SubHeadNavbar";
 import Image from "next/image";
+import styles from "./coop.module.css";
 
 const STOPOutlinePage = () => {
   return (
@@ -13,7 +12,7 @@ const STOPOutlinePage = () => {
           type="IND_UNIV_PROJECT"
           title="산학협력 프로젝트"
           subtitle="Industry-Academia Collaboration Project"
-          text="성균관대학교 소프트웨어융합대학과 기업들이 협약을 맺고, 기업이 필요로 하는 주제를 바탕으로 실무 중심의 프로젝트를 수행합니다."
+          text="기업들과 성균관대학교 소프트웨어융합대학이 상호협약을 맺어 기업이 필요로 하는 기술을 해결하고, 프로젝트 수행을 통해 학생들의 문제해결 역량 및 실무능력을 제고하고자 합니다."
         />
       </div>
 
@@ -86,7 +85,7 @@ const STOPOutlinePage = () => {
           <br />
           ◦ 연도별 참여 기업 수<br />
           <Image
-            src="/images/Industry_CorpCount1.png"
+            src="/images/Industry_CorpCount2.png"
             alt="참여 기업 수"
             layout="responsive" // 반응형 크기 조정
             width={800} // 원본 비율에 맞는 너비
@@ -97,24 +96,31 @@ const STOPOutlinePage = () => {
           <br />
           ∎ 주제 선정
           <br />
-          ◦ 기업에서 필요한 주제 결정
+          ◦ 기업에서 미래를 위해 개발이 필요하지만 Risk가 커서 도전하기 어려운 과제
           <br />
-          ◦ 기술 trend 조사를 위해 외국 논문 및 자료분석
+          ◦ 기업에서 수행하는 프로젝트 중에서 Prototype 개발이 필요한 과제
           <br />
-          ◦ 기업에서 기 출시된 제품들의 고객 반응 조사
+          ◦ 상용시점 및 완성도 Quality에 대한 Risk가 적은 과제
           <br />
-          ◦ 기업 입장에서 미래를 위해 개발이 필요하지만 risk가 커서 도전하기 어려운 과제
+          ◦ 기업에서 기출시된 제품들의 고객 반응 분석 후 개선방안 제시 및 개발
           <br />
-          ◦ 현재 수행하는 프로젝트 중에서 외주 업체에 용역을 주거나, 간단한 개발이 필요한 과제
+          ◦ 선생기술 탐색, 최신기술 검증, 참신한 아이디어 구현, Pilot test 등
           <br />
-          &nbsp; &nbsp; (상용 시점 및 완성도 quality 에 대한 risk가 적은 과제)
           <br />
-          ◦ 선행기술 탐색, 기술 검증, 참신한 아이디어 구현, 테스팅 등<br />
+          ∎ 수행기간
+          <br />
+          ◦ 4월~12월(약 9개월)
+          <br />
+          <br />
+          ∎ 산학협력프로젝트 팀 구성
+          <br />
+          ◦ 2~4학년 학부생 3~5명 + 지도교수 1명으로 구성
+          <br />
           <br />
           ∎ 산학 과제 수행 절차 및 역할
           <br />
           <Image
-            src="/images/IndustryStatus_3.png"
+            src="/images/IndustryStatus_4.png"
             alt="수행 절차 및 역할"
             layout="responsive"
             width={800}
@@ -123,22 +129,37 @@ const STOPOutlinePage = () => {
           />
           <br />
           <br />
+          ∎ 산학협력프로젝트 진행 및 실적
+          <br />
+          ◦ 일정 및 프로세스
+          <br />
+          <br />
           ∎ 과제 관리 Tool
           <br />
-          ◦ Project Communication : Slack, Trello
+          ◦ Project Communication: Slack, Trello
           <br />
-          ◦ Document Repository : Google Drive, Slack, Notion 등 <br />
-          ◦ Source Code Management : Git
+          ◦ Document Repository: Google Drive, Slack, Notion
+          <br />
+          ◦ Source Code Management: GitHub
+          <br />
+          <br />
+          ∎ 프로젝트 활동 점검방식
+          <br />
+          ◦ 정기 미팅 실시
+          <br />
+          ◦ 1학기 프로젝트 수행(4~5월)
+          <br />
+          ◦ 하계집중근무 프로젝트 수행(6~8월)
+          <br />
+          ◦ 2학기 프로젝트 수행(9~12월)
           <br />
           <br />
           ∎ 현재까지 추진 과제 분야별 분석
           <br />
-          ◦ 2016년부터 수행한 프로젝트들을 분야별로 구분
+          ◦ 머신러닝, 컴퓨터비전, 자연어처리, 빅데이터분석, 시스템&네트워크, 보안 및 SW엔제니어링, Interaction&AR, Web/App Application
           <br />
-          &nbsp; - 머신러닝, 컴퓨터비전, 자연어처리, 빅데이터분석,시스템,네트워크,보안 및
-          SW엔지니어링, Interaction,AR, Web/App Application <br />
           <Image
-            src="/images/Industry_Table.png"
+            src="/images/Industry_Table2.png"
             alt="분야별 분석"
             layout="responsive"
             width={800}
