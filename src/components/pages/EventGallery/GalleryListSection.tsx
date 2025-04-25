@@ -4,7 +4,7 @@ import { SearchInput } from "@/components/common/SearchInput";
 import { useGalleries } from "@/hooks/swr/useGalleries";
 import { GalleryRequestParams } from "@/types/gallery";
 import { handleChangeSearch } from "@/utils/handleChangeSearch";
-import { Group, Pagination, Grid } from "@mantine/core";
+import { Group, Pagination } from "@mantine/core";
 import { useDebouncedState } from "@mantine/hooks";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -105,7 +105,7 @@ export function GalleryListSection() {
           ></Dropdown>
         </Group>
       </Group>
-      <Grid>
+      <div className={classes.projectGrid}>
         {data &&
           data.map((item, idx) => {
             const imgUrl = previewImgUrls[idx];
@@ -121,7 +121,7 @@ export function GalleryListSection() {
               </div>
             );
           })}
-      </Grid>
+      </div>
       {pageNumber && setPageNumber && pageData && (
         <Group justify="center" mt={20}>
           <Pagination value={pageNumber} onChange={setPageNumber} total={pageData.totalPages} />

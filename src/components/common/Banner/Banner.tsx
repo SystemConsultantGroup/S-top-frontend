@@ -45,7 +45,7 @@ export function Banner({ type, title, subtitle, text, width, height }: BannerPro
         priority
       ></Image>
       <Group className={classes.group} gap={0}>
-        <Stack className={classes.stack} align="flex-start" pl={50} gap={0}>
+        <Stack className={classes.stack} align="flex-start" gap={0}>
           <div className={classes.title}>{title}</div>
           <div className={classes.subtitle}>{subtitle}</div>
         </Stack>

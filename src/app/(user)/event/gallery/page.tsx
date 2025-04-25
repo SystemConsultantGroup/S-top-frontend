@@ -11,9 +11,11 @@ export default function GalleryPage() {
     <>
       <SubHeadNavbar title="Events" />
       <Banner {...S_TOP_BANNER_INFO} />
-      <div className={classes.container}>
-        <Text className={classes.title}>갤러리</Text>
-        <GalleryListSection />
+      <div className={classes.wrapper}>
+        <div className={classes.container}>
+          <Text className={classes.title}>갤러리</Text>
+          <GalleryListSection />
+        </div>
       </div>
     </>
   );

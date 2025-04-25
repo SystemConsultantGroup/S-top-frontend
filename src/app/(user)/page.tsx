@@ -234,8 +234,8 @@ export default function Home() {
 
             <MainArticle
               className={styles.gallery}
-              title={{ text: "갤러리", align: "center" }}
-              detailUri={{ uri: "/event/gallery", align: "right" }}
+              title={{ text: "갤러리", align: "left" }}
+              detailUri={{ uri: "/event/gallery", align: "left" }}
               itemHead={[
                 (() => {
                   const headData = galleryHeadData.current;
