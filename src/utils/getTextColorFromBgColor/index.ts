@@ -1,0 +1,1 @@
+export { getTextColorByBgColor } from "./getTextColorFromBgColor";

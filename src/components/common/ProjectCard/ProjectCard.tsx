@@ -50,12 +50,12 @@ export function ProjectCard({
           <IconSearch className={classes.icon} />
         </Link>
       </CardSection>
-      <CardSection pl={24} pt={8}>
+      <CardSection pl={10} pt={8}>
         <Group className={classes["badge-group"]} gap={16}>
           <CardBadge label={PROJECT_CATEGORY_MAPPED_LIST[data.projectCategory]} />
         </Group>
       </CardSection>
-      <CardSection pl={24} pr={24} pb={16} pt={8}>
+      <CardSection pl={10} pr={10} pb={16} pt={8}>
         <Stack gap={8}>
           <Link
             href={{
@@ -65,7 +65,9 @@ export function ProjectCard({
           >
             <div className={classes.title}>{data.projectName}</div>
           </Link>
-          <div className={classes["participants-container"]}>{studentsString}</div>
+          {studentsString.length > 0 && (
+            <div className={classes["participants-container"]}>{studentsString}</div>
+          )}
           <Divider c={"var(--color-outline)"} />
         </Stack>
         <Stack gap={0} mt={8}>
@@ -73,10 +75,12 @@ export function ProjectCard({
             <div className={classes["attr-wrapper"]}>참가팀명</div>
             <div className={classes["value-wrapper"]}>{data.teamName}</div>
           </Group>
-          <Group gap={24}>
-            <div className={classes["attr-wrapper"]}>지도교수</div>
-            <div className={classes["value-wrapper"]}>{professorString}</div>
-          </Group>
+          {professorString.length > 0 && (
+            <Group gap={24}>
+              <div className={classes["attr-wrapper"]}>지도교수</div>
+              <div className={classes["value-wrapper"]}>{professorString}</div>
+            </Group>
+          )}
         </Stack>
       </CardSection>
       <ProjectCardLikeSection

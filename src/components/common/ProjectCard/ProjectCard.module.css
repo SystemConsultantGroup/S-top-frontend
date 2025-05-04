@@ -6,7 +6,7 @@
 }
 
 .img-section {
-  padding: 8px;
+  padding: 10px;
   position: relative;
 }
 
@@ -19,18 +19,17 @@
 }
 
 .img:hover ~ .icon {
-  transform: scale(1.5);
-  top: 75%;
-  left: 85%;
-  transition: 0.5s;
+  transform: scale(1.5) translate(-70%, -70%);
 }
 
 .icon {
   color: var(--color-outlineVariant);
   position: absolute;
-  top: 85%;
-  left: 90%;
-  transform: translate(-50%, -50%);
+  right: -10px;
+  bottom: -10px;
+  transform: translate(-100%, -100%);
+  transform-origin: 100% 100%;
+  transition: 0.5s;
 }
 
 .badge-group {
