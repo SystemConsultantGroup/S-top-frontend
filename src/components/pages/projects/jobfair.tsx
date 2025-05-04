@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./jobfair.module.css"; // CSS 파일 import
-import { Header } from "../../common/Header"; // Header 컴포넌트 import
+// import { Header } from "../../common/Header"; // Header 컴포넌트 import
 import { SearchInput } from "../../common/SearchInput";
 
 const JobFairPage = () => {
@@ -50,7 +50,7 @@ const JobFairPage = () => {
   return (
     <div className={styles.container}>
       {/* Header 컴포넌트 사용 */}
-      <Header />
+      {/* <Header /> */}
 
       {/* 파란색 바 추가 */}
       <div className={styles.navbar}>
