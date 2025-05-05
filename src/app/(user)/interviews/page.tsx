@@ -131,9 +131,9 @@ export default function InterviewsPage() {
                 selectedOption={yearFilter}
                 onOptionClick={handleYearSelect}
               />
-            </div>
+            </div> 
           </div>
-        </div>
+        </div> 
         <div className={classes.videoGrid}>
           {videoData.map((video) =>
             video.id ? ( // Check if video.id exists
