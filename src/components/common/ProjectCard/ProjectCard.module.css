@@ -6,13 +6,13 @@
 }
 
 .img-section {
-  padding: 10px;
+  padding: 16px 16px 8px 16px;
   position: relative;
 }
 
 .img {
-  width: auto;
-  height: auto;
+  width: 266px;
+  height: 150px;
   max-width: 100%;
   max-height: 100%;
   border-radius: 8px;
@@ -25,8 +25,8 @@
 .icon {
   color: var(--color-outlineVariant);
   position: absolute;
-  right: -10px;
-  bottom: -10px;
+  right: -4px;
+  bottom: -12px;
   transform: translate(-100%, -100%);
   transform-origin: 100% 100%;
   transition: 0.5s;
@@ -37,14 +37,10 @@
 }
 
 .title {
-  font-size: 24px;
-  line-height: 25px;
+  font-size: 21px;
+  line-height: 28px;
   font-weight: 700;
   color: var(--color-onSurface);
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  word-break: keep-all;
 }
 
 .participants-container {
