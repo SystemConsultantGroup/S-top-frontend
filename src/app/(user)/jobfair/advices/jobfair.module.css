@@ -35,22 +35,15 @@
 .filters {
   display: flex;
   justify-content: flex-end;
-  padding-right: 1rem;   
+  padding-right: 1rem;
   margin-top: 1rem;
-}
-
-.dropdown {
-  margin-right: 0px;
 }
 
 .videoGrid {
   display: grid;
-  gap: 1.25rem;                  
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(260px, 1fr)              
-  );
-  width: 100%;                      
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  width: 100%;
   margin-top: 2.5rem;
 }
 
@@ -71,13 +64,12 @@
   .searchSection {
     width: 90%;
   }
-
 }
 
 @media screen and (max-width: 1024px) {
   /** 태블릿 가로 */
   .videoGrid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 }
 

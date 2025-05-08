@@ -105,25 +105,21 @@ const InternsPage = () => {
         />
       </div>
 
-
       <div className={styles.mainContent}>
-
         <h2 className={styles.title}>인턴들의 이야기</h2>
 
         <div className={styles.searchSection}>
-          <SearchInput 
+          <SearchInput
             placeholder={"인턴 인터뷰 영상 검색"}
-            onChange={(e) => setSearchQuery(e.target.value)} 
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
           <div className={styles.filters}>
-            <div className={styles.dropdown}>
-              <Dropdown
-                options={YEARS}
-                placeholder="전체"
-                selectedOption={selectedYear}
-                onOptionClick={handleYearSelect}
-              />
-            </div>
+            <Dropdown
+              options={YEARS}
+              placeholder="전체"
+              selectedOption={selectedYear}
+              onOptionClick={handleYearSelect}
+            />
           </div>
         </div>
 

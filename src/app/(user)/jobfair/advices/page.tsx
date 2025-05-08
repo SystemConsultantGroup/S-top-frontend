@@ -109,18 +109,16 @@ const JobFairPage = () => {
         <h2 className={styles.title}>선배님들의 조언</h2>
         <div className={styles.searchSection}>
           <SearchInput
-            placeholder={"현직자 인터뷰 영상 검색"} 
-            onChange={(e) => setSearchQuery(e.target.value)} 
+            placeholder={"현직자 인터뷰 영상 검색"}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
           <div className={styles.filters}>
-            <div className={styles.dropdown}>
-              <Dropdown
-                options={YEARS}
-                placeholder="전체"
-                selectedOption={selectedYear}
-                onOptionClick={handleYearSelect}
-              />
-            </div>
+            <Dropdown
+              options={YEARS}
+              placeholder="전체"
+              selectedOption={selectedYear}
+              onOptionClick={handleYearSelect}
+            />
           </div>
         </div>
         <div className={styles.videoGrid}>

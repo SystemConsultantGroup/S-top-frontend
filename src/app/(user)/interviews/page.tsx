@@ -124,16 +124,14 @@ export default function InterviewsPage() {
           />
 
           <div className={classes.filters}>
-            <div className={classes.dropdown}>
-              <Dropdown
-                options={YEARS}
-                placeholder="전체 연도"
-                selectedOption={yearFilter}
-                onOptionClick={handleYearSelect}
-              />
-            </div> 
+            <Dropdown
+              options={YEARS}
+              placeholder="전체 연도"
+              selectedOption={yearFilter}
+              onOptionClick={handleYearSelect}
+            />
           </div>
-        </div> 
+        </div>
         <div className={classes.videoGrid}>
           {videoData.map((video) =>
             video.id ? ( // Check if video.id exists

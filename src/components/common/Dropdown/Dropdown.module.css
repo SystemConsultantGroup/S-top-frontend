@@ -1,6 +1,6 @@
 .dropdownToggle {
   padding: 10px 12px;
-  width: clamp(180px, 35vw, 300px); 
+  width: clamp(180px, 35vw, 300px);
   background-color: var(--color-inputSurface);
   border: 1px solid var(--color-inputBorder);
   border-radius: 8px;
@@ -50,7 +50,7 @@
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.4px;
-  width: clamp(178px, 35vw, 298px); 
+  width: clamp(178px, 35vw, 298px);
 }
 
 .dropdownItem:hover {
