@@ -9,6 +9,7 @@ import { VideoCard } from "@/components/common/VideoCard_noQuiz/VideoCard";
 import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
 import { useAuth } from "@/components/common/Auth";
 import { handleJobInterviewBookmarkToggle } from "@/utils/jobInterview/handleJobInterviewBookmarkToggle";
+import { CardGridContainer } from "@/components/common/CardGridContainer/CardGridContainer";
 
 interface Interview {
   id: number;
@@ -121,7 +122,7 @@ const JobFairPage = () => {
             />
           </div>
         </div>
-        <div className={styles.videoGrid}>
+        <CardGridContainer>
           {filteredInterviews.map((interview) => (
             <div key={interview.id}>
               <VideoCard
@@ -134,7 +135,7 @@ const JobFairPage = () => {
               />
             </div>
           ))}
-        </div>
+        </CardGridContainer>
       </div>
     </>
   );

@@ -39,23 +39,10 @@
   margin-top: 1rem;
 }
 
-.videoGrid {
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  width: 100%;
-  margin-top: 2.5rem;
-}
-
 @media screen and (max-width: 480px) {
   /** 모바일 세로 */
   .searchSection {
     width: 100%;
-  }
-
-  .videoGrid {
-    grid-template-columns: 1fr; /* 한 줄에 하나의 카드 */
-    gap: 12px; /* 간격 축소 */
   }
 }
 
@@ -63,19 +50,5 @@
   /** 모바일 가로, 태블릿 세로 */
   .searchSection {
     width: 90%;
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  /** 태블릿 가로 */
-  .videoGrid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-}
-
-@media (min-width: 1440px) {
-  .videoGrid {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
   }
 }
