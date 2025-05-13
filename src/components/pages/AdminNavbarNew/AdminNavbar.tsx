@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Icon,
   IconArrowUpRight,
@@ -10,7 +12,6 @@ import {
   IconUsers,
 } from "@tabler/icons-react";
 import { Group, Code, ScrollArea, Box, ThemeIcon, UnstyledButton } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import classes from "./AdminNavbar.module.css";
@@ -87,20 +88,19 @@ const mockData: IAdminNavData[] = [
 
 export function AdminNavbar() {
   const pathname = usePathname();
-  const isShrinked = !useMediaQuery("(min-width: 1200px)");
 
   const links = mockData.map((item) => <LinksGroup {...item} key={item.label} path={pathname} />);
 
   return (
     <nav className={classes.navbar}>
       <div className={classes.header}>
-        <Group justify={isShrinked ? "center" : "space-between"}>
+        <Group classNames={{ root: classes.headerGroup }}>
           <Image
             alt="logo"
             src="/images/logo.png"
-            width={0}
-            height={0}
-            style={{ width: isShrinked ? "100%" : "100px", height: "auto" }}
+            width={100}
+            height={70}
+            className={classes.logo}
           />
           <Code fw={700}>v1.0.0</Code>
         </Group>

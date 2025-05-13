@@ -11,7 +11,7 @@
   position: fixed;
   height: 100vh;
 
-  @media (min-width: 576px) {
+  @media (min-width: 576px) and (max-width: 1199.98px) {
     display: flex;
     width: 100px;
   }
@@ -26,7 +26,7 @@
   margin-right: calc(var(--mantine-spacing-md) * -1);
   color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
 
-  @media (min-width: 576px) {
+  @media (min-width: 576px) and (max-width: 1199.98px) {
     padding: var(--mantine-spacing-xs);
     padding-top: 0;
   }
@@ -34,6 +34,26 @@
   @media (min-width: 1200px) {
     padding: var(--mantine-spacing-md);
     padding-top: 0;
+  }
+}
+
+.headerGroup {
+  @media (min-width: 576px) and (max-width: 1199.98px) {
+    justify-content: center;
+
+    & .logo {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    justify-content: space-between;
+
+    & .logo {
+      width: 100px;
+      height: auto;
+    }
   }
 }
 
@@ -59,10 +79,20 @@
   border-radius: var(--mantine-radius-md);
   overflow: hidden;
 
-  & .control[data-group-active] {
-    ~ .collapse .link:not([data-active]):hover {
+  @media (min-width: 576px) and (max-width: 1199.98px) {
+    &:has(.control[data-group-active]) {
       background-color: var(--mantine-color-blue-light);
-      color: var(--mantine-color-blue-light-color);
+    }
+
+    &:has(.control:not([data-group-active])) {
+      background-color: var(--mantine-color-gray-light);
+    }
+
+    & .control[data-group-active] {
+      ~ .collapse .link:not([data-active]):hover {
+        background-color: var(--mantine-color-blue-light);
+        color: var(--mantine-color-blue-light-color);
+      }
     }
   }
 }
@@ -134,9 +164,17 @@
 .linkLabel {
   margin-left: 0;
 
-  @media (min-width: 576px) {
+  & * {
+    display: none;
+  }
+
+  @media (min-width: 576px) and (max-width: 1199.98px) {
     &[data-external] {
       display: none;
+    }
+
+    & .subtitle {
+      display: block;
     }
   }
 
@@ -144,6 +182,10 @@
     margin-left: var(--mantine-spacing-md);
 
     &[data-external] {
+      display: block;
+    }
+
+    & .label {
       display: block;
     }
   }

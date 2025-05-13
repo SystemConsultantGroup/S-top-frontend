@@ -3,7 +3,6 @@ import { IAdminNavData } from "./AdminNavbar";
 import { Box, Collapse, Group, Text, ThemeIcon, UnstyledButton } from "@mantine/core";
 import { IconChevronRight } from "@tabler/icons-react";
 import classes from "./AdminNavbar.module.css";
-import { useMediaQuery } from "@mantine/hooks";
 
 export function LinksGroup({
   path,
@@ -18,7 +17,6 @@ export function LinksGroup({
 
   const isActiveGroup = isLinks && links.some((link) => link.link === path);
   const isActiveSelf = !isLinks && href === path;
-  const isShrinked = !useMediaQuery("(min-width: 1200px)");
 
   const [opened, setOpened] = useState(initiallyOpened || isActiveGroup || false);
 
@@ -28,7 +26,6 @@ export function LinksGroup({
       className={classes.link}
       href={link.link}
       key={link.label}
-      onClick={(e) => e.preventDefault()}
       data-active={link.link === path || undefined}
     >
       {link.label}
@@ -36,22 +33,11 @@ export function LinksGroup({
   ));
 
   return (
-    <Box
-      className={classes.cellBox}
-      style={{
-        backgroundColor:
-          isLinks && isShrinked && opened
-            ? isActiveGroup
-              ? "var(--mantine-color-blue-light)"
-              : "var(--mantine-color-gray-light)"
-            : undefined,
-      }}
-      data-opened={isLinks && isShrinked && opened ? true : undefined}
-    >
+    <Box className={classes.cellBox} data-opened={isLinks && opened ? true : undefined}>
       <UnstyledButton
         className={classes.control}
         onClick={() => setOpened((o) => !o)}
-        component={isLinks ? "a" : undefined}
+        component={isLinks ? undefined : "a"}
         href={href}
         data-group-active={isActiveGroup || undefined}
         data-self-active={isActiveSelf || undefined}
@@ -61,7 +47,10 @@ export function LinksGroup({
             <ThemeIcon variant="transparent" size={30}>
               <Icon className={classes.icon} size={28} stroke={1.6} />
             </ThemeIcon>
-            <Box className={classes.linkLabel}>{isShrinked ? subtitle || label : label}</Box>
+            <Box className={classes.linkLabel}>
+              <Text className={classes.label}>{label}</Text>
+              <Text className={classes.subtitle}>{subtitle || label}</Text>
+            </Box>
           </Box>
           {isLinks && (
             <IconChevronRight
