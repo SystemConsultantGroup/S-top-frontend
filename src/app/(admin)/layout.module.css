@@ -1,9 +1,16 @@
 .container {
   width: 100%;
   display: grid;
-  grid-template-areas: "sidebar main";
-  grid-template-columns: 300px auto;
+  grid-template-areas: "navbar main";
   background-color: var(--color-background);
+
+  @media (min-width: 576px) {
+    grid-template-columns: 100px auto;
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: 280px auto;
+  }
 }
 
 .main {
