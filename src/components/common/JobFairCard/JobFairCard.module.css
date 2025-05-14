@@ -22,8 +22,6 @@
 }
 
 .logo img {
-  width: 250px; /* 고정 너비 */
-  height: 200px; /* 고정 높이 */
   object-fit: contain;
 }
 

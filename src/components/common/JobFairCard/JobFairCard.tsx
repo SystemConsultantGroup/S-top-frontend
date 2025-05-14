@@ -2,6 +2,7 @@
 
 import React from "react";
 import classes from "./JobFairCard.module.css";
+import Image from "next/image";
 
 interface JobFairCardProps {
   logo: string; // 이미지 URL
@@ -22,7 +23,7 @@ export const JobFairCard: React.FC<JobFairCardProps> = ({
   return (
     <div className={classes.card}>
       <div className={classes.logo}>
-        <img src={logo} alt={`${company} logo`} />
+        <Image src={logo} alt={`${company} logo`} fill/>
       </div>
       <div className={classes.description}>
         <div className={classes.company}>{company}</div>

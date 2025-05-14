@@ -7,6 +7,7 @@ import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
 import { useRouter } from "next/navigation"; // 추가
 import React, { useState } from "react";
 import classes from "./registerForm.module.css";
+import Image from "next/image";
 
 const MEMBER_TYPES = ["학생", "교수/교직원", "기업관계자", "외부인"];
 const SIGNUP_SOURCES = ["학과 게시판", "s-top 홍보자료", "학과 카톡방", "지인 소개", "기타"];
@@ -39,7 +40,7 @@ export function RegisterForm() {
     setAcceptedPrivacy(!acceptedPrivacy);
   };
 
-  const handleChange = (field: string, value: any) => {
+  const handleChange = (field: string, value: string) => {
     setFormData((prevState) => ({
       ...prevState,
       [field]: value,
@@ -98,10 +99,9 @@ export function RegisterForm() {
   return (
     <div className={classes.registerBox}>
       <form onSubmit={handleSubmit} className={classes.form}>
-        <img src="/images/S-TopLogo.png" alt="Logo" className={classes.logo} />
+        <Image src="/images/S-TopLogo.png" alt="Logo" className={classes.logo} width={250} height={250}/>
 
         <h1>회원 정보 입력</h1>
-
         <TextInput
           className={classes.text}
           label="이름"

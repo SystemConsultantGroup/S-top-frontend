@@ -17,10 +17,15 @@ interface FormData {
   content: string;
 }
 
+interface Project {
+  id: string;
+  projectName: string;
+}
+
 function InquiryWritePageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [project, setProject] = useState<any>(null);
+  const [project, setProject] = useState<Project | null>(null);
   //const projectId = searchParams.get("id");
   const projectId = searchParams.get("id");
 
@@ -58,7 +63,7 @@ function InquiryWritePageContent() {
     content: "",
   });
 
-  const handleChange = (field: string, value: any) => {
+  const handleChange = (field: string, value: string) => {
     setFormData((prevState) => ({
       ...prevState,
       [field]: value,

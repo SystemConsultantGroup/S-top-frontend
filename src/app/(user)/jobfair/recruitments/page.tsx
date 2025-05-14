@@ -151,7 +151,7 @@ const RecruitmentsPage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          const validContent = data.content.map((item: any) => ({
+          const validContent = data.content.map((item: JobInfo) => ({
             ...item,
             logo: item.logo || "/images/logo.png",
           }));

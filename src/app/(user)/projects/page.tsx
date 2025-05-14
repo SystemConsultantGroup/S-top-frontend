@@ -109,6 +109,7 @@ export default function ProjectsPage() {
       type: typeOptionsList.join(",") || null,
       category: categoryOptionsList.join(",") || null,
     }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab, options]);
 
   return (
