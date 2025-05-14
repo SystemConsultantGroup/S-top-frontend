@@ -1,5 +1,6 @@
 .card {
   width: 100%;
+  max-width: 300px; /* TODO: Grid 적용 후 삭제해도 됨 */
   box-sizing: border-box;
   position: relative;
   background-color: var(--color-surfaceContainerLowest);

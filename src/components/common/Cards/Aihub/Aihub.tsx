@@ -34,9 +34,9 @@ export function AihubCard({
   company,
   model,
 }: {
-  title: string;
-  people: string;
-  company: string;
+  title: string | null;
+  people: string | null;
+  company: string | null;
   model: string;
 }) {
   return (

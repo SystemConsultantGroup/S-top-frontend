@@ -38,6 +38,7 @@ export default function InquiriesDetailPage() {
     if (!data && !error) {
       fetchData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ID]);
 
   return (
