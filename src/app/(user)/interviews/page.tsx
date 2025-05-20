@@ -20,6 +20,22 @@ interface VideoData {
   favorite: boolean;
 }
 
+interface VideoApiResponse {
+  id: number;
+  title: string;
+  talkerName: string;
+  talkerBelonging: string;
+  youtubeId: string;
+  favorite: boolean;
+}
+
+interface FetchVideoParams {
+  page: number;
+  size: number;
+  year?: string;
+  title?: string;
+}
+
 const YEARS = ["전체 연도", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018"];
 
 export default function InterviewsPage() {
@@ -60,11 +76,12 @@ export default function InterviewsPage() {
     // TODO: isLoggedIn 을 추가한 이유는, 최초 요청 시 토큰 없이 요청이 되고
     // 이후에 로그인을 하면 토큰이 추가되어 요청이 가서, 북마크가 올바르게 동작하게 된다.
     // 토큰 검증이 모든 API 호출 전에 이루어질 수 있도록 근본적인 해결이 필요하다
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery, yearFilter, pageNumber, isLoggedIn]);
 
   const fetchVideoData = async () => {
     try {
-      const params: any = {
+      const params: FetchVideoParams = {
         page: pageNumber - 1, // 페이지 번호는 0부터 시작
         size: pageSize,
       };
@@ -81,8 +98,8 @@ export default function InterviewsPage() {
       const response = await CommonAxios.get("/talks", { params });
 
       const formattedData = response.data.content
-        .filter((item: any) => item.id) // Filter out things w/o id
-        .map((item: any) => ({
+        .filter((item: VideoApiResponse) => item.id) // Filter out things w/o id
+        .map((item: VideoApiResponse) => ({
           id: item.id,
           title: item.title,
           subtitle: `${item.talkerName} ${item.talkerBelonging}`,

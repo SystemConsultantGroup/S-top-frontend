@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import styles from "./jonfairInterns.module.css";
 import { Banner } from "@/components/common/Banner/Banner";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
@@ -47,7 +47,7 @@ const InternsPage = () => {
     });
   };
 
-  const fetchInterviews = async () => {
+  const fetchInterviews = useCallback(async () => {
     try {
       const response = await CommonAxios.get("/jobInterviews", {
         params: {
@@ -65,14 +65,14 @@ const InternsPage = () => {
     } catch (error) {
       console.error("Error fetching interviews:", error);
     }
-  };
+  }, [selectedYear, searchQuery, isLoggedIn]);
 
   useEffect(() => {
     fetchInterviews();
     // TODO: isLoggedIn 을 추가한 이유는, 최초 요청 시 토큰 없이 요청이 되고
     // 이후에 로그인을 하면 토큰이 추가되어 요청이 가서, 북마크가 올바르게 동작하게 된다.
     // 토큰 검증이 모든 API 호출 전에 이루어질 수 있도록 근본적인 해결이 필요하다
-  }, [selectedYear, searchQuery, isLoggedIn]);
+  }, [fetchInterviews]);
 
   const filteredInterviews = interviews.filter((interview) => {
     const searchLower = searchQuery.trim().normalize("NFC").toLowerCase(); // 검색어 소문자로 변환 및 공백 제거
