@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from "react";
 import { JWT_COOKIE_NAME, JWT_MAX_AGE } from "@/constants/Auth";
 import { CommonAxios } from "@/utils/CommonAxios";
 import Cookies from "js-cookie";
@@ -15,7 +15,7 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
   const [isLoadingCookie, setIsLoadingCookie] = useState(true);
 
@@ -86,6 +86,33 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   return (
     <AuthContext.Provider
       value={{ token, login, logout, isLoggedIn: !!token, isLoading: isLoadingCookie }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+interface IMockAuthProvider extends Partial<AuthContextValue> {
+  children: ReactNode;
+}
+
+export function MockAuthProvider({
+  token = "mocked-token",
+  isLoggedIn = true,
+  isLoading = false,
+  login = () => {},
+  logout = () => {},
+  children,
+}: IMockAuthProvider) {
+  return (
+    <AuthContext.Provider
+      value={{
+        token: isLoggedIn ? token : null,
+        login,
+        logout,
+        isLoggedIn,
+        isLoading,
+      }}
     >
       {children}
     </AuthContext.Provider>

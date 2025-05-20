@@ -1,0 +1,48 @@
+.topbar {
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-lg);
+
+  @media (max-width: 575.98px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 576px) {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: var(--mantine-spacing-md);
+  }
+}
+
+.hamburger {
+  @media (max-width: 575.98px) {
+    display: block;
+  }
+
+  @media (min-width: 576px) {
+    display: none;
+  }
+}
+
+.logoBox {
+  @media (max-width: 575.98px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (min-width: 576px) {
+    display: none;
+  }
+}
+
+.logo {
+  width: 70px;
+  height: auto;
+}
+
+.userBox {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}

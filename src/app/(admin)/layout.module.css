@@ -15,11 +15,11 @@
 
 .main {
   background-color: var(--color-background);
-  padding: 30px;
 }
 
 .content {
   grid-area: main;
   position: static;
   height: 100vh;
+  overflow: hidden;
 }
