@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar/SubHeadNavbar";
 import { Banner } from "@/components/common/Banner/Banner";
 import { SearchInput } from "@/components/common/SearchInput";
@@ -15,11 +15,32 @@ const YEARS = ["2020", "2021", "2022", "2023", "2024"];
 const TYPES = ["tag1", "tag2", "tag3", "tag4", "tag5"];
 const SIZE = ["필터1", "필터2", "필터3", "필터4", "필터5"];
 
+interface Dataset {
+  id: string;
+  title: string | null;
+  participants: string[] | null;
+  professor: string | null;
+  dataTypes: string[];
+  years: number[];
+  categories: string[];
+  url: string;
+}
+
+type DatasetApiResponse = Omit<Dataset, "years" | "categories"> & {
+  developmentYears: number[];
+  topics: string[];
+};
+
+type DatasetFilters = Pick<
+  DatasetApiResponse,
+  "title" | "dataTypes" | "topics" | "developmentYears" | "professor" | "participants"
+>;
+
 export default function DatasetsPage() {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [selectedYearOptions, setSelectedYearOptions] = useState<string[]>([]);
   const [selectedTopicOptions, setSelectedTopicOptions] = useState<string[]>([]);
-  const [datasets, setDatasets] = useState<any[]>([]);
+  const [datasets, setDatasets] = useState<Dataset[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleOptionSelect = (option: string) => {
@@ -46,9 +67,9 @@ export default function DatasetsPage() {
     setSelectedTopicOptions((prev) => prev.filter((item) => item !== option));
   };
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
-      const filters: Record<string, any> = {
+      const filters: DatasetFilters = {
         title: searchQuery || null,
         dataTypes: selectedOptions,
         topics: selectedTopicOptions,
@@ -63,31 +84,27 @@ export default function DatasetsPage() {
         },
       });
 
-      const transformedDatasets = response.data.content.map((data: any) => ({
-        id: data.id,
-        title: data.title,
-        participants: data.participants,
-        professor: data.professor,
-        dataTypes: data.dataTypes,
-        years: data.developmentYears,
-        categories: data.topics,
-        url: data.url,
-      }));
+      const transformedDatasets: Dataset[] = response.data.content.map(
+        (data: DatasetApiResponse) => ({
+          id: data.id,
+          title: data.title,
+          participants: data.participants,
+          professor: data.professor,
+          dataTypes: data.dataTypes,
+          years: data.developmentYears,
+          categories: data.topics,
+          url: data.url,
+        })
+      );
       setDatasets(transformedDatasets);
     } catch (error) {
       console.error("Error fetching datasets:", error);
     }
-  };
+  }, [searchQuery, selectedOptions, selectedTopicOptions, selectedYearOptions]);
 
-  // Fetch all datasets on initial load
   useEffect(() => {
     fetchData();
-  }, []);
-
-  // Refetch datasets whenever filters or search query changes
-  useEffect(() => {
-    fetchData(); // Fetch with filters if any of them changes
-  }, [searchQuery, selectedYearOptions, selectedTopicOptions, selectedOptions]);
+  }, [fetchData]);
 
   return (
     <>
@@ -136,7 +153,7 @@ export default function DatasetsPage() {
               key={dataset.id}
               title={dataset.title}
               people={dataset.professor}
-              company={dataset.participants.join(", ")}
+              company={dataset.participants?.join(", ") || null}
               model={dataset.dataTypes.join(", ")}
             />
           ))}

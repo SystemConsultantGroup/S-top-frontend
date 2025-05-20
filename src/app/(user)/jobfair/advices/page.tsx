@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Banner } from "@/components/common/Banner/Banner";
 import styles from "./jobfair.module.css"; // CSS 파일 import
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
@@ -47,33 +47,33 @@ const JobFairPage = () => {
     });
   };
 
-  const fetchInterviews = async () => {
+ const fetchInterviews = useCallback(async () => {
     try {
       const response = await CommonAxios.get("/jobInterviews", {
         params: {
-          year: selectedYear !== "전체" ? selectedYear : undefined, // "All"이면 연도 필터를 적용하지 않음
-          search: searchQuery || undefined, // 검색어 필터
-          page: 0, // 페이지 번호
-          size: 100, // 한 페이지 크기
+          year: selectedYear !== "전체" ? selectedYear : undefined,
+          search: searchQuery || undefined,
+          page: 0,
+          size: 100,
         },
       });
 
-      // category 필터 적용
       const filteredInterviews = response.data.content.filter(
-        (item: Interview) => item.category === "SENIOR" // category 필터를 "SENIOR"로 유지
+        (item: Interview) => item.category === "SENIOR"
       );
-      setInterviews(filteredInterviews); // 필터링된 데이터를 상태에 저장
+      setInterviews(filteredInterviews);
     } catch (error) {
-      console.error("Error fetching interviews:", error); // 에러 처리
+      console.error("Error fetching interviews:", error);
     }
-  };
+  }, [selectedYear, searchQuery, isLoggedIn]);
+
 
   useEffect(() => {
     fetchInterviews(); // 데이터 가져오기 함수 호출
     // TODO: isLoggedIn 을 추가한 이유는, 최초 요청 시 토큰 없이 요청이 되고
     // 이후에 로그인을 하면 토큰이 추가되어 요청이 가서, 북마크가 올바르게 동작하게 된다.
     // 토큰 검증이 모든 API 호출 전에 이루어질 수 있도록 근본적인 해결이 필요하다
-  }, [selectedYear, searchQuery, isLoggedIn]); // 의존성 배열 추가 (필요에 따라 수정)
+  }, [fetchInterviews]); // 의존성 배열 추가 (필요에 따라 수정)
 
   const filteredInterviews = interviews.filter((interview) => {
     const searchLower = searchQuery.trim().normalize("NFC").toLowerCase(); // 검색어 소문자로 변환 및 공백 제거

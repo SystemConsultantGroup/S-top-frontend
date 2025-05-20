@@ -38,12 +38,12 @@ const STOPOutlinePage = () => {
           <br />
           ◦ 기업에서 기출시된 제품들의 고객 반응 분석 후 개선방안 제시 및 개발
           <br />
-          ◦ 선생기술 탐색, 최신기술 검증, 참신한 아이디어 구현, Pilot test 등 
+          ◦ 선생기술 탐색, 최신기술 검증, 참신한 아이디어 구현, Pilot test 등
           <br />
           <br />
           ∎ 수행기간
           <br />
-          ◦ 4월~12월(약 9개월) 
+          ◦ 4월~12월(약 9개월)
           <br />
           <br />
           ∎ 산학협력프로젝트 팀 구성
@@ -53,7 +53,8 @@ const STOPOutlinePage = () => {
           <br />
           ∎ 현재까지 추진 과제 분야별 분석
           <br />
-          ◦ 머신러닝, 컴퓨터비전, 자연어처리, 빅데이터분석, 시스템&네트워크, 보안 및 SW엔제니어링, Interaction&AR, Web/App Application
+          ◦ 머신러닝, 컴퓨터비전, 자연어처리, 빅데이터분석, 시스템&네트워크, 보안 및 SW엔제니어링,
+          Interaction&AR, Web/App Application
           <br />
           <Image
             src="/images/Industry_Table2.png"
