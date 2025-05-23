@@ -4,6 +4,8 @@ import { IconSquarePlus } from "@tabler/icons-react";
 import styles from "../Main.module.css";
 import { useRouter } from "next/navigation";
 
+import { CardGridContainer } from "@/components/common/CardGridContainer/CardGridContainer";
+
 type Alignment = "left" | "center" | "right";
 
 interface IArticleTitle {
@@ -45,9 +47,11 @@ export function MainArticle({ className, title, detailUri, itemHead }: IMainArti
             <IconSquarePlus className={styles.articleDetail} size={48} stroke={1.5} />
           </ActionIcon>
         </Group>
-        <Group justify="space-between" align="baseline">
+        <CardGridContainer>
+          {" "}
+          {/*카드 그리드 컨테이너 컴포넌트 사용용*/}
           {itemHead}
-        </Group>
+        </CardGridContainer>
       </Stack>
     </>
   );
