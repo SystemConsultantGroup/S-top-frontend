@@ -1,36 +1,38 @@
 .card {
-  width: 300px;
+  width: 100%;
+  max-width: 300px; /* TODO: Grid 적용 후 삭제해도 됨 */
+  box-sizing: border-box;
+  position: relative;
   background-color: var(--color-surfaceContainerLowest);
   border: 1px solid var(--color-outlineVariant);
   border-radius: 12px;
 }
 
 .img-section {
-  padding: 8px;
+  padding: 16px 16px 8px 16px;
   position: relative;
 }
 
 .img {
-  width: auto;
-  height: auto;
+  width: 266px;
+  aspect-ratio: auto 16/9;
   max-width: 100%;
   max-height: 100%;
   border-radius: 8px;
 }
 
 .img:hover ~ .icon {
-  transform: scale(1.5);
-  top: 75%;
-  left: 85%;
-  transition: 0.5s;
+  transform: scale(1.5) translate(-70%, -70%);
 }
 
 .icon {
   color: var(--color-outlineVariant);
   position: absolute;
-  top: 85%;
-  left: 90%;
-  transform: translate(-50%, -50%);
+  right: -4px;
+  bottom: -12px;
+  transform: translate(-100%, -100%);
+  transform-origin: 100% 100%;
+  transition: 0.5s;
 }
 
 .badge-group {
@@ -38,14 +40,10 @@
 }
 
 .title {
-  font-size: 24px;
-  line-height: 25px;
+  font-size: 21px;
+  line-height: 28px;
   font-weight: 700;
   color: var(--color-onSurface);
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  word-break: keep-all;
 }
 
 .participants-container {
