@@ -16,11 +16,10 @@
 /* Main content section */
 .mainContent {
   width: 100%;
-  max-width: 1440px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 1.5rem 6rem;
   box-sizing: border-box;
-  padding-bottom: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +28,7 @@
 
 .searchSection {
   width: 80%;
-  margin: 2.5rem auto 1rem;
+  margin: 2rem auto 3.5rem;
 }
 
 .filters {
@@ -44,11 +43,19 @@
   .searchSection {
     width: 100%;
   }
+
+  .mainContent {
+    padding: 0 10px;
+  }
 }
 
 @media screen and (max-width: 768px) {
   /** 모바일 가로, 태블릿 세로 */
   .searchSection {
     width: 90%;
+  }
+
+  .mainContent {
+    padding: 0 20px;
   }
 }

@@ -14,6 +14,7 @@ import { MONTH_LIST } from "@/constants/MonthList";
 import classes from "./GalleryListSection.module.css";
 import { GalleryPreview } from "@/components/common/GalleryPreview/GalleryPreview";
 import { getFileUrlById } from "@/utils/handleDownloadFile";
+import { CardGridContainer } from "@/components/common/CardGridContainer/CardGridContainer";
 
 export function GalleryListSection() {
   const years = getYears();
@@ -105,7 +106,7 @@ export function GalleryListSection() {
           ></Dropdown>
         </Group>
       </Group>
-      <div className={classes.projectGrid}>
+      <CardGridContainer>
         {data &&
           data.map((item, idx) => {
             const imgUrl = previewImgUrls[idx];
@@ -121,7 +122,7 @@ export function GalleryListSection() {
               </div>
             );
           })}
-      </div>
+      </CardGridContainer>
       {pageNumber && setPageNumber && pageData && (
         <Group justify="center" mt={20}>
           <Pagination value={pageNumber} onChange={setPageNumber} total={pageData.totalPages} />

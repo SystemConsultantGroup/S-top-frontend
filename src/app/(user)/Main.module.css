@@ -1,7 +1,28 @@
 .container {
   width: 100%;
-  max-width: 1440px;
+  max-width: 1280x;
   margin: 0 auto;
   padding: 0 1.5rem 6rem;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: 768px) {
+    /** 모바일 가로, 태블릿 세로 */
+    padding: 0 20px;
+  }
+
+  @media screen and (max-width: 480px) {
+    /** 모바일 세로 */
+    padding: 0 10px;
+  }
+}
+
+.project,
+.interview,
+.gallery {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
 }

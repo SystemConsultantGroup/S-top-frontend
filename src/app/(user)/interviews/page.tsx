@@ -152,7 +152,7 @@ export default function InterviewsPage() {
         </div>
         <CardGridContainer>
           {videoData.map((video) =>
-            video.id ? ( // Check if video.id exists
+            video.id ? (
               <VideoCard
                 key={video.id}
                 id={video.id}

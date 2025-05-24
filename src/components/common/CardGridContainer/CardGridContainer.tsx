@@ -1,5 +1,3 @@
-/* CardGridContainer.tsx */
-"use client";
 import { ReactNode } from "react";
 import classes from "./CardGridContainer.module.css";
 

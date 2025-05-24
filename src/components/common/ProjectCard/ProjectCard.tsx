@@ -47,9 +47,9 @@ export function ProjectCard({
                 style={{ objectFit: "cover" }}
                 priority
               />
+              <IconSearch className={classes.icon} />
             </div>
           )}
-          <IconSearch className={classes.icon} />
         </Link>
       </CardSection>
       <CardSection pl={16}>

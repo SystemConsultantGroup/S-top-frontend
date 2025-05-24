@@ -47,11 +47,7 @@ export function MainArticle({ className, title, detailUri, itemHead }: IMainArti
             <IconSquarePlus className={styles.articleDetail} size={48} stroke={1.5} />
           </ActionIcon>
         </Group>
-        <CardGridContainer>
-          {" "}
-          {/*카드 그리드 컨테이너 컴포넌트 사용용*/}
-          {itemHead}
-        </CardGridContainer>
+        <CardGridContainer>{itemHead}</CardGridContainer>
       </Stack>
     </>
   );

@@ -12,12 +12,18 @@
 
 .container {
   margin: 0 auto;
-  width: 100%; /* 화면 너비에 항상 맞춤 */
-  max-width: 1440px;
+  width: 100%;
+  max-width: 1280px;
   padding: 0 1.5rem 6rem;
-  box-sizing: border-box; /* 패딩과 테두리를 너비에 포함 */
+  box-sizing: border-box;
+
+  @media screen and (max-width: 768px) {
+    /** 모바일 가로, 태블릿 세로 */
+    padding: 0 20px;
+  }
 
   @media screen and (max-width: 480px) {
+    /** 모바일 세로 */
     padding: 0 10px;
   }
 }

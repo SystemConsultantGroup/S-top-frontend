@@ -14,20 +14,20 @@
 }
 
 .image-wrapper {
-  position: relative; /* Needed for the fill prop to work correctly */
+  position: relative;
   width: 100%;
   height: 100%;
-  aspect-ratio: 16 / 9; /* Maintain the aspect ratio of the thumbnail */
+  aspect-ratio: 16 / 9;
   border-radius: 8px;
-  overflow: hidden; /* Clip any parts of the image that exceed the wrapper */
+  overflow: hidden;
 }
 
 .img {
-  object-fit: cover; /* Or 'contain' if you don't want cropping */
-  border-radius: inherit; /* Inherit border-radius from the wrapper */
+  object-fit: cover;
+  border-radius: inherit;
 }
 
-.img:hover ~ .icon {
+.image-wrapper:hover .icon {
   transform: scale(1.5) translate(-70%, -70%);
 }
 
