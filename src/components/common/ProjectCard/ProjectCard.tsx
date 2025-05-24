@@ -38,16 +38,18 @@ export function ProjectCard({
           style={{ textDecorationLine: "none" }}
         >
           {thumbnailUrl && (
-            <Image
-              src={thumbnailUrl}
-              alt={"thumbnail"}
-              className={classes.img}
-              width={266}
-              height={150}
-              priority
-            />
+            <div className={classes["image-wrapper"]}>
+              <Image
+                src={thumbnailUrl}
+                alt={"thumbnail"}
+                className={classes.img}
+                fill
+                style={{ objectFit: "cover" }}
+                priority
+              />
+              <IconSearch className={classes.icon} />
+            </div>
           )}
-          <IconSearch className={classes.icon} />
         </Link>
       </CardSection>
       <CardSection pl={16}>
