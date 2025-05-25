@@ -12,7 +12,6 @@ import { fetcher } from "@/utils/fetcher";
 import { IProjectContent } from "@/types/project";
 import { ITalkContent } from "@/types/talks";
 import { IGalleryContent } from "@/types/galleries";
-//import { useWindowSize } from "@/hooks/useWindowSize";
 import { GenerateCardsRow } from "@/components/pages/ItemGrid";
 import { getFileUrlById } from "@/utils/handleDownloadFile";
 import { CommonAxios } from "@/utils/CommonAxios";
@@ -48,12 +47,6 @@ export default function Home() {
    */
   const [loaded, setLoaded] = useState(false);
 
-  /**
-   * 반응형 디자인을 위한 screen width와 height
-   * - width: 프로젝트 아이템이 한 줄에 몇 개가 배치되는지 screen width에 따라 달라지므로
-   * 숫자를 맞추기 위해 채워야 하는 더미 아이템을 dynamic하게 만들어 그리드를 유지하는 역할을 수행함.
-   */
-  //const { width: screenWidth } = useWindowSize(); 샤용X
   const { isLoggedIn } = useAuth();
 
   useEffect(() => {
@@ -130,7 +123,6 @@ export default function Home() {
               itemHead={[
                 (() => {
                   const headData = projectHeadData.current;
-                  // const rowCount = getItemCountPerRow(screenWidth);
 
                   const props = headData.map((data, idx) => {
                     projectIsLikes.current[idx] = data.like;

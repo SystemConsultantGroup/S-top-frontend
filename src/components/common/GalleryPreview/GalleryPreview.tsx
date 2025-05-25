@@ -13,8 +13,6 @@ export interface Props {
 }
 
 export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
-  // text color와 맞추기
-  //const dimmedColor = colorScheme === "dark" ? theme.colors.dark[2] : theme.colors.gray[6];
 
   function formatDate(date: Date) {
     const year = date.getFullYear();
@@ -27,7 +25,6 @@ export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
   return (
     <>
       <Card className={classes.card} withBorder>
-        {/* 이미지를 fill 레이아웃으로 배치해 폭 100% 차지 */}
         <div className={classes.image_section}>
           <Image
             src={imgUrl}

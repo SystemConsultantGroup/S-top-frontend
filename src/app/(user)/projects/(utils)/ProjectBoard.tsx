@@ -1,6 +1,5 @@
 import { ProjectCard } from "@/components/common/ProjectCard";
 import { IProjectContent } from "@/types/project";
-//import { DummyCard, getItemCountPerRow } from "@/components/pages/ItemGrid";
 import { useRef } from "react";
 import { CommonAxios } from "@/utils/CommonAxios";
 import { CardGridContainer } from "@/components/common/CardGridContainer/CardGridContainer";
@@ -9,7 +8,6 @@ interface IProjectBoard {
   data: IProjectContent[] | undefined;
   loaded: boolean;
   thumbnails: string[];
-  //  screenWidth: number;
 }
 
 export function ProjectBoard({ data, loaded, thumbnails }: IProjectBoard) {
@@ -20,10 +18,6 @@ export function ProjectBoard({ data, loaded, thumbnails }: IProjectBoard) {
       {!loaded ? (
         <div>Loading...</div>
       ) : data && data.length ? (
-        // const rowCount = getItemCountPerRow(screenWidth); // 이 줄 제거
-        // const dummyCount = rowCount - (data.length % rowCount); // 이 줄 제거
-
-        // projectCards와 dummyCards를 합치던 로직 대신, projectCards만 반환
         data.map((item, idx) => {
           projectIsLikes.current[idx] = item.like;
           projectIsMarks.current[idx] = item.bookMark;
