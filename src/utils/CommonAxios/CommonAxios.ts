@@ -1,15 +1,5 @@
 import { setAccessTokenCookie } from "@/utils/auth/setAccessTokenCookie";
-import axios, { AxiosRequestConfig } from "axios";
-
-interface RetryAxiosRequestConfig extends AxiosRequestConfig {
-  _shouldRequestBeRetriedWithReissuedAccessToken?: boolean;
-}
-
-type FailedQueueItem = {
-  resolve: (value?: unknown) => void;
-  reject: (reason?: unknown) => void;
-  config: RetryAxiosRequestConfig;
-};
+import axios from "axios";
 
 /**
  * @description POST: /auth/reissue 의 응답 타입.
@@ -18,24 +8,6 @@ type FailedQueueItem = {
 interface ReissueResponse {
   accessToken: string;
 }
-
-let isGettingReissuedAccessToken = false;
-let failedRequestsQueue: FailedQueueItem[] = [];
-
-/**
- * @description: refresh token 으로 access token 을 재발급 받은 후, 실패한 요청들을 재시도하는 함수
- */
-const processFailedRequestsQueue = (error: unknown, reissuedAccessToken: string | null = null) => {
-  failedRequestsQueue.forEach(({ resolve, reject, config }) => {
-    if (!reissuedAccessToken) return reject(error);
-
-    config.headers = config.headers || {};
-    config.headers.Authorization = `Bearer ${reissuedAccessToken}`;
-    resolve(axios(config));
-  });
-
-  failedRequestsQueue = [];
-};
 
 const getReissuedAccessToken = async () => {
   const res = await CommonAxios.post<ReissueResponse>("/auth/reissue", null, {
@@ -73,38 +45,15 @@ CommonAxios.interceptors.response.use(
   },
   async function (error) {
     const _error = error as CustomAxiosResponseInterceptorError;
-    const originalRequest = _error.config;
 
     if (
-      _error.response?.status === 401 && // access token 만료 포함 기타 사유로 인증 실패 시
-      !originalRequest._shouldRequestBeRetriedWithReissuedAccessToken
+      _error.response?.status === 401 // access token 만료 포함 기타 사유로 인증 실패 시
     ) {
-      if (isGettingReissuedAccessToken) {
-        return new Promise((resolve, reject) => {
-          failedRequestsQueue.push({ resolve, reject, config: originalRequest });
-        });
-      }
-
-      originalRequest._shouldRequestBeRetriedWithReissuedAccessToken = true;
-      isGettingReissuedAccessToken = true;
-
-      try {
-        const reissuedAccessToken = await getReissuedAccessToken();
-        setAccessTokenCookie(reissuedAccessToken);
-        isGettingReissuedAccessToken = false;
-
-        CommonAxios.defaults.headers.Authorization = `Bearer ${reissuedAccessToken}`;
-        processFailedRequestsQueue(null, reissuedAccessToken);
-
-        // 기존 요청 재시도 (지금 refresh token 재발급 요청을 촉발한 요청 자체는 failedRequestsQueue 에 없으므로)
-        originalRequest.headers.Authorization = `Bearer ${reissuedAccessToken}`;
-        return CommonAxios(originalRequest);
-      } catch (err) {
-        // 기존의 refresh token 으로 access token 을 재발급 받지 못한 경우
-        processFailedRequestsQueue(err, null);
-        isGettingReissuedAccessToken = false;
-        return Promise.reject(err);
-      }
+      // SWR 등 비동기 상태 관리 라이브러리 도입 시 invalidate 로 새로고침 없이 구현 가능.
+      // 지금은 수동으로 axios 요청을 직접 관리해야 해서 일단 reload 로 구현.
+      const reissuedAccessToken = await getReissuedAccessToken();
+      setAccessTokenCookie(reissuedAccessToken);
+      return window.location.reload();
     }
 
     // 특정 에러 코드(4002, 3001)로 로그아웃이 필요한 상황
