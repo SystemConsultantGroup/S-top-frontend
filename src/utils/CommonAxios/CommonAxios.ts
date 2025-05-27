@@ -1,5 +1,8 @@
+import { JWT_COOKIE_NAME } from "@/constants/Auth";
 import { setAccessTokenCookie } from "@/utils/auth/setAccessTokenCookie";
 import axios from "axios";
+import Cookies from "js-cookie";
+import { redirect } from "next/navigation";
 
 /**
  * @description POST: /auth/reissue 의 응답 타입.
@@ -46,6 +49,7 @@ CommonAxios.interceptors.response.use(
   async function (error) {
     const _error = error as CustomAxiosResponseInterceptorError;
 
+    // 인증 실패한 경우 access token 재발급 시도하고 새로고침 함.
     if (
       _error.response?.status === 401 // access token 만료 포함 기타 사유로 인증 실패 시
     ) {
@@ -68,15 +72,14 @@ CommonAxios.interceptors.response.use(
         credentials: "include",
       })
         .then(() => {
-          // Cookies.remove(JWT_COOKIE_NAME);
+          Cookies.remove(JWT_COOKIE_NAME);
           CommonAxios.defaults.withCredentials = false;
-          // window.location.replace("/");
+          window.location.replace("/");
         })
         .catch((error) => console.error("Logout failed:", error));
     } else if (error.response?.status === 401) {
       // 401: 인증 실패 → 로그인 페이지(또는 메인)로 리다이렉트
-      console.log("check refresh token here");
-      // redirect("/");
+      redirect("/");
     }
     return Promise.reject(error);
   }
