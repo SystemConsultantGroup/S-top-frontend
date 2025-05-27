@@ -1,26 +1,16 @@
 .container {
+  width: 100%;
+  max-width: 1280px;
+  padding: 0 1.5rem 6rem;
   margin: 0 auto;
-  width: 1280px;
-
-  @media screen and (max-width: 1280px) {
-    /** 태블릿 가로, 노트북 */
-    width: 1024px;
-  }
-
-  @media screen and (max-width: 1024px) {
-    /** 태블릿 가로 */
-    width: 768px;
-  }
 
   @media screen and (max-width: 768px) {
     /** 모바일 가로, 태블릿 세로 */
-    width: 100%;
     padding: 0 20px;
   }
 
   @media screen and (max-width: 480px) {
     /** 모바일 세로 */
-    width: 100%;
     padding: 0 10px;
   }
 }

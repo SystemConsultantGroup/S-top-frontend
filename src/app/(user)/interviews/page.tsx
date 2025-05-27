@@ -8,6 +8,7 @@ import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { VideoCard } from "@/components/common/VideoCard/VideoCard";
 import { Group, Pagination } from "@mantine/core";
 import { useAuth } from "@/components/common/Auth";
+import { CardGridContainer } from "@/components/common/CardGridContainer/CardGridContainer";
 
 import classes from "./interviews.module.css";
 import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
@@ -141,19 +142,17 @@ export default function InterviewsPage() {
           />
 
           <div className={classes.filters}>
-            <div className={classes.dropdown}>
-              <Dropdown
-                options={YEARS}
-                placeholder="전체 연도"
-                selectedOption={yearFilter}
-                onOptionClick={handleYearSelect}
-              />
-            </div>
+            <Dropdown
+              options={YEARS}
+              placeholder="전체 연도"
+              selectedOption={yearFilter}
+              onOptionClick={handleYearSelect}
+            />
           </div>
         </div>
-        <div className={classes.videoGrid}>
+        <CardGridContainer>
           {videoData.map((video) =>
-            video.id ? ( // Check if video.id exists
+            video.id ? (
               <VideoCard
                 key={video.id}
                 id={video.id}
@@ -166,7 +165,7 @@ export default function InterviewsPage() {
               />
             ) : null
           )}
-        </div>
+        </CardGridContainer>
         <Group justify="center" mt={20}>
           <Pagination value={pageNumber} onChange={setPageNumber} total={totalPages} />
         </Group>

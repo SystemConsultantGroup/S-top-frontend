@@ -9,6 +9,7 @@ import { VideoCard } from "@/components/common/VideoCard_noQuiz/VideoCard";
 import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
 import { useAuth } from "@/components/common/Auth";
 import { handleJobInterviewBookmarkToggle } from "@/utils/jobInterview/handleJobInterviewBookmarkToggle";
+import { CardGridContainer } from "@/components/common/CardGridContainer/CardGridContainer";
 
 interface Interview {
   id: number;
@@ -95,8 +96,8 @@ const JobFairPage = () => {
   };
 
   return (
-    <div>
-      <div className={styles.container}>
+    <>
+      <div className={styles.banner}>
         <SubHeadNavbar title="Job Fair" />
         <Banner
           type="PROJECT"
@@ -105,13 +106,14 @@ const JobFairPage = () => {
           text="S-TOP Job Fair는 현업에 종사하고 있는 선배 개발자님들과 실무 경험을 얻고자 하는 학생들을 연결하여, IT 인재 양성 문화를 함께 만들기 위해 기획되었습니다."
         />
       </div>
-      <div className={styles.backColor}>
-        <div className={styles.search}>
-          <h2 className={styles.title}>선배님들의 조언</h2>
-          <div className={styles.searchArea}>
-            <SearchInput placeholder="영상 검색" onChange={(e) => setSearchQuery(e.target.value)} />
-          </div>
-          <div className={styles.dropdown}>
+      <div className={styles.mainContent}>
+        <h2 className={styles.title}>선배님들의 조언</h2>
+        <div className={styles.searchSection}>
+          <SearchInput
+            placeholder={"현직자 인터뷰 영상 검색"}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <div className={styles.filters}>
             <Dropdown
               options={YEARS}
               placeholder="전체"
@@ -120,7 +122,7 @@ const JobFairPage = () => {
             />
           </div>
         </div>
-        <div className={styles.videoGrid}>
+        <CardGridContainer>
           {filteredInterviews.map((interview) => (
             <div key={interview.id}>
               <VideoCard
@@ -133,9 +135,9 @@ const JobFairPage = () => {
               />
             </div>
           ))}
-        </div>
+        </CardGridContainer>
       </div>
-    </div>
+    </>
   );
 };
 

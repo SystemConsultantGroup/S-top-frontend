@@ -1,4 +1,4 @@
-import { Card, Text, Flex, CardSection } from "@mantine/core";
+import { Card, Text, Flex } from "@mantine/core";
 import Image from "next/image";
 import { IconEye } from "@tabler/icons-react";
 import classes from "./GalleryPreview.module.css";
@@ -12,16 +12,7 @@ export interface Props {
   width?: number;
 }
 
-export function GalleryPreview({
-  imgUrl,
-  title,
-  date,
-  viewCount,
-  height = 180,
-  width = 300,
-}: Props) {
-  // text color와 맞추기
-  //const dimmedColor = colorScheme === "dark" ? theme.colors.dark[2] : theme.colors.gray[6];
+export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
 
   function formatDate(date: Date) {
     const year = date.getFullYear();
@@ -33,21 +24,17 @@ export function GalleryPreview({
 
   return (
     <>
-      <Card
-        padding="sm"
-        radius="md"
-        style={{ width: width, paddingBottom: 0, display: "inline-block" }}
-      >
-        <CardSection className={classes.image_section}>
+      <Card className={classes.card} withBorder>
+        <div className={classes.image_section}>
           <Image
             src={imgUrl}
             alt="gallery preview image"
-            height={height}
-            width={width - 16}
+            fill
+            sizes="(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 300px"
             className={classes.image_view}
             priority
           />
-        </CardSection>
+        </div>
 
         <Text fw={700} size="lg" mt="md" className={classes.title}>
           {title}

@@ -1,30 +1,28 @@
 .container {
+  width: 100%;
+  max-width: 1280x;
   margin: 0 auto;
-  width: 1280px;
-
-  @media screen and (max-width: 1280px) {
-    /** 태블릿 가로, 노트북 */
-    width: 1024px;
-  }
-
-  @media screen and (max-width: 1024px) {
-    /** 태블릿 가로 */
-    width: 768px;
-  }
+  padding: 0 1.5rem 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   @media screen and (max-width: 768px) {
     /** 모바일 가로, 태블릿 세로 */
-    width: 100%;
     padding: 0 20px;
   }
 
   @media screen and (max-width: 480px) {
     /** 모바일 세로 */
-    width: 100%;
     padding: 0 10px;
   }
 }
-/* 
-.project{
-  justify-content: center;
-} */
+
+.project,
+.interview,
+.gallery {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
