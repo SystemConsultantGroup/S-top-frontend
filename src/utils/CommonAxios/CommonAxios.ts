@@ -1,6 +1,6 @@
 import { JWT_COOKIE_NAME } from "@/constants/Auth";
 import { setAccessTokenCookie } from "@/utils/auth/setAccessTokenCookie";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Cookies from "js-cookie";
 
 /**
@@ -28,25 +28,13 @@ export const CommonAxios = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
 });
 
-interface CustomAxiosResponseInterceptorError {
-  config: {
-    _shouldRequestBeRetriedWithReissuedAccessToken?: boolean;
-    headers: {
-      [key: string]: string;
-    };
-  };
-  response: {
-    status: number;
-  };
-}
-
 CommonAxios.interceptors.response.use(
   function (response) {
     // 2xx(200)번대 정상작동
     return response;
   },
   async function (error) {
-    const _error = error as CustomAxiosResponseInterceptorError;
+    const _error = error as AxiosError;
 
     // 인증 실패한 경우 access token 재발급 시도하고 새로고침 함.
     if (
