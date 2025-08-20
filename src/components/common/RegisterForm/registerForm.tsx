@@ -7,6 +7,7 @@ import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
 import { useRouter } from "next/navigation"; // 추가
 import React, { useState } from "react";
 import classes from "./registerForm.module.css";
+import Link from "next/link";
 
 const MEMBER_TYPES = ["학생", "교수/교직원", "기업관계자", "외부인"];
 const SIGNUP_SOURCES = ["학과 게시판", "s-top 홍보자료", "학과 카톡방", "지인 소개", "기타"];
@@ -202,11 +203,17 @@ export function RegisterForm() {
 
         <br />
         <div onClick={handleTermsChange}>
-          <CheckBox label="서비스이용약관 (필수)" />
+          <CheckBox label="서비스 이용약관에 동의합니다. (필수)" />
         </div>
+        <Link href="/policy" target="_blank" className={classes.link}>
+          서비스 이용약관
+        </Link>
         <div onClick={handlePrivacyChange}>
-          <CheckBox label="개인정보처리방침 (필수)" />
+          <CheckBox label="개인정보 처리방침에 동의합니다. (필수)" />
         </div>
+        <Link href="/privacy" target="_blank" className={classes.link}>
+          개인정보 처리방침
+        </Link>
         <br />
         <br />
         <PrimaryButton type="submit">회원가입</PrimaryButton>
