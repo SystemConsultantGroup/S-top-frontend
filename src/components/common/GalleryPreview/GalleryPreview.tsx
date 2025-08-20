@@ -13,7 +13,6 @@ export interface Props {
 }
 
 export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
-
   function formatDate(date: Date) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0"); // getMonth()는 0부터 시작하므로 +1
