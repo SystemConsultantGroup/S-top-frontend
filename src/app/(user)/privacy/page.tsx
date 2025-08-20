@@ -3,18 +3,19 @@ import styles from "./page.module.css";
 export default function PrivacyPage() {
   return (
     <main className={styles.container}>
-      <article className={styles.content}>
-        <header>
-          <h1 className={styles.pageTitle}>시스템컨설턴트그룹 개인정보 처리방침</h1>
-        </header>
-
-        <div>
+      <header className={styles.hero}>
+        <div className={styles.heroInner}>
+          <h1 className={styles.title}>시스템컨설턴트그룹 개인정보 처리방침</h1>
+        </div>
+      </header>
+      <section className={styles.content}>
+        <div className={styles.containerBody}>
           <p>
-            시스템컨설턴트그룹(이하 ‘회사’ 또는 ‘SCG’)은 정보주체의 자유와 권리 보호를 위해
-            ｢개인정보 보호법｣ 및 관계 법령이 정한 바를 준수하여, 적법하게 개인정보를 처리하고
-            안전하게 관리하고 있습니다. 이에 ｢개인 정보 보호법｣ 제30조에 따라 정보주체에게 개인정보
-            처리에 관한 절차 및 기준을 안내하고, 이와 관련된 고충을 신속하고 원활하게 처리할 수
-            있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
+            시스템컨설턴트그룹(이하 ‘SCG’)은 정보주체의 자유와 권리 보호를 위해 ｢개인정보 보호법｣ 및
+            관계 법령이 정한 바를 준수하여, 적법하게 개인정보를 처리하고 안전하게 관리하고 있습니다.
+            이에 ｢개인 정보 보호법｣ 제30조에 따라 정보주체에게 개인정보 처리에 관한 절차 및 기준을
+            안내하고, 이와 관련된 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이
+            개인정보 처리방침을 수립·공개합니다.
           </p>
 
           <h3>개인정보의 처리 목적</h3>
@@ -277,7 +278,7 @@ export default function PrivacyPage() {
             </li>
           </ol>
         </div>
-      </article>
+      </section>
     </main>
   );
 }

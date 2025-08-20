@@ -3,6 +3,45 @@
   padding: 0 16px;
 }
 
+.containerBody {
+  max-width: 1000px;
+  margin: 28px auto 80px;
+  padding: 0 12px;
+}
+
+.hero {
+  background: #f7f9fb;
+  padding: 48px 0;
+  border-bottom: 1px solid #eef2f6;
+}
+.heroInner {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 12px;
+}
+
+.title {
+  font-size: 34px;
+  line-height: 1;
+  margin: 0;
+  font-weight: 700;
+  color: #0b1220;
+}
+.subtitle {
+  margin: 12px 0;
+  color: #475569;
+  max-width: 840px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.effective {
+  display: block;
+  margin-top: 6px;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
 .content {
   max-width: 900px;
   margin: 2rem auto;

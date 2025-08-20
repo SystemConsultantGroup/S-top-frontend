@@ -1,0 +1,108 @@
+.container {
+  display: block;
+  padding: 0 16px;
+}
+
+.hero {
+  background: #f7f9fb;
+  padding: 48px 0;
+  border-bottom: 1px solid #eef2f6;
+}
+.heroInner {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 12px;
+}
+.title {
+  font-size: 34px;
+  line-height: 1;
+  margin: 0;
+  font-weight: 700;
+  color: #0b1220;
+}
+.subtitle {
+  margin: 12px 0;
+  color: #475569;
+  max-width: 840px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.effective {
+  display: block;
+  margin-top: 6px;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.containerBody {
+  max-width: 1000px;
+  margin: 28px auto 80px;
+  padding: 0 12px;
+}
+
+.card {
+  border: 1px solid #e6edf3;
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  background: #fff;
+}
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.cardIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
+  color: #0b1220;
+}
+.cardTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+.cardBody {
+  margin: 0;
+  color: #334155;
+  line-height: 1.6;
+  font-size: 14px;
+  white-space: pre-wrap;
+}
+
+.contactCard {
+  border: 1px solid #e6edf3;
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-top: 24px;
+  background: #fbfeff;
+}
+.contactTitle {
+  margin: 0 0 8px 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+.contactBody {
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    padding: 64px 0;
+  }
+  .title {
+    font-size: 40px;
+  }
+  .containerBody {
+    margin-top: 40px;
+  }
+}
