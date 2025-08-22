@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./page.module.css";
 
 export default function PrivacyPage() {
@@ -246,7 +248,19 @@ export default function PrivacyPage() {
                   <br />
                   주소 : 성균관대학교 자연과학캠퍼스 제1공학관 22221
                   <br />
-                  연락처 : 031-290-7959, <a href="mailto:scg@scg.skku.ac.kr">scg@scg.skku.ac.kr</a>
+                  연락처 : 031-290-7959,{" "}
+                  <span>
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = "mailto:" + ["scg", "@", "scg.skku.ac.kr"].join("");
+                      }}
+                      style={{ wordBreak: "break-all" }}
+                    >
+                      scg [at] scg.skku.ac.kr
+                    </a>
+                  </span>
                 </p>
               </div>
             </li>
@@ -267,7 +281,19 @@ export default function PrivacyPage() {
                   <br />
                   주소 : 성균관대학교 자연과학캠퍼스 제1공학관 22221
                   <br />
-                  연락처 : 031-290-7959, <a href="mailto:scg@scg.skku.ac.kr">scg@scg.skku.ac.kr</a>
+                  연락처 : 031-290-7959,{" "}
+                  <span>
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = "mailto:" + ["scg", "@", "scg.skku.ac.kr"].join("");
+                      }}
+                      style={{ wordBreak: "break-all" }}
+                    >
+                      scg [at] scg.skku.ac.kr
+                    </a>
+                  </span>
                 </p>
               </div>
             </li>
