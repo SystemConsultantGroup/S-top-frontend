@@ -16,6 +16,10 @@ export const USER_NAVS: INavList[] = [
     link: "/projects",
   },
   {
+    title: "Key Speech",
+    link: "/key-speech",
+  },
+  {
     title: "Interviews",
     link: "/interviews",
     items: [
@@ -42,6 +46,10 @@ export const USER_NAVS: INavList[] = [
       //   link: "/jobfair/recruitments",
       // },
     ],
+  },
+  {
+    title: "Entrepreneurship",
+    link: "/entrepreneurship",
   },
   // {
   //   title: "AI Hub",

@@ -48,7 +48,7 @@ const JobFairPage = () => {
     });
   };
 
- const fetchInterviews = useCallback(async () => {
+  const fetchInterviews = useCallback(async () => {
     try {
       const response = await CommonAxios.get("/jobInterviews", {
         params: {
@@ -67,7 +67,6 @@ const JobFairPage = () => {
       console.error("Error fetching interviews:", error);
     }
   }, [selectedYear, searchQuery, isLoggedIn]);
-
 
   useEffect(() => {
     fetchInterviews(); // 데이터 가져오기 함수 호출
