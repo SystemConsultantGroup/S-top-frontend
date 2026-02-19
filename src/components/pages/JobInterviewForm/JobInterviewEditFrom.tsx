@@ -12,7 +12,15 @@ import { isNotEmpty, matches, useForm } from "@mantine/form";
 import { notFound, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export function JobInterviewEditFrom({ jobInterviewID }: { jobInterviewID?: number }) {
+export function JobInterviewEditFrom({
+  jobInterviewID,
+  redirectUrl = "/admin/jobfair",
+  defaultCategory,
+}: {
+  jobInterviewID?: number;
+  redirectUrl?: string;
+  defaultCategory?: string;
+}) {
   /* next 라우터, 페이지 이동에 이용 */
   const { push } = useRouter();
   const url = "jobInterviews";
@@ -26,7 +34,7 @@ export function JobInterviewEditFrom({ jobInterviewID }: { jobInterviewID?: numb
       youtubeId: " ",
       belonging: "",
       name: "",
-      category: "",
+      category: defaultCategory || "",
     },
     validate: {
       title: isNotEmpty("제목을 입력해주세요."),
@@ -93,7 +101,7 @@ export function JobInterviewEditFrom({ jobInterviewID }: { jobInterviewID?: numb
       }
 
       // TODO: 등록/수정 성공 시 알림
-      push("/admin/jobfair");
+      push(redirectUrl);
     } catch (error) {
       // TODO: 에러 처리
       console.error(error);
@@ -131,13 +139,15 @@ export function JobInterviewEditFrom({ jobInterviewID }: { jobInterviewID?: numb
               <Group mt="xs">
                 <Radio value="SENIOR" label="시니어" />
                 <Radio value="INTERN" label="인턴" />
+                <Radio value="ENTREPRENEURSHIP" label="창업" />
+                <Radio value="KEY_SPEECH" label="Key Speech" />
               </Group>
             </RadioGroup>
           </Row>
           <Group justify="center">
             <PrimaryButton
               onClick={() => {
-                push("/admin/jobfair");
+                push(redirectUrl);
               }}
             >
               목록으로

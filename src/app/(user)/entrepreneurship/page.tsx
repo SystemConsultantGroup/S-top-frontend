@@ -99,7 +99,7 @@ export default function EntrepreneurshipPage() {
           type="INTERVIEW"
           title="창업 이야기"
           subtitle="Entrepreneurship"
-          text="성균관대학교 선배들이 들려주는 생생한 창업 도전기와 성공 스토리를 만나보세요."
+          text="성균관대학교 선배님들의 생생한 창업 도전기와 성공 스토리를 만나보세요."
         />
       </div>
 
