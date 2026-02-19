@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: "S-TOP 기술교류회",
 };
 
+// import { TopBanner } from "@/components/common/TopBanner/TopBanner";
+
 export default function UserLayout({
   children,
 }: Readonly<{
@@ -16,6 +18,7 @@ export default function UserLayout({
 }>) {
   return (
     <>
+      {/* <TopBanner /> */}
       <Header />
       <section className={classes["content-wrapper"]}>{children}</section>
       <Footer />
