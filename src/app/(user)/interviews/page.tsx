@@ -37,7 +37,7 @@ interface FetchVideoParams {
   title?: string;
 }
 
-const YEARS = ["전체 연도", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018"];
+const YEARS = ["전체 연도", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018"];
 
 export default function InterviewsPage() {
   const [videoData, setVideoData] = useState<VideoData[]>([]);

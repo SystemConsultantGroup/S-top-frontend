@@ -31,7 +31,7 @@ export function ProjectSelectTab({ setOptions, tab, setTab }: IProjectSelectTab)
   return (
     <Group className={styles.tabBtnBox} justify="space-between" grow>
       <Button className={TabButtonStyle(0)} onClick={() => onTabChange(0)}>
-        S-TOP 2025 프로젝트
+        S-TOP 2026 프로젝트
       </Button>
       <Button className={TabButtonStyle(1)} onClick={() => onTabChange(1)}>
         전체 프로젝트{" "}
