@@ -24,12 +24,4 @@ export const LogoList: LogoListType = [
     src: "/images/swskku_logo.png",
     alt: "College of Computing and Informatics",
   },
-  {
-    src: "/images/link_logo_1.png",
-    alt: "Leaders in Industry,university Cooperation",
-  },
-  {
-    src: "/images/link_logo_2.png",
-    alt: "Leaders in Industry,university Cooperation 3.0",
-  },
 ];
