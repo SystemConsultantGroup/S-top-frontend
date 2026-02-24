@@ -16,6 +16,14 @@
   filter: brightness(1.1);
 }
 
+.noLink {
+  cursor: default;
+}
+
+.noLink:hover {
+  filter: none;
+}
+
 .content {
   display: flex;
   justify-content: center;
@@ -29,7 +37,7 @@
   transition: transform 0.2s ease;
 }
 
-.banner:hover .arrow {
+.banner:hover:not(.noLink) .arrow {
   transform: translateX(4px);
 }
 

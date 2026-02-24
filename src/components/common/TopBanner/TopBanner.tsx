@@ -5,14 +5,27 @@ import styles from "./TopBanner.module.css";
 import { IconArrowRight } from "@tabler/icons-react";
 
 export const TopBanner = () => {
-  return (
-    <Link href="/key-speech" className={styles.bannerLink}>
-      <div className={styles.banner}>
-        <div className={styles.content}>
-          <span>2026 삼성전자 DX 부문장 Key Speech 보러가기</span>
-          <IconArrowRight size={18} className={styles.arrow} />
-        </div>
+  const text = process.env.NEXT_PUBLIC_TOP_BANNER_TEXT;
+  const url = process.env.NEXT_PUBLIC_TOP_BANNER_URL;
+
+  if (!text) return null;
+
+  const bannerContent = (
+    <div className={`${styles.banner} ${!url ? styles.noLink : ""}`}>
+      <div className={styles.content}>
+        <span>{text}</span>
+        {url && <IconArrowRight size={18} className={styles.arrow} />}
       </div>
-    </Link>
+    </div>
   );
+
+  if (url) {
+    return (
+      <Link href={url} className={styles.bannerLink}>
+        {bannerContent}
+      </Link>
+    );
+  }
+
+  return bannerContent;
 };

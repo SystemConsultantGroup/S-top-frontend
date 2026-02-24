@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "S-TOP 기술교류회",
 };
 
-// import { TopBanner } from "@/components/common/TopBanner/TopBanner";
+import { TopBanner } from "@/components/common/TopBanner/TopBanner";
 
 export default function UserLayout({
   children,
@@ -18,7 +18,7 @@ export default function UserLayout({
 }>) {
   return (
     <>
-      {/* <TopBanner /> */}
+      <TopBanner />
       <Header />
       <section className={classes["content-wrapper"]}>{children}</section>
       <Footer />
