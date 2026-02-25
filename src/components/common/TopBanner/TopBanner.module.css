@@ -1,0 +1,53 @@
+.banner {
+  background: linear-gradient(90deg, #00c4cc 0%, #7d2ae8 100%);
+  color: white;
+  text-align: center;
+  padding: 12px 20px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 1000;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.banner:hover {
+  filter: brightness(1.1);
+}
+
+.noLink {
+  cursor: default;
+}
+
+.noLink:hover {
+  filter: none;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.arrow {
+  transition: transform 0.2s ease;
+}
+
+.banner:hover:not(.noLink) .arrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .banner {
+    font-size: 13px;
+    padding: 10px 15px;
+  }
+}
+
+.bannerLink {
+  text-decoration: none;
+}

@@ -97,6 +97,24 @@ const AdminMenuList = [
         href: "/admin/jobfair",
         icon: <IconFiles size={SUBICONSIZE} />,
       },
+      {
+        label: (
+          <>
+            창업<br></br>영상 관리
+          </>
+        ),
+        href: "/admin/entrepreneurship",
+        icon: <IconFiles size={SUBICONSIZE} />,
+      },
+      {
+        label: (
+          <>
+            Key Speech<br></br>영상 관리
+          </>
+        ),
+        href: "/admin/key-speech",
+        icon: <IconFiles size={SUBICONSIZE} />,
+      },
       { label: "갤러리 관리", href: "/admin/gallery", icon: <IconFiles size={SUBICONSIZE} /> },
       { label: "퀴즈 제출 목록", href: "/admin/quiz-list", icon: <IconFiles size={SUBICONSIZE} /> },
     ],

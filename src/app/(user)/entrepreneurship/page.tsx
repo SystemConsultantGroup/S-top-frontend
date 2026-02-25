@@ -1,8 +1,8 @@
 "use client";
+
 import { useState, useEffect, useCallback } from "react";
+import styles from "./Entrepreneurship.module.css";
 import { Banner } from "@/components/common/Banner/Banner";
-import styles from "./jobfair.module.css"; // CSS 파일 import
-import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
 import { SearchInput } from "@/components/common/SearchInput";
 import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { VideoCard } from "@/components/common/VideoCard_noQuiz/VideoCard";
@@ -26,7 +26,7 @@ interface Interview {
 
 const YEARS = ["전체", "2026", "2025", "2024", "2023", "2022", "2021"];
 
-const JobFairPage = () => {
+export default function EntrepreneurshipPage() {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
   const [interviews, setInterviews] = useState<Interview[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -36,7 +36,6 @@ const JobFairPage = () => {
     handleJobInterviewBookmarkToggle({
       jobInterviewId: id,
       isLoggedIn,
-      //TODO: 특정 ID 의 job interview 를 못 찾은 경우 에러 처리 필요
       isAlreadyBookmarked: interviews.find((interview) => interview.id === id)?.favorite ?? false,
       onToggleSuccess: fetchInterviews,
       onToggleFail: () => {
@@ -52,6 +51,7 @@ const JobFairPage = () => {
     try {
       const response = await CommonAxios.get("/jobInterviews", {
         params: {
+          category: "ENTREPRENEURSHIP",
           year: selectedYear !== "전체" ? selectedYear : undefined,
           search: searchQuery || undefined,
           page: 0,
@@ -59,57 +59,56 @@ const JobFairPage = () => {
         },
       });
 
+      // API에서 category 필터링이 되는지 확실하지 않으므로 클라이언트에서도 한 번 더 필터링 (안전장치)
+      // 만약 API가 category 파라미터를 지원한다면 response.data.content에 이미 필터링된 데이터가 올 것임
       const filteredInterviews = response.data.content.filter(
-        (item: Interview) => item.category === "SENIOR"
+        (item: Interview) => item.category === "ENTREPRENEURSHIP"
       );
       setInterviews(filteredInterviews);
     } catch (error) {
-      console.error("Error fetching interviews:", error);
+      console.error("Error fetching entrepreneurship interviews:", error);
     }
   }, [selectedYear, searchQuery, isLoggedIn]);
 
   useEffect(() => {
-    fetchInterviews(); // 데이터 가져오기 함수 호출
-    // TODO: isLoggedIn 을 추가한 이유는, 최초 요청 시 토큰 없이 요청이 되고
-    // 이후에 로그인을 하면 토큰이 추가되어 요청이 가서, 북마크가 올바르게 동작하게 된다.
-    // 토큰 검증이 모든 API 호출 전에 이루어질 수 있도록 근본적인 해결이 필요하다
-  }, [fetchInterviews]); // 의존성 배열 추가 (필요에 따라 수정)
-
-  const filteredInterviews = interviews.filter((interview) => {
-    const searchLower = searchQuery.trim().normalize("NFC").toLowerCase(); // 검색어 소문자로 변환 및 공백 제거
-    const interviewTitle = interview.title.normalize("NFC").toLowerCase();
-    const isMatchingSearch =
-      !searchQuery || // 검색어가 없으면 무조건 true
-      interviewTitle.includes(searchLower);
-
-    const isMatchingYear =
-      !selectedYear || // 선택된 연도가 없으면 무조건 true
-      selectedYear === "전체" || // "All" 선택 시 모든 연도 허용
-      String(interview.year) === selectedYear;
-
-    return isMatchingSearch && isMatchingYear; // 검색어와 연도 둘 다 만족하는 경우
-  });
+    fetchInterviews();
+  }, [fetchInterviews]);
 
   const handleYearSelect = (year: string) => {
     setSelectedYear(year);
   };
 
+  // 클라이언트 사이드 검색어 필터링 (API에서 search 파라미터가 동작하더라도 추가적인 클라이언트 필터링이 필요할 수 있음)
+  // 여기서는 API 결과를 그대로 렌더링하도록 함. (InternsPage 로직 참조)
+  // InternsPage에서는 클라이언트 필터링도 하고 있음. 동일하게 구현.
+  const filteredInterviews = interviews.filter((interview) => {
+    const searchLower = searchQuery.trim().normalize("NFC").toLowerCase();
+    const interviewTitle = interview.title.normalize("NFC").toLowerCase();
+    const isMatchingSearch = !searchQuery || interviewTitle.includes(searchLower);
+
+    const isMatchingYear =
+      !selectedYear || selectedYear === "전체" || String(interview.year) === selectedYear;
+
+    return isMatchingSearch && isMatchingYear;
+  });
+
   return (
     <>
       <div className={styles.banner}>
-        <SubHeadNavbar title="Job Fair" />
         <Banner
-          type="PROJECT"
-          title="잡페어"
-          subtitle="Job Fair"
-          text="S-TOP Job Fair는 현업에 종사하고 있는 선배 개발자님들과 실무 경험을 얻고자 하는 학생들을 연결하여, IT 인재 양성 문화를 함께 만들기 위해 기획되었습니다."
+          type="INTERVIEW"
+          title="창업 이야기"
+          subtitle="Entrepreneurship"
+          text="성균관대학교 선배님들의 생생한 창업 도전기와 성공 스토리를 만나보세요."
         />
       </div>
+
       <div className={styles.mainContent}>
-        <h2 className={styles.title}>선배님들의 조언</h2>
+        <h2 className={styles.title}>선배님들의 창업 이야기</h2>
+
         <div className={styles.searchSection}>
           <SearchInput
-            placeholder={"현직자 인터뷰 영상 검색"}
+            placeholder="창업 인터뷰 영상 검색"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <div className={styles.filters}>
@@ -121,6 +120,7 @@ const JobFairPage = () => {
             />
           </div>
         </div>
+
         <CardGridContainer>
           {filteredInterviews.map((interview) => (
             <div key={interview.id}>
@@ -138,6 +138,4 @@ const JobFairPage = () => {
       </div>
     </>
   );
-};
-
-export default JobFairPage;
+}

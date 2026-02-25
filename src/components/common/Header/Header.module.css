@@ -17,7 +17,7 @@
 } */
 
 .container {
-  position: fixed;
+  position: sticky;
   z-index: 100;
   top: 0;
   width: 100vw;
@@ -88,7 +88,7 @@
 
 .logo {
   & > img {
-    width: 100px;
+    width: 80px;
     height: auto;
   }
 }
@@ -108,11 +108,11 @@
 .title {
   & > h1 {
     margin: 0;
-    font-size: 28px;
+    font-size: 24px;
   }
 
   & > span {
-    font-size: 14px;
+    font-size: 12px;
     white-space: nowrap;
   }
 
@@ -133,8 +133,9 @@
   }
 
   & > ul {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    display: flex;
+    justify-content: center;
+    gap: 30px;
   }
 
   & > ul > li {
@@ -187,8 +188,10 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: 16px;
+    font-size: 14px;
   }
+
+  font-size: 14px;
 
   display: flex;
   position: relative;
@@ -253,7 +256,7 @@
 
 .swuniv {
   & > img {
-    width: 160px;
+    width: 130px;
     height: auto;
   }
 

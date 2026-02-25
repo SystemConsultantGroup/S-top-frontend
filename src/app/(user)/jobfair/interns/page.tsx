@@ -24,7 +24,7 @@ interface Interview {
   favorite: boolean;
 }
 
-const YEARS = ["전체", "2025", "2024", "2023", "2022", "2021"];
+const YEARS = ["전체", "2026", "2025", "2024", "2023", "2022", "2021"];
 
 const InternsPage = () => {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);

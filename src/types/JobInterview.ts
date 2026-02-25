@@ -7,6 +7,7 @@ export interface JobInterviewRequestParams {
   month?: number;
   page?: number;
   size?: number;
+  category?: string;
 }
 
 export interface JobInterview {

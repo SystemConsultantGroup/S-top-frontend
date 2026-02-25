@@ -108,6 +108,8 @@ const AdminSidebarMenuList: ListProps[] = [
     children: [
       { label: "대담 영상 관리", href: "/admin/interviews" },
       { label: "잡페어 영상 관리", href: "/admin/jobfair" },
+      { label: "창업 영상 관리", href: "/admin/entrepreneurship" },
+      { label: "Key Speech 영상 관리", href: "/admin/key-speech" },
       { label: "갤러리 관리", href: "/admin/gallery" },
       { label: "퀴즈 제출 목록", href: "/admin/quiz-list" },
     ],

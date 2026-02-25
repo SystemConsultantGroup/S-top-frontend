@@ -25,7 +25,9 @@ export function HeaderSymbol({ setIsOpen }: HandoutOverviewProps) {
       <div className={styles.dividerlnt} />
       <div className={styles.title}>
         <h1>S-TOP</h1>
-        <span>성균관대학교 소프트웨어융합대학</span>
+        <span>성균관대학교 </span>
+        <br />
+        <span>소프트웨어융합대학</span>
       </div>
     </Link>
   );
