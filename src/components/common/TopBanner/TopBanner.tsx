@@ -4,10 +4,12 @@ import Link from "next/link";
 import styles from "./TopBanner.module.css";
 import { IconArrowRight } from "@tabler/icons-react";
 
-export const TopBanner = () => {
-  const text = process.env.NEXT_PUBLIC_TOP_BANNER_TEXT;
-  const url = process.env.NEXT_PUBLIC_TOP_BANNER_URL;
+interface TopBannerProps {
+  text?: string;
+  url?: string;
+}
 
+export const TopBanner = ({ text, url }: TopBannerProps) => {
   if (!text) return null;
 
   const bannerContent = (
