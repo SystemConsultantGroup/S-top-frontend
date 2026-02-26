@@ -1,0 +1,124 @@
+.container {
+  display: block;
+  padding: 0 16px;
+}
+
+.containerBody {
+  max-width: 1000px;
+  margin: 28px auto 80px;
+  padding: 0 12px;
+}
+
+.hero {
+  background: #f7f9fb;
+  padding: 48px 0;
+  border-bottom: 1px solid #eef2f6;
+}
+.heroInner {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 12px;
+}
+
+.title {
+  font-size: 34px;
+  line-height: 1;
+  margin: 0;
+  font-weight: 700;
+  color: #0b1220;
+}
+.subtitle {
+  margin: 12px 0;
+  color: #475569;
+  max-width: 840px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.effective {
+  display: block;
+  margin-top: 6px;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.content {
+  max-width: 900px;
+  margin: 2rem auto;
+  color: rgb(55, 53, 47);
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+.content h2 {
+  font-size: 1.5rem;
+  margin: 1.5rem 0 0.5rem;
+  font-weight: 700;
+}
+
+.content h3 {
+  font-size: 1.25rem;
+  margin: 1.25rem 0 0.5rem;
+  font-weight: 700;
+}
+
+.content p {
+  margin: 0.5rem 0;
+}
+
+.content a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.content ul,
+.content ol {
+  margin: 0.6rem 0;
+  padding-left: 1.25rem;
+}
+
+.content li {
+  margin: 0.25rem 0;
+}
+
+.content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.content th,
+.content td {
+  border: 1px solid rgba(55, 53, 47, 0.12);
+  padding: 0.5rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.content th {
+  color: rgba(55, 53, 47, 0.7);
+  font-weight: 600;
+  background: rgba(55, 53, 47, 0.03);
+}
+
+.content blockquote {
+  margin: 1rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid rgba(55, 53, 47, 0.7);
+}
+
+.indented {
+  padding-left: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .content {
+    margin: 3rem auto;
+  }
+}

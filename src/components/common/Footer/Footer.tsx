@@ -30,9 +30,17 @@ export function Footer() {
           <h3>Sungkyun Tech Open Party(S-TOP)</h3>
         </div>
         <div className={styles.terms}>
-          <Link href="/#">개인정보처리방침</Link>
+          <Link href="/privacy">개인정보처리방침</Link>
           <div className={styles.dividertnt} />
-          <Link href="/#">네티즌윤리규약</Link>
+          <Link href="/policy">이용약관</Link>
+          <div className={styles.dividertnt} />
+          <Link
+            href="https://www.skku.edu/skku/etc/netizen.do"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            네티즌윤리규약
+          </Link>
         </div>
         <div className={styles.detail}>
           <span>

@@ -44,6 +44,13 @@
   width: 300px;
 }
 
+.link {
+  font-size: 14px;
+  text-decoration: underline;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
 /* Tablet Landscape */
 @media screen and (max-width: 1280px) {
   .registerBox {
