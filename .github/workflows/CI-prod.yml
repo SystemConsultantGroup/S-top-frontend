@@ -4,7 +4,7 @@ on:
   push:
     branches: ["main"]
 env:
-  dockerimage_tag: ${{ github.sha }}
+  dockerimage_tag: ${{ github.sha }}-${{ github.run_number }}
   dockerimage_name: scgskku/stop-fe-prod
 jobs:
   build:
