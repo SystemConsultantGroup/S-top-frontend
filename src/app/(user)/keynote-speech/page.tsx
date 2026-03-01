@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import styles from "./KeySpeech.module.css";
+import styles from "./KeynoteSpeech.module.css";
 import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
 
 interface Interview {
@@ -20,22 +20,22 @@ interface Interview {
 // Generate years from 2021 to current year + 1 (or hardcode as requested)
 const YEARS = [2026, 2025, 2024, 2023, 2022, 2021];
 
-export default function KeySpeechPage() {
+export default function KeynoteSpeechPage() {
   const [selectedYear, setSelectedYear] = useState<number>(YEARS[0]);
-  // Store all interviews for Key Speech
+  // Store all interviews for Keynote Speech
   const [allInterviews, setAllInterviews] = useState<Interview[]>([]);
   // Currently displayed interview
   const [currentInterview, setCurrentInterview] = useState<Interview | null>(null);
 
   const fetchInterviews = useCallback(async () => {
     try {
-      // Fetch all Key Speech interviews
+      // Fetch all Keynote Speech interviews
       // Note: We might want to fetch by year if the API supports it efficiently,
       // but to ensure we have the list for client-side filtering (if needed) or finding the latest.
       // Based on previous pages, we used params.
       const response = await CommonAxios.get("/jobInterviews", {
         params: {
-          category: "KEY_SPEECH",
+          category: "KEYNOTE_SPEECH",
           size: 100, // Fetch enough to cover recent years
         },
       });
@@ -44,7 +44,7 @@ export default function KeySpeechPage() {
         setAllInterviews(response.data.content);
       }
     } catch (error) {
-      console.error("Error fetching Key Speech interviews:", error);
+      console.error("Error fetching Keynote Speech interviews:", error);
     }
   }, []);
 
@@ -78,7 +78,7 @@ export default function KeySpeechPage() {
       </aside>
 
       <section className={styles.content}>
-        <h1 className={styles.title}>Key Speech</h1>
+        <h1 className={styles.title}>Keynote Speech</h1>
 
         {currentInterview ? (
           <div>
@@ -101,7 +101,7 @@ export default function KeySpeechPage() {
             </div>
           </div>
         ) : (
-          <div className={styles.noVideo}>{selectedYear}년도 Key Speech 영상이 없습니다.</div>
+          <div className={styles.noVideo}>{selectedYear}년도 Keynote Speech 영상이 없습니다.</div>
         )}
       </section>
     </main>

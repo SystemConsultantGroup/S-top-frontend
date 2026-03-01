@@ -16,8 +16,8 @@ export const USER_NAVS: INavList[] = [
     link: "/projects",
   },
   {
-    title: "Key Speech",
-    link: "/key-speech",
+    title: "Keynote Speech",
+    link: "/keynote-speech",
   },
   {
     title: "Interviews",
