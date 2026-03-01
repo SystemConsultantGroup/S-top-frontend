@@ -16,9 +16,12 @@ export default function UserLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const topBannerText = process.env.NEXT_PUBLIC_TOP_BANNER_TEXT;
+  const topBannerUrl = process.env.NEXT_PUBLIC_TOP_BANNER_URL;
+
   return (
     <>
-      <TopBanner />
+      <TopBanner text={topBannerText} url={topBannerUrl} />
       <Header />
       <section className={classes["content-wrapper"]}>{children}</section>
       <Footer />
