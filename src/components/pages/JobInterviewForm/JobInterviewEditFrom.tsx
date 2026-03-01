@@ -140,7 +140,7 @@ export function JobInterviewEditFrom({
                 <Radio value="SENIOR" label="시니어" />
                 <Radio value="INTERN" label="인턴" />
                 <Radio value="ENTREPRENEURSHIP" label="창업" />
-                <Radio value="KEY_SPEECH" label="Key Speech" />
+                <Radio value="KEYNOTE_SPEECH" label="Keynote Speech" />
               </Group>
             </RadioGroup>
           </Row>
