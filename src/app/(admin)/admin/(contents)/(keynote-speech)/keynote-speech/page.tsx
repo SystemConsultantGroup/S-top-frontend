@@ -3,14 +3,14 @@
 import { PageHeader } from "@/components/common/PageHeader";
 import { JobInterviewListSection } from "@/components/pages/JobInterviewListSection";
 
-export default function AdminKeySpeechPage() {
+export default function AdminKeynoteSpeechPage() {
   return (
     <>
-      <PageHeader title="Key Speech 영상 관리" />
+      <PageHeader title="Keynote Speech 영상 관리" />
       <JobInterviewListSection
-        category="KEY_SPEECH"
-        createUrl="/admin/key-speech-create"
-        editUrlBase="/admin/key-speech"
+        category="KEYNOTE_SPEECH"
+        createUrl="/admin/keynote-speech-create"
+        editUrlBase="/admin/keynote-speech"
       />
     </>
   );

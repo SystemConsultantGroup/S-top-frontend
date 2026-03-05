@@ -109,10 +109,10 @@ const AdminMenuList = [
       {
         label: (
           <>
-            Key Speech<br></br>영상 관리
+            Keynote Speech<br></br>영상 관리
           </>
         ),
-        href: "/admin/key-speech",
+        href: "/admin/keynote-speech",
         icon: <IconFiles size={SUBICONSIZE} />,
       },
       { label: "갤러리 관리", href: "/admin/gallery", icon: <IconFiles size={SUBICONSIZE} /> },
