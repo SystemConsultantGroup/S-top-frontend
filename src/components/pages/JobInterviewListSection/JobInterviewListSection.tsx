@@ -18,7 +18,17 @@ import { useDebouncedState } from "@mantine/hooks";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 
-export function JobInterviewListSection() {
+export interface JobInterviewListSectionProps {
+  category?: string;
+  createUrl?: string;
+  editUrlBase?: string;
+}
+
+export function JobInterviewListSection({
+  category,
+  createUrl = "/admin/jobfair-create",
+  editUrlBase = "/admin/jobfair",
+}: JobInterviewListSectionProps) {
   /* next 라우터, 페이지 이동에 이용 */
   const { push } = useRouter();
   const url = "jobInterviews";
@@ -34,6 +44,7 @@ export function JobInterviewListSection() {
     {
       page: pageNumber - 1,
       size: Number(pageSize),
+      category: category,
     },
     300
   );
@@ -41,7 +52,7 @@ export function JobInterviewListSection() {
   /* SWR 훅을 사용하여 공지사항 목록 패칭 */
   // TODO: 백엔드 수정 이후 sort 파라미터 추가
   const { data, pageData, mutate } = useJobInterviews({
-    params: { ...query, page: pageNumber - 1, size: Number(pageSize) },
+    params: { ...query, page: pageNumber - 1, size: Number(pageSize), category: category },
   });
 
   /* 체크박스 전체선택, 일괄선택 다루는 파트 */
@@ -98,7 +109,7 @@ export function JobInterviewListSection() {
           <DangerButton onClick={handleDelete}>선택 삭제</DangerButton>
           <PrimaryButton
             onClick={() => {
-              push(`/admin/jobfair-create`);
+              push(createUrl);
             }}
           >
             영상 등록
@@ -137,7 +148,7 @@ export function JobInterviewListSection() {
               <DataTableData text={false}>
                 <Button
                   onClick={() => {
-                    push(`/admin/jobfair/${jobInterview.id}`);
+                    push(`${editUrlBase}/${jobInterview.id}`);
                   }}
                 >
                   수정

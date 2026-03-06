@@ -1,9 +1,10 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { JWT_COOKIE_NAME, JWT_MAX_AGE } from "@/constants/Auth";
+import { JWT_COOKIE_NAME } from "@/constants/Auth";
 import { CommonAxios } from "@/utils/CommonAxios";
 import Cookies from "js-cookie";
+import { setAccessTokenCookie } from "@/utils/auth/setAccessTokenCookie";
 
 interface AuthContextValue {
   token: string | null;
@@ -63,7 +64,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setToken(token);
     CommonAxios.defaults.headers.Authorization = `Bearer ${token}`;
     CommonAxios.defaults.withCredentials = true;
-    Cookies.set(JWT_COOKIE_NAME, token, { "max-age": String(JWT_MAX_AGE), secure: true });
+    setAccessTokenCookie(token);
 
     setTimeout(() => {
       fetchMe(); // 토큰 설정 후 약간의 딜레이를 두고 me API 호출

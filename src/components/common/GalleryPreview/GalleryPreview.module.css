@@ -1,10 +1,19 @@
+.card {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+}
+
 .image_section {
+  position: relative;
+  aspect-ratio: 16/9;
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 8px;
 }
 
 .image_view {
+  object-fit: cover;
   border-radius: 8px;
 }
 

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import styles from "./jonfairInterns.module.css";
 import { Banner } from "@/components/common/Banner/Banner";
 import { SubHeadNavbar } from "@/components/common/SubHeadNavbar";
@@ -9,6 +9,7 @@ import { VideoCard } from "@/components/common/VideoCard_noQuiz/VideoCard";
 import { CommonAxios } from "@/utils/CommonAxios/CommonAxios";
 import { useAuth } from "@/components/common/Auth";
 import { handleJobInterviewBookmarkToggle } from "@/utils/jobInterview/handleJobInterviewBookmarkToggle";
+import { CardGridContainer } from "@/components/common/CardGridContainer/CardGridContainer";
 
 interface Interview {
   id: number;
@@ -23,7 +24,7 @@ interface Interview {
   favorite: boolean;
 }
 
-const YEARS = ["전체", "2025", "2024", "2023", "2022", "2021"];
+const YEARS = ["전체", "2026", "2025", "2024", "2023", "2022", "2021"];
 
 const InternsPage = () => {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
@@ -47,7 +48,7 @@ const InternsPage = () => {
     });
   };
 
-  const fetchInterviews = async () => {
+  const fetchInterviews = useCallback(async () => {
     try {
       const response = await CommonAxios.get("/jobInterviews", {
         params: {
@@ -65,14 +66,14 @@ const InternsPage = () => {
     } catch (error) {
       console.error("Error fetching interviews:", error);
     }
-  };
+  }, [selectedYear, searchQuery, isLoggedIn]);
 
   useEffect(() => {
     fetchInterviews();
     // TODO: isLoggedIn 을 추가한 이유는, 최초 요청 시 토큰 없이 요청이 되고
     // 이후에 로그인을 하면 토큰이 추가되어 요청이 가서, 북마크가 올바르게 동작하게 된다.
     // 토큰 검증이 모든 API 호출 전에 이루어질 수 있도록 근본적인 해결이 필요하다
-  }, [selectedYear, searchQuery, isLoggedIn]);
+  }, [fetchInterviews]);
 
   const filteredInterviews = interviews.filter((interview) => {
     const searchLower = searchQuery.trim().normalize("NFC").toLowerCase(); // 검색어 소문자로 변환 및 공백 제거
@@ -94,8 +95,8 @@ const InternsPage = () => {
   };
 
   return (
-    <div>
-      <div className={styles.container}>
+    <>
+      <div className={styles.banner}>
         <SubHeadNavbar title="Job Fair" />
         <Banner
           type="PROJECT"
@@ -104,13 +105,16 @@ const InternsPage = () => {
           text="S-TOP Job Fair는 현업에 종사하고 있는 선배 개발자님들과 실무 경험을 얻고자 하는 학생들을 연결하여, IT 인재 양성 문화를 함께 만들기 위해 기획되었습니다."
         />
       </div>
-      <div className={styles.backColor}>
-        <div className={styles.search}>
-          <h2 className={styles.title}>인턴들의 이야기</h2>
-          <div className={styles.searchArea}>
-            <SearchInput placeholder="영상 검색" onChange={(e) => setSearchQuery(e.target.value)} />
-          </div>
-          <div className={styles.dropdown}>
+
+      <div className={styles.mainContent}>
+        <h2 className={styles.title}>인턴들의 이야기</h2>
+
+        <div className={styles.searchSection}>
+          <SearchInput
+            placeholder={"인턴 인터뷰 영상 검색"}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <div className={styles.filters}>
             <Dropdown
               options={YEARS}
               placeholder="전체"
@@ -119,7 +123,8 @@ const InternsPage = () => {
             />
           </div>
         </div>
-        <div className={styles.videoGrid}>
+
+        <CardGridContainer>
           {filteredInterviews.map((interview) => (
             <div key={interview.id}>
               <VideoCard
@@ -132,9 +137,9 @@ const InternsPage = () => {
               />
             </div>
           ))}
-        </div>
+        </CardGridContainer>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -12,7 +12,6 @@ import { useState, useEffect } from "react";
 import { IOption } from "./type";
 import styles from "./Projects.module.css";
 import { ProjectBoard, ProjectFilterBox, ProjectSelectTab } from "./(utils)";
-import { useWindowSize } from "@/hooks/useWindowSize";
 import { getFileUrlById } from "@/utils/handleDownloadFile";
 
 export default function ProjectsPage() {
@@ -56,7 +55,7 @@ export default function ProjectsPage() {
    * - width: 프로젝트 아이템이 한 줄에 몇 개가 배치되는지 screen width에 따라 달라지므로
    * 숫자를 맞추기 위해 채워야 하는 더미 아이템을 dynamic하게 만들어 그리드를 유지하는 역할을 수행함.
    */
-  const { width: screenWidth } = useWindowSize();
+  //const { width: screenWidth } = useWindowSize();
 
   /**
    * 탭 정보
@@ -121,12 +120,7 @@ export default function ProjectsPage() {
         {/* 필터링 박스 */}
         <ProjectFilterBox setQuery={setQuery} tab={tab} options={options} setOptions={setOptions} />
         {/* 프로젝트 아이템 */}
-        <ProjectBoard
-          data={data}
-          loaded={loaded}
-          thumbnails={thumbnails}
-          screenWidth={screenWidth}
-        />
+        <ProjectBoard data={data} loaded={loaded} thumbnails={thumbnails} />
         {/* 페이지네이션 */}
         {pageNumber && setPageNumber && pageData && (
           <Pagination value={pageNumber} onChange={setPageNumber} total={pageData.totalPages} />

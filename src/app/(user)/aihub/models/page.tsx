@@ -14,11 +14,29 @@ const YEARS = ["2020", "2021", "2022", "2023", "2024"];
 const TYPES = ["tag1", "tag2", "tag3", "tag4", "tag5"];
 const FRAMEWORK = ["필터1", "필터2", "필터3", "필터4", "필터5"];
 
+interface Model {
+  id: string;
+  title: string;
+  professor: string;
+  participants: string[];
+  learningModels: string[];
+  topics: string[];
+  developmentYears: number[];
+  url: string;
+}
+
+type ModelApiResponse = Model;
+
+type ModelFilters = Pick<
+  Model,
+  "title" | "learningModels" | "topics" | "developmentYears" | "professor" | "participants"
+>;
+
 export default function ModelsPage() {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [selectedYearOptions, setSelectedYearOptions] = useState<string[]>([]);
   const [selectedTopicOptions, setSelectedTopicOptions] = useState<string[]>([]);
-  const [models, setModels] = useState<any[]>([]);
+  const [models, setModels] = useState<Model[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleOptionSelect = (option: string) => {
@@ -47,7 +65,7 @@ export default function ModelsPage() {
 
   const fetchModels = async () => {
     try {
-      const filters: Record<string, any> = {
+      const filters: ModelFilters = {
         title: searchQuery || "",
         learningModels: selectedOptions,
         topics: selectedTopicOptions,
@@ -62,7 +80,7 @@ export default function ModelsPage() {
         },
       });
 
-      const transformedModels = response.data.content.map((model: any) => ({
+      const transformedModels = response.data.content.map((model: ModelApiResponse) => ({
         id: model.id,
         title: model.title,
         professor: model.professor,
@@ -81,11 +99,13 @@ export default function ModelsPage() {
   // 초기 데이터 로드
   useEffect(() => {
     fetchModels();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 필터 변경 시 데이터 로드
   useEffect(() => {
     fetchModels();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery, selectedYearOptions, selectedTopicOptions, selectedOptions]);
 
   return (
