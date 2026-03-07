@@ -18,7 +18,7 @@ interface Interview {
 }
 
 // Generate years from 2021 to current year + 1 (or hardcode as requested)
-const YEARS = [2026, 2025, 2024, 2023, 2022, 2021];
+const YEARS = [2026];
 
 export default function KeynoteSpeechPage() {
   const [selectedYear, setSelectedYear] = useState<number>(YEARS[0]);
