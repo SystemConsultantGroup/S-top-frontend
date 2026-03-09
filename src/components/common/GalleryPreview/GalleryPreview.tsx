@@ -6,19 +6,20 @@ import classes from "./GalleryPreview.module.css";
 export interface Props {
   imgUrl: string;
   title: string;
-  date: Date;
+  year: number;
+  month: number;
   viewCount?: number;
   height?: number;
   width?: number;
 }
 
-export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
-  function formatDate(date: Date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // getMonth()는 0부터 시작하므로 +1
-    const day = String(date.getDate()).padStart(2, "0");
-
-    return `${year}.${month}.${day}`;
+export function GalleryPreview({ imgUrl, title, year, month, viewCount }: Props) {
+  function formatDate(year: number, month: number) {
+    if (year && month) {
+      const formattedMonth = String(month).padStart(2, "0");
+      return `${year}.${formattedMonth}`;
+    }
+    return "";
   }
 
   return (
@@ -41,7 +42,7 @@ export function GalleryPreview({ imgUrl, title, date, viewCount }: Props) {
 
         <Flex justify="space-between" mt="xs" className={classes.bottom}>
           <Text c="dimmed" size="sm">
-            {formatDate(date)}
+            {formatDate(year, month)}
           </Text>
           {viewCount && (
             <Flex align="center">

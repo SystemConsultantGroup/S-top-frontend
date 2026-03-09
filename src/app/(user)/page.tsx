@@ -232,7 +232,8 @@ export default function Home() {
                     return {
                       title: data.title,
                       imgUrl,
-                      date: new Date(data.createdAt),
+                      year: data.year,
+                      month: data.month,
                       viewCount: data.hitCount,
                     };
                   });

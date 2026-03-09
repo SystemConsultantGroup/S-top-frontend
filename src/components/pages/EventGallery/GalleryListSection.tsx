@@ -110,14 +110,14 @@ export function GalleryListSection() {
         {data &&
           data.map((item, idx) => {
             const imgUrl = previewImgUrls[idx];
-            const date = new Date(item.createdAt);
             return (
               <div key={idx} onClick={() => onGalleryClick(item.id)} className={classes.gridItem}>
                 <GalleryPreview
                   imgUrl={imgUrl}
                   title={item.title}
                   viewCount={item.hitCount}
-                  date={date}
+                  year={item.year}
+                  month={item.month}
                 />
               </div>
             );
