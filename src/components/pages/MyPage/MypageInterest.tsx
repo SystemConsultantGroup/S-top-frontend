@@ -13,7 +13,7 @@ import { IProjectContent } from "@/types/project";
 import { CommonAxios } from "@/utils/CommonAxios";
 import { ITalkContent } from "@/types/talks";
 import { JobInterview } from "@/types/JobInterview";
-import { getFileUrlById } from "@/utils/handleDownloadFile";
+import { getImageUrlById } from "@/utils/handleDownloadFile";
 import { useAuth } from "@/components/common/Auth";
 
 export function MypageInterest() {
@@ -30,7 +30,7 @@ export function MypageInterest() {
       setProjects(response1.data);
       // thumbnail url 가져오기
       const promises = response1.data.map((data: IProjectContent) =>
-        getFileUrlById(data.thumbnailInfo.id)
+        getImageUrlById(data.thumbnailInfo.id)
       );
       const urlResults = await Promise.all(promises);
       setThumbnailUrls(urlResults);

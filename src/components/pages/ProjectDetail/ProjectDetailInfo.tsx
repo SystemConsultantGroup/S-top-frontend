@@ -4,7 +4,7 @@ import { useAuth } from "@/components/common/Auth";
 import { PrimaryButton } from "@/components/common/Buttons";
 import { CardBadge } from "@/components/common/CardBadge";
 import { CommonAxios } from "@/utils/CommonAxios";
-import { getFileUrlById } from "@/utils/handleDownloadFile";
+import { getImageUrlById } from "@/utils/handleDownloadFile";
 import { AspectRatio, Button, Divider, Flex, Group, Stack, Text } from "@mantine/core";
 import {
   IconBookmark,
@@ -104,7 +104,7 @@ export function ProjectDetailInfo({ projectId }: Props) {
 
   const fetchImages = (thumbnailId: number, posterId: number) => {
     if (thumbnailId) {
-      getFileUrlById(thumbnailId)
+      getImageUrlById(thumbnailId)
         .then((url) => {
           setThumbnail(url);
         })
@@ -113,7 +113,7 @@ export function ProjectDetailInfo({ projectId }: Props) {
         });
     }
     if (posterId) {
-      getFileUrlById(posterId)
+      getImageUrlById(posterId)
         .then((url) => {
           setPoster(url);
         })

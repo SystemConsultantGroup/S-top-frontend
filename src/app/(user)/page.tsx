@@ -13,7 +13,7 @@ import { IProjectContent } from "@/types/project";
 import { ITalkContent } from "@/types/talks";
 import { IGalleryContent } from "@/types/galleries";
 import { GenerateCardsRow } from "@/components/pages/ItemGrid";
-import { getFileUrlById } from "@/utils/handleDownloadFile";
+import { getImageUrlById } from "@/utils/handleDownloadFile";
 import { CommonAxios } from "@/utils/CommonAxios";
 import { useAuth } from "@/components/common/Auth";
 
@@ -66,7 +66,7 @@ export default function Home() {
       switch (type) {
         case "PROJECT":
           return Promise.all(
-            (items as IProjectContent[]).map((item) => getFileUrlById(item.thumbnailInfo.id))
+            (items as IProjectContent[]).map((item) => getImageUrlById(item.thumbnailInfo.id))
           );
         case "TALK":
           return (items as ITalkContent[]).map(
@@ -74,7 +74,7 @@ export default function Home() {
           );
         case "GALLERY":
           return Promise.all(
-            (items as IGalleryContent[]).map((item) => getFileUrlById(item.files[0].id))
+            (items as IGalleryContent[]).map((item) => getImageUrlById(item.files[0].id))
           );
         default:
           return [];

@@ -13,7 +13,7 @@ import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { MONTH_LIST } from "@/constants/MonthList";
 import classes from "./GalleryListSection.module.css";
 import { GalleryPreview } from "@/components/common/GalleryPreview/GalleryPreview";
-import { getFileUrlById } from "@/utils/handleDownloadFile";
+import { getImageUrlById } from "@/utils/handleDownloadFile";
 import { CardGridContainer } from "@/components/common/CardGridContainer/CardGridContainer";
 
 export function GalleryListSection() {
@@ -45,7 +45,7 @@ export function GalleryListSection() {
   useEffect(() => {
     const fetchImgUrls = async () => {
       if (data) {
-        const promises = data.map((item) => getFileUrlById(item.files[0].id));
+        const promises = data.map((item) => getImageUrlById(item.files[0].id));
         const urlResults = await Promise.all(promises);
         setPreviewImgUrls(urlResults);
       }
