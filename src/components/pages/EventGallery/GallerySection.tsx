@@ -4,7 +4,7 @@ import { Gallery } from "@/types/gallery";
 import classes from "./GallerySection.module.css";
 import { useEffect, useState } from "react";
 import { CommonAxios } from "@/utils/CommonAxios";
-import { getFileUrlById } from "@/utils/handleDownloadFile";
+import { getImageUrlById } from "@/utils/handleDownloadFile";
 import { ApiFile } from "@/types/file";
 import { Flex, Group, Text } from "@mantine/core";
 import Image from "next/image";
@@ -31,7 +31,7 @@ export function GallerySection({ galleryId }: Props) {
 
         /* 갤러리 이미지 url 가져오기 */
         const promises = response.data.files.map((fileItem: ApiFile) =>
-          getFileUrlById(fileItem.id)
+          getImageUrlById(fileItem.id)
         );
         const urlResults = await Promise.all(promises);
         setImgUrls(urlResults);

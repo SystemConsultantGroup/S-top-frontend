@@ -9,7 +9,7 @@ import { getYears } from "@/utils/getYears";
 import { CommonAxios } from "@/utils/CommonAxios";
 import { AWARD_TYPE_LOOKUP_TABLE } from "@/constants/LookupTables";
 import { IProjectContent } from "@/types/project";
-import { getFileUrlById } from "@/utils/handleDownloadFile";
+import { getImageUrlById } from "@/utils/handleDownloadFile";
 
 export function EventAwardView() {
   const [selectedYear, setSelectedYear] = useState<string>("");
@@ -56,7 +56,7 @@ export function EventAwardView() {
         const projectDatas: IProjectContent[] = response.data?.content;
         setProjects(projectDatas);
         // thumbnail url 가져오기
-        const promises = projectDatas.map((data) => getFileUrlById(data.thumbnailInfo.id));
+        const promises = projectDatas.map((data) => getImageUrlById(data.thumbnailInfo.id));
         const urlResults = await Promise.all(promises);
         setThumbnailUrls(urlResults);
       } catch (error) {

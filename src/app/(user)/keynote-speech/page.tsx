@@ -49,7 +49,7 @@ export default function KeynoteSpeechPage() {
   }, [years]);
 
   const currentTalk =
-    selectedYear === null ? null : talks.find((talk) => talk.year === selectedYear) ?? null;
+    selectedYear === null ? null : (talks.find((talk) => talk.year === selectedYear) ?? null);
 
   const handleBookmarkToggle = async (id: number) => {
     if (!isLoggedIn) {
@@ -108,7 +108,9 @@ export default function KeynoteSpeechPage() {
           />
         ) : (
           <div className={styles.noVideo}>
-            {selectedYear ? `${selectedYear}년도 Keynote Speech 영상이 없습니다.` : "등록된 영상이 없습니다."}
+            {selectedYear
+              ? `${selectedYear}년도 Keynote Speech 영상이 없습니다.`
+              : "등록된 영상이 없습니다."}
           </div>
         )}
       </section>
