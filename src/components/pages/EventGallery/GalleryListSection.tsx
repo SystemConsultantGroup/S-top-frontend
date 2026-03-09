@@ -63,22 +63,22 @@ export function GalleryListSection() {
   };
 
   /* 연도 변경 핸들러 */
-  const onYearChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const { value } = event.target;
-    setYear(value);
+  const onYearChange = (value: string) => {
+    const newValue = value === "전체" ? null : value;
+    setYear(newValue);
     setQuery((prev) => ({
       ...prev,
-      year: value ? Number(value) : undefined,
+      year: newValue ? Number(newValue) : undefined,
     }));
   };
 
   /* 월 변경 핸들러 */
-  const onMonthChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const { value } = event.target;
-    setMonth(value);
+  const onMonthChange = (value: string) => {
+    const newValue = value === "전체" ? null : value;
+    setMonth(newValue);
     setQuery((prev) => ({
       ...prev,
-      month: value ? Number(value) : undefined,
+      month: newValue ? Number(newValue) : undefined,
     }));
   };
 
@@ -93,15 +93,15 @@ export function GalleryListSection() {
         <SearchInput placeholder="검색" w={400} onChange={onSearchChange} />
         <Group>
           <Dropdown
-            options={years}
+            options={["전체", ...years]}
             placeholder={"연도"}
-            onOptionClick={() => onYearChange}
+            onOptionClick={onYearChange}
             selectedOption={year}
           ></Dropdown>
           <Dropdown
-            options={MONTH_LIST}
+            options={["전체", ...MONTH_LIST]}
             placeholder={"월"}
-            onOptionClick={() => onMonthChange}
+            onOptionClick={onMonthChange}
             selectedOption={month}
           ></Dropdown>
         </Group>
@@ -110,14 +110,14 @@ export function GalleryListSection() {
         {data &&
           data.map((item, idx) => {
             const imgUrl = previewImgUrls[idx];
-            const date = new Date(item.createdAt);
             return (
               <div key={idx} onClick={() => onGalleryClick(item.id)} className={classes.gridItem}>
                 <GalleryPreview
                   imgUrl={imgUrl}
                   title={item.title}
                   viewCount={item.hitCount}
-                  date={date}
+                  year={item.year}
+                  month={item.month}
                 />
               </div>
             );
