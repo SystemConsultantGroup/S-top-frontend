@@ -216,12 +216,12 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
                   label={"보안/소프트웨어공학"}
                 ></Radio>
                 <Radio
-                  value={ProjectsCategoryLookupTable["자연어처리"]}
-                  label={"자연어처리"}
+                  value={ProjectsCategoryLookupTable["AI/자연어처리"]}
+                  label={"AI/자연어처리"}
                 ></Radio>
                 <Radio
-                  value={ProjectsCategoryLookupTable["컴퓨터비전"]}
-                  label={"컴퓨터비전"}
+                  value={ProjectsCategoryLookupTable["AI/컴퓨터비전"]}
+                  label={"AI/컴퓨터비전"}
                 ></Radio>
                 <Radio
                   value={ProjectsCategoryLookupTable["빅데이터분석"]}
