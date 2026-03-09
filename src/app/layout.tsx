@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   description: "S-TOP 기술교류회",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const headersList = await headers();
+  const headersList = headers();
   const domain = headersList.get("host");
   const isProdDomain = domain === "s-top.cs.skku.edu";
 
