@@ -224,8 +224,8 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
                   label={"AI/컴퓨터비전"}
                 ></Radio>
                 <Radio
-                  value={ProjectsCategoryLookupTable["빅데이터분석"]}
-                  label={"빅데이터분석"}
+                  value={ProjectsCategoryLookupTable["AI/빅데이터분석"]}
+                  label={"AI/빅데이터분석"}
                 ></Radio>
                 <Radio
                   value={ProjectsCategoryLookupTable["인터랙션/증강현실"]}

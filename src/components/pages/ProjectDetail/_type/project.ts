@@ -30,27 +30,3 @@ export interface ProjectDetailDto {
   description: string;
   comments: CommentDto[];
 }
-
-/* 한국어 임의 매핑 -> 추후 수정 */
-export function categoryMapping(category: string) {
-  switch (category) {
-    case "COMPUTER_VISION":
-      return "컴퓨터 비전";
-    case "SYSTEM_NETWORK":
-      return "시스템 네트워크";
-    case "WEB_APPLICATION":
-      return "웹";
-    case "SECURITY_SOFTWARE_ENGINEERING":
-      return "보안";
-    case "NATURAL_LANGUAGE_PROCESSING":
-      return "NLP";
-    case "BIG_DATA_ANALYSIS":
-      return "빅데이터";
-    case "AI_MACHINE_LEARNING":
-      return "AI";
-    case "INTERACTION_AUGMENTED_REALITY":
-      return "증강현실";
-    default:
-      return "None";
-  }
-}
