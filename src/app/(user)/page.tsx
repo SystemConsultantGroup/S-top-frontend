@@ -62,8 +62,6 @@ export default function Home() {
       { headData: galleryHeadData, thumbnail: galleryThumbnails, type: "GALLERY" },
     ];
 
-    console.log(projectThumbnails);
-
     const fetchThumbnails = async (items: Content[], type: string) => {
       switch (type) {
         case "PROJECT":
