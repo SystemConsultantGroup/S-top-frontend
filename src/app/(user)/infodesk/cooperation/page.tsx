@@ -53,7 +53,7 @@ const STOPOutlinePage = () => {
           <br />
           ∎ 현재까지 추진 과제 분야별 분석
           <br />
-          ◦ 머신러닝, AI/컴퓨터비전, AI/자연어처리, 빅데이터분석, 시스템&네트워크, 보안 및
+          ◦ 머신러닝, AI/컴퓨터비전, AI/자연어처리, AI/빅데이터분석, 시스템&네트워크, 보안 및
           SW엔제니어링, Interaction&AR, Web/App Application
           <br />
           <Image
