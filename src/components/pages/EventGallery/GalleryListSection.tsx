@@ -63,8 +63,7 @@ export function GalleryListSection() {
   };
 
   /* 연도 변경 핸들러 */
-  const onYearChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const { value } = event.target;
+  const onYearChange = (value: string) => {
     setYear(value);
     setQuery((prev) => ({
       ...prev,
@@ -73,8 +72,7 @@ export function GalleryListSection() {
   };
 
   /* 월 변경 핸들러 */
-  const onMonthChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const { value } = event.target;
+  const onMonthChange = (value: string) => {
     setMonth(value);
     setQuery((prev) => ({
       ...prev,
@@ -95,13 +93,13 @@ export function GalleryListSection() {
           <Dropdown
             options={years}
             placeholder={"연도"}
-            onOptionClick={() => onYearChange}
+            onOptionClick={onYearChange}
             selectedOption={year}
           ></Dropdown>
           <Dropdown
             options={MONTH_LIST}
             placeholder={"월"}
-            onOptionClick={() => onMonthChange}
+            onOptionClick={onMonthChange}
             selectedOption={month}
           ></Dropdown>
         </Group>
