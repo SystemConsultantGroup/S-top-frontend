@@ -3,6 +3,7 @@ import { PagedApiResponse } from "./common";
 export interface ITalkRequestParams {
   year?: string;
   title?: string;
+  isKeynoteSpeech?: boolean;
   page?: number;
   size?: number;
 }
@@ -15,6 +16,7 @@ export interface ITalkContent {
   talkerBelonging: string;
   talkerName: string;
   favorite: boolean;
+  isKeynoteSpeech?: boolean;
   quiz: IQuestions[];
   createdAt: string;
   updatedAt: string;

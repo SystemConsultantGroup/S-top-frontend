@@ -14,7 +14,15 @@ import { Quiz } from "@/types/Interview";
 import "@mantine/dates/styles.css";
 import { useQuizs } from "@/hooks/useQuizs/useQuizs";
 
-export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
+export function InterviewEditFrom({
+  interviewID,
+  redirectUrl = "/admin/interviews",
+  defaultIsKeynoteSpeech = false,
+}: {
+  interviewID?: number;
+  redirectUrl?: string;
+  defaultIsKeynoteSpeech?: boolean;
+}) {
   const {
     quizzes,
     setQuizzes,
@@ -38,6 +46,7 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
       year: new Date().getFullYear(),
       talkerName: "",
       talkerBelonging: "",
+      isKeynoteSpeech: defaultIsKeynoteSpeech,
       quizzes: [] as Quiz[],
     },
     validate: {
@@ -63,6 +72,7 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
             year: data.year,
             talkerBelonging: data.talkerBelonging,
             talkerName: data.talkerName,
+            isKeynoteSpeech: data.isKeynoteSpeech ?? defaultIsKeynoteSpeech,
           });
           setQuizzes(
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -98,6 +108,7 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
         year: form.values.year,
         talkerBelonging: form.values.talkerBelonging,
         talkerName: form.values.talkerName,
+        isKeynoteSpeech: form.values.isKeynoteSpeech,
         quiz: quizzes.map((quiz) => {
           console.log(quiz);
           if (!quiz.question || quiz.question.trim().length === 0) {
@@ -117,7 +128,7 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
       }
 
       // 성공적으로 전송된 후 페이지 이동
-      push("/admin/interviews");
+      push(redirectUrl);
     } catch (error) {
       console.error(error);
       // 에러 처리 로직 추가 (예: 사용자에게 에러 메시지 표시)
@@ -206,7 +217,7 @@ export function InterviewEditFrom({ interviewID }: { interviewID?: number }) {
               onClick={() => {
                 // console.log(form.values.youtubeId.match(reg));
                 // console.log((reg.exec(form.values.youtubeId) || [0, 0, 0, 0, 0, 0, ""])[6]);
-                push("/admin/interviews");
+                push(redirectUrl);
               }}
             >
               목록으로
