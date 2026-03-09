@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 import { IOption } from "./type";
 import styles from "./Projects.module.css";
 import { ProjectBoard, ProjectFilterBox, ProjectSelectTab } from "./(utils)";
-import { getFileUrlById } from "@/utils/handleDownloadFile";
+import { getImageUrlById } from "@/utils/handleDownloadFile";
 
 export default function ProjectsPage() {
   /**
@@ -71,7 +71,7 @@ export default function ProjectsPage() {
   useEffect(() => {
     if (data && data.length) {
       const loadImages = async () => {
-        const promises = data.map((item) => getFileUrlById(item.thumbnailInfo.id));
+        const promises = data.map((item) => getImageUrlById(item.thumbnailInfo.id));
         const urls = await Promise.all(promises);
         setThumbnails(urls);
       };

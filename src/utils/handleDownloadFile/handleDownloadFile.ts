@@ -23,6 +23,7 @@ export async function getFileUrlById(fileId: number) {
     url: `/files/${fileId}`,
     responseType: "blob",
   });
+  console.log(result);
 
   const blob = new Blob([result.data]);
 
@@ -40,4 +41,8 @@ export async function handleDownloadBlob(obj: Blob, fileName: string) {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+}
+
+export async function getImageUrlById(fileId: number) {
+  return `${process.env.NEXT_PUBLIC_API_ENDPOINT}/files/${fileId}`;
 }

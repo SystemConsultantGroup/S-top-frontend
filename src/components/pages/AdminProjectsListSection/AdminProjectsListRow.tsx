@@ -5,7 +5,7 @@ import { DataTableData } from "@/components/common/DataTable/elements/DataTableD
 import { DataTableRow } from "@/components/common/DataTable/elements/DataTableRow";
 import { ProjectsCategoryLookupTable } from "@/constants/LookupTables/index";
 import { IProjectContent } from "@/types/project";
-import { getFileUrlById } from "@/utils/handleDownloadFile";
+import { getImageUrlById } from "@/utils/handleDownloadFile";
 import { Checkbox } from "@mantine/core";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -34,7 +34,7 @@ export function AdminProjectListRow({
 
   useEffect(() => {
     if (thumbnailId) {
-      getFileUrlById(thumbnailId)
+      getImageUrlById(thumbnailId)
         .then((url) => {
           setThumbnail(url);
         })

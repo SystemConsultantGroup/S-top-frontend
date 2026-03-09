@@ -1,6 +1,6 @@
 "use client";
 
-import { getFileUrlById } from "@/utils/handleDownloadFile";
+import { getImageUrlById } from "@/utils/handleDownloadFile";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Carousel, CarouselSlide } from "@mantine/carousel";
@@ -13,7 +13,7 @@ export function EventImageSection({ fileIds }: { fileIds: number[] }) {
       if (fileIds) {
         const urls = await Promise.all(
           fileIds.map(async (fileId) => {
-            return getFileUrlById(fileId);
+            return getImageUrlById(fileId);
           })
         );
         setUrls(urls);
