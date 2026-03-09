@@ -17,7 +17,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
 import { ProjectDetailComment } from "./ProjectDetailComment";
 import classes from "./ProjectDetailInfo.module.css";
-import { ProjectDetailDto, categoryMapping } from "./_type/project";
+import { ProjectDetailDto } from "./_type/project";
+import { ProjectsCategoryLookupTable } from "@/constants/LookupTables/ProjectsCategoryLookupTable";
 
 interface Props {
   projectId: string;
@@ -215,7 +216,15 @@ export function ProjectDetailInfo({ projectId }: Props) {
           </Stack>
           <Divider className={classes.divider} />
           <Flex gap={"sm"}>
-            {project && <CardBadge label={categoryMapping(project.projectCategory)} />}
+            {project && (
+              <CardBadge
+                label={
+                  ProjectsCategoryLookupTable[
+                    project.projectCategory as keyof typeof ProjectsCategoryLookupTable
+                  ]
+                }
+              />
+            )}
             {/* {project.tags.map((label: string, index: number) => (
               <CardBadge key={index} label={label} />
             ))} */}

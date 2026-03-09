@@ -25,7 +25,7 @@ export const NavList: NavListType = [
         link: "#",
       },
       {
-        name: "컴퓨터 비전",
+        name: "AI/컴퓨터 비전",
         link: "#",
       },
       {
@@ -37,11 +37,11 @@ export const NavList: NavListType = [
         link: "#",
       },
       {
-        name: "자연어 처리",
+        name: "AI/자연어 처리",
         link: "#",
       },
       {
-        name: "빅데이터 분석",
+        name: "AI/빅데이터 분석",
         link: "#",
       },
       {
