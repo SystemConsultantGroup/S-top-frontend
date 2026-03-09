@@ -5,6 +5,7 @@ export interface InterviewRequestParams {
   youtubeId?: string;
   year?: number;
   month?: number;
+  isKeynoteSpeech?: boolean;
   page?: number;
   size?: number;
 }
@@ -18,6 +19,7 @@ export interface Interview {
   talkerName: string;
   favorite: boolean;
   category: string;
+  isKeynoteSpeech?: boolean;
   createdAt: string;
   updatedAt: string;
 }
