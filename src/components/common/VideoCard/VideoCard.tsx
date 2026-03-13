@@ -100,7 +100,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
         alert("퀴즈 이벤트 참여 기간이 아닙니다.");
       }
       if (error instanceof AxiosError && error.response?.data?.code === 8805) {
-        alert("현재 이벤트 참여 연도의 대담 영상이 아닙니다다.");
+        alert("현재 이벤트 참여 연도의 대담 영상이 아닙니다.");
       }
       if (error instanceof AxiosError && error.response?.data?.code === 8901) {
         alert("퀴즈 최대 시도 횟수를 초과하였습니다.");
