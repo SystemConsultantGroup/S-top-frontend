@@ -14,7 +14,6 @@ export const USER_TYPE_LOOKUP_TABLE: Record<Role, string> = {
 };
 
 export const AWARD_TYPE_LOOKUP_TABLE: Record<ProjectAwardStatus, string> = {
-  NONE: "미정",
   FIRST: "대상",
   SECOND: "최우수상",
   THIRD: "우수상",

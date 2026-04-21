@@ -24,7 +24,7 @@ export interface IProjectContent {
   professorNames: string[];
   projectType: ProjectType;
   projectCategory: ProjectCategory;
-  awardStatus: ProjectAwardStatus;
+  awardStatuses: ProjectAwardStatus[];
   year: number;
   likeCount: number;
   like: boolean;
@@ -45,6 +45,6 @@ export type ProjectCategory =
   | "AI_MACHINE_LEARNING"
   | "INTERACTION_AUGMENTED_REALITY";
 
-export type ProjectAwardStatus = "NONE" | "FIRST" | "SECOND" | "THIRD" | "FOURTH" | "FIFTH";
+export type ProjectAwardStatus = "FIRST" | "SECOND" | "THIRD" | "FOURTH" | "FIFTH";
 
 export interface IProjectResponse extends PagedApiResponse<IProjectContent> {}

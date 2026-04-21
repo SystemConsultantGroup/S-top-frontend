@@ -26,7 +26,7 @@ export const MockProjectData: IProjectContent = {
   professorNames: ["교수 이름 1"],
   projectType: "STARTUP",
   projectCategory: "BIG_DATA_ANALYSIS",
-  awardStatus: "FIRST",
+  awardStatuses: ["FIRST"],
   year: 2023,
   likeCount: 100,
   like: false,

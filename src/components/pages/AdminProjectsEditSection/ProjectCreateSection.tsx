@@ -3,7 +3,7 @@
 import { Row } from "@/components/common/Row";
 import { Section } from "@/components/common/Section";
 import { TextInput } from "@/components/common/TextInput";
-import { FileInput, Group, Radio, RadioGroup, Stack, Title } from "@mantine/core";
+import { FileInput, Group, Radio, RadioGroup, Stack, Title, Checkbox } from "@mantine/core";
 import classes from "./AdminProjectsEditSection.module.css";
 import { Dropdown } from "@/components/common/Dropdown/Dropdown";
 import { useEffect, useState } from "react";
@@ -36,7 +36,7 @@ export interface ProjectEditFormInputs {
   teamName: string;
   youtubeId: string;
   year: number;
-  awardStatus: ProjectAwardStatus;
+  awardStatuses: ProjectAwardStatus[];
   members: Member[];
   url: string;
   description: string;
@@ -56,7 +56,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
       teamName: "",
       youtubeId: "",
       year: 0,
-      awardStatus: "NONE",
+      awardStatuses: [],
       members: [],
       url: "",
       description: "",
@@ -112,7 +112,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
         teamName: values.teamName,
         youtubeId: values.youtubeId,
         year: Number(option),
-        awardStatus: values.awardStatus,
+        awardStatuses: values.awardStatuses,
         members: members,
         url: values.url,
         description: values.description,
@@ -155,7 +155,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
         teamName: prevProject.teamName,
         youtubeId: prevProject.youtubeId,
         year: prevProject.year,
-        awardStatus: prevProject.awardStatus,
+        awardStatuses: prevProject.awardStatuses,
         members: prevMembers,
         url: prevProject.url,
         description: prevProject.description,
@@ -322,18 +322,28 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
               w={"50%"}
             />
           </Row>
-          <Row field="수상 내역" fieldSize={130} mt={20}>
-            <RadioGroup {...getInputProps("awardStatus")}>
+          <Row field="수상 목록" fieldSize={130} mt={20}>
+            <Checkbox.Group {...getInputProps("awardStatuses")}>
               <Group gap={20}>
-                <Radio value={ProjectsAwardStatusLookupTable["대상"]} label={"대상"}></Radio>
-                <Radio
+                <Checkbox value={ProjectsAwardStatusLookupTable["대상"]} label={"대상"}></Checkbox>
+                <Checkbox
                   value={ProjectsAwardStatusLookupTable["최우수상"]}
                   label={"최우수상"}
-                ></Radio>
-                <Radio value={ProjectsAwardStatusLookupTable["우수상"]} label={"우수상"}></Radio>
-                <Radio value={ProjectsAwardStatusLookupTable["인기상"]} label={"인기상"}></Radio>
+                ></Checkbox>
+                <Checkbox
+                  value={ProjectsAwardStatusLookupTable["우수상"]}
+                  label={"우수상"}
+                ></Checkbox>
+                <Checkbox
+                  value={ProjectsAwardStatusLookupTable["인기상"]}
+                  label={"인기상"}
+                ></Checkbox>
+                <Checkbox
+                  value={ProjectsAwardStatusLookupTable["장려상"]}
+                  label={"장려상"}
+                ></Checkbox>
               </Group>
-            </RadioGroup>
+            </Checkbox.Group>
           </Row>
           <Group justify="center" mt={30}>
             {projectId && (
