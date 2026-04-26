@@ -138,7 +138,7 @@ export function EventAwardView() {
           return (
             <div key={idx}>
               <Text className={classes.awardType}>
-                {data.awardStatuses?.map((status) => AWARD_TYPE_LOOKUP_TABLE[status]).join("/")}
+                {data.awards?.map((status) => AWARD_TYPE_LOOKUP_TABLE[status]).join("/")}
               </Text>
               <ProjectCard
                 data={data}

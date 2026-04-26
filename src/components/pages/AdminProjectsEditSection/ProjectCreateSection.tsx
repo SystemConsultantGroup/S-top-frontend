@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { PrimaryButton } from "@/components/common/Buttons";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { getYears } from "@/utils/getYears";
-import { ProjectAwardStatus, ProjectCategory, ProjectType } from "@/types/project";
+import { ProjectAward, ProjectCategory, ProjectType } from "@/types/project";
 import {
   ProjectsCategoryLookupTable,
   ProjectsTypeLookupTable,
@@ -18,7 +18,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useFiles } from "@/hooks/useFiles/useFiles";
 import { CommonAxios } from "@/utils/CommonAxios";
-import { ProjectsAwardStatusLookupTable } from "@/constants/LookupTables/ProjectsAwardStatusLookupTable";
+import { ProjectsAwardLookupTable } from "@/constants/LookupTables/ProjectsAwardLookupTable";
 
 type Role = "PROFESSOR" | "STUDENT";
 
@@ -36,7 +36,7 @@ export interface ProjectEditFormInputs {
   teamName: string;
   youtubeId: string;
   year: number;
-  awardStatuses: ProjectAwardStatus[];
+  awards: ProjectAward[];
   members: Member[];
   url: string;
   description: string;
@@ -56,7 +56,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
       teamName: "",
       youtubeId: "",
       year: 0,
-      awardStatuses: [],
+      awards: [],
       members: [],
       url: "",
       description: "",
@@ -112,7 +112,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
         teamName: values.teamName,
         youtubeId: values.youtubeId,
         year: Number(option),
-        awardStatuses: values.awardStatuses,
+        awards: values.awards,
         members: members,
         url: values.url,
         description: values.description,
@@ -155,7 +155,7 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
         teamName: prevProject.teamName,
         youtubeId: prevProject.youtubeId,
         year: prevProject.year,
-        awardStatuses: prevProject.awardStatuses,
+        awards: prevProject.awards,
         members: prevMembers,
         url: prevProject.url,
         description: prevProject.description,
@@ -323,25 +323,16 @@ export function ProjectCreateSection({ projectId }: { projectId?: number }) {
             />
           </Row>
           <Row field="수상 목록" fieldSize={130} mt={20}>
-            <Checkbox.Group {...getInputProps("awardStatuses")}>
+            <Checkbox.Group {...getInputProps("awards")}>
               <Group gap={20}>
-                <Checkbox value={ProjectsAwardStatusLookupTable["대상"]} label={"대상"}></Checkbox>
+                <Checkbox value={ProjectsAwardLookupTable["대상"]} label={"대상"}></Checkbox>
                 <Checkbox
-                  value={ProjectsAwardStatusLookupTable["최우수상"]}
+                  value={ProjectsAwardLookupTable["최우수상"]}
                   label={"최우수상"}
                 ></Checkbox>
-                <Checkbox
-                  value={ProjectsAwardStatusLookupTable["우수상"]}
-                  label={"우수상"}
-                ></Checkbox>
-                <Checkbox
-                  value={ProjectsAwardStatusLookupTable["인기상"]}
-                  label={"인기상"}
-                ></Checkbox>
-                <Checkbox
-                  value={ProjectsAwardStatusLookupTable["장려상"]}
-                  label={"장려상"}
-                ></Checkbox>
+                <Checkbox value={ProjectsAwardLookupTable["우수상"]} label={"우수상"}></Checkbox>
+                <Checkbox value={ProjectsAwardLookupTable["인기상"]} label={"인기상"}></Checkbox>
+                <Checkbox value={ProjectsAwardLookupTable["장려상"]} label={"장려상"}></Checkbox>
               </Group>
             </Checkbox.Group>
           </Row>

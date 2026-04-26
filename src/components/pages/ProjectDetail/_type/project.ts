@@ -20,7 +20,7 @@ export interface ProjectDetailDto {
   teamName: string;
   youtubeId: string;
   year: number;
-  awardStatuses: string[]; //FIRST, SECOND, THIRD, FOURTH, FIFTH
+  awards: string[]; //FIRST, SECOND, THIRD, FOURTH, FIFTH
   studentNames: string[];
   professorNames: string[];
   likeCount: number;

@@ -1,4 +1,4 @@
-export const ProjectsAwardStatusLookupTable = {
+export const ProjectsAwardLookupTable = {
   대상: "FIRST",
   최우수상: "SECOND",
   우수상: "THIRD",
