@@ -138,14 +138,7 @@ export function EventAwardView() {
           return (
             <div key={idx}>
               <Text className={classes.awardType}>
-                {/* TODO: 중복 수상 하드코딩 제거 필요 */}
-                {(() => {
-                  const legend = [699, 706];
-                  if (legend.includes(data.id)) {
-                    return "장려상/인기상";
-                  }
-                  return AWARD_TYPE_LOOKUP_TABLE[data.awardStatus];
-                })()}
+                {data.awards?.map((status) => AWARD_TYPE_LOOKUP_TABLE[status]).join("/")}
               </Text>
               <ProjectCard
                 data={data}

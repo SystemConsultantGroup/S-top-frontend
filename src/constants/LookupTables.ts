@@ -1,4 +1,4 @@
-import { ProjectAwardStatus } from "@/types/project";
+import { ProjectAward } from "@/types/project";
 import { Role } from "@/types/user";
 
 export const USER_TYPE_LOOKUP_TABLE: Record<Role, string> = {
@@ -13,8 +13,7 @@ export const USER_TYPE_LOOKUP_TABLE: Record<Role, string> = {
   TEMP: "임시",
 };
 
-export const AWARD_TYPE_LOOKUP_TABLE: Record<ProjectAwardStatus, string> = {
-  NONE: "미정",
+export const AWARD_TYPE_LOOKUP_TABLE: Record<ProjectAward, string> = {
   FIRST: "대상",
   SECOND: "최우수상",
   THIRD: "우수상",
